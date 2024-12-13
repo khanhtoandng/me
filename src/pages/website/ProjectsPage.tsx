@@ -11,13 +11,86 @@ import { Globe, Github } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
 import ReusableCard from "@/components/custom/ReusableCard";
-import { projectsData } from "@/data/ProjectsData";
 import SEO from "@/components/featuers/SEO";
 
 export default function ProjectsPage() {
   const { t, i18n } = useTranslation();
   const direction = i18n.language === "ar" ? "rtl" : "ltr";
+  const projectsData = [
+    {
+      id: "samtax",
+      titleKey: "projects.samtax.title",
+      descriptionKey: "projects.samtax.description",
+      skills: ["React", "Tailwind CSS", "Shadcn UI"],
+      links: {
+        website: "https://sam-tax.com",
+      },
+    },
 
+    {
+      id: "gradients-css",
+      titleKey: "projects.gradientsCss.title",
+      descriptionKey: "projects.gradientsCss.description",
+      skills: [
+        "React JS",
+        "Typescript",
+        "Tailwind CSS",
+        "Github",
+        "Git",
+        "RESTful APIs",
+      ],
+      links: {
+        website: "https://gradients.vercel.app",
+        github: "https://github.com/balshaer/gradients-css",
+      },
+    },
+    {
+      id: "raouf-zadi",
+      titleKey: "projects.raoufzadi.title",
+      descriptionKey: "projects.raoufzadi.description",
+      skills: ["React JS", "Typescript", "Tailwind CSS", "Github", "Git"],
+      links: {
+        website: "https://raoufzadi.vercel.app",
+      },
+    },
+
+    {
+      id: "naj-training-center",
+      titleKey: "projects.najTrainingCenter.title",
+      descriptionKey: "projects.najTrainingCenter.description",
+      skills: ["React JS", "Javascript", "MIUI"],
+      links: {
+        website: "https://naj.shamilapp.com/",
+      },
+    },
+    {
+      id: "rove",
+      titleKey: "projects.rove.title",
+      descriptionKey: "projects.rove.description",
+      skills: ["React", "Tailwind CSS", "Laravel", "MYSQL"],
+      links: {
+        github: "https://github.com/balshaer/rove",
+      },
+    },
+    {
+      id: "sustainable-star",
+      titleKey: "projects.sustainableStar.title",
+      descriptionKey: "projects.sustainableStar.description",
+      skills: ["React", "Tailwind CSS", "Material UI"],
+      links: {
+        website: "https://sustainablestar.com.sa/",
+      },
+    },
+    {
+      id: "bookstore-api",
+      titleKey: "projects.bookstoreApi.title",
+      descriptionKey: "projects.bookstoreApi.description",
+      skills: ["Node JS", "Express JS", "Mongoose DB"],
+      links: {
+        github: "https://github.com/balshaer/bookstore-api",
+      },
+    },
+  ];
   const styles = {
     breadcrumbLink: "hover:text-[var(--paragraph)] hoverd",
     arrowIcon:
