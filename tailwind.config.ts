@@ -1,5 +1,4 @@
-/* eslint-disable no-undef */
-// tailwind.config.js
+
 export const darkMode = ["class"];
 export const content = [
   "./pages/**/*.{ts,tsx}",

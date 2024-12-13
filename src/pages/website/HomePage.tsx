@@ -8,6 +8,7 @@ import { Github, Globe } from "lucide-react";
 import Header from "@/components/website/Header";
 
 import SEO from "@/components/featuers/SEO";
+import { scrollToTop } from "@/helper";
 
 const styles = {
   breadcrumbLink: "hover:text-[var(--paragraph)] hoverd",
@@ -194,7 +195,10 @@ export default function HomePage() {
               <Button
                 className="w-max"
                 variant="default"
-                onClick={() => navigateTo("/work")}
+                onClick={() => {
+                  navigateTo("/work");
+                  scrollToTop();
+                }}
               >
                 {t("Public.SeeMore")}
               </Button>
@@ -261,7 +265,10 @@ export default function HomePage() {
               <Button
                 className="mb-10 w-max"
                 variant="default"
-                onClick={() => navigateTo("/projects")}
+                onClick={() => {
+                  navigateTo("/projects");
+                  scrollToTop();
+                }}
               >
                 {t("Public.SeeMore")}
               </Button>

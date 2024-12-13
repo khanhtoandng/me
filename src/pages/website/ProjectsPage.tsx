@@ -121,6 +121,7 @@ export default function ProjectsPage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
+        dir={direction}
         className="projectCards flex min-h-[100vh] w-full flex-col gap-5 max-md:pb-0"
       >
         <div className="header">
