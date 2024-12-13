@@ -1,7 +1,6 @@
-/** @type {import('tailwindcss').Config} */
-// eslint-disable-next-line no-undef
+// tailwind.config.js
 module.exports = {
-  darkMode: ["class"], 
+  darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -80,6 +79,5 @@ module.exports = {
       },
     },
   },
-  // eslint-disable-next-line no-undef
   plugins: [require("tailwindcss-animate")],
 };
