@@ -13,11 +13,11 @@ export default defineConfig({
   },
 
   define: {
-    "process.env": process.env,
+    "process.env": process.env, // Ensuring that environment variables are properly defined
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      "@": path.resolve(__dirname, "./src"), // Setting up alias for src directory
     },
   },
 });
