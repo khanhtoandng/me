@@ -1,15 +1,1 @@
-{
-    "builds": [
-      {
-        "src": "postcss.config.ts",
-        "use": "@vercel/node"
-      }
-    ],
-    "rewrites": [
-      {
-        "source": "/(.*)",
-        "destination": "/"
-      }
-    ]
-  }
-  
+{ "rewrites": [{ "source": "/(.*)", "destination": "/" }] }
