@@ -16,6 +16,21 @@ export default function WorkPage() {
   const direction = i18n.language === "ar" ? "rtl" : "ltr";
   const workData = [
     {
+      id: "full-stack-developer-freelance",
+      title: "WorkExperience.FullStackDeveloperFreelance.Title",
+      company: "Freelance",
+      date: "WorkExperience.FullStackDeveloperFreelance.Date",
+      description: "WorkExperience.FullStackDeveloperFreelance.Description",
+      skills: [
+        "React js",
+        "Node.js",
+        "MongoDB",
+        "Express.js",
+        "Git",
+        "RESTful APIs",
+      ],
+    },
+    {
       id: "frontend-developer-sustainable-star",
       title: "WorkExperience.FrontendDeveloperSustainableStar.Title",
       company: "Sustainable Star LLC",

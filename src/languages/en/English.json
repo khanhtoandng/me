@@ -62,44 +62,48 @@
     "Blog": "Blog",
     "Work": "Work"
   },
- "projects": {
-  "samtax": {
-    "title": "SamTax",
-    "description": "Developed a multi-language website for a service company, enhancing user engagement and accessibility."
+  "projects": {
+    "samtax": {
+      "title": "SamTax",
+      "description": "Developed a multi-language website for a service company, enhancing user engagement and accessibility."
+    },
+    "raoufzadi": {
+      "title": "Raouf Zadi",
+      "description": "Designed a professional online presence for a barber, showcasing services and style."
+    },
+    "gradientsCss": {
+      "title": "Gradients CSS",
+      "description": "Created a sophisticated gradient tool tailored for designers and developers, offering seamless customization."
+    },
+    "najTrainingCenter": {
+      "title": "Naj Training Center",
+      "description": "Developed an educational platform for a dental training center in Saudi Arabia, supporting professional growth."
+    },
+    "rove": {
+      "title": "Rove",
+      "description": "Built a full-stack e-commerce web application with robust product management, transaction processing, and an engaging user experience."
+    },
+    "sustainableStar": {
+      "title": "Sustainable Star",
+      "description": "Delivered a dynamic website for a sustainability-focused startup, effectively communicating their mission and vision."
+    },
+    "bookstoreApi": {
+      "title": "Bookstore API",
+      "description": "Designed a RESTful API for a bookstore, enabling efficient management of users, authors, and books, with versatile integration options."
+    },
+    "frontendDeveloperSustainableStar": {
+      "title": "Sustainable Star",
+      "description": "Engineered user-friendly interfaces and optimized performance for a startup website using modern web technologies."
+    }
   },
-  "raoufzadi": {
-    "title": "Raouf Zadi",
-    "description": "Designed a professional online presence for a barber, showcasing services and style."
-  },
-  "gradientsCss": {
-    "title": "Gradients CSS",
-    "description": "Created a sophisticated gradient tool tailored for designers and developers, offering seamless customization."
-  },
-  "najTrainingCenter": {
-    "title": "Naj Training Center",
-    "description": "Developed an educational platform for a dental training center in Saudi Arabia, supporting professional growth."
-  },
-  "rove": {
-    "title": "Rove",
-    "description": "Built a full-stack e-commerce web application with robust product management, transaction processing, and an engaging user experience."
-  },
-  "sustainableStar": {
-    "title": "Sustainable Star",
-    "description": "Delivered a dynamic website for a sustainability-focused startup, effectively communicating their mission and vision."
-  },
-  "bookstoreApi": {
-    "title": "Bookstore API",
-    "description": "Designed a RESTful API for a bookstore, enabling efficient management of users, authors, and books, with versatile integration options."
-  },
-  "frontendDeveloperSustainableStar": {
-    "title": "Sustainable Star",
-    "description": "Engineered user-friendly interfaces and optimized performance for a startup website using modern web technologies."
-  }
-}
-,
   "WorkExperience": {
     "Title": "Work Experience",
-    "Description": "This title conveys a formal tone and clearly indicates that it encompasses your work experiences.",
+    "Description": "A comprehensive record showcasing notable professional experiences in the field of software development.",
+    "FullStackDeveloperFreelance": {
+      "Title": "Full Stack Developer (Freelance)",
+      "Date": "October 2023 - Present",
+      "Description": "Providing full-stack development services to clients, building and maintaining web applications with technologies such as React, Node.js, and MongoDB. Collaborated with clients to define requirements, implement features, and ensure timely delivery."
+    },
     "FrontendDeveloperSustainableStar": {
       "Title": "Frontend Developer at Sustainable Star LLC",
       "Date": "July 2023 - October 2023",

@@ -44,7 +44,7 @@ export default function HomePage() {
         "RESTful APIs",
       ],
       links: {
-        website: "https://gradients.vercel.app",
+        website: "https://gradientscss.vercel.app/",
         github: "https://github.com/balshaer/gradients-css",
       },
     },
@@ -97,6 +97,21 @@ export default function HomePage() {
   ];
 
   const workData = [
+    {
+      id: "full-stack-developer-freelance",
+      title: "WorkExperience.FullStackDeveloperFreelance.Title",
+      company: "Freelance",
+      date: "WorkExperience.FullStackDeveloperFreelance.Date",
+      description: "WorkExperience.FullStackDeveloperFreelance.Description",
+      skills: [
+        "React js",
+        "Node.js",
+        "MongoDB",
+        "Express.js",
+        "Git",
+        "RESTful APIs",
+      ],
+    },
     {
       id: "frontend-developer-sustainable-star",
       title: "WorkExperience.FrontendDeveloperSustainableStar.Title",

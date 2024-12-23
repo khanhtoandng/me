@@ -10,11 +10,10 @@ export default function Header() {
   const direction = i18n.language === "ar" ? "rtl" : "ltr";
 
   return (
-    <div className="header" dir={direction}>
+    <div className="header max-md:pt-20" dir={direction}>
       <div className="header-content">
         <h1 className="header-title">{t("Header.Title")}</h1>
         <RandomizedTextEffect
-        
           text={t("Header.Subtitle")}
           className="subtitle italic"
         />
