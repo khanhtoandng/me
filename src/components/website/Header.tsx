@@ -10,7 +10,7 @@ export default function Header() {
   const direction = i18n.language === "ar" ? "rtl" : "ltr";
 
   return (
-    <div className="header max-md:pt-20" dir={direction}>
+    <div className="header max-md:pt-[70px]" dir={direction}>
       <div className="header-content">
         <h1 className="header-title">{t("Header.Title")}</h1>
         <RandomizedTextEffect

@@ -122,7 +122,7 @@ export default function ProjectsPage() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
         dir={direction}
-        className="projectCards flex min-h-[100vh] w-full flex-col gap-5 max-md:pb-0"
+        className="projectCards flex min-h-[100vh] w-full flex-col gap-5 max-md:pb-0 max-md:pt-[50px]"
       >
         <div className="header">
           <h1 className="header-title">{t("Projects.Title")}</h1>

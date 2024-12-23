@@ -81,7 +81,7 @@ export default function WorkPage() {
           "Baraa Alshaer",
           "Work Experience",
           "Full Stack Developer",
-          "Software Engineer",
+        "Software Engineer",
           "براء الشاعر خبرة عمل",
         ]}
       />
@@ -91,7 +91,7 @@ export default function WorkPage() {
         animate={{ opacity: 100 }}
         transition={{ duration: 0.5 }}
         dir={direction}
-        className="projectCards flex min-h-[100vh] w-full flex-col gap-5 max-md:pb-0"
+        className="projectCards max-md:pt-[50px] flex min-h-[100vh] w-full flex-col gap-5 max-md:pb-0"
       >
         <div className="header">
           <h1 className="header-title">{t("WorkExperience.Title")}</h1>
