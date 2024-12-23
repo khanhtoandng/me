@@ -9,6 +9,7 @@ import React, {
   useEffect,
 } from "react";
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
+import { motion } from "framer-motion";
 
 interface ThemeContextType {
   theme: "light" | "dark";
@@ -38,8 +39,16 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <StyledThemeProvider theme={{ mode: theme }}>
-        {theme === "dark" ? <DarkMode /> : <LightMode />}
-        {children}
+        <motion.div
+          key={theme} // Changing the key will trigger the animation
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }} // Set the duration of the transition
+        >
+          {theme === "dark" ? <DarkMode /> : <LightMode />}
+          {children}
+        </motion.div>
       </StyledThemeProvider>
     </ThemeContext.Provider>
   );
