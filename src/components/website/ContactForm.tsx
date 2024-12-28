@@ -30,6 +30,7 @@ import { useTranslation } from "react-i18next";
 import { useMediaQuery } from "@react-hook/media-query";
 import i18n from "@/i18n";
 import { Button } from "@/components/ui/button";
+import { MailPlusIcon } from "lucide-react";
 
 const styles = {
   form: "grid items-start gap-4 ",
@@ -225,9 +226,12 @@ export function ContactForm() {
 
   const commonContent = (
     <div className="text-[var(--paragraph)]">
-      <p className="hoverd py-[8px] ps-1 text-[1rem] font-bold text-[var(--tertiary-color)] max-md:ps-0">
+      <Button
+        icon={<MailPlusIcon className="h-5 w-5" />}
+        className="hoverd gap-0 border-none bg-transparent px-0 py-[8px] ps-1 text-[1rem] font-bold text-[var(--tertiary-color)] hover:bg-transparent hover:text-[var(--tertiary-color)] max-md:ps-0"
+      >
         {t("Public.Email")}
-      </p>
+      </Button>
     </div>
   );
   const closeDialog = () => {

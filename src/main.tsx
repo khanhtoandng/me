@@ -16,11 +16,14 @@ import { LanguageProvider } from "./context/LanguageContext.tsx";
 import { ToastProvider, ToastViewport } from "@/components/ui/toast";
 import React from "react";
 import { HelmetProvider } from "react-helmet-async";
-
+import { Analytics } from "@vercel/analytics/react"
 AOS.init();
 
 ReactDOM.render(
   <React.StrictMode>
+
+<Analytics/>
+
     <HelmetProvider>
       <MenuProvider>
         <LanguageProvider>
