@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
 import ReusableCard from "@/components/custom/ReusableCard";
-import { Github, Globe } from "lucide-react";
+import { ArrowLeftIcon, ArrowRightIcon, Github, Globe } from "lucide-react";
 import Header from "@/components/website/Header";
 
 import SEO from "@/components/featuers/SEO";
@@ -159,6 +159,7 @@ export default function HomePage() {
 
   const isValidLink = (link: any | undefined): boolean =>
     link && link.trim() !== "" && link !== "#";
+  const isArabic = i18n.language === "ar";
 
   return (
     <>
@@ -208,12 +209,19 @@ export default function HomePage() {
 
             {workData.length > 3 && (
               <Button
-                className="w-max"
+                className="w-max flex-row-reverse"
                 variant="default"
                 onClick={() => {
                   navigateTo("/work");
                   scrollToTop();
                 }}
+                icon={
+                  isArabic ? (
+                    <ArrowLeftIcon className="h-5 w-5" />
+                  ) : (
+                    <ArrowRightIcon className="h-5 w-5" />
+                  )
+                }
               >
                 {t("Public.SeeMore")}
               </Button>
@@ -278,12 +286,19 @@ export default function HomePage() {
 
             {projectsData.length > 3 && (
               <Button
-                className="mb-10 w-max"
+                className="mb-10 w-max flex-row-reverse"
                 variant="default"
                 onClick={() => {
                   navigateTo("/projects");
                   scrollToTop();
                 }}
+                icon={
+                  isArabic ? (
+                    <ArrowLeftIcon className="h-5 w-5" />
+                  ) : (
+                    <ArrowRightIcon className="h-5 w-5" />
+                  )
+                }
               >
                 {t("Public.SeeMore")}
               </Button>

@@ -15,6 +15,8 @@ const LightMode = createGlobalStyle`
     --card-background: #edf0f1;
     --card-headline : #000000;
     --card-paragraph : #333333;
+    --card-background-effect: #2426295c;
+    --card-border-color: #ffffff25;
     --link-color: #000000;
     --link-hover:#fff;
     --Logo-text-color: #000000;

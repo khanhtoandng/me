@@ -1,15 +1,16 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Globe, Github } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
-  Card,
   CardHeader,
   CardFooter,
   CardTitle,
   CardDescription,
   CardContent,
 } from "@/components/ui/card";
+import { MagicCard } from "../ui/MagicCard";
 
 interface ReusableCardProps extends React.HTMLAttributes<HTMLDivElement> {
   id?: string;
@@ -41,11 +42,12 @@ const ReusableCard = React.forwardRef<HTMLDivElement, ReusableCardProps>(
     ref,
   ) => {
     return (
-      <Card
+      <MagicCard
         data-aos="fade-up"
         data-aos-easing="ease-in-out"
         ref={ref}
-        className={cn("pb-4 pt-2", className)}
+        gradientColor="#7e7e7e12"
+        className={cn("px-4 pb-4 pt-2", className)}
         {...props}
       >
         <CardHeader className="flex items-center justify-between py-2 max-md:flex-col max-md:items-start">
@@ -106,7 +108,7 @@ const ReusableCard = React.forwardRef<HTMLDivElement, ReusableCardProps>(
             )}
           </div>
         </CardFooter>
-      </Card>
+      </MagicCard>
     );
   },
 );

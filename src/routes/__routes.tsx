@@ -20,7 +20,7 @@ const AppRoutes: React.FC = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <div className="text-base ">
+      <div className="text-base">
         <Button
           isLoading={true}
           className="flex cursor-text gap-0 border-none bg-transparent"

@@ -13,6 +13,8 @@ const DarkMode = createGlobalStyle`
     --button-text: #fffffe;
     --button-text-hover: #fffffe;
     --card-background: #242629;
+    --card-background-effect: #2426295c;
+    --card-border-color: #ffffff25;
     --card-headline : #fffffe;
     --card-paragraph : #94a1b2;
     --link-color: #7f5af0;

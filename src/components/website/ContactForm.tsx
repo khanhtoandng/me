@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 import { useMediaQuery } from "@react-hook/media-query";
 import i18n from "@/i18n";
 import { Button } from "@/components/ui/button";
-import { MailPlusIcon } from "lucide-react";
+import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 
 const styles = {
   form: "grid items-start gap-4 ",
@@ -223,11 +223,18 @@ export function ContactForm() {
   const [open, setOpen] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const { t } = useTranslation();
+  const isArabic = i18n.language === "ar";
 
   const commonContent = (
     <div className="text-[var(--paragraph)]">
       <Button
-        icon={<MailPlusIcon className="h-5 w-5" />}
+        icon={
+          isArabic ? (
+            <ArrowLeftIcon className="h-5 w-5" />
+          ) : (
+            <ArrowRightIcon className="h-5 w-5" />
+          )
+        }
         className="hoverd gap-0 border-none bg-transparent px-0 py-[8px] ps-1 text-[1rem] font-bold text-[var(--tertiary-color)] hover:bg-transparent hover:text-[var(--tertiary-color)] max-md:ps-0"
       >
         {t("Public.Email")}
