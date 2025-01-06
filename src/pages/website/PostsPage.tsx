@@ -13,6 +13,7 @@ import { motion } from "framer-motion";
 import ReusableCard from "@/components/custom/ReusableCard";
 import SEO from "@/components/featuers/SEO";
 import React from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function PostsPage() {
   const { t, i18n } = useTranslation();
@@ -31,6 +32,7 @@ export default function PostsPage() {
   };
 
   const [posts, setPosts] = React.useState<any[]>([]);
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     const fetchPosts = async () => {
@@ -42,6 +44,8 @@ export default function PostsPage() {
         setPosts(data);
       } catch (error) {
         console.error("Error fetching posts:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -104,61 +108,73 @@ export default function PostsPage() {
         </div>
 
         <div className="posts-cards flex flex-col gap-8 pb-16">
-          {posts.map((post: any) => (
-            <ReusableCard
-              key={post.id}
-              id={post.id}
-              title={post.title}
-              description={post.description}
-              skills={Array.isArray(post.tags) ? post.tags : []}
-              websiteLink={post.url}
-              githubLink={post.github_url}
-              t={t}
-              linkStyle={styles.linkStyle}
-              className="pb-4 pt-2"
-              dir={direction}
-            >
-              <div className="flex max-w-[60%] flex-wrap gap-2 max-md:mb-0 max-md:mt-4 max-md:max-w-full">
-                {Array.isArray(post.tags) && post.tags.length > 0 ? (
-                  post.tags.map((tag: string, tagIndex: number) => (
-                    <Badge key={tagIndex}>{tag}</Badge>
-                  ))
-                ) : (
-                  <span>No tags available</span>
-                )}
-              </div>
+          {loading
+            ? Array(3)
+                .fill(null)
+                .map((_, index) => (
+                  <div key={index} className="w-full">
+                    <Skeleton className="mb-4 h-48" />
+                    <Skeleton className="mb-2 h-8" />
+                    <Skeleton className="mb-2 h-6" />
+                    <Skeleton className="h-10" />
+                  </div>
+                ))
+            : // Show posts once data is fetched
+              posts.map((post: any) => (
+                <ReusableCard
+                  key={post.id}
+                  id={post.id}
+                  title={post.title}
+                  description={post.description}
+                  skills={Array.isArray(post.tags) ? post.tags : []}
+                  websiteLink={post.url}
+                  githubLink={post.github_url}
+                  t={t}
+                  linkStyle={styles.linkStyle}
+                  className="pb-4 pt-2"
+                  dir={direction}
+                >
+                  <div className="flex max-w-[60%] flex-wrap gap-2 max-md:mb-0 max-md:mt-4 max-md:max-w-full">
+                    {Array.isArray(post.tags) && post.tags.length > 0 ? (
+                      post.tags.map((tag: string, tagIndex: number) => (
+                        <Badge key={tagIndex}>{tag}</Badge>
+                      ))
+                    ) : (
+                      <span>No tags available</span>
+                    )}
+                  </div>
 
-              <div className="flex flex-wrap gap-4 max-md:mt-5">
-                {isValidLink(post.url) && (
-                  <a
-                    href={post.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.linkStyle}
-                  >
-                    <span>
-                      <Globe className="h-4 w-4" />
-                    </span>
-                    <span>{t("links.visitWebsite")}</span>
-                  </a>
-                )}
+                  <div className="flex flex-wrap gap-4 max-md:mt-5">
+                    {isValidLink(post.url) && (
+                      <a
+                        href={post.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.linkStyle}
+                      >
+                        <span>
+                          <Globe className="h-4 w-4" />
+                        </span>
+                        <span>{t("links.visitWebsite")}</span>
+                      </a>
+                    )}
 
-                {isValidLink(post.github_url) && (
-                  <a
-                    href={post.github_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.linkStyle}
-                  >
-                    <span>
-                      <Github className="h-4 w-4" />
-                    </span>
-                    <span>{t("links.visitGithub")}</span>
-                  </a>
-                )}
-              </div>
-            </ReusableCard>
-          ))}
+                    {isValidLink(post.github_url) && (
+                      <a
+                        href={post.github_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.linkStyle}
+                      >
+                        <span>
+                          <Github className="h-4 w-4" />
+                        </span>
+                        <span>{t("links.visitGithub")}</span>
+                      </a>
+                    )}
+                  </div>
+                </ReusableCard>
+              ))}
         </div>
       </motion.div>
     </>
