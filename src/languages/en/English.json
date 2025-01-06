@@ -14,6 +14,11 @@
     "At": "at"
   },
 
+  "Posts": {
+    "Title": "Latest Posts",
+    "Description": "Explore my latest posts on web development, programming, and tech."
+  },
+
   "Language": {
     "change": "Language change to English"
   },
@@ -60,7 +65,9 @@
     "About": "About",
     "Projects": "Projects ",
     "Blog": "Blog",
-    "Work": "Work"
+    "Work": "Work",
+    "Post": "Post",
+    "Posts": "Posts"
   },
   "projects": {
     "samtax": {

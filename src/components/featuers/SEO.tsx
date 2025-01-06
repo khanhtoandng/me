@@ -1,5 +1,5 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import React from "react";
+import { Helmet } from "react-helmet-async";
 
 interface SEOProps {
   title: string;
@@ -29,7 +29,7 @@ const SEO: React.FC<SEOProps> = ({
       <link rel="icon" type="image/svg+xml" href="./app/images/Logo.png" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta name="description" content={description} />
-      <meta name="keywords" content={keywords.join(', ')} />
+      <meta name="keywords" content={keywords.join(", ")} />
       <meta name="author" content={author} />
       <meta name="robots" content="index, follow" />
       <meta name="referrer" content="origin" />
@@ -53,7 +53,11 @@ const SEO: React.FC<SEOProps> = ({
 
       {/* Preconnect to Google Fonts */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossOrigin="anonymous"
+      />
       <link
         href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&display=swap"
         rel="stylesheet"

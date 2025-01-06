@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useCallback, useEffect, useRef } from "react";
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 
@@ -74,7 +72,7 @@ export function MagicCard({
     <div
       ref={cardRef}
       className={cn(
-        "group relative flex size-full overflow-hidden rounded-xl border border-[var(--card-border-color)] bg-[var(--card-background)] text-black dark:bg-neutral-900 dark:text-white",
+        "group relative flex size-full overflow-hidden rounded-xl border border-[var(--card-border-color)] bg-[var(--card-background)]",
         className,
       )}
     >

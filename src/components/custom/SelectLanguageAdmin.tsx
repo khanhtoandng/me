@@ -27,7 +27,7 @@ const SelectLanguageAdmin: React.FC<SelectLanguageProps> = () => {
     <div className="relative inline-block">
       <Select onValueChange={changeLanguage} defaultValue={currentLanguage}>
         <SelectTrigger
-          className="flex w-max flex-row-reverse items-center justify-center  p-0 gap-2 border-none text-[var(--card-headline)]"
+          className="flex w-max flex-row-reverse items-center justify-center gap-2 border-none p-0 text-[var(--card-headline)]"
           aria-label={t("SelectLanguage")}
         >
           <SelectValue placeholder={t("SelectLanguage")} />

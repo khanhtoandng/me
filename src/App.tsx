@@ -16,7 +16,8 @@ const App: React.FC = () => {
   const isNotFoundPage =
     location.pathname !== "/" &&
     location.pathname !== "/projects" &&
-    location.pathname !== "/work";
+    location.pathname !== "/work" &&
+    location.pathname !== "/posts";
 
   return (
     <div className="App flex min-h-screen flex-col bg-[var(--background)]">

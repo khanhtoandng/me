@@ -9,6 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Logo from "../custom/Logo";
 import i18n from "@/i18n";
 import SelectLanguage from "../custom/SelectLanguage";
+import { LuFileSpreadsheet } from "react-icons/lu";
 
 const styles = {
   link: "text-[var(--paragraph)] hover:text-[var(--headline)] flex gap-2 rounded-md  text-sm font-medium items-center py-2 hoverd",
@@ -64,6 +65,7 @@ export default function Navbar() {
     { name: t("Navbar.Home"), path: "/", icon: Home },
     { name: t("Navbar.Work"), path: "/work", icon: Briefcase },
     { name: t("Navbar.Projects"), path: "/projects", icon: FolderGit2 },
+    { name: t("Navbar.Post"), path: "/posts", icon: LuFileSpreadsheet },
   ];
   const { language } = i18n;
 
@@ -83,7 +85,7 @@ export default function Navbar() {
           <div className="hidden h-full items-center justify-center md:flex">
             <div
               dir={direction}
-              className="mr-[-100px] flex h-full items-center justify-center gap-8"
+              className="mr-[-100px] flex h-full items-center justify-center gap-6"
             >
               {navItems.map((item) => (
                 <div

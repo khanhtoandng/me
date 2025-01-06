@@ -1,6 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
-import DarkMode from "@/themes/Dark";
-import LightMode from "@/themes/Light";
 import React, {
   createContext,
   useState,
@@ -12,8 +9,8 @@ import { ThemeProvider as StyledThemeProvider } from "styled-components";
 import { motion } from "framer-motion";
 
 interface ThemeContextType {
-  theme: "light" | "dark";
-  setTheme: React.Dispatch<React.SetStateAction<"light" | "dark">>;
+  theme: "light" | "dark" | "system";
+  setTheme: React.Dispatch<React.SetStateAction<"light" | "dark" | "system">>;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -23,10 +20,13 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setTheme] = useState<"light" | "dark">("dark");
+  const [theme, setTheme] = useState<"light" | "dark" | "system">("system");
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("pageMode") as "light" | "dark";
+    const savedTheme = localStorage.getItem("pageMode") as
+      | "light"
+      | "dark"
+      | "system";
     if (savedTheme) {
       setTheme(savedTheme);
     }
@@ -34,11 +34,36 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem("pageMode", theme);
+
+    // Set body class based on the selected theme
+    if (theme === "light") {
+      document.body.classList.add("light");
+      document.body.classList.remove("dark");
+    } else if (theme === "dark") {
+      document.body.classList.add("dark");
+      document.body.classList.remove("light");
+    } else if (theme === "system") {
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+        .matches
+        ? "dark"
+        : "light";
+      document.body.classList.add(systemTheme);
+      document.body.classList.remove(systemTheme === "dark" ? "light" : "dark");
+    }
   }, [theme]);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      <StyledThemeProvider theme={{ mode: theme }}>
+      <StyledThemeProvider
+        theme={{
+          mode:
+            theme === "system"
+              ? window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light"
+              : theme,
+        }}
+      >
         <motion.div
           key={theme} // Changing the key will trigger the animation
           initial={{ opacity: 0 }}
@@ -46,7 +71,6 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }} // Set the duration of the transition
         >
-          {theme === "dark" ? <DarkMode /> : <LightMode />}
           {children}
         </motion.div>
       </StyledThemeProvider>

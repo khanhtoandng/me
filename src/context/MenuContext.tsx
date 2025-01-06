@@ -5,9 +5,7 @@ interface MenuContextType {
   setIsOpen: any;
 }
 
-export const MenuContext = createContext<MenuContextType | any>(
-  undefined,
-);
+export const MenuContext = createContext<MenuContextType | any>(undefined);
 
 interface MenuProviderProps {
   children: ReactNode;

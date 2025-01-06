@@ -35,7 +35,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 const styles = {
   form: "grid items-start gap-4 ",
   inputGrid: "grid gap-2",
-  dialogContent: "sm:max-w-[425px]",
+  dialogContent: "sm:max-w-[425px] rounded-[10px]",
 };
 
 function ProfileForm({

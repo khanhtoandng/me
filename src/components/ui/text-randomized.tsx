@@ -1,12 +1,10 @@
-"use client";
-
 import { useEffect, useState, useCallback } from "react";
 
 const lettersAndSymbols = "abcdefghijklmnopqrstuvwxyz!@#$%^&*-_+=;:<>,";
 
 interface AnimatedTextProps {
   text: string;
-  className?: string; // Optional className prop
+  className?: string;
 }
 
 export function RandomizedTextEffect({
@@ -14,6 +12,7 @@ export function RandomizedTextEffect({
   className = "",
 }: AnimatedTextProps) {
   const [animatedText, setAnimatedText] = useState("");
+  const [hasSeenAnimation, setHasSeenAnimation] = useState<boolean>(false);
 
   const getRandomChar = useCallback(
     () =>
@@ -55,10 +54,31 @@ export function RandomizedTextEffect({
   }, [text, getRandomChar]);
 
   useEffect(() => {
-    animateText();
-  }, [text, animateText]);
+    // Check localStorage to see if animation has already been shown
+    const isFirstVisit = !localStorage.getItem("hasSeenAnimation");
+
+    if (isFirstVisit) {
+      animateText();
+      localStorage.setItem("hasSeenAnimation", "true");
+    } else {
+      setHasSeenAnimation(true); // Skip animation if already seen
+    }
+
+    const handleBeforeUnload = () => {
+      // Reset the flag when the window is closed or refreshed
+      localStorage.removeItem("hasSeenAnimation");
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [animateText]);
 
   return (
-    <div className={`relative inline-block ${className}`}>{animatedText}</div>
+    <div className={`relative inline-block ${className}`}>
+      {hasSeenAnimation ? text : animatedText}
+    </div>
   );
 }

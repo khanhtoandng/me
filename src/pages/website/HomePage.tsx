@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import ReusableCard from "@/components/custom/ReusableCard";
 import { ArrowLeftIcon, ArrowRightIcon, Github, Globe } from "lucide-react";
 import Header from "@/components/website/Header";
-
 import SEO from "@/components/featuers/SEO";
 import { scrollToTop } from "@/helper";
 
@@ -17,7 +16,6 @@ const styles = {
   linkStyle:
     "flex items-center justify-center gap-1 text-sm text-[var(--headline)] opacity-70 hoverd hover:opacity-100",
 };
-// data/workData.ts
 
 export default function HomePage() {
   const projectsData = [
@@ -30,7 +28,6 @@ export default function HomePage() {
         website: "https://sam-tax.com",
       },
     },
-
     {
       id: "gradients-css",
       titleKey: "projects.gradientsCss.title",
@@ -57,7 +54,6 @@ export default function HomePage() {
         website: "https://raoufzadi.vercel.app",
       },
     },
-
     {
       id: "naj-training-center",
       titleKey: "projects.najTrainingCenter.title",
@@ -260,13 +256,10 @@ export default function HomePage() {
                       rel="noopener noreferrer"
                       className={styles.linkStyle}
                     >
-                      <span>
-                        <Globe className="h-4 w-4" />
-                      </span>
-                      <span>{t("links.visitWebsite")}</span>
+                      <Globe className="h-5 w-5" />
+                      {t("Projects.Links.Website")}
                     </a>
                   )}
-
                   {isValidLink(project.links.github) && (
                     <a
                       href={project.links.github}
@@ -274,10 +267,8 @@ export default function HomePage() {
                       rel="noopener noreferrer"
                       className={styles.linkStyle}
                     >
-                      <span>
-                        <Github className="h-4 w-4" />
-                      </span>
-                      <span>{t("links.visitGithub")}</span>
+                      <Github className="h-5 w-5" />
+                      {t("Projects.Links.Github")}
                     </a>
                   )}
                 </div>
@@ -286,7 +277,7 @@ export default function HomePage() {
 
             {projectsData.length > 3 && (
               <Button
-                className="mb-10 w-max flex-row-reverse"
+                className="w-max flex-row-reverse"
                 variant="default"
                 onClick={() => {
                   navigateTo("/projects");
