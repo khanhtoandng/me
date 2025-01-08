@@ -18,6 +18,7 @@ export default function Header() {
           className="subtitle italic"
         />
         <p className={"description"}>{t("Header.Description1")}</p>
+
         <p className={"description"}>{t("Header.Description2")}</p>
         <p className={"description"}>{t("Header.Description3")}</p>
         <ContactForm />

@@ -127,6 +127,10 @@
       "Description": "Completed an internship at GEDCO as a software engineer through my college."
     }
   },
+
+  "Recommendations": {
+    "Title": "Recommendations"
+  },
   "Projects": {
     "Title": "Projects",
     "Description": "I have worked on a variety of projects; here are some of the ones I'm particularly proud of.",

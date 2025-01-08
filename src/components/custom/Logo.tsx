@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { RandomizedTextEffect } from "../ui/text-randomized";
 import { motion, AnimatePresence } from "framer-motion";
+import { HyperText } from "../ui/text-randomized-logo";
 
 export default function Logo() {
   const [isHovered, setIsHovered] = useState(false);
@@ -22,10 +22,9 @@ export default function Logo() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0 }}
               >
-                <RandomizedTextEffect
-                  text={"Baraa"}
-                  className="hovered text-base font-bold text-[var(--link-color)]"
-                />
+                <HyperText className="hovered text-base font-bold text-[var(--link-color)]">
+                  Baraa
+                </HyperText>
               </motion.div>
             ) : (
               <motion.div

@@ -65,7 +65,6 @@ export default function PostsPage() {
           "براء الشاعر مقالات",
         ]}
       />
-
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -133,6 +132,10 @@ export default function PostsPage() {
                   linkStyle={styles.linkStyle}
                   className="pb-4 pt-2"
                   dir={direction}
+                  coverImg={
+                    post.cover_image ||
+                    "https://images.prismic.io/loco-blogs/79328284-f97b-489f-924c-eb3b17e34b56_image2.png?auto=compress%2Cformat&rect=0%2C0%2C1999%2C1124&w=1920&fit=max"
+                  } // Passing image URL as 'img' prop
                 >
                   <div className="flex max-w-[60%] flex-wrap gap-2 max-md:mb-0 max-md:mt-4 max-md:max-w-full">
                     {Array.isArray(post.tags) && post.tags.length > 0 ? (

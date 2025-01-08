@@ -8,6 +8,7 @@ import { ArrowLeftIcon, ArrowRightIcon, Github, Globe } from "lucide-react";
 import Header from "@/components/website/Header";
 import SEO from "@/components/featuers/SEO";
 import { scrollToTop } from "@/helper";
+import Recommendations from "@/components/website/Recommendations";
 
 const styles = {
   breadcrumbLink: "hover:text-[var(--paragraph)] hoverd",
@@ -296,6 +297,8 @@ export default function HomePage() {
             )}
           </div>
         </section>
+
+        <Recommendations />
       </motion.div>
     </>
   );

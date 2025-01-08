@@ -71,6 +71,7 @@ export function MagicCard({
   return (
     <div
       ref={cardRef}
+      data-aos="fade-up"
       className={cn(
         "group relative flex size-full overflow-hidden rounded-xl border border-[var(--card-border-color)] bg-[var(--card-background)]",
         className,

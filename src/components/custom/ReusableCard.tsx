@@ -22,6 +22,9 @@ interface ReusableCardProps extends React.HTMLAttributes<HTMLDivElement> {
   githubLink?: string;
   t?: (key: string) => string;
   linkStyle?: string;
+  img?: string;
+  coverImg?: string; // New prop for cover image
+  suptitle?: string;
 }
 
 const ReusableCard = React.forwardRef<HTMLDivElement, ReusableCardProps>(
@@ -36,6 +39,9 @@ const ReusableCard = React.forwardRef<HTMLDivElement, ReusableCardProps>(
       githubLink,
       t = (key: string) => key,
       linkStyle = "",
+      img,
+      coverImg, // Destructure coverImg prop
+      suptitle,
       className,
       ...props
     },
@@ -50,11 +56,30 @@ const ReusableCard = React.forwardRef<HTMLDivElement, ReusableCardProps>(
         className={cn("px-4 pb-4 pt-2", className)}
         {...props}
       >
+        {coverImg && (
+          <div className="w-full">
+            <img
+              src={coverImg}
+              alt={title || "Cover Image"}
+              className="roud mb-1 h-[200px] w-full rounded-[10px] object-cover"
+            />
+          </div>
+        )}
         <CardHeader className="flex items-center justify-between py-2 max-md:flex-col max-md:items-start">
+          {img && (
+            <img
+              src={img}
+              alt={title || "Image"}
+              className="h-12 w-12 rounded-full object-cover"
+            />
+          )}
           {title && (
             <CardTitle className="text-base font-semibold leading-6 tracking-tight text-[var(--headline)]">
               {title}
             </CardTitle>
+          )}
+          {suptitle && (
+            <h3 className="mt-1 text-sm text-[var(--subtitle)]">{suptitle}</h3>
           )}
           {date && (
             <CardDescription className="text-sm text-[var(--paragraph)] max-md:mb-0 max-md:mt-1">
