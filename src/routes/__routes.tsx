@@ -3,6 +3,7 @@ import React, { Suspense } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { t } from "i18next";
+import ContactPage from "@/pages/website/ContactPage";
 
 // common
 const NotFoundPage = React.lazy(() => import("@/pages/common/NotFoundPage"));
@@ -40,6 +41,7 @@ const AppRoutes: React.FC = () => {
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/work" element={<WorkPage />} />
         <Route path="/posts" element={<PostPage />} />
+        <Route path="/contact" element={<ContactPage />} />
         {/* </Route> */}
 
         <Route path="*" element={<NotFoundPage />} />

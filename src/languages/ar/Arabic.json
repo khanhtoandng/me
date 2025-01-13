@@ -13,7 +13,26 @@
     "Links": "روابط",
     "At": "في"
   },
-
+  "frontendDeveloperSustainableStar": "مطور واجهات أمامية في Sustainable Star LLC",
+  "company": "الشركة",
+  "sustainableStarLLC": "Sustainable Star LLC",
+  "date": "التاريخ",
+  "description": "الوصف",
+  "frontendDescription": "مطور واجهات أمامية يعمل مع React JS، TypeScript، Tailwind CSS، و Git/Github لبناء تطبيقات قابلة للتوسع.",
+  "skills": "المهارات",
+  "frontendSkills": "React JS، TypeScript، Tailwind CSS، GitHub، Git، RESTful APIs",
+  "frontendDeveloperPtit": "مطور واجهات أمامية في PTIT",
+  "ptit": "PTIT",
+  "ptitDescription": "عملت على مشاريع مبنية باستخدام React JS، مع استخدام JavaScript وTailwind CSS لتقديم واجهات مستخدم عالية الجودة وقابلة للاستجابة.",
+  "ptitSkills": "React JS، JavaScript، Tailwind CSS، GitHub، Git",
+  "softwareEngineerInternGedco": "متدرب مهندس برمجيات في GEDCO",
+  "gedco": "GEDCO",
+  "gedcoDescription": "تدربت كمهندس برمجيات، وعملت على تطبيقات مبنية باستخدام PHP وقواعد بيانات MySQL، لتحسين أنظمة البرمجيات في الشركة.",
+  "gedcoSkills": "PHP، MySQL، Bootstrap",
+  "Contact": {
+    "Title": "اتصل بنا",
+    "Description": "هل لديك مشروع تريد العمل عليه ؟ تواصل معي"
+  },
   "Posts": {
     "Title": "أحدث المقالات",
     "Description": "اكتشف أحدث مقالاتي في تطوير الويب، البرمجة، والتكنولوجيا."
@@ -66,7 +85,8 @@
     "Blog": "مدونة",
     "Work": "العمل",
     "Post": "المنشورات",
-    "Posts": "المنشورات"
+    "Posts": "المنشورات",
+    "Contact": "تواصل"
   },
   "Recommendations": {
     "Title": "التوصيات"

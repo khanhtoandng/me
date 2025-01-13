@@ -177,6 +177,7 @@ export default function HomePage() {
         transition={{ duration: 0.5 }}
       >
         <Header />
+        {/* <WorkTimeLine /> */}
         <section dir={direction} className="section">
           <h1 className="section-title">{t("WorkExperience.Title")}</h1>
 
@@ -225,6 +226,7 @@ export default function HomePage() {
             )}
           </div>
         </section>
+
         <section dir={direction} className="section">
           <h1 className="section-title">{t("Projects.Title")}</h1>
 

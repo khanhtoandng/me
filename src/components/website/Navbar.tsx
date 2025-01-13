@@ -3,13 +3,21 @@ import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 import { HiOutlineSun } from "react-icons/hi";
 import { LuMoon } from "react-icons/lu";
-import { Menu, X, Home, Briefcase, FolderGit2 } from "lucide-react";
+import {
+  Menu,
+  X,
+  Home,
+  Briefcase,
+  FolderGit2,
+  MessageCircleCode,
+} from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
 import { motion, AnimatePresence } from "framer-motion";
 import Logo from "../custom/Logo";
 import i18n from "@/i18n";
 import SelectLanguage from "../custom/SelectLanguage";
 import { LuFileSpreadsheet } from "react-icons/lu";
+import { ThemeToggle } from "../ui/theme-toggle";
 
 const styles = {
   link: "text-[var(--paragraph)] hover:text-[var(--headline)] flex gap-2 rounded-md  text-sm font-medium items-center py-2 hoverd",
@@ -59,13 +67,13 @@ export default function Navbar() {
   });
 
   const IconComponent = theme === "light" ? LuMoon : HiOutlineSun;
-  const modeText = theme === "light" ? "Dark Mode" : "Light Mode";
 
   const navItems = [
     { name: t("Navbar.Home"), path: "/", icon: Home },
     { name: t("Navbar.Work"), path: "/work", icon: Briefcase },
     { name: t("Navbar.Projects"), path: "/projects", icon: FolderGit2 },
     { name: t("Navbar.Post"), path: "/posts", icon: LuFileSpreadsheet },
+    { name: t("Navbar.Contact"), path: "/contact", icon: MessageCircleCode },
   ];
   const { language } = i18n;
 
@@ -85,7 +93,7 @@ export default function Navbar() {
           <div className="hidden h-full items-center justify-center md:flex">
             <div
               dir={direction}
-              className="mr-[-100px] flex h-full items-center justify-center gap-6"
+              className="mr-[-100px] flex h-full items-center justify-center gap-8"
             >
               {navItems.map((item) => (
                 <div
@@ -118,18 +126,7 @@ export default function Navbar() {
           </div>
 
           <div className="flex h-full items-center justify-center gap-4 max-md:hidden max-md:gap-2">
-            <motion.div
-              className={
-                styles.navMenu +
-                "mr-[14px] flex h-full items-center justify-center"
-              }
-              onClick={toggleMode}
-              whileTap="animate"
-              variants={iconAnimationVariants}
-            >
-              <IconComponent className={"h-5 w-5"} />
-              <span className="sr-only">{modeText}</span>
-            </motion.div>
+            <ThemeToggle />
 
             <SelectLanguage
               currentLanguage={currentLanguage}

@@ -40,7 +40,7 @@ const ReusableCard = React.forwardRef<HTMLDivElement, ReusableCardProps>(
       t = (key: string) => key,
       linkStyle = "",
       img,
-      coverImg, // Destructure coverImg prop
+      coverImg,
       suptitle,
       className,
       ...props
@@ -56,15 +56,6 @@ const ReusableCard = React.forwardRef<HTMLDivElement, ReusableCardProps>(
         className={cn("px-4 pb-4 pt-2", className)}
         {...props}
       >
-        {coverImg && (
-          <div className="w-full">
-            <img
-              src={coverImg}
-              alt={title || "Cover Image"}
-              className="roud mb-1 h-[200px] w-full rounded-[10px] object-cover"
-            />
-          </div>
-        )}
         <CardHeader className="flex items-center justify-between py-2 max-md:flex-col max-md:items-start">
           {img && (
             <img

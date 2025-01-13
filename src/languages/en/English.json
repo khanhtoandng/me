@@ -14,6 +14,29 @@
     "At": "at"
   },
 
+  "company": "Company",
+  "date": "Date",
+  "description": "Description",
+  "skills": "Skills",
+  "frontendDeveloperSustainableStar": "Frontend Developer at Sustainable Star LLC",
+  "frontendDeveloperPtit": "Frontend Developer at PTIT",
+  "softwareEngineerInternGedco": "Software Engineer Intern at GEDCO",
+  "sustainableStarLLC": "Sustainable Star LLC",
+  "ptit": "PTIT",
+  "gedco": "GEDCO",
+  "frontendDescription": "Frontend developer working with React JS, Typescript, Tailwind CSS, and Git/Github to build scalable applications.",
+  "ptitDescription": "Worked on React JS-based projects, using Javascript and Tailwind CSS to deliver high-quality, responsive UI.",
+  "gedcoDescription": "Interned as a Software Engineer, working on PHP-based applications and MySQL databases, enhancing company software systems.",
+  "frontendSkills": "React js, Typescript, Tailwind CSS, Github, Git, RESTful APIs",
+  "ptitSkills": "React js, Javascript, Tailwind CSS, Github, Git",
+  "gedcoSkills": "PHP, MySQL, Bootstrap",
+
+
+  "Contact": {
+    "Title": "Let's Contact!",
+    "Description": "Do you have a project that you would like to collaborate on? Please feel free to contact me."
+  },
+
   "Posts": {
     "Title": "Latest Posts",
     "Description": "Explore my latest posts on web development, programming, and tech."
@@ -67,7 +90,8 @@
     "Blog": "Blog",
     "Work": "Work",
     "Post": "Post",
-    "Posts": "Posts"
+    "Posts": "Posts",
+    "Contact": "Say Hi"
   },
   "projects": {
     "samtax": {

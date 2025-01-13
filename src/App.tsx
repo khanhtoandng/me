@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import Navbar from "@/components/website/Navbar";
 import Footer from "@/components/website/Footer";
 import { useLocation } from "react-router-dom";
+import { BackgroundEffect } from "./components/ui/backgroundEffect";
 
 const App: React.FC = () => {
   inject();
@@ -17,11 +18,13 @@ const App: React.FC = () => {
     location.pathname !== "/" &&
     location.pathname !== "/projects" &&
     location.pathname !== "/work" &&
+    location.pathname !== "/contact" &&
     location.pathname !== "/posts";
 
   return (
-    <div className="App flex min-h-screen flex-col bg-[var(--background)]">
-      <main className="container mx-auto flex-grow px-4 sm:px-6 lg:px-8">
+    <div className="App relative flex min-h-screen flex-col bg-[var(--background)]">
+      <BackgroundEffect />
+      <main className="container z-50 mx-auto flex-grow px-4 sm:px-6 lg:px-8">
         {!isNotFoundPage && <Navbar />}
 
         <Toaster className="hidden max-md:block" position="bottom-center" />

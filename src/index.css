@@ -10,7 +10,7 @@ body {
 
 @layer components {
   .container {
-    @apply max-w-4xl;
+    @apply max-w-[1200px];
   }
 }
 
