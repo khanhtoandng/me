@@ -6,6 +6,7 @@ import Navbar from "@/components/common/Navbar";
 import Footer from "@/components/common/Footer";
 import { webImage } from "@/data/Links";
 import BackgroundEffect from "@/components/ui/backgroundEffect";
+import { Analytics } from "@vercel/analytics/react"
 
 export const metadata: Metadata = {
   title: {
@@ -45,6 +46,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex  relative dark flex-col min-h-screen">
+        <Analytics/>
         <Toaster />
         <Navbar />
         <BackgroundEffect />
