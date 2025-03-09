@@ -2,6 +2,7 @@ import { Timeline } from "@/components/ui/timeline";
 import { Skeleton } from "../ui/skeleton";
 import { Badge } from "../ui/badge";
 import Link from "next/link";
+import { companies } from "@/data/Links";
 
 export function TimelineDemo() {
   const styles = {
@@ -21,7 +22,7 @@ export function TimelineDemo() {
             <h1 className={styles.sectionTitle}>
               <span>Frontend Developer</span> <span className="opacity-60">at</span>
               <span>
-                <Link href="#" target="_blank">
+                <Link href={companies.sustainablestar} target="_blank">
                   Sustainable Star LLC
                 </Link>
               </span>
@@ -51,7 +52,10 @@ export function TimelineDemo() {
           <div>
             <h1 className={styles.sectionTitle}>
               <span>Frontend Developer</span> <span className="opacity-60">at</span>
+              <Link href={companies.ptit} target="_blank">
+           
               <span>PTIT</span>
+              </Link>
             </h1>
             <p className={styles.sectionDescription}>
               Worked as a React developer, responsible for rebuilding and
@@ -77,7 +81,11 @@ export function TimelineDemo() {
           <div>
             <h1 className={styles.sectionTitle}>
               <span>Software Engineer Intern</span> <span className="opacity-60">at</span>
+         
+              <Link href={companies.gedco} target="_blank">
+         
               <span>GEDCO</span>
+              </Link>
             </h1>
             <p className={styles.sectionDescription}>
               Completed an internship at GEDCO as a software engineer through my
