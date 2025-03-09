@@ -30,7 +30,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
 
   return (
     <div className="mx-auto w-full  bg-transparent md:pt-10" ref={containerRef}>
-      <div className="section container">
+      <div className="section ">
         <h2 className="section-title pb-0">Employment History</h2>
         <p className="description">
           Here is a brief overview of my employment history.

@@ -105,7 +105,7 @@ export function TimelineDemo() {
   
 
   return (
-    <div id="work" className="h-max min-h-screen w-full  sm:px-6 md:px-8 max-md:px-0">
+    <div id="work" className="h-max min-h-screen w-full    px-0">
       <Timeline data={data} />
     </div>
   );
