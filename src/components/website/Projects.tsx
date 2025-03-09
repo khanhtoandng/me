@@ -154,9 +154,7 @@ export default function Projects() {
   <OtherProjectLink href="https://sam-tax.com/">
     SamTax <span className="opacity-60">- A professional website for a U.S.-based company offering tax and translation services.</span>
   </OtherProjectLink>
-  <OtherProjectLink href="https://sam-tax.com/">
-    RaoufZadi <span className="opacity-60">- A professional website for a U.S.-based company offering tax and translation services.</span>
-  </OtherProjectLink>
+
   <OtherProjectLink href="https://github.com/balshaer/rove">
     Rove <span className="opacity-60">- A full-stack, open-source eCommerce web application.</span>
   </OtherProjectLink>
