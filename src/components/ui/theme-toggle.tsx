@@ -1,22 +1,33 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Moon, Sun } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useTheme } from "@/context/ThemeContext";
 
 interface ThemeToggleProps {
   className?: string;
 }
 
 export function ThemeToggle({ className }: ThemeToggleProps) {
-  const { theme, setTheme } = useTheme();
-  const [isDark, setIsDark] = useState(theme === "dark");
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    const theme = savedTheme || (prefersDark ? "dark" : "light");
+    setIsDark(theme === "dark");
+
+    document.body.classList.add(theme);
+  }, []);
 
   const toggleTheme = () => {
     const newTheme = isDark ? "light" : "dark";
-    setTheme(newTheme);
     setIsDark(!isDark);
+    document.body.classList.toggle("dark", !isDark);
+    document.body.classList.toggle("light", isDark);
+    localStorage.setItem("theme", newTheme);
   };
 
   return (
@@ -26,7 +37,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
         isDark
           ? "border border-zinc-800 bg-zinc-950"
           : "border border-zinc-200 bg-white",
-        className,
+        className
       )}
       onClick={toggleTheme}
       role="button"
@@ -38,7 +49,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
             "flex h-6 w-6 items-center justify-center rounded-full transition-transform duration-300",
             isDark
               ? "translate-x-0 transform bg-zinc-800"
-              : "translate-x-8 transform bg-gray-200",
+              : "translate-x-8 transform bg-gray-200"
           )}
         >
           {isDark ? (
@@ -50,7 +61,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
         <div
           className={cn(
             "flex h-6 w-6 items-center justify-center rounded-full transition-transform duration-300",
-            isDark ? "bg-transparent" : "-translate-x-8 transform",
+            isDark ? "bg-transparent" : "-translate-x-8 transform"
           )}
         >
           {isDark ? (

@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState, useCallback } from "react";
 
 const lettersAndSymbols = "abcdefghijklmnopqrstuvwxyz!@#$%^&*-_+=;:<>,";
@@ -17,7 +18,7 @@ export function RandomizedTextEffect({
   const getRandomChar = useCallback(
     () =>
       lettersAndSymbols[Math.floor(Math.random() * lettersAndSymbols.length)],
-    [],
+    []
   );
 
   const animateText = useCallback(async () => {
@@ -48,24 +49,22 @@ export function RandomizedTextEffect({
             .slice(i + 1)
             .split("")
             .map(() => getRandomChar())
-            .join(""),
+            .join("")
       );
     }
   }, [text, getRandomChar]);
 
   useEffect(() => {
-    // Check localStorage to see if animation has already been shown
     const isFirstVisit = !localStorage.getItem("hasSeenAnimation");
 
     if (isFirstVisit) {
       animateText();
       localStorage.setItem("hasSeenAnimation", "true");
     } else {
-      setHasSeenAnimation(true); // Skip animation if already seen
+      setHasSeenAnimation(true); 
     }
 
     const handleBeforeUnload = () => {
-      // Reset the flag when the window is closed or refreshed
       localStorage.removeItem("hasSeenAnimation");
     };
 

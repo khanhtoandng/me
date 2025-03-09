@@ -3,32 +3,17 @@
     "development"
   ],
   "hints": {
+    "axe/name-role-value": "off",
+    "button-type": "off",
     "compat-api/css": [
       "default",
       {
         "ignore": [
-          "@layer"
+          "overscroll-behavior",
+          "overscroll-behavior: none"
         ]
       }
     ],
-    "disown-opener": "off",
-    "typescript-config/consistent-casing": "off",
-    "typescript-config/strict": "off",
-    "axe/name-role-value": [
-      "default",
-      {
-        "button-name": "off"
-      }
-    ],
-    "button-type": "off"
-  },
-  "browserslist": [
-    "defaults",
-    "not ie 11",
-    "not and_chr <= 122",
-    "not chrome <= 122",
-    "not edge <= 122",
-    "not opera <= 106",
-    "not samsung <= 23"
-  ]
+    "no-inline-styles": "off"
+  }
 }

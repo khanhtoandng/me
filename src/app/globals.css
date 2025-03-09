@@ -1,0 +1,375 @@
+@import url("https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #000000;
+    --headline: #ffffff;
+    --paragraph: #ffffffd4;
+    --border: #333333;
+    --button: #0070f3;
+    --scroll: #0070f3;
+    --button-border: #0070f3;
+    --button-hover: #0761d1;
+    --button-text: #ffffff;
+    --button-text-hover: #ffffff;
+    --card-background: #111111;
+    --card-background-effect: #11111180;
+    --card-border-color: #333333;
+    --card-headline: #ffffff;
+    --card-paragraph: #888888;
+    --link-color: #0070f3;
+    --link-hover: #ffffff;
+    --nav-item: #888888;
+    --logo-background: #ffffff;
+    --logo-text-color: #000000;
+    --gradient-color-1: #00000080;
+    --gradient-color-2: #11111180;
+    --input-background: #111111;
+    --input-border-color: #333333;
+    --badge-background: #0070f3;
+    --badge-text: #ffffff;
+    --skeleton-color: #222222;
+    --tertiary-color: #0070f3;
+    --footer-border-color: #333333;
+    --footer-text: #888888;
+    --menu-color: #888888;
+    --input-text: #ffffff;
+    --input-border: #ff0000;
+    --select-box-border: #0070f3;
+    --outline-button-text: #0070f3;
+    --mark: #ffffff;
+    --active: #ffffff;
+    --active-text: #000000;
+    --mobile-nav: #000000e6;
+    --offset: 10px;
+    --slide-up-fade: slide-up-fade 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    --fade-in: fade-in 0.2s ease-in-out forwards;
+    --logo: #0070f3;
+  }
+
+  .light {
+    --background: #ffffff;
+    --headline: #000000;
+    --paragraph: #666666;
+    --border: #eaeaea;
+    --button: #0070f3;
+    --scroll: #0070f3;
+    --button-border: #0070f3;
+    --button-hover: #0761d1;
+    --button-text: #ffffff;
+    --button-text-hover: #ffffff;
+    --card-background: #fafafa;
+    --card-headline: #000000;
+    --card-paragraph: #666666;
+    --card-background-effect: #fafafa80;
+    --card-border-color: #eaeaea;
+    --link-color: #0070f3;
+    --link-hover: #000000;
+    --logo-text-color: #000000;
+    --input-background: #fafafa;
+    --input-border-color: #eaeaea;
+    --badge-background: #0070f3;
+    --badge-text: #ffffff;
+    --skeleton-color: #f0f0f0;
+    --tertiary-color: #0070f3;
+    --footer-border-color: #eaeaea;
+    --footer-background: #fafafa;
+    --footer-text: #666666;
+    --menu-color: #000000;
+    --input-text: #000000;
+    --select-box-border: #0070f3;
+    --outline-button-text: #0070f3;
+    --mark: #0070f3;
+    --mobile-nav: #ffffffde;
+    --logo: #0070f3;
+  }
+
+  .dark {
+    --offset: 10px;
+    --slide-up-fade: slide-up-fade 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    --fade-in: fade-in 0.2s ease-in-out forwards;
+  }
+
+  * {
+    @apply m-0 box-border p-0 border-border;
+  }
+
+  html {
+    @apply text-base;
+    scroll-behavior: smooth;
+  }
+
+  a {
+    @apply cursor-pointer;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Cairo", sans-serif;
+    overscroll-behavior: none;
+  }
+}
+
+.hoverd {
+  transition: all 0.3s ease 0s !important;
+}
+
+@layer components {
+  .cardsGroup {
+    @apply flex min-h-[100px] w-full flex-col gap-5 max-md:w-full;
+  }
+
+  .section {
+    @apply py-[20px];
+  }
+
+  form {
+    @apply flex w-full flex-col gap-4 bg-[var(--background)];
+  }
+
+  form .form-title {
+    @apply text-center text-[var(--headline)];
+  }
+
+  .project-cards-container a:hover .overed {
+    @apply opacity-40;
+  }
+
+  .project-cards-container a:not(:hover) .overed {
+    @apply transition-opacity duration-300 ease-in-out;
+  }
+
+  .title {
+    @apply inline-block scale-[0.94];
+  }
+
+  .span-title {
+    @apply w-max opacity-0 blur-[4px];
+  }
+
+  .link {
+    @apply font-bold text-[var(--paragraph)] underline transition-all;
+  }
+
+  .header {
+    @apply flex flex-col items-start justify-start pt-0 max-md:pt-4;
+  }
+
+  .header-title {
+    @apply flex flex-col gap-4 py-[4px] text-2xl font-bold capitalize text-[var(--headline)];
+  }
+
+  .subtitle {
+    @apply w-full text-base text-[var(--headline)] opacity-80 max-md:max-w-none;
+  }
+
+  .section-subtitle {
+    @apply w-full pb-[18px] text-base text-[var(--paragraph)] max-md:max-w-none;
+  }
+
+  .section-title {
+    @apply flex flex-col gap-4 py-6 text-xl font-bold capitalize text-[var(--headline)];
+  }
+
+  .description {
+    @apply w-full py-2 text-base text-[var(--paragraph)] max-md:max-w-none;
+  }
+
+  .main-navbar {
+    @apply flex w-full flex-row items-center justify-between rounded-3xl py-3 max-md:m-auto max-md:border-b max-md:border-none max-md:px-0 max-md:backdrop-blur-2xl;
+  }
+
+  .cardGroup {
+    @apply grid grid-cols-3 gap-4 max-md:grid-cols-1;
+  }
+
+  .cardContainer {
+    @apply h-max w-1/3 border border-[var(--border)] bg-[var(--card-background)] p-4 max-md:w-full;
+  }
+
+  .inputWithIcon {
+    @apply flex items-center justify-start gap-1 rounded-md border-2 border-[var(--input-border-color)] bg-[var(--card-background)] px-2 text-[var(--paragraph)];
+  }
+
+  .badeIcon {
+    @apply cursor-pointer font-bold text-[var(--headline)];
+  }
+
+  .activeLink {
+    @apply relative max-md:hidden;
+  }
+
+  .sectionIcon {
+    @apply h-8 w-8 cursor-pointer rounded-md bg-[var(--card-background)] p-2 text-[var(--headline)];
+  }
+
+  .container {
+    @apply max-w-[960px] px-[14px];
+  }
+}
+
+@layer utilities {
+  .fade-in-right {
+    animation: fade-in-right 0.3s ease-out;
+  }
+
+  .fade-out-right {
+    animation: fade-out-right 0.3s ease-in;
+  }
+
+  @keyframes fade-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fade-out-right {
+    from {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes scale {
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes fade-in {
+    100% {
+      opacity: 1;
+      filter: blur(0);
+    }
+  }
+
+  @keyframes moving {
+    50% {
+      width: 100%;
+    }
+    100% {
+      width: 0;
+      right: 0;
+      left: unset;
+    }
+  }
+}
+
+@screen md {
+  .activeLink span:first-child::after {
+    @apply absolute bottom-0 left-[-5px] top-0 z-[9999] m-auto h-[90%] w-[2px] rounded-lg bg-[var(--headline)] content-[''];
+  }
+}
+
+.page {
+  @apply min-h-[100dvh] w-full;
+}
+
+.dropdownMenuItemIcon {
+  @apply rounded-sm bg-[var(--card-background)] p-[3px] text-[var(--card-headline)];
+}
+
+.input-error {
+  @apply border-2 border-red-400;
+}
+
+.gradientButton {
+  @apply bg-gradient-to-r from-[#1488CC] to-[#2B32B2] shadow-none transition-all duration-300;
+}
+
+.gradientButton:hover {
+  @apply shadow-[0_1px_20px_rgba(20,136,204,0.5)];
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply text-[var(--headline)];
+}
+
+p {
+  @apply text-[var(--paragraph)];
+}
+
+*::selection {
+  @apply bg-[#04182f] text-[#2d83d4];
+  opacity: 0.1;
+}
+
+.page {
+  @apply container px-4 pt-2 max-md:pt-16;
+}
+
+.link {
+  @apply text-[var(--link-color)] hoverd  underline;
+}
+
+.badge-hover:hover > :not(:hover) {
+  filter: blur(5px);
+  opacity: 0.5;
+  transition: all 0.3s ease 0s;
+}
+
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 0px;
+  background-color: var(--background);
+  border: 2px solid var(--background);
+}
+
+*::-webkit-scrollbar-track:hover {
+  background-color: var(--background);
+}
+
+*::-webkit-scrollbar-track:active {
+  background-color: var(--background);
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background-color: var(--scroll);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #494951;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: #424249;
+}
+
+.test1 {
+  @apply border-2 border-black bg-green-300 text-black;
+}
+
+.test2 {
+  @apply border-2 border-black bg-red-300 text-black;
+}
+
+.test3 {
+  @apply border-2 border-black bg-blue-300 text-black;
+}
+
+.test4 {
+  @apply border-2 border-black bg-yellow-300 text-black;
+}

@@ -11,7 +11,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "h-full gap-1 flex max-md:h-[35px] capitalize font-bold items-center justify-center rounded-full cursor-pointer px-6 py-3 transition duration-100 transform bg-[var(--button)] border-2 border-[var(--button-border)] text-[var(--button-text)] hoverd hover:bg-[var(--button-hover)] hover:text-[var(--button-text-hover)]",
+          "h-full gap-1 flex max-md:h-[35px] capitalize font-bold items-center justify-center rounded-full cursor-pointer px-6 py-3 transition duration-100 transform gradientButton  text-[var(--button-text)] hoverd hover:bg-[var(--button-hover)] hover:text-[var(--button-text-hover)]",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:

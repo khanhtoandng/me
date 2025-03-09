@@ -8,7 +8,7 @@ const Card = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("rounded-lg bg-[var(--card-background)] p-4", className)}
+    className={cn("bg-[var(--card-background)] border-[var(--card-border-color)] border rounded-xl p-4", className)}
     {...props}
   />
 ));
@@ -21,7 +21,7 @@ const CardHeader = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "flex items-center justify-between py-2 max-md:flex-col max-md:items-start",
+      "flex items-center  justify-between py-2 max-md:flex-col max-md:items-start",
       className,
     )}
     {...props}
@@ -36,7 +36,7 @@ const CardTitle = React.forwardRef<
   <h3
     ref={ref}
     className={cn(
-      "text-base font-semibold leading-6 tracking-tight text-[var(--headline)]",
+      "text-base font-semibold max-md:p-0 leading-6 tracking-tight text-[var(--headline)]",
       className,
     )}
     {...props}
@@ -63,7 +63,7 @@ const CardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("", className)} {...props} />
+  <div ref={ref} className={cn("p-0", className)} {...props} />
 ));
 CardContent.displayName = "CardContent";
 
@@ -74,7 +74,7 @@ const CardFooter = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "flex h-max flex-wrap items-start gap-2 pt-2 max-md:m-0 max-md:mt-2 max-md:items-end max-md:p-0",
+      "flex h-max flex-wrap  items-start max-md:flex-row max-md:px-4 gap-2 pt-2 max-md:m-0 max-md:mt-2 max-md:items-end ",
       className,
     )}
     {...props}

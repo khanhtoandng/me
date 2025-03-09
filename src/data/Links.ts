@@ -5,8 +5,13 @@ export const linkedin = "https://www.linkedin.com/in/balshaer/";
 export const github = "https://github.com/balshaer";
 export const whatsapp = `https://wa.me/${phoneNumber}`;
 export const youtube = "https://www.youtube.com/@Codewithbaraa";
+export const mailto = `mailto:${email}`;
+
 export const companies = {
   ptit: "http://ptit.com.sa/",
   sustainablestar: "https://sustainablestar.com.sa/",
   gedco: "#",
 };
+
+export const webImage =
+  "https://cdn.dribbble.com/userupload/14186516/file/original-302bcec5d5a7d2bae6c18ee8cabc5f37.png?resize=400x400";

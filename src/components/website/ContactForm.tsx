@@ -16,8 +16,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import emailjs from "emailjs-com";
+import { MagicCard } from "../ui/MagicCard";
+import WorldMapDemo from "./WorldMapDemo";
+import { cn } from "@/lib/utils";
 
-// Define form validation schema with Zod
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   email: z.string().email({ message: "Invalid email address." }),
@@ -26,7 +28,7 @@ const formSchema = z.object({
     .min(10, { message: "Message must be at least 10 characters." }),
 });
 
-export function ContactForm() {
+export default function ContactForm() {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -36,98 +38,119 @@ export function ContactForm() {
     },
   });
 
-  // Handle form submission and send data using EmailJS
   const onSubmit = (data: any) => {
     emailjs
       .sendForm(
         "service_vr92r5g",
         "template_dvr1x78",
         data,
-        "5J3vip7CH5ZH9OLZv",
+        "5J3vip7CH5ZH9OLZv"
       )
       .then(
-        (result) => {
+        (result: any) => {
           console.log(result.text);
         },
-        (error) => {
+        (error: any) => {
           console.log(error.text);
-        },
+        }
       );
   };
 
   return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-2 p-[20px]"
-      >
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-[var(--headline)]">Name</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Your Name"
-                  className="rounded-[8px] border-[var(--input-border-color)] bg-[var(--input-background)] text-[var(--input-text)]"
-                  {...field}
-                />
-              </FormControl>
-              <FormDescription className="text-[var(--paragraph)]">
-                Your full name.
-              </FormDescription>
-              <FormMessage className="text-red-500" />
-            </FormItem>
+    <div>
+      <div >
+        <MagicCard
+          data-aos="fade-up"
+          data-aos-easing="ease-in-out"
+          gradientColor="#7e7e7e12"
+          className={cn(
+            "group container overflow-hidden transition-all duration-300",
+            "border-[var(--card-border-color)] bg-[var(--card-background)]"
           )}
-        />
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-[var(--headline)]">Email</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Your Email"
-                  className="rounded-[8px] border-[var(--input-border-color)] bg-[var(--input-background)] text-[var(--input-text)]"
-                  {...field}
-                />
-              </FormControl>
-              <FormDescription className="text-[var(--paragraph)]">
-                Your email address.
-              </FormDescription>
-              <FormMessage className="text-red-500" />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="message"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-[var(--headline)]">Message</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder="Your Message"
-                  className="h-[200px] rounded-[8px] border-[var(--input-border-color)] bg-[var(--input-background)] text-[var(--input-text)]"
-                  {...field}
-                />
-              </FormControl>
-              <FormDescription className="text-[var(--paragraph)]">
-                Your message to us.
-              </FormDescription>
-              <FormMessage className="text-red-500" />
-            </FormItem>
-          )}
-        />
-        <Button
-          type="submit"
-          className="border-[var(--button-border)] bg-[var(--button)] text-[var(--button-text)] hover:bg-[var(--button-hover)] hover:text-[var(--button-text-hover)]"
+          ref={undefined}
         >
-          Submit
-        </Button>
-      </form>
-    </Form>
+          <div className="flex flex-col bg-transparent">
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-2 bg-transparent py-[20px]"
+              >
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[var(--headline)]">
+                        Name
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Enter your name"
+                          className="rounded-[8px] border-[var(--input-border-color)] bg-[var(--input-background)] text-[var(--input-text)]"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription className="text-[var(--paragraph)]">
+                        {/* Please provide your full name. */}
+                      </FormDescription>
+                      <FormMessage className="text-red-500" />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[var(--headline)]">
+                        Email Address
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Enter your email"
+                          className="rounded-[8px] border-[var(--input-border-color)] bg-[var(--input-background)] text-[var(--input-text)]"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription className="text-[var(--paragraph)]">
+                        {/* We will use this email to contact you. */}
+                      </FormDescription>
+                      <FormMessage className="text-red-500" />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[var(--headline)]">
+                        Your Message
+                      </FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Write your message here"
+                          className="h-[200px] rounded-[8px] border-[var(--input-border-color)] bg-[var(--input-background)] text-[var(--input-text)]"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription className="text-[var(--paragraph)]">
+                        {/* Please provide a detailed message. */}
+                      </FormDescription>
+                      <FormMessage className="text-red-500 hoverd" />
+                    </FormItem>
+                  )}
+                />
+                <Button type="submit">Submit</Button>
+              </form>
+            </Form>
+          </div>
+        </MagicCard>
+      </div>
+
+      <div className="container flex items-center justify-center">
+        <WorldMapDemo />
+      </div>
+    </div>
   );
 }
