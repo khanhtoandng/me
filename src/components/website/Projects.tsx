@@ -41,23 +41,22 @@ const ProjectLink = ({
 
 const OtherProjectLink = ({
   href,
-  children
+  children,
 }: {
   href: string;
   children: React.ReactNode;
 }) => (
-  <Card className="text-[var(--headline)] ">
-    <div className="flex items-center gap-2">
-    <ExternalLink className="h-4 w-4" />
+  <ScrollEffect type="fadeUp">
+    <Card className="text-[var(--headline)] ">
+      <h1 className="flex items-center gap-2 max-md:flex-wrap">
+        <ExternalLink className="h-4 w-4" />
 
-    <Link href={href} target="_blank">
-      {children}
-    </Link>
-    </div>
-
-
-
-  </Card>
+        <Link href={href} target="_blank">
+          {children}
+        </Link>
+      </h1>
+    </Card>
+  </ScrollEffect>
 );
 
 const ProjectsData = [
@@ -112,61 +111,77 @@ export default function Projects() {
     <div className="projects-cards flex flex-col gap-8 pb-16">
       {ProjectsData.map((project: any) => (
         <ScrollEffect type="fadeUp">
+          <ReusableCard
+            key={project.id}
+            id={project.id}
+            title={project.title}
+            description={project.description}
+            skills={project.skills}
+            websiteLink={project.links.website}
+            githubLink={project.links.github}
+            linkStyle={styles.linkStyle}
+            className="pb-4 pt-2"
+          >
+            <div className="flex max-w-[60%] flex-wrap gap-2 max-md:mb-0 max-md:mt-4 max-md:max-w-full">
+              {project.skills.map((skill: any, index: any) => (
+                <Badge key={index}>{skill}</Badge>
+              ))}
+            </div>
 
-        <ReusableCard
-          key={project.id}
-          id={project.id}
-          title={project.title}
-          description={project.description}
-          skills={project.skills}
-          websiteLink={project.links.website}
-          githubLink={project.links.github}
-          linkStyle={styles.linkStyle}
-          className="pb-4 pt-2"
-        >
-          <div className="flex max-w-[60%] flex-wrap gap-2 max-md:mb-0 max-md:mt-4 max-md:max-w-full">
-            {project.skills.map((skill: any, index: any) => (
-              <Badge key={index}>{skill}</Badge>
-            ))}
-          </div>
+            <div className="flex flex-wrap gap-4 max-md:mt-5">
+              {isValidLink(project.links.website) && (
+                <ProjectLink href={project.links.website} icon={Globe}>
+                  Visit Website
+                </ProjectLink>
+              )}
 
-          <div className="flex flex-wrap gap-4 max-md:mt-5">
-            {isValidLink(project.links.website) && (
-              <ProjectLink href={project.links.website} icon={Globe}>
-                Visit Website
-              </ProjectLink>
-            )}
-
-            {isValidLink(project.links.github) && (
-              <ProjectLink href={project.links.github} icon={Github}>
-                View on GitHub
-              </ProjectLink>
-            )}
-          </div>
-        </ReusableCard>
+              {isValidLink(project.links.github) && (
+                <ProjectLink href={project.links.github} icon={Github}>
+                  View on GitHub
+                </ProjectLink>
+              )}
+            </div>
+          </ReusableCard>
         </ScrollEffect>
-
       ))}
 
-      <h2 className="text-base text-[var(--paragraph)] opacity-80">Here are some more projects that I have worked on, <br /> You can find the complete list of projects on my <Link className="link text-base" href={"https://github.com/balshaer/"}>GitHub profile.</Link></h2>
+      <h2 className="text-base text-[var(--paragraph)] opacity-80">
+        Here are some more projects that I have worked on, <br /> You can find
+        the complete list of projects on my{" "}
+        <Link className="link text-base" href={"https://github.com/balshaer/"}>
+          GitHub profile.
+        </Link>
+      </h2>
 
       <ul className="space-y-2">
-  <OtherProjectLink href="https://sam-tax.com/">
-    SamTax <span className="opacity-60">- A professional website for a U.S.-based company offering tax and translation services.</span>
-  </OtherProjectLink>
+        <OtherProjectLink href="https://sam-tax.com/">
+          SamTax{" "}
+          <span className="opacity-60">
+            - A professional website for a U.S.-based company offering tax and
+            translation services.
+          </span>
+        </OtherProjectLink>
 
-  <OtherProjectLink href="https://github.com/balshaer/rove">
-    Rove <span className="opacity-60">- A full-stack, open-source eCommerce web application.</span>
-  </OtherProjectLink>
-  <OtherProjectLink href="https://sustainablestar.com.sa/">
-    Sustainable Star <span className="opacity-60">- A corporate website for a Saudi Arabian company specializing in software solutions.</span>
-  </OtherProjectLink>
-  <OtherProjectLink href="https://github.com/balshaer/bookstore-api">
-    Bookstore API <span className="opacity-60">- A robust API for managing bookstore operations.</span>
-  </OtherProjectLink>
-</ul>
-
-
+        <OtherProjectLink href="https://github.com/balshaer/rove">
+          Rove{" "}
+          <span className="opacity-60">
+            - A full-stack, open-source eCommerce web application.
+          </span>
+        </OtherProjectLink>
+        <OtherProjectLink href="https://sustainablestar.com.sa/">
+          Sustainable Star{" "}
+          <span className="opacity-60">
+            - A corporate website for a Saudi Arabian company specializing in
+            software solutions.
+          </span>
+        </OtherProjectLink>
+        <OtherProjectLink href="https://github.com/balshaer/bookstore-api">
+          Bookstore API{" "}
+          <span className="opacity-60">
+            - A robust API for managing bookstore operations.
+          </span>
+        </OtherProjectLink>
+      </ul>
     </div>
   );
 }

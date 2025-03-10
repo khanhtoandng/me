@@ -14,13 +14,13 @@ export default function HomePage() {
       <TimelineDemo />
       <RecommendationsSection />
 
-      <div className="text-[var(--headline)]">
+      <h2 className="max-md:overflow-hidden">
         If you want to get in touch, feel free to eamil me at:{" "}
-        <Link className="link" href={mailto}>
+        <Link className="link " href={mailto}>
           {email}
         </Link>
         .
-      </div>
+      </h2>
     </div>
   );
 }

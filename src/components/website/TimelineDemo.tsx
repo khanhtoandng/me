@@ -34,7 +34,7 @@ export function TimelineDemo() {
             </p>
           </div>
   
-          <div className="flex gap-3 pt-2 flex-wrap">
+          <div className="flex gap-3 pt-2 md:pb-[28px] flex-wrap max-md:overflow-hidden">
             <Badge className="w-max">React js</Badge>
             <Badge className="w-max">Typescript</Badge>
             <Badge className="w-max">Tailwind CSS</Badge>
@@ -62,7 +62,7 @@ export function TimelineDemo() {
               updating several projects, as well as developing new projects.
             </p>
   
-            <div className="flex gap-3 pt-2 flex-wrap">
+            <div className="flex gap-3 pt-2 md:pb-[28px]  flex-wrap">
               <Badge className="w-max">React js</Badge>
               <Badge className="w-max">Typescript</Badge>
               <Badge className="w-max">Tailwind CSS</Badge>
@@ -93,7 +93,7 @@ export function TimelineDemo() {
             </p>
           </div>
   
-          <div className="flex gap-3 pt-2 flex-wrap">
+          <div className="flex gap-3 pt-2 md:pb-[28px]  flex-wrap">
             <Badge className="w-max">PHP</Badge>
             <Badge className="w-max">MYSQL</Badge>
             <Badge className="w-max">Java</Badge>

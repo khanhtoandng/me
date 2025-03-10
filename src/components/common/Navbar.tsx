@@ -7,19 +7,16 @@ import {
   Briefcase,
   FolderGit2,
   MessageCircleCode,
-  LucideMoon,
-  LucideSun,
   LucideFileSpreadsheet,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "../ui/theme-toggle";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-// import SelectLanguage from "./SelectLanguage";
 import Logo from "./Logo";
 
 const styles = {
-  link: "text-[var(--paragraph)] hover:text-[var(--headline)] flex gap-[5px] rounded-md text-sm font-medium items-center py-2",
+  link: "text-[var(--headline)] hover:text-[var(--headline)] flex gap-[5px] hoverd rounded-md text-sm font-medium items-center py-2",
   icon: "h-4 w-4",
   dropdownItem:
     "flex items-center w-full h-full p-2 text-[var(--headline)] justify-center text-center rounded-md",
@@ -36,12 +33,12 @@ const iconAnimationVariants = {
 
 const mobileMenuVariants = {
   closed: {
-    opacity: 0,
+    opacity: "0%",
     x: "100%",
     transition: { duration: 0.2 },
   },
   open: {
-    opacity: 1,
+    opacity: "100%",
     x: 0,
     transition: { duration: 0.2 },
   },
@@ -49,19 +46,8 @@ const mobileMenuVariants = {
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [theme, setTheme] = useState("dark");
   const path = usePathname();
   const isDasboard = path.startsWith("/dashboard");
-
-  const toggleMode = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
-  };
-
-  // const [currentLanguage, setCurrentLanguage] = useState<string>(() => {
-  //   return localStorage.getItem("selectedLanguage") || "en";
-  // });
-
-  const IconComponent = theme === "light" ? LucideMoon : LucideSun;
 
   const navItems = [
     { name: "Work", path: "/#work", icon: Briefcase },
@@ -79,10 +65,10 @@ export default function Navbar() {
       ) : (
         <nav
           dir="ltr"
-          className="container max-md:bg-[var(--background)] max-md:z-50 mx-auto z-50 flex items-center justify-between gap-5 rounded-3xl border border-zinc-700/40 bg-[var(--mobile-nav)] px-5 text-base backdrop-blur-lg max-md:fixed max-md:left-0 max-md:right-0 max-md:top-0 max-md:w-full max-md:rounded-none max-md:px-3 sm:px-6 md:mt-2"
+          className="container max-md:bg-[var(--background)] max-md:z-50 mx-auto z-50 flex items-center justify-between gap-5 rounded-3xl border border-zinc-700/40 max-md:border-t-0 max-md:border-x-0 bg-[var(--mobile-nav)] px-5 text-base backdrop-blur-lg max-md:fixed max-md:left-0 max-md:right-0 max-md:top-0 max-md:w-full max-md:rounded-none max-md:px-3 sm:px-6 md:mt-2 max-[900]:hidden"
         >
           <div className="container mx-auto px-0">
-            <div className="flex h-14  items-center justify-between">
+            <div className="flex h-14  items-center justify-between max-md:flex-wrap">
               <Link href={"/"} className="flex-shrink-0">
                 <Logo />
               </Link>
@@ -90,11 +76,11 @@ export default function Navbar() {
               <div className="hidden  h-full items-center justify-center md:flex">
                 <div
                   dir="ltr"
-                  className="mr-[-100px] flex h-full items-center justify-center gap-8"
+                  className=" flex h-full items-center justify-center gap-8"
                 >
                   {navItems.map((item) => (
                     <div
-                      className="relative flex h-full items-center justify-center max-md:hidden"
+                      className="relative   flex h-full items-center justify-center  max-md:hidden"
                       key={item.name}
                     >
                       <Link
@@ -122,15 +108,11 @@ export default function Navbar() {
 
               <div className="flex  h-full items-center justify-center gap-4 max-md:hidden max-md:gap-2">
                 <ThemeToggle />
-         
               </div>
 
               {/* Mobile menu toggle */}
-              <div className="flex items-center gap-3 justify-center md:hidden">
-
-                   <ThemeToggle />
-
-
+              <div className="flex items-center max-md:flex-wrap gap-3 justify-center md:hidden">
+                <ThemeToggle />
 
                 <motion.button
                   className="text-[var(--headline)]"
@@ -142,33 +124,38 @@ export default function Navbar() {
                     variants={iconAnimationVariants}
                     initial="initial"
                   >
-
                     <div className="flex w-full items-center justify-start rounded-sm text-center">
                       <Menu className="h-4 w-4 max-md:h-5 max-md:w-5" />
                     </div>
                   </motion.div>
                 </motion.button>
-                
               </div>
 
               {/* Mobile menu */}
               <AnimatePresence>
                 {isMobileMenuOpen && (
                   <motion.div
-                    className="fixed inset-0 m-0 flex h-[100vh] w-full flex-col items-center justify-center bg-[var(--background)]"
+                    className="fixed z-50 inset-0 m-0 flex h-[100vh] w-full flex-col items-center justify-center bg-[var(--background)]"
                     initial="closed"
                     animate="open"
                     exit="closed"
                     variants={mobileMenuVariants}
                   >
                     <nav className="absolute left-0 right-[-40px] top-[-9px] m-auto mt-2 flex h-14 w-full items-center justify-end px-8 text-[var(--headline)]">
+                   
+                   <motion.span
+                    initial={{opacity : "0%"}}
+                    animate={{opacity : "100%"}}
+                           transition={{ duration: 1.5 }}>
                       <X
                         onClick={() => setIsMobileMenuOpen(false)}
                         className="h-5 w-5 cursor-pointer"
                       />
+                      </motion.span>
+                      
                     </nav>
 
-                    <div className="flex flex-col space-y-4">
+                    <div className="flex flex-col  space-y-4">
                       {navItems.map((item) => (
                         <Link
                           key={item.name}
@@ -176,10 +163,15 @@ export default function Navbar() {
                           className="hidden max-md:text-[20px] max-md:font-bold h-full w-full items-center justify-center rounded-md p-2 text-center text-[var(--headline)] max-md:flex"
                           onClick={() => setIsMobileMenuOpen(false)}
                         >
-                          <span>{item.name}</span>
+                          <motion.span
+                            initial={{ opacity: "0%" }}
+                            animate={{ opacity: "100%" }}
+                            transition={{ duration: 1.5 }}
+                          >
+                            {item.name}
+                          </motion.span>
                         </Link>
                       ))}
-                
                     </div>
                   </motion.div>
                 )}

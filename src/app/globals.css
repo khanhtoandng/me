@@ -96,11 +96,12 @@
 
   * {
     @apply m-0 box-border p-0 border-border;
+    scroll-behavior: smooth;
+
   }
 
   html {
     @apply text-base;
-    scroll-behavior: smooth;
   }
 
   a {

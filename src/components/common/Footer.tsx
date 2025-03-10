@@ -40,13 +40,13 @@ export default function Footer() {
   return (
     <>
       {!isDasboard ? (
-        <footer className="w-full z-50  border-t-[0.5px] border-[var(--footer-border-color)] bg-[var(--footer-background)]">
+        <footer className="w-full z-40  max-md:overflow-hidden border-t-[0.5px] border-[var(--footer-border-color)] bg-[var(--footer-background)]">
           <div className="container mx-auto flex items-center justify-between py-10 max-md:flex-col max-md:gap-4 max-md:p-0 max-md:py-14">
             <div
               dir={direction}
               className="hoverd flex gap-2 text-sm capitalize text-[var(--footer-text)] max-md:flex-col max-md:items-center"
             >
-              <div dir={direction} className="flex h-full gap-2">
+              <div dir={direction} className="flex max-md:flex-wrap h-full gap-2">
                 {footerLinks.map((item, index) => (
                   <div
                     key={index}
@@ -64,11 +64,10 @@ export default function Footer() {
                 ))}
               </div>
             </div>
-            <div className="flex items-center gap-1 text-sm capitalize text-[var(--footer-text)] opacity-90">
-  <span>&copy; {currentYear}</span>
-  <span>All Rights Reserved</span>
-</div>
-
+            <div className="flex items-center max-md:flex-wrap gap-1 text-sm capitalize text-[var(--footer-text)] opacity-90">
+              <span>&copy; {currentYear}</span>
+              <span>All Rights Reserved</span>
+            </div>
           </div>
         </footer>
       ) : (

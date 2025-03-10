@@ -81,10 +81,10 @@ const ReusableCard = React.forwardRef<HTMLDivElement, ReusableCardProps>(
               <CardTitle className="text-lg    font-semibold">
                 <a
                   href={websiteLink || githubLink || "#"}
-                  className="text-[var(--card-headline)]  transition-colors hover:text-[var(--link-hover)] flex items-center"
+                  className="text-[var(--card-headline)] max-md:flex-wrap   transition-colors hover:text-[var(--link-hover)] flex items-center"
                 >
                   <span>{title}</span>
-                  <ExternalLink className="ms-2 h-4 w-4" />
+                  {/* <ExternalLink className="ms-2 h-4 w-4 max-md:hidden" /> */}
                 </a>
               </CardTitle>
             )}
