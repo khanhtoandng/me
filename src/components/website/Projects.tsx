@@ -47,15 +47,15 @@ const OtherProjectLink = ({
   children: React.ReactNode;
 }) => (
   <ScrollEffect type="fadeUp">
-    <Card className="text-[var(--headline)] ">
-      <h1 className="flex items-center gap-2 max-md:flex-wrap">
-        <ExternalLink className="h-4 w-4" />
+    <Link href={href} target="_blank">
+      <Card className="text-[var(--headline)] ">
+        <h1 className="flex items-center gap-2 max-md:flex-wrap">
+          <ExternalLink className="h-4 w-4 max-md:hidden" />
 
-        <Link href={href} target="_blank">
           {children}
-        </Link>
-      </h1>
-    </Card>
+        </h1>
+      </Card>
+    </Link>
   </ScrollEffect>
 );
 

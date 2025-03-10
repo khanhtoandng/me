@@ -97,7 +97,6 @@
   * {
     @apply m-0 box-border p-0 border-border;
     scroll-behavior: smooth;
-
   }
 
   html {
@@ -348,7 +347,7 @@ p {
 
 *::-webkit-scrollbar-thumb {
   border-radius: 20px;
-  background-color: var(--scroll);
+  background-color: #494951;
 }
 
 *::-webkit-scrollbar-thumb:hover {
