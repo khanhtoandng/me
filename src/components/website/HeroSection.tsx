@@ -33,7 +33,7 @@ export default function HeroSection() {
             I am a <span ref={highlightedWordRef}>Full-Stack Developer</span> from Palestine, specializing in crafting
             seamless and efficient web applications across both front-end and
             back-end technologies. I hold a degree in software engineering from{" "}
-            <Link target="_blank" href={alazhar} className="link">
+            <Link target="_blank"  href={alazhar} className="link">
               Al-Azhar University
             </Link>, where I developed a strong foundation in modern software 
             development principles, problem-solving, and system architecture.

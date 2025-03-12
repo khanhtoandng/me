@@ -35,8 +35,8 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
       className={cn(
         "flex h-8 w-16 cursor-pointer rounded-full p-1 transition-all duration-300",
         isDark
-          ? "border border-zinc-800 bg-zinc-950"
-          : "border border-zinc-200 bg-white",
+          ? "border border-[var(--card-border-color)]"
+          : "border border-[var(--card-border-color)]",
         className
       )}
       onClick={toggleTheme}
@@ -48,14 +48,20 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
           className={cn(
             "flex h-6 w-6 items-center justify-center rounded-full transition-transform duration-300",
             isDark
-              ? "translate-x-0 transform bg-zinc-800"
-              : "translate-x-8 transform bg-gray-200"
+              ? "translate-x-0 transform bg-[var(--border)]"
+              : "translate-x-8 transform bg-[var(--border)]"
           )}
         >
           {isDark ? (
-            <Moon className="h-4 w-4 text-white" strokeWidth={1.5} />
+            <Moon
+              className="h-4 w-4 text-[var(--headline)]"
+              strokeWidth={1.5}
+            />
           ) : (
-            <Sun className="h-4 w-4 text-gray-700" strokeWidth={1.5} />
+            <Sun
+              className="h-4 w-4 text-[var(--paragraph)]"
+              strokeWidth={1.5}
+            />
           )}
         </div>
         <div
@@ -65,9 +71,15 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
           )}
         >
           {isDark ? (
-            <Sun className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
+            <Sun
+              className="h-4 w-4 text-[var(--paragraph)]"
+              strokeWidth={1.5}
+            />
           ) : (
-            <Moon className="h-4 w-4 text-black" strokeWidth={1.5} />
+            <Moon
+              className="h-4 w-4 text-[var(--headline)]"
+              strokeWidth={1.5}
+            />
           )}
         </div>
       </div>
