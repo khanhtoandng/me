@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { MagicCard } from "../ui/MagicCard";
 import Marquee from "../ui/marquee";
 import { ScrollEffect } from "@/lib/animations";
+import Image from "next/image";
 
 const RecommendationsSection = () => {
   const reviews = [
@@ -48,10 +49,12 @@ const RecommendationsSection = () => {
             ref={undefined}
           >
             <header className="flex items-start gap-2">
-              <img
+              <Image
                 src={review.image}
                 alt={review.name}
-                className="mb-4 h-12 w-12 rounded-full"
+                width={50}
+                height={50}
+                className="mb-4  rounded-full"
               />
               <div className="pt-1 text-start">
                 <h3 className="text-sm font-semibold text-[var(--card-headline)]">

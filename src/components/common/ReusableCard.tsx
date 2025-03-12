@@ -12,6 +12,7 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import { MagicCard } from "../ui/MagicCard";
+import Image from "next/image";
 
 interface ReusableCardProps extends React.HTMLAttributes<HTMLDivElement> {
   id?: string;
@@ -67,10 +68,11 @@ const ReusableCard = React.forwardRef<HTMLDivElement, ReusableCardProps>(
               className="absolute inset-0 bg-cover bg-center blur-[100px]"
               style={{ backgroundImage: `url(${coverImg})` }}
             ></div>
-            <img
+            <Image
               src={coverImg}
               alt={"Cover Image"}
-              className="w-full h-full object-contain z-50 transition-transform duration-300  rounded-lg scale-105"
+              fill
+              className="object-contain z-50 transition-transform duration-300  rounded-lg scale-105"
             />
           </div>
         )}
@@ -100,10 +102,11 @@ const ReusableCard = React.forwardRef<HTMLDivElement, ReusableCardProps>(
               <span>{date}</span>
               {img && (
                 <div className="h-12 w-12 rounded-full overflow-hidden">
-                  <img
+                  <Image
+                    fill
                     src={img}
                     alt={title || "Profile Image"}
-                    className="w-full h-full object-cover"
+                    className=" bject-cover"
                   />
                 </div>
               )}
