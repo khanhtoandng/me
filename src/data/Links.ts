@@ -6,6 +6,7 @@ export const github = "https://github.com/balshaer";
 export const whatsapp = `https://wa.me/${phoneNumber}`;
 export const youtube = "https://www.youtube.com/@Codewithbaraa";
 export const mailto = `mailto:${email}`;
+export const alazhar = "https://www.alazhar.edu.ps/eng/index.asp";
 
 export const companies = {
   ptit: "http://ptit.com.sa/",

@@ -55,7 +55,7 @@
     --background: #ffffff;
     --headline: #000000;
     --paragraph: #666666;
-    --border: #eaeaea;
+    --border: #0000002f;
     --button: #0070f3;
     --scroll: #0070f3;
     --button-border: #0070f3;
@@ -66,7 +66,7 @@
     --card-headline: #000000;
     --card-paragraph: #666666;
     --card-background-effect: #fafafa80;
-    --card-border-color: #eaeaea;
+    --card-border-color: #0000002f;
     --link-color: #0070f3;
     --link-hover: #000000;
     --logo-text-color: #000000;
@@ -78,7 +78,7 @@
     --tertiary-color: #0070f3;
     --footer-border-color: #eaeaea;
     --footer-background: #fafafa;
-    --footer-text: #666666;
+    --footer-text: #000;
     --menu-color: #000000;
     --input-text: #000000;
     --select-box-border: #0070f3;

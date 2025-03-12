@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import { MagicCard } from "../ui/MagicCard";
 import Marquee from "../ui/marquee";
+import { ScrollEffect } from "@/lib/animations";
 
 const RecommendationsSection = () => {
   const reviews = [
@@ -33,44 +34,43 @@ const RecommendationsSection = () => {
 
   return (
     <div className="section h flex flex-col items-center justify-center gap-4 overflow-x-hidden pb-10 text-center">
-
-
-<div className="flex flex-col items-center justify-center gap-4">
-
-
-      {reviews.map((review, index) => (
-        <MagicCard
+      <div className="flex flex-col items-center justify-center gap-4">
+        {reviews.map((review, index) => (
+          <ScrollEffect 
           key={index}
-          data-aos="fade-up"
-          data-aos-easing="ease-in-out"
-          gradientColor="#7e7e7e12"
-          className={cn("flex h-max w-full p-8")}
-          ref={undefined}
-        >
-          <header className="flex items-start gap-2">
-            <img
-              src={review.image}
-              alt={review.name}
-              className="mb-4 h-12 w-12 rounded-full"
-            />
-            <div className="pt-1 text-start">
-              <h3 className="text-sm font-semibold text-[var(--card-headline)]">
-                {review.name}
-              </h3>
-              <p className="text-sm text-[var(--card-paragraph)]">
-                {review.title}
-              </p>
-            </div>
-          </header>
+          type="fadeUp">
 
-          <p className="mt-0 line-clamp-6 text-start text-[var(--card-paragraph)]">
-            {review.review}
-          </p>
-        </MagicCard>
-      ))}
+          <MagicCard
+            data-aos="fade-up"
+            data-aos-easing="ease-in-out"
+            gradientColor="#7e7e7e12"
+            className={cn("flex h-max w-full p-8")}
+            ref={undefined}
+          >
+            <header className="flex items-start gap-2">
+              <img
+                src={review.image}
+                alt={review.name}
+                className="mb-4 h-12 w-12 rounded-full"
+              />
+              <div className="pt-1 text-start">
+                <h3 className="text-sm font-semibold text-[var(--card-headline)]">
+                  {review.name}
+                </h3>
+                <p className="text-sm text-[var(--card-paragraph)]">
+                  {review.title}
+                </p>
+              </div>
+            </header>
 
-</div>
+            <p className="mt-0 line-clamp-6 text-start text-[var(--card-paragraph)]">
+              {review.review}
+            </p>
+          </MagicCard>
+          </ScrollEffect>
 
+        ))}
+      </div>
     </div>
   );
 };

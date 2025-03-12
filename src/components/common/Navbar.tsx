@@ -65,7 +65,7 @@ export default function Navbar() {
       ) : (
         <nav
           dir="ltr"
-          className="container max-md:bg-[var(--background)] max-md:z-50 mx-auto z-50 flex items-center justify-between gap-5 rounded-3xl border border-zinc-700/40 max-md:border-t-0 max-md:border-x-0 bg-[var(--mobile-nav)] px-5 text-base backdrop-blur-lg max-md:fixed max-md:left-0 max-md:right-0 max-md:top-0 max-md:w-full max-md:rounded-none max-md:px-3 sm:px-6 md:mt-2 max-[900]:hidden"
+          className="container  max-md:bg-[var(--background)] max-md:z-50 mx-auto z-50 flex items-center justify-between gap-5 rounded-3xl border border-[var(--border)] max-md:border-t-0 max-md:border-x-0 bg-[var(--mobile-nav)] px-5 text-base backdrop-blur-lg max-md:fixed max-md:left-0 max-md:right-0 max-md:top-0 max-md:w-full max-md:rounded-none max-md:px-3 sm:px-6 md:mt-2 max-[900]:hidden"
         >
           <div className="container mx-auto px-0">
             <div className="flex h-14  items-center justify-between max-md:flex-wrap">
@@ -142,17 +142,16 @@ export default function Navbar() {
                     variants={mobileMenuVariants}
                   >
                     <nav className="absolute left-0 right-[-40px] top-[-9px] m-auto mt-2 flex h-14 w-full items-center justify-end px-8 text-[var(--headline)]">
-                   
-                   <motion.span
-                    initial={{opacity : "0%"}}
-                    animate={{opacity : "100%"}}
-                           transition={{ duration: 1.5 }}>
-                      <X
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className="h-5 w-5 cursor-pointer"
-                      />
+                      <motion.span
+                        initial={{ opacity: "0%" }}
+                        animate={{ opacity: "100%" }}
+                        transition={{ duration: 1.5 }}
+                      >
+                        <X
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className="h-5 w-5 cursor-pointer"
+                        />
                       </motion.span>
-                      
                     </nav>
 
                     <div className="flex flex-col  space-y-4">

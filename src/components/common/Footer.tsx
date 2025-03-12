@@ -46,7 +46,10 @@ export default function Footer() {
               dir={direction}
               className="hoverd flex gap-2 text-sm capitalize text-[var(--footer-text)] max-md:flex-col max-md:items-center"
             >
-              <div dir={direction} className="flex max-md:flex-wrap h-full gap-2">
+              <div
+                dir={direction}
+                className="flex max-md:flex-wrap h-full gap-2"
+              >
                 {footerLinks.map((item, index) => (
                   <div
                     key={index}
