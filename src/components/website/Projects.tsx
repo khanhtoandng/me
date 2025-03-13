@@ -71,6 +71,18 @@ const ProjectsData = [
       github: null,
     },
   },
+
+  {
+    id: 5,
+    title: "Sam-Tax",
+    description:
+      "A professional website for a U.S.-based company offering tax and translation services.",
+    skills: ["React", "Tailwind CSS", "Express.js", "Mongodb", "Node.js", ""],
+    links: {
+      website: "https://www.sam-tax.com/",
+      github: null,
+    },
+  },
   {
     id: 1,
     title: "Gradients CSS",
@@ -154,13 +166,7 @@ export default function Projects() {
       </h2>
 
       <ul className="space-y-2">
-        <OtherProjectLink href="https://sam-tax.com/">
-          SamTax{" "}
-          <span className="opacity-60">
-            - A professional website for a U.S.-based company offering tax and
-            translation services.
-          </span>
-        </OtherProjectLink>
+       
 
         <OtherProjectLink href="https://github.com/balshaer/rove">
           Rove{" "}
