@@ -3,13 +3,14 @@ import { Metadata } from "next";
 import {
   Breadcrumb,
   BreadcrumbItem,
+  BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
 import React from "react";
 import Link from "next/link";
-import { webImage } from "@/data/Links";
+import { webImage, websitePath } from "@/data/Links";
 
 export const metadata: Metadata = {
   title: "Posts",
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
     title: "Posts - Baraa Alshaer",
     description:
       "Discover the latest posts and articles by Baraa Alshaer, a Full Stack Developer sharing his insights on web development, technology, and other related topics.",
-    url: "https://alshaer.vercel.app/posts",
+    url: websitePath.posts,
     images: [
       {
         url: webImage,
@@ -58,17 +59,20 @@ export default function PostsPage() {
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
-                <Link className={styles.breadcrumbLink} href={"/"}>
+                <BreadcrumbLink className={styles.breadcrumbLink} href={"/"}>
                   Home
-                </Link>
+                </BreadcrumbLink>
               </BreadcrumbItem>
               <div>
                 <BreadcrumbSeparator />
               </div>
               <BreadcrumbItem>
-                <Link className={styles.breadcrumbLink} href={"/posts"}>
+                <BreadcrumbLink
+                  className={styles.breadcrumbLink}
+                  href={"/posts"}
+                >
                   Posts
-                </Link>
+                </BreadcrumbLink>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>

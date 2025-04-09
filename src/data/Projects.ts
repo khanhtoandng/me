@@ -1,3 +1,5 @@
+import { projects } from "./Links";
+
 const getFaviconUrl = (url: string | undefined): string => {
   if (!url) return "/app/images/logo.png";
   try {
@@ -15,9 +17,9 @@ export const ProjectsData = [
     descriptionKey: "projects.samtax.description",
     skills: ["React", "Tailwind CSS", "Shadcn UI"],
     links: {
-      website: "https://sam-tax.com",
+      website: projects.samtax,
     },
-    img: getFaviconUrl("https://sam-tax.com"),
+    img: getFaviconUrl(projects.samtax),
   },
 
   {
@@ -33,10 +35,10 @@ export const ProjectsData = [
       "RESTful APIs",
     ],
     links: {
-      website: "https://gradientscss.vercel.app/",
-      github: "https://github.com/balshaer/gradients-css",
+      website: projects.gradientscss.website,
+      github: projects.gradientscss.github,
     },
-    img: getFaviconUrl("https://gradientscss.vercel.app/"),
+    img: getFaviconUrl(projects.gradientscss.website),
   },
   {
     id: "raouf-zadi",
@@ -44,9 +46,9 @@ export const ProjectsData = [
     descriptionKey: "projects.raoufzadi.description",
     skills: ["React JS", "Typescript", "Tailwind CSS", "Github", "Git"],
     links: {
-      website: "https://raoufzadi.vercel.app",
+      website: projects.raoufzadi,
     },
-    img: getFaviconUrl("https://raoufzadi.vercel.app"),
+    img: getFaviconUrl(projects.raoufzadi),
   },
 
   {
@@ -55,9 +57,9 @@ export const ProjectsData = [
     descriptionKey: "projects.najTrainingCenter.description",
     skills: ["React JS", "Javascript", "MIUI"],
     links: {
-      website: "https://naj.shamilapp.com/",
+      website: projects.najcenter,
     },
-    img: getFaviconUrl("https://naj.shamilapp.com/"),
+    img: getFaviconUrl(projects.najcenter),
   },
   {
     id: "rove",
@@ -65,7 +67,7 @@ export const ProjectsData = [
     descriptionKey: "projects.rove.description",
     skills: ["React", "Tailwind CSS", "Laravel", "MYSQL"],
     links: {
-      github: "https://github.com/balshaer/rove",
+      github: projects.rove,
     },
     img: getFaviconUrl(undefined), // No website link available
   },
@@ -75,9 +77,9 @@ export const ProjectsData = [
     descriptionKey: "projects.sustainableStar.description",
     skills: ["React", "Tailwind CSS", "Material UI"],
     links: {
-      website: "https://sustainablestar.com.sa/",
+      website: projects.sustainablestar,
     },
-    img: getFaviconUrl("https://sustainablestar.com.sa/"),
+    img: getFaviconUrl(projects.sustainablestar),
   },
   {
     id: "bookstore-api",
@@ -85,7 +87,7 @@ export const ProjectsData = [
     descriptionKey: "projects.bookstoreApi.description",
     skills: ["Node JS", "Express JS", "Mongoose DB"],
     links: {
-      github: "https://github.com/balshaer/bookstore-api",
+      github: projects.bookstoreapi,
     },
     img: getFaviconUrl(undefined),
   },

@@ -6,7 +6,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Metadata } from "next";
-import { webImage } from "@/data/Links";
+import { webImage, websitePath } from "@/data/Links";
 import Link from "next/link";
 import Projects from "@/components/website/Projects";
 
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     title: "Projects - Baraa Alshaer",
     description:
       "Discover the latest projects by Baraa Alshaer, showcasing expertise in full-stack web development with projects built using modern technologies like React, Node.js, TypeScript, and more.",
-    url: "https://alshaer.vercel.app/projects",
+    url: websitePath.projects,
     images: [
       {
         url: webImage,
@@ -51,26 +51,28 @@ export default function ProjectsPage() {
       <div className="projectCards  flex min-h-[100vh] w-full flex-col gap-5 max-md:pb-0 max-md:pt-[50px]">
         <div className="header">
           <h1 className="header-title">Projects</h1>
-          <p className="description max-w-[100%]">I have worked on a variety of projects, here are some of the ones I'm particularly proud of.</p>
+          <p className="description max-w-[100%]">
+            I have worked on a variety of projects, here are some of the ones
+            I'm particularly proud of.
+          </p>
           <div className="py-5">
             <Breadcrumb>
               <BreadcrumbList>
-                <Link href={"/"}>
-                  <BreadcrumbItem>
-                    <BreadcrumbLink className={styles.breadcrumbLink}>
-                      Home
-                    </BreadcrumbLink>
-                  </BreadcrumbItem>
-                </Link>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href={"/"} className={styles.breadcrumbLink}>
+                    Home
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
                 <BreadcrumbSeparator />
 
-                <Link href={"/projects"}>
-                  <BreadcrumbItem>
-                    <BreadcrumbLink className={styles.breadcrumbLink}>
-                      Projects
-                    </BreadcrumbLink>
-                  </BreadcrumbItem>
-                </Link>
+                <BreadcrumbItem>
+                  <BreadcrumbLink
+                    href={"/projects"}
+                    className={styles.breadcrumbLink}
+                  >
+                    Projects
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
           </div>

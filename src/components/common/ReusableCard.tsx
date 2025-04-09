@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/card";
 import { MagicCard } from "../ui/MagicCard";
 import Image from "next/image";
+import Link from "next/link";
 
 interface ReusableCardProps extends React.HTMLAttributes<HTMLDivElement> {
   id?: string;
@@ -81,13 +82,13 @@ const ReusableCard = React.forwardRef<HTMLDivElement, ReusableCardProps>(
           <div className="flex flex-col space-y-2">
             {title && (
               <CardTitle className="text-lg    font-semibold">
-                <a
+                <Link
                   href={websiteLink || githubLink || "#"}
                   className="text-[var(--card-headline)] max-md:flex-wrap   transition-colors hover:text-[var(--link-hover)] flex items-center"
                 >
                   <span>{title}</span>
                   {/* <ExternalLink className="ms-2 h-4 w-4 max-md:hidden" /> */}
-                </a>
+                </Link>
               </CardTitle>
             )}
             {suptitle && (
@@ -139,7 +140,7 @@ const ReusableCard = React.forwardRef<HTMLDivElement, ReusableCardProps>(
 
           <div className="flex max-md:w-full flex-wrap gap-4">
             {websiteLink && (
-              <a
+              <Link
                 href={websiteLink}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -152,11 +153,11 @@ const ReusableCard = React.forwardRef<HTMLDivElement, ReusableCardProps>(
               >
                 <Globe className="h-4 w-4" />
                 <span>Visit Website</span>
-              </a>
+              </Link>
             )}
 
             {githubLink && (
-              <a
+              <Link
                 href={githubLink}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -169,7 +170,7 @@ const ReusableCard = React.forwardRef<HTMLDivElement, ReusableCardProps>(
               >
                 <Github className="h-4 w-4" />
                 <span>Visit Github</span>
-              </a>
+              </Link>
             )}
           </div>
         </CardFooter>

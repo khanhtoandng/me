@@ -9,6 +9,7 @@ import {
   MessageCircleIcon,
   Youtube,
 } from "lucide-react";
+import Link from "next/link";
 
 export interface SocialMediaLink {
   title: string;
@@ -67,7 +68,7 @@ const LinksSection: React.FC = () => {
           }
           key={index}
         >
-          <a
+          <Link
             className={` ${
               hoveredIndex !== null && index !== hoveredIndex
                 ? styles.socialLinkHover
@@ -86,7 +87,7 @@ const LinksSection: React.FC = () => {
               <span className="max-md:hidden">{item.icon}</span>
               <span>{item.title}</span>
             </span>
-          </a>
+          </Link>
         </li>
       ))}
     </ul>

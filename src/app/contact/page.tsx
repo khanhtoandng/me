@@ -10,7 +10,7 @@ import {
 
 import Link from "next/link";
 import ContactForm from "@/components/website/ContactForm";
-import { webImage } from "@/data/Links";
+import { webImage, websitePath } from "@/data/Links";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: "Contact - Baraa Alshaer",
     description:
       "Contact Baraa Alshaer, a skilled Full Stack Developer, for project inquiries, consultations, or collaborations. Let's bring your web development ideas to life.",
-    url: "https://alshaer.vercel.app/contact",
+    url: websitePath.contact,
     images: [
       {
         url: webImage,
@@ -59,24 +59,23 @@ export default function ContactPage() {
         <div className="py-5">
           <Breadcrumb>
             <BreadcrumbList>
-              <Link href={"/"}>
-                <BreadcrumbItem>
-                  <BreadcrumbLink className={styles.breadcrumbLink}>
-                    Home
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-              </Link>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="/" className={styles.breadcrumbLink}>
+                  Home
+                </BreadcrumbLink>
+              </BreadcrumbItem>
 
               <div>
                 <BreadcrumbSeparator />
               </div>
-              <Link href={"/contact"}>
-                <BreadcrumbItem>
-                  <BreadcrumbLink className={styles.breadcrumbLink}>
-                    Contact
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-              </Link>
+              <BreadcrumbItem>
+                <BreadcrumbLink
+                  href="/contact"
+                  className={styles.breadcrumbLink}
+                >
+                  Contact
+                </BreadcrumbLink>
+              </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
         </div>

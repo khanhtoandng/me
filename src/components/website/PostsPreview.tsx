@@ -1,12 +1,16 @@
 "use client";
 
-import { Globe, Github } from "lucide-react";
+import { Globe, Github, FileWarning, Repeat1, RepeatIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
 
-import React from "react";
+import React, { useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import ReusableCard from "../common/ReusableCard";
+import Link from "next/link";
+import { Button } from "../ui/button";
+import { Card, CardContent, CardFooter } from "../ui/card";
+import { RandomizedTextEffect } from "../ui/text-randomized";
 
 export default function PostsPreview() {
   const direction = "en";
@@ -25,6 +29,7 @@ export default function PostsPreview() {
 
   const [posts, setPosts] = React.useState<any[]>([]);
   const [loading, setLoading] = React.useState(true);
+  const [flag, setflag] = useState(false);
 
   React.useEffect(() => {
     const fetchPosts = async () => {
@@ -36,6 +41,7 @@ export default function PostsPreview() {
         setPosts(data);
       } catch (error) {
         console.error("Error fetching posts:", error);
+        setflag(true);
       } finally {
         setLoading(false);
       }
@@ -43,6 +49,8 @@ export default function PostsPreview() {
 
     fetchPosts();
   }, []);
+
+  const reload = () => {};
 
   return (
     <motion.div
@@ -52,7 +60,7 @@ export default function PostsPreview() {
       dir={direction}
       className="posts  flex min-h-[100vh] w-full flex-col gap-5 max-md:pb-0 max-md:pt-[50px]"
     >
-      <div className="flex flex-col items-center justify-center gap-8 ">
+      <div className="flex relative w-full min-h-[50vh] flex-col items-center justify-center gap-8 ">
         {loading
           ? Array(3)
               .fill(null)
@@ -94,7 +102,7 @@ export default function PostsPreview() {
 
                 <div className="flex flex-wrap gap-4 max-md:mt-5">
                   {isValidLink(post.url) && (
-                    <a
+                    <Link
                       href={post.url}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -104,11 +112,11 @@ export default function PostsPreview() {
                         <Globe className="h-4 w-4" />
                       </span>
                       <span>Visit Website</span>
-                    </a>
+                    </Link>
                   )}
 
                   {isValidLink(post.github_url) && (
-                    <a
+                    <Link
                       href={post.github_url}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -118,11 +126,31 @@ export default function PostsPreview() {
                         <Github className="h-4 w-4" />
                       </span>
                       <span>Visit Github</span>
-                    </a>
+                    </Link>
                   )}
                 </div>
               </ReusableCard>
             ))}
+
+        {flag && (
+          <Card className="flex   h-max absolute inset-0 m-auto text-[var(--paragraph)] w-1/3  rounded-[10px] p-3 justify-center items-center flex-col gap-3">
+            <CardContent>
+              <div className="error flex items-center justify-center gap-1">
+                <FileWarning />
+                <RandomizedTextEffect
+                  className=" text-[var(--paragraph)]"
+                  text={"Faield to get posts"}
+                />
+              </div>
+            </CardContent>
+
+            <CardFooter>
+              <Button className="gap-0" onClick={reload} icon={<RepeatIcon />}>
+                Try again
+              </Button>
+            </CardFooter>
+          </Card>
+        )}
       </div>
     </motion.div>
   );

@@ -4,10 +4,10 @@ import "./globals.css";
 import { Toaster } from "sonner";
 import Navbar from "@/components/common/Navbar";
 import Footer from "@/components/common/Footer";
-import { webImage } from "@/data/Links";
+import { webImage, websitePath } from "@/data/Links";
 import BackgroundEffect from "@/components/ui/backgroundEffect";
-import { Analytics } from "@vercel/analytics/react"
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: {
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: "Baraa Alshaer - Full Stack Developer",
     description:
       "Explore the portfolio of Baraa Alshaer, a passionate Full Stack Developer. Projects, blogs, and more showcasing expertise in modern web development.",
-    url: "https://alshaer.vercel.app/",
+    url: websitePath.main,
     images: [
       {
         url: webImage,
@@ -47,8 +47,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex  relative dark flex-col min-h-screen">
-        <SpeedInsights/>
-        <Analytics/>
+        <SpeedInsights />
+        <Analytics />
         <Toaster />
         <Navbar />
         <BackgroundEffect />

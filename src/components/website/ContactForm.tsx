@@ -17,7 +17,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import emailjs from "emailjs-com";
 import { MagicCard } from "../ui/MagicCard";
-import WorldMapDemo from "./WorldMapDemo";
 import { cn } from "@/lib/utils";
 
 const formSchema = z.object({
@@ -58,7 +57,7 @@ export default function ContactForm() {
 
   return (
     <div>
-      <div >
+      <div>
         <MagicCard
           data-aos="fade-up"
           data-aos-easing="ease-in-out"
@@ -146,10 +145,6 @@ export default function ContactForm() {
             </Form>
           </div>
         </MagicCard>
-      </div>
-
-      <div className="container flex items-center justify-center">
-        <WorldMapDemo />
       </div>
     </div>
   );

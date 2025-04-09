@@ -7,7 +7,7 @@ interface helperTypes {
 }
 
 export const scrollToTop = () => {
-//   scroll.scrollToTop({ duration: 500, smooth: true });
+  //   scroll.scrollToTop({ duration: 500, smooth: true });
 };
 
 export const PageTitle: React.FC<helperTypes> = ({ title }) => {
@@ -19,3 +19,4 @@ export const PageTitle: React.FC<helperTypes> = ({ title }) => {
 
   return null;
 };
+
