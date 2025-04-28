@@ -2,6 +2,8 @@ import { Timeline } from "@/components/ui/timeline";
 import { Badge } from "../ui/badge";
 import Link from "next/link";
 import { companies } from "@/data/Links";
+import { Briefcase } from "lucide-react";
+import { ScrollEffect } from "@/lib/animations";
 
 export function TimelineDemo() {
   const styles = {
@@ -137,7 +139,18 @@ export function TimelineDemo() {
   ];
 
   return (
-    <div id="work" className="h-max min-h-screen w-full    px-0">
+    <div id="work" className="h-max w-full px-0 py-10">
+      <ScrollEffect type="fadeIn">
+        <div className="section-header mb-8">
+          <h2 className="section-title flex items-center gap-2">
+            <Briefcase className="h-6 w-6 text-[var(--link-color)]" />
+            Work Experience
+          </h2>
+          <p className="description">
+            My professional journey and the companies I've worked with.
+          </p>
+        </div>
+      </ScrollEffect>
       <Timeline data={data} />
     </div>
   );

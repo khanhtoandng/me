@@ -9,30 +9,34 @@ import { Metadata } from "next";
 import { webImage, websitePath } from "@/data/Links";
 import Link from "next/link";
 import Projects from "@/components/website/Projects";
+import PageSeo from "@/components/seo/PageSeo";
 
+// Enhanced metadata for better SEO
 export const metadata: Metadata = {
-  title: "Projects",
+  title: "Projects | Web Applications & Software Solutions",
   description:
-    "Explore the portfolio of Baraa Alshaer, a Full Stack Developer. Discover a range of innovative projects, from web applications to cutting-edge software solutions developed using technologies like React, Node.js, TypeScript, and more.",
+    "Explore Baraa Alshaer's portfolio of innovative projects, from responsive web applications to cutting-edge software solutions developed using React, Node.js, TypeScript, and more. View case studies and technical details.",
+  keywords:
+    "web projects, React projects, Node.js applications, TypeScript projects, full stack development, portfolio projects, software solutions",
   openGraph: {
-    title: "Projects - Baraa Alshaer",
+    title: "Projects - Baraa Alshaer | Web Applications & Software Solutions",
     description:
-      "Discover the latest projects by Baraa Alshaer, showcasing expertise in full-stack web development with projects built using modern technologies like React, Node.js, TypeScript, and more.",
+      "Discover Baraa Alshaer's latest projects showcasing expertise in full-stack web development with modern technologies like React, Node.js, TypeScript, and more. Explore case studies and technical implementations.",
     url: websitePath.projects,
     images: [
       {
         url: webImage,
         width: 400,
         height: 400,
-        alt: "Baraa Alshaer Projects",
+        alt: "Baraa Alshaer Projects Portfolio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Projects - Baraa Alshaer",
+    title: "Projects - Baraa Alshaer | Web Applications & Software Solutions",
     description:
-      "Check out the portfolio of Baraa Alshaer, a Full Stack Developer, featuring innovative projects and web applications built with modern technologies.",
+      "Check out Baraa Alshaer's portfolio of innovative projects and web applications built with React, Node.js, TypeScript and other modern technologies.",
     images: webImage,
   },
 };
@@ -48,7 +52,15 @@ export default function ProjectsPage() {
 
   return (
     <>
-      <div className="projectCards  flex min-h-[100vh] w-full flex-col gap-5 max-md:pb-0 max-md:pt-[50px]">
+      {/* Add structured data for the projects page */}
+      <PageSeo
+        title="Projects - Baraa Alshaer"
+        description="Explore Baraa Alshaer's portfolio of innovative projects, from responsive web applications to cutting-edge software solutions."
+        image={webImage}
+        type="WebPage"
+      />
+
+      <div className="projectCards flex min-h-[100vh] w-full flex-col gap-5 max-md:pb-0 max-md:pt-[50px]">
         <div className="header">
           <h1 className="header-title">Projects</h1>
           <p className="description max-w-[100%]">

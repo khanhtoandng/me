@@ -18,6 +18,7 @@ import { Textarea } from "@/components/ui/textarea";
 import emailjs from "emailjs-com";
 import { MagicCard } from "../ui/MagicCard";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -37,22 +38,35 @@ export default function ContactForm() {
     },
   });
 
-  const onSubmit = (data: any) => {
-    emailjs
-      .sendForm(
-        "service_vr92r5g",
-        "template_dvr1x78",
-        data,
-        "5J3vip7CH5ZH9OLZv"
-      )
-      .then(
-        (result: any) => {
-          console.log(result.text);
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    try {
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+      const userId = process.env.NEXT_PUBLIC_EMAILJS_USER_ID;
+
+      if (!serviceId || !templateId || !userId) {
+        console.error("EmailJS configuration is missing");
+        return;
+      }
+
+      const result = await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          name: data.name,
+          email: data.email,
+          message: data.message,
         },
-        (error: any) => {
-          console.log(error.text);
-        }
+        userId
       );
+
+      console.log("Email sent successfully:", result.text);
+      form.reset();
+      toast.success("Message sent successfully! I'll get back to you soon.");
+    } catch (error) {
+      console.error("Failed to send email:", error);
+      toast.error("Failed to send message. Please try again later.");
+    }
   };
 
   return (

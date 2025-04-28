@@ -9,30 +9,34 @@ import {
 } from "@/components/ui/breadcrumb";
 
 import React from "react";
-import Link from "next/link";
 import { webImage, websitePath } from "@/data/Links";
+import PageSeo from "@/components/seo/PageSeo";
 
+// Enhanced metadata for better SEO
 export const metadata: Metadata = {
-  title: "Posts",
+  title: "Blog Posts | Web Development & Technology Insights",
   description:
-    "Explore the latest blog posts by Baraa Alshaer, a Full Stack Developer. Stay updated with insights, tutorials, and projects related to web development, technology, and more.",
+    "Explore the latest blog posts by Baraa Alshaer, a Full Stack Developer. Stay updated with insights, tutorials, and projects related to web development, React, Node.js, TypeScript, and modern technology trends.",
+  keywords:
+    "web development blog, React tutorials, Node.js articles, TypeScript tips, full stack development, coding tutorials, tech insights, software engineering blog",
   openGraph: {
-    title: "Posts - Baraa Alshaer",
+    title: "Blog Posts - Baraa Alshaer | Web Development & Technology Insights",
     description:
-      "Discover the latest posts and articles by Baraa Alshaer, a Full Stack Developer sharing his insights on web development, technology, and other related topics.",
+      "Discover the latest posts and articles by Baraa Alshaer, a Full Stack Developer sharing his insights on web development, React, Node.js, TypeScript, and other cutting-edge technologies.",
     url: websitePath.posts,
     images: [
       {
         url: webImage,
         width: 400,
         height: 400,
-        alt: "Baraa Alshaer Posts",
+        alt: "Baraa Alshaer Blog Posts",
       },
     ],
+    type: "article",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Posts - Baraa Alshaer",
+    title: "Blog Posts - Baraa Alshaer | Web Development & Technology Insights",
     description:
       "Explore the latest blog posts by Baraa Alshaer, a Full Stack Developer. Stay updated with insights, tutorials, and projects related to web development, technology, and more.",
     images: webImage,
@@ -49,36 +53,46 @@ export default function PostsPage() {
   };
 
   return (
-    <div className="posts  flex min-h-[100vh] w-full flex-col gap-5 max-md:pb-0 max-md:pt-[50px]">
-      <div className="header">
-        <h1 className="header-title">Latest posts</h1>
-        <p className="description max-w-[100%]">
-          Explore my latest posts on web development, programming, and tech.
-        </p>
-        <div className="py-5">
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink className={styles.breadcrumbLink} href={"/"}>
-                  Home
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <div>
-                <BreadcrumbSeparator />
-              </div>
-              <BreadcrumbItem>
-                <BreadcrumbLink
-                  className={styles.breadcrumbLink}
-                  href={"/posts"}
-                >
-                  Posts
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
+    <>
+      {/* Add structured data for the blog posts page */}
+      <PageSeo
+        title="Blog Posts - Baraa Alshaer"
+        description="Explore the latest blog posts by Baraa Alshaer, a Full Stack Developer sharing insights on web development and technology."
+        image={webImage}
+        type="WebPage"
+      />
+
+      <div className="posts flex min-h-[100vh] w-full flex-col gap-5 max-md:pb-0 max-md:pt-[50px]">
+        <div className="header">
+          <h1 className="header-title">Latest posts</h1>
+          <p className="description max-w-[100%]">
+            Explore my latest posts on web development, programming, and tech.
+          </p>
+          <div className="py-5">
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink className={styles.breadcrumbLink} href={"/"}>
+                    Home
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <div>
+                  <BreadcrumbSeparator />
+                </div>
+                <BreadcrumbItem>
+                  <BreadcrumbLink
+                    className={styles.breadcrumbLink}
+                    href={"/posts"}
+                  >
+                    Posts
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </div>
         </div>
+        <PostsPreview />
       </div>
-      <PostsPreview />
-    </div>
+    </>
   );
 }

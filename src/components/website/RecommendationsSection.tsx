@@ -3,8 +3,9 @@
 import { cn } from "@/lib/utils";
 import { MagicCard } from "../ui/MagicCard";
 import { ScrollEffect } from "@/lib/animations";
-import Image from "next/image";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"; // Correct import
+import OptimizedImage from "../ui/OptimizedImage";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { MessageSquareQuote } from "lucide-react";
 
 const RecommendationsSection = () => {
   const reviews = [
@@ -60,8 +61,19 @@ I am pleased to recommend Baraa, who worked as a Front-End Developer at PTIT com
   };
 
   return (
-    <div className="section h flex flex-col items-center justify-center gap-4 overflow-x-hidden pb-10 text-center">
-      <div className="flex flex-col items-center justify-center gap-4">
+    <div className="section py-10">
+      <ScrollEffect type="fadeIn">
+        <div className="section-header mb-8">
+          <h2 className="section-title flex items-center gap-2">
+            <MessageSquareQuote className="h-6 w-6 text-[var(--link-color)]" />
+            Recommendations
+          </h2>
+          <p className="description">
+            Here are some recommendations from people I've worked with.
+          </p>
+        </div>
+      </ScrollEffect>
+      <div className="flex flex-col items-center justify-center gap-6">
         {reviews.map((review, index) => (
           <ScrollEffect key={index} type="fadeUp">
             <MagicCard
@@ -73,12 +85,14 @@ I am pleased to recommend Baraa, who worked as a Front-End Developer at PTIT com
             >
               <header className="flex items-start gap-2">
                 {review.image ? (
-                  <Image
+                  <OptimizedImage
                     src={review.image}
                     alt={review.name}
                     width={50}
                     height={50}
                     className="mb-4 rounded-full"
+                    loadingClassName="animate-pulse bg-gray-300/20"
+                    sizes="50px"
                   />
                 ) : (
                   <Avatar className="bg-[var(--secondary)] border border-[var(--input-border-color)]">
@@ -102,9 +116,17 @@ I am pleased to recommend Baraa, who worked as a Front-End Developer at PTIT com
                 </div>
               </header>
 
-              <p className="mt-0 line-clamp-6 text-start text-[var(--card-paragraph)]">
-                {review.review}
-              </p>
+              <div className="mt-4 relative">
+                <span className="absolute -left-2 -top-2 text-4xl text-[var(--link-color)] opacity-20">
+                  "
+                </span>
+                <p className="mt-0 line-clamp-6 text-start text-[var(--card-paragraph)] relative z-10">
+                  {review.review}
+                </p>
+                <span className="absolute -bottom-4 -right-2 text-4xl text-[var(--link-color)] opacity-20">
+                  "
+                </span>
+              </div>
             </MagicCard>
           </ScrollEffect>
         ))}

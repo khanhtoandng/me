@@ -1,21 +1,34 @@
-import * as React from "react";
+import { useState, useEffect, useCallback } from "react";
 
 const MOBILE_BREAKPOINT = 768;
 
 export function useIsMobile() {
-  const [isMobile, setIsMobile] = React.useState<boolean | undefined>(
-    undefined
-  );
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
-  React.useEffect(() => {
-    const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);
-    const onChange = () => {
-      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
-    };
-    mql.addEventListener("change", onChange);
+  // Use useCallback to memoize the handler function
+  const handleResize = useCallback(() => {
     setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
-    return () => mql.removeEventListener("change", onChange);
   }, []);
 
-  return !!isMobile;
+  useEffect(() => {
+    // Set initial value
+    handleResize();
+
+    // Use the more modern way to add event listener
+    const mediaQuery = window.matchMedia(
+      `(max-width: ${MOBILE_BREAKPOINT - 1}px)`
+    );
+
+    // Add event listener
+    mediaQuery.addEventListener("change", handleResize);
+    window.addEventListener("resize", handleResize);
+
+    // Clean up
+    return () => {
+      mediaQuery.removeEventListener("change", handleResize);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [handleResize]);
+
+  return isMobile;
 }

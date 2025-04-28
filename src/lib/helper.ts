@@ -1,16 +1,18 @@
-// import { animateScroll as scroll } from "react-scroll";
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
-interface helperTypes {
+interface TitleProps {
   title: string;
 }
 
 export const scrollToTop = () => {
-  //   scroll.scrollToTop({ duration: 500, smooth: true });
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
 };
 
-export const PageTitle: React.FC<helperTypes> = ({ title }) => {
+export const PageTitle: React.FC<TitleProps> = ({ title }) => {
   const location = usePathname();
 
   useEffect(() => {
@@ -19,4 +21,3 @@ export const PageTitle: React.FC<helperTypes> = ({ title }) => {
 
   return null;
 };
-

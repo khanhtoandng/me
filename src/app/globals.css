@@ -129,7 +129,11 @@
   }
 
   .section {
-    @apply py-[20px];
+    @apply py-[30px] relative;
+  }
+
+  .section-header {
+    @apply mb-8;
   }
 
   form {
@@ -177,11 +181,11 @@
   }
 
   .section-title {
-    @apply flex flex-col gap-4 py-6 text-xl font-bold capitalize text-[var(--headline)];
+    @apply flex items-center gap-2 py-3 text-2xl font-bold capitalize text-[var(--headline)];
   }
 
   .description {
-    @apply w-full py-2 text-base text-[var(--paragraph)] max-md:max-w-none;
+    @apply w-full py-2 text-base text-[var(--paragraph)] max-md:max-w-none leading-relaxed;
   }
 
   .main-navbar {
@@ -213,17 +217,139 @@
   }
 
   .container {
-    @apply max-w-[960px] px-[14px];
+    @apply max-w-[1024px] px-[20px];
   }
 }
 
 @layer utilities {
+  /* Animation utilities */
   .fade-in-right {
     animation: fade-in-right 0.3s ease-out;
   }
 
   .fade-out-right {
     animation: fade-out-right 0.3s ease-in;
+  }
+
+  /* Glass effect */
+  .glass-effect {
+    @apply bg-opacity-20 backdrop-blur-lg backdrop-filter;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(to right, var(--link-color), #baa3fd);
+  }
+
+  /* Subtle hover effect */
+  .hover-lift {
+    @apply transition-all duration-300;
+    transform: translateY(0);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Text highlight effect */
+  .highlight-text {
+    position: relative;
+    display: inline-block;
+  }
+
+  .highlight-text::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    background-color: var(--link-color);
+    opacity: 0.2;
+    z-index: -1;
+    transform: skew(-12deg);
+  }
+
+  /* Animated border */
+  .animated-border {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .animated-border::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid transparent;
+    border-radius: inherit;
+    background: linear-gradient(
+        90deg,
+        var(--link-color),
+        #baa3fd,
+        var(--link-color)
+      )
+      border-box;
+    -webkit-mask:
+      linear-gradient(#fff 0 0) padding-box,
+      linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) padding-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    animation: border-rotate 4s linear infinite;
+  }
+
+  @keyframes border-rotate {
+    0% {
+      background-position: 0% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+
+  /* Shimmer effect */
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shimmer::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    animation: shimmer 2s infinite;
+  }
+
+  @keyframes shimmer {
+    100% {
+      left: 150%;
+    }
+  }
+
+  /* Glow effect */
+  .glow-on-hover {
+    transition: all 0.3s ease;
+  }
+
+  .glow-on-hover:hover {
+    box-shadow: 0 0 15px var(--link-color);
   }
 
   @keyframes fade-in-right {
@@ -363,18 +489,111 @@ p {
   background-color: #424249;
 }
 
-.test1 {
-  @apply border-2 border-black bg-green-300 text-black;
+/* Enhanced card styles */
+.card-enhanced {
+  @apply relative overflow-hidden rounded-lg border border-[var(--card-border-color)] bg-[var(--card-background)] p-6 transition-all duration-300;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
-.test2 {
-  @apply border-2 border-black bg-red-300 text-black;
+.card-enhanced:hover {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
 }
 
-.test3 {
-  @apply border-2 border-black bg-blue-300 text-black;
+/* Decorative elements */
+.decorative-circle {
+  @apply absolute rounded-full opacity-10;
+  background: linear-gradient(45deg, var(--link-color), #baa3fd);
+  filter: blur(40px);
 }
 
-.test4 {
-  @apply border-2 border-black bg-yellow-300 text-black;
+/* Animated underline for links */
+.animated-underline {
+  @apply relative inline-block;
+}
+
+.animated-underline::after {
+  @apply absolute bottom-0 left-0 h-[2px] w-0 bg-[var(--link-color)] transition-all duration-300 content-[''];
+}
+
+.animated-underline:hover::after {
+  @apply w-full;
+}
+
+/* Modern card styles */
+.modern-card {
+  @apply relative overflow-hidden rounded-xl border border-[var(--card-border-color)] bg-[var(--card-background)] transition-all duration-300;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.modern-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    800px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.06),
+    transparent 40%
+  );
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.modern-card:hover::before {
+  opacity: 1;
+}
+
+/* Gradient border */
+.gradient-border {
+  position: relative;
+  border-radius: 0.5rem;
+  padding: 1px;
+  background: linear-gradient(90deg, var(--link-color), #baa3fd);
+}
+
+.gradient-border-content {
+  border-radius: 0.4rem;
+  background: var(--card-background);
+  height: 100%;
+  width: 100%;
+}
+
+/* Frosted glass effect */
+.frosted-glass {
+  background: rgba(255, 255, 255, 0.05);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Animated gradient background */
+.animated-gradient-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-gradient-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    -45deg,
+    var(--link-color),
+    #baa3fd,
+    #7f5af0,
+    #6b46c1
+  );
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.animated-gradient-bg:hover::before {
+  opacity: 1;
 }

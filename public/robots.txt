@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://alshaer.vercel.app/sitemap.xml
+
+# Host
+Host: https://alshaer.vercel.app

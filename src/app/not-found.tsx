@@ -1,21 +1,43 @@
 "use client";
 
 import { RandomizedTextEffect } from "@/components/ui/text-randomized";
+import Link from "next/link";
+import { webImage } from "@/data/Links";
+import PageSeo from "@/components/seo/PageSeo";
 
 export default function NotFoundPage() {
   return (
-    <div className="  relative h-[50vh] flex justify-center items-center w-full ">
-      <div className="flex flex-col m-auto absolute items-center justify-center">
-        <RandomizedTextEffect
-          className="mt-6 text-2xl font-bold tracking-tight text-[var(--headline)] sm:text-4xl"
-          text={"404 | Not found"}
-        />
+    <>
+      {/* Add structured data for the 404 page */}
+      <PageSeo
+        title="404 - Page Not Found"
+        description="The page you are looking for does not exist. Please check the URL or navigate back to the homepage."
+        image={webImage}
+        type="WebPage"
+      />
 
-        <RandomizedTextEffect
-          className="mt-4 text-[var(--paragraph)]"
-          text={"Not found"}
-        />
+      <div className="relative h-[70vh] flex flex-col justify-center items-center w-full">
+        <div className="flex flex-col items-center justify-center text-center">
+          <RandomizedTextEffect
+            className="mt-6 text-3xl font-bold tracking-tight text-[var(--headline)] sm:text-5xl"
+            text={"404 | Page Not Found"}
+          />
+
+          <RandomizedTextEffect
+            className="mt-4 text-xl text-[var(--paragraph)]"
+            text={"The page you are looking for doesn't exist."}
+          />
+
+          <div className="mt-8">
+            <Link
+              href="/"
+              className="px-6 py-3 bg-[var(--button)] text-[var(--button-text)] rounded-md hover:opacity-90 transition-opacity"
+            >
+              Return to Homepage
+            </Link>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

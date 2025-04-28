@@ -1,61 +1,264 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import LinksSection from "./LinksSection";
+import { useEffect, useRef, memo } from "react";
 import { annotate } from "rough-notation";
 import { alazhar } from "@/data/Links";
 import Link from "next/link";
 
-export default function HeroSection() {
+function HeroSection() {
   const highlightedWordRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
+    // Only run the annotation once when the component mounts
+    let annotation: any;
+
     if (highlightedWordRef.current) {
-      const annotation = annotate(highlightedWordRef.current, {
+      annotation = annotate(highlightedWordRef.current, {
         type: "underline",
         color: "#7f5af0",
         padding: 0,
         strokeWidth: 1,
       });
-      annotation.show();
+
+      // Show the annotation with a slight delay for better performance
+      const timer = setTimeout(() => {
+        annotation.show();
+      }, 100);
+
+      // Clean up
+      return () => {
+        clearTimeout(timer);
+        if (annotation) annotation.remove();
+      };
     }
   }, []);
 
   return (
-    <div>
-      <div className="header max-md:pt-[50px]">
-        <div className="header-content">
-          <h1 className="header-title">Baraa Alshaer</h1>
-          <h1 className="subtitle capitalize">
-            software engineer | Full-Stack Developer
-          </h1>
-          <p className="description">
-            I am a <span ref={highlightedWordRef}>Full-Stack Developer</span>{" "}
-            from Palestine, specializing in crafting seamless and efficient web
-            applications across both front-end and back-end technologies. I hold
-            a degree in software engineering from{" "}
-            <Link target="_blank" href={alazhar} className="link">
-              Al-Azhar University
-            </Link>
-            , where I developed a strong foundation in modern software
-            development principles, problem-solving, and system architecture.
-          </p>
-          <p className="description">
-            I approach each project with a focus on delivering high-quality
-            solutions, combining my skills in frontend development, backend
-            systems, and overall project design. My aim is to create
-            user-centric applications that not only meet client needs but also
-            drive innovation.
-          </p>
-          <p className="description">
-            I am dedicated to staying current with industry trends and
-            continuously improving my craft. My work reflects a commitment to
-            excellence and a drive to contribute meaningfully to the tech
-            community.
-          </p>
-        </div>
-        <LinksSection />
+    <div className="header max-md:pt-[50px]">
+      <div className="header-content">
+        <h1 className="header-title">Baraa Alshaer</h1>
+        <h1 className="subtitle capitalize">
+          software engineer | Full-Stack Developer
+        </h1>
+        <p className="description">
+          I am a <span ref={highlightedWordRef}>Full-Stack Developer</span> from
+          Palestine, specializing in crafting seamless and efficient web
+          applications across both front-end and back-end technologies. I hold a
+          degree in software engineering from{" "}
+          <Link target="_blank" href={alazhar} className="link">
+            Al-Azhar University
+          </Link>
+          , where I developed a strong foundation in modern software development
+          principles, problem-solving, and system architecture.
+        </p>
+        <p className="description">
+          I approach each project with a focus on delivering high-quality
+          solutions, combining my skills in frontend development, backend
+          systems, and overall project design. My aim is to create user-centric
+          applications that not only meet client needs but also drive
+          innovation.
+        </p>
+        <p className="description">
+          I am dedicated to staying current with industry trends and
+          continuously improving my craft. My work reflects a commitment to
+          excellence and a drive to contribute meaningfully to the tech
+          community.
+        </p>
       </div>
+
+      <ul className="hovered section flex items-start gap-4 py-[8px] text-[1rem] text-[var(--paragraph)] max-md:w-full max-md:flex-col">
+        <li className="rounded-lg underline max-md:w-full max-md:bg-[var(--card-background)] max-md:px-[8px] max-md:py-[14px]">
+          <a
+            className="flex contact-title capitalize text-[1rem] items-center hoverd gap-2 max-md:flex max-md:flex-row h-[100%] w-full"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.linkedin.com/in/balshaer/"
+          >
+            <span className="hidden h-full items-center justify-center max-md:flex">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-external-link"
+              >
+                <path d="M15 3h6v6"></path>
+                <path d="M10 14 21 3"></path>
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              </svg>
+            </span>
+            <span className="flex h-full items-center justify-center gap-1 text-[var(--headline)] opacity-80">
+              <span className="max-md:hidden">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-linkedin h-4 w-4"
+                >
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                  <rect width="4" height="12" x="2" y="9"></rect>
+                  <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+              </span>
+              <span>Linkedin</span>
+            </span>
+          </a>
+        </li>
+        <li className="rounded-lg underline max-md:w-full max-md:bg-[var(--card-background)] max-md:px-[8px] max-md:py-[14px]">
+          <a
+            className="flex contact-title capitalize text-[1rem] items-center hoverd gap-2 max-md:flex max-md:flex-row h-[100%] w-full"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/balshaer"
+          >
+            <span className="hidden h-full items-center justify-center max-md:flex">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-external-link"
+              >
+                <path d="M15 3h6v6"></path>
+                <path d="M10 14 21 3"></path>
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              </svg>
+            </span>
+            <span className="flex h-full items-center justify-center gap-1 text-[var(--headline)] opacity-80">
+              <span className="max-md:hidden">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-github h-4 w-4"
+                >
+                  <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+                  <path d="M9 18c-4.51 2-5-2-7-2"></path>
+                </svg>
+              </span>
+              <span>Github</span>
+            </span>
+          </a>
+        </li>
+        <li className="rounded-lg underline max-md:w-full max-md:bg-[var(--card-background)] max-md:px-[8px] max-md:py-[14px]">
+          <a
+            className="flex contact-title capitalize text-[1rem] items-center hoverd gap-2 max-md:flex max-md:flex-row h-[100%] w-full"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://wa.me/970599349034"
+          >
+            <span className="hidden h-full items-center justify-center max-md:flex">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-external-link"
+              >
+                <path d="M15 3h6v6"></path>
+                <path d="M10 14 21 3"></path>
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              </svg>
+            </span>
+            <span className="flex h-full items-center justify-center gap-1 text-[var(--headline)] opacity-80">
+              <span className="max-md:hidden">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-message-circle h-4 w-4"
+                >
+                  <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path>
+                </svg>
+              </span>
+              <span>Whatsapp</span>
+            </span>
+          </a>
+        </li>
+        <li className="rounded-lg underline max-md:w-full max-md:bg-[var(--card-background)] max-md:px-[8px] max-md:py-[14px]">
+          <a
+            className="flex contact-title capitalize text-[1rem] items-center hoverd gap-2 max-md:flex max-md:flex-row h-[100%] w-full"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.youtube.com/@Codewithbaraa"
+          >
+            <span className="hidden h-full items-center justify-center max-md:flex">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-external-link"
+              >
+                <path d="M15 3h6v6"></path>
+                <path d="M10 14 21 3"></path>
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              </svg>
+            </span>
+            <span className="flex h-full items-center justify-center gap-1 text-[var(--headline)] opacity-80">
+              <span className="max-md:hidden">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-youtube h-4 w-4"
+                >
+                  <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path>
+                  <path d="m10 15 5-3-5-3z"></path>
+                </svg>
+              </span>
+              <span>Youtube</span>
+            </span>
+          </a>
+        </li>
+      </ul>
     </div>
   );
 }
+
+// Memoize the component to prevent unnecessary re-renders
+export default memo(HeroSection);
