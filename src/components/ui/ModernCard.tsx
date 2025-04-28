@@ -2,15 +2,19 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
+import { motion, HTMLMotionProps } from "framer-motion";
 
-interface ModernCardProps extends React.HTMLAttributes<HTMLDivElement> {
+// Omit conflicting props from HTMLMotionProps
+type MotionCardProps = Omit<
+  HTMLMotionProps<"div">,
+  keyof React.HTMLAttributes<HTMLDivElement>
+> & {
   children: React.ReactNode;
   className?: string;
   hoverEffect?: boolean;
   glowEffect?: boolean;
   gradientBorder?: boolean;
-}
+};
 
 export function ModernCard({
   children,
@@ -19,7 +23,7 @@ export function ModernCard({
   glowEffect = false,
   gradientBorder = false,
   ...props
-}: ModernCardProps) {
+}: MotionCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isMounted, setIsMounted] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -31,13 +35,13 @@ export function ModernCard({
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current || !hoverEffect) return;
-    
+
     const rect = cardRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    
+
     setMousePosition({ x, y });
-    
+
     if (cardRef.current) {
       cardRef.current.style.setProperty("--mouse-x", `${x}px`);
       cardRef.current.style.setProperty("--mouse-y", `${y}px`);
@@ -53,21 +57,17 @@ export function ModernCard({
   };
 
   // Base classes for the card
-  const baseClasses = "relative overflow-hidden rounded-xl border border-[var(--card-border-color)] bg-[var(--card-background)] transition-all duration-300";
-  
+  const baseClasses =
+    "relative overflow-hidden rounded-xl border border-[var(--card-border-color)] bg-[var(--card-background)] transition-all duration-300";
+
   // Classes for hover effect
   const hoverClasses = hoverEffect ? "hover-lift" : "";
-  
+
   // Classes for glow effect
   const glowClasses = glowEffect ? "glow-on-hover" : "";
-  
+
   // Combine all classes
-  const cardClasses = cn(
-    baseClasses,
-    hoverClasses,
-    glowClasses,
-    className
-  );
+  const cardClasses = cn(baseClasses, hoverClasses, glowClasses, className);
 
   // If we're using a gradient border, wrap the content
   if (gradientBorder) {
@@ -113,7 +113,7 @@ export function ModernCard({
           }}
         />
       )}
-      
+
       {/* Main content */}
       <div className="relative z-10">{children}</div>
     </motion.div>
