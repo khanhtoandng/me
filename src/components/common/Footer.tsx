@@ -170,10 +170,7 @@ export default function Footer() {
             <span>
               &copy; {currentYear} Baraa Alshaer. All rights reserved.
             </span>
-            <span className="mx-2 inline-flex items-center">
-              Made with <Heart className="h-3 w-3 mx-1 text-red-500" /> in
-              Palestine
-            </span>
+       
           </div>
 
           <button

@@ -97,21 +97,7 @@ export default function FloatingActionButton({ threshold = 300 }: FloatingAction
           </motion.button>
 
           {/* Back to top button */}
-          <AnimatePresence>
-            {!isMenuOpen && (
-              <motion.button
-                className="mt-3 flex h-10 w-10 items-center justify-center rounded-full bg-[var(--card-background)] text-[var(--headline)] shadow-md hover:bg-[var(--card-hover)] transition-colors"
-                onClick={scrollToTop}
-                whileTap={{ scale: 0.9 }}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                aria-label="Back to top"
-              >
-                <ArrowUp className="h-5 w-5" />
-              </motion.button>
-            )}
-          </AnimatePresence>
+     
         </motion.div>
       )}
     </AnimatePresence>

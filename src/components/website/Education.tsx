@@ -72,7 +72,7 @@ export default function Education() {
             href={item.institutionLink}
             target="_blank"
           >
-            <div className="rounded-lg bg-[var(--card-background)] text-[var(--paragraph)] flex border border-[var(--card-border-color)] p-3 hover:bg-[var(--card-hover)] transition-colors">
+            <div className="rounded-[12px] bg-[var(--card-background)] text-[var(--paragraph)] flex border border-[var(--card-border-color)] p-3 hover:bg-[var(--card-hover)] transition-colors">
               <div className="flex-none">
                 <span className="relative flex shrink-0 overflow-hidden rounded-full border border-[var(--card-border-color)] size-12 m-auto bg-[var(--background)]">
                   <Image
