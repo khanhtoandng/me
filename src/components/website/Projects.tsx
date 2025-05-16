@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-
+import { useMemo } from "react";
 import { Globe, Github, ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import ReusableCard from "@/components/common/ReusableCard";
@@ -13,8 +13,6 @@ import { github, projects } from "@/data/Links";
 const styles = {
   linkStyle:
     "flex items-center justify-center gap-1 text-sm text-[var(--headline)] opacity-70 hover:opacity-100 transition-opacity",
-  linkStyle2:
-    "text-[var(--link-color)] hoverd hover:text-[var(--link-hover)] flex gap-1 items-center w-max justify-center",
 };
 
 const isValidLink = (link: string | undefined) =>
@@ -49,10 +47,9 @@ const OtherProjectLink = ({
 }) => (
   <ScrollEffect type="fadeUp">
     <Link href={href} target="_blank">
-      <Card className="text-[var(--headline)] ">
+      <Card className="text-[var(--headline)]">
         <h1 className="flex items-center gap-2 max-md:flex-wrap">
           <ExternalLink className="h-4 w-4 max-md:hidden" />
-
           {children}
         </h1>
       </Card>
@@ -60,25 +57,27 @@ const OtherProjectLink = ({
   </ScrollEffect>
 );
 
+// Add `type` field to each project
 const ProjectsData = [
   {
     id: 2,
+    type: "frontend",
     title: "SFB - Sustainable Star Form Builder",
     description:
-      " A dynamic form builder that enables companies to create and manage custom forms easily, streamlining data collection and enhancing user experience with a flexible and customizable interface.",
+      "A dynamic form builder for customizable data collection with a great UI.",
     skills: ["React", "Tailwind CSS", "Shadcn UI"],
     links: {
       website: projects.sfb,
       github: null,
     },
   },
-
   {
     id: 5,
+    type: "fullstack",
     title: "Sam-Tax",
     description:
       "A professional website for a U.S.-based company offering tax and translation services.",
-    skills: ["React", "Tailwind CSS", "Express.js", "Mongodb", "Node.js", ""],
+    skills: ["React", "Tailwind CSS", "Express.js", "Mongodb", "Node.js"],
     links: {
       website: projects.samtax,
       github: null,
@@ -86,9 +85,10 @@ const ProjectsData = [
   },
   {
     id: 1,
+    type: "frontend",
     title: "Gradients CSS",
     description:
-      "Created a sophisticated gradient tool tailored for designers and developers, offering seamless customization.",
+      "A gradient design tool for developers and designers with live previews.",
     skills: ["React JS", "Typescript", "Tailwind CSS", "RESTful APIs"],
     links: {
       website: projects.gradientscss.website,
@@ -97,9 +97,10 @@ const ProjectsData = [
   },
   {
     id: 3,
+    type: "frontend",
     title: "Raouf Zadi",
     description:
-      "Designed a professional online presence for a barber, showcasing services and style.",
+      "A stylish barber portfolio website built with modern React stack.",
     skills: ["React JS", "Typescript", "Tailwind CSS", "Git"],
     links: {
       website: projects.raoufzadi,
@@ -108,9 +109,10 @@ const ProjectsData = [
   },
   {
     id: 4,
+    type: "frontend",
     title: "Naj Training Center",
     description:
-      "Developed an educational platform for a dental training center in Saudi Arabia, supporting professional growth.",
+      "An educational platform for a dental training center in Saudi Arabia.",
     skills: ["React JS", "Javascript", "MIUI"],
     links: {
       website: projects.najcenter,
@@ -119,10 +121,22 @@ const ProjectsData = [
   },
 ];
 
-export default function Projects() {
+// Type for props
+type ProjectsProps = {
+  filterType?: string; // e.g., "frontend", "backend", etc.
+};
+
+export default function Projects({ filterType = "all" }: ProjectsProps) {
+  const filteredProjects = useMemo(() => {
+    if (filterType === "all") return ProjectsData;
+    return ProjectsData.filter(
+      (project) => project.type.toLowerCase() === filterType.toLowerCase()
+    );
+  }, [filterType]);
+
   return (
     <div className="projects-cards flex flex-col gap-8 pb-16">
-      {ProjectsData.map((project: any) => (
+      {filteredProjects.map((project) => (
         <ScrollEffect key={project.id} type="fadeUp">
           <ReusableCard
             id={project.id}
@@ -135,7 +149,7 @@ export default function Projects() {
             className="pb-4 pt-2"
           >
             <div className="flex max-w-[60%] flex-wrap gap-2 max-md:mb-0 max-md:mt-4 max-md:max-w-full">
-              {project.skills.map((skill: any, index: any) => (
+              {project.skills.map((skill, index) => (
                 <Badge key={index}>{skill}</Badge>
               ))}
             </div>
@@ -175,8 +189,7 @@ export default function Projects() {
         <OtherProjectLink href={projects.sustainablestar}>
           Sustainable Star{" "}
           <span className="opacity-60">
-            - A corporate website for a Saudi Arabian company specializing in
-            software solutions.
+            - A corporate website for a Saudi Arabian software company.
           </span>
         </OtherProjectLink>
         <OtherProjectLink href={projects.bookstoreapi}>

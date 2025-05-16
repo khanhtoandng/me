@@ -19,6 +19,7 @@ import emailjs from "emailjs-com";
 import { MagicCard } from "../ui/MagicCard";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import { ScrollEffect } from "@/lib/animations";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -70,7 +71,7 @@ export default function ContactForm() {
   };
 
   return (
-    <div>
+    <ScrollEffect type="fadeIn" >
       <div>
         <MagicCard
           data-aos="fade-up"
@@ -160,6 +161,6 @@ export default function ContactForm() {
           </div>
         </MagicCard>
       </div>
-    </div>
+    </ScrollEffect>
   );
 }
