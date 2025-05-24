@@ -45,7 +45,7 @@ if (typeof window !== "undefined") {
 
 // Line Chart Component
 interface LineChartProps {
-  data: Array<{ date: string; value: number }>;
+  data: Array<Record<string, any>>;
   xField: string;
   yField: string;
   category: string;
@@ -54,7 +54,10 @@ interface LineChartProps {
 export function LineChart({ data, xField, yField, category }: LineChartProps) {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const [chartData, setChartData] = useState({
+  const [chartData, setChartData] = useState<{
+    labels: any[];
+    datasets: any[];
+  }>({
     labels: [],
     datasets: [],
   });
@@ -135,7 +138,7 @@ export function LineChart({ data, xField, yField, category }: LineChartProps) {
 
 // Bar Chart Component
 interface BarChartProps {
-  data: Array<{ [key: string]: any }>;
+  data: Array<Record<string, any>>;
   xField: string;
   yField: string;
   category: string;
@@ -151,7 +154,10 @@ export function BarChart({
 }: BarChartProps) {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const [chartData, setChartData] = useState({
+  const [chartData, setChartData] = useState<{
+    labels: any[];
+    datasets: any[];
+  }>({
     labels: [],
     datasets: [],
   });
@@ -233,7 +239,7 @@ export function BarChart({
 
 // Pie Chart Component
 interface PieChartProps {
-  data: Array<{ [key: string]: any }>;
+  data: Array<Record<string, any>>;
   nameField: string;
   valueField: string;
 }
@@ -241,7 +247,10 @@ interface PieChartProps {
 export function PieChart({ data, nameField, valueField }: PieChartProps) {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const [chartData, setChartData] = useState({
+  const [chartData, setChartData] = useState<{
+    labels: any[];
+    datasets: any[];
+  }>({
     labels: [],
     datasets: [],
   });
@@ -293,10 +302,13 @@ export function PieChart({ data, nameField, valueField }: PieChartProps) {
         },
         tooltip: {
           callbacks: {
-            label: function (context) {
+            label: function (context: any) {
               const label = context.label || "";
               const value = context.raw || 0;
-              const total = context.dataset.data.reduce((a, b) => a + b, 0);
+              const total = context.dataset.data.reduce(
+                (a: any, b: any) => a + b,
+                0
+              );
               const percentage = Math.round((value / total) * 100);
               return `${label}: ${value} (${percentage}%)`;
             },

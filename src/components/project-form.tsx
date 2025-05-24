@@ -23,11 +23,21 @@ import { Badge } from "@/components/ui/badge";
 import { X } from "lucide-react";
 import { useState } from "react";
 
-export function ProjectForm({ project = null, onSubmit, onCancel }) {
-  const [tags, setTags] = useState(project?.tags || []);
+interface ProjectFormProps {
+  project?: any;
+  onSubmit: () => void;
+  onCancel: () => void;
+}
+
+export function ProjectForm({
+  project = null,
+  onSubmit,
+  onCancel,
+}: ProjectFormProps) {
+  const [tags, setTags] = useState<string[]>(project?.tags || []);
   const [tagInput, setTagInput] = useState("");
 
-  const addTag = (e) => {
+  const addTag = (e: React.MouseEvent | React.KeyboardEvent) => {
     e.preventDefault();
     if (tagInput.trim() && !tags.includes(tagInput.trim())) {
       setTags([...tags, tagInput.trim()]);
@@ -35,8 +45,8 @@ export function ProjectForm({ project = null, onSubmit, onCancel }) {
     }
   };
 
-  const removeTag = (tagToRemove) => {
-    setTags(tags.filter((tag) => tag !== tagToRemove));
+  const removeTag = (tagToRemove: string) => {
+    setTags(tags.filter((tag: string) => tag !== tagToRemove));
   };
 
   return (

@@ -16,6 +16,20 @@ import * as RiIcons from "react-icons/ri";
 import * as SiIcons from "react-icons/si";
 import * as TiIcons from "react-icons/ti";
 
+const iconLibraries = {
+  fa: FaIcons,
+  ai: AiIcons,
+  bi: BiIcons,
+  bs: BsIcons,
+  fi: FiIcons,
+  hi: HiIcons,
+  io: IoIcons,
+  md: MdIcons,
+  ri: RiIcons,
+  si: SiIcons,
+  ti: TiIcons,
+};
+
 export interface SocialMediaLink {
   title: string;
   link: string;
@@ -38,7 +52,10 @@ const LinksSection: React.FC = () => {
     const IconComponent = iconLib[iconName as keyof typeof iconLib];
     if (!IconComponent) return null;
 
-    const Icon = IconComponent as React.ComponentType<{ size?: number }>;
+    const Icon = IconComponent as React.ComponentType<{
+      size?: number;
+      className?: string;
+    }>;
     return <Icon size={20} className="text-[var(--link-color)]" />;
   };
 

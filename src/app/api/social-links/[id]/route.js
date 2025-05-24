@@ -5,8 +5,9 @@ import SocialLink from "@/lib/models/socialLink";
 export async function GET(request, { params }) {
   try {
     await dbConnect();
+    const { id } = await params;
 
-    const socialLink = await SocialLink.findById(params.id);
+    const socialLink = await SocialLink.findById(id);
 
     if (!socialLink) {
       return NextResponse.json(
@@ -31,10 +32,11 @@ export async function GET(request, { params }) {
 export async function PUT(request, { params }) {
   try {
     await dbConnect();
+    const { id } = await params;
 
     const body = await request.json();
 
-    const socialLink = await SocialLink.findByIdAndUpdate(params.id, body, {
+    const socialLink = await SocialLink.findByIdAndUpdate(id, body, {
       new: true,
       runValidators: true,
     });
@@ -63,8 +65,9 @@ export async function PUT(request, { params }) {
 export async function DELETE(request, { params }) {
   try {
     await dbConnect();
+    const { id } = await params;
 
-    const socialLink = await SocialLink.findByIdAndDelete(params.id);
+    const socialLink = await SocialLink.findByIdAndDelete(id);
 
     if (!socialLink) {
       return NextResponse.json(

@@ -5,9 +5,11 @@ import Content from "@/lib/models/content";
 export async function GET(request, { params }) {
   try {
     await dbConnect();
+    const { section } = await params;
+    const { id } = await params;
 
     const content = await Content.findOne({ 
-      section: params.section,
+      section: section,
       isActive: true 
     });
 
@@ -31,12 +33,13 @@ export async function GET(request, { params }) {
 export async function PUT(request, { params }) {
   try {
     await dbConnect();
+    const { id } = await params;
 
     const body = await request.json();
-    body.section = params.section; // Ensure section matches URL parameter
+    body.section = section; // Ensure section matches URL parameter
 
     const content = await Content.findOneAndUpdate(
-      { section: params.section },
+      { section: section },
       body,
       { new: true, runValidators: true, upsert: true }
     );
@@ -58,9 +61,10 @@ export async function PUT(request, { params }) {
 export async function DELETE(request, { params }) {
   try {
     await dbConnect();
+    const { id } = await params;
 
     const content = await Content.findOneAndUpdate(
-      { section: params.section },
+      { section: section },
       { isActive: false },
       { new: true }
     );

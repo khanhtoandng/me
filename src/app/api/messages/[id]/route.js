@@ -5,7 +5,8 @@ import Message from "@/lib/models/message"
 export async function GET(request, { params }) {
   try {
     await dbConnect()
-    const message = await Message.findById(params.id)
+    const { id } = await params;
+    const message = await Message.findById(id)
 
     if (!message) {
       return NextResponse.json({ success: false, error: "Message not found" }, { status: 404 })
@@ -20,10 +21,11 @@ export async function GET(request, { params }) {
 export async function PUT(request, { params }) {
   try {
     await dbConnect()
+    const { id } = await params;
 
     const body = await request.json()
 
-    const message = await Message.findByIdAndUpdate(params.id, body, {
+    const message = await Message.findByIdAndUpdate(id, body, {
       new: true,
       runValidators: true,
     })
@@ -41,8 +43,9 @@ export async function PUT(request, { params }) {
 export async function DELETE(request, { params }) {
   try {
     await dbConnect()
+    const { id } = await params;
 
-    const message = await Message.findByIdAndDelete(params.id)
+    const message = await Message.findByIdAndDelete(id)
 
     if (!message) {
       return NextResponse.json({ success: false, error: "Message not found" }, { status: 404 })

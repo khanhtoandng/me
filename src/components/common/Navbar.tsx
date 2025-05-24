@@ -14,7 +14,6 @@ import { ThemeToggle } from "../ui/theme-toggle";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Logo from "./Logo";
-import { ispath } from "@/lib/helper";
 
 const styles = {
   link: "text-[var(--headline)] hover:text-[var(--headline)] flex gap-[5px] hoverd rounded-md text-sm font-medium items-center py-2",

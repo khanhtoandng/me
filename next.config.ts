@@ -30,7 +30,6 @@ const nextConfig: NextConfig = {
 
   // Build optimizations
   reactStrictMode: true,
-  swcMinify: true,
 
   // Cache optimizations
   onDemandEntries: {

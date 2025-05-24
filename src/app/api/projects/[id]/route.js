@@ -5,8 +5,9 @@ import Project from "@/lib/models/project"
 export async function GET(request, { params }) {
   try {
     await dbConnect()
+    const { id } = await params;
 
-    const project = await Project.findById(params.id)
+    const project = await Project.findById(id)
 
     if (!project) {
       return NextResponse.json({ success: false, error: "Project not found" }, { status: 404 })
@@ -21,11 +22,12 @@ export async function GET(request, { params }) {
 export async function PUT(request, { params }) {
   try {
     await dbConnect()
+    const { id } = await params;
 
     const body = await request.json()
     body.updatedAt = Date.now()
 
-    const project = await Project.findByIdAndUpdate(params.id, body, {
+    const project = await Project.findByIdAndUpdate(id, body, {
       new: true,
       runValidators: true,
     })
@@ -43,8 +45,9 @@ export async function PUT(request, { params }) {
 export async function DELETE(request, { params }) {
   try {
     await dbConnect()
+    const { id } = await params;
 
-    const project = await Project.findByIdAndDelete(params.id)
+    const project = await Project.findByIdAndDelete(id)
 
     if (!project) {
       return NextResponse.json({ success: false, error: "Project not found" }, { status: 404 })

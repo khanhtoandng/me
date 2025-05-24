@@ -5,7 +5,8 @@ import Recommendation from "@/lib/models/recommendation"
 export async function GET(request, { params }) {
   try {
     await dbConnect()
-    const recommendation = await Recommendation.findById(params.id)
+    const { id } = await params;
+    const recommendation = await Recommendation.findById(id)
 
     if (!recommendation) {
       return NextResponse.json({ success: false, error: "Recommendation not found" }, { status: 404 })
@@ -20,11 +21,12 @@ export async function GET(request, { params }) {
 export async function PUT(request, { params }) {
   try {
     await dbConnect()
+    const { id } = await params;
 
     const body = await request.json()
     body.updatedAt = Date.now()
 
-    const recommendation = await Recommendation.findByIdAndUpdate(params.id, body, {
+    const recommendation = await Recommendation.findByIdAndUpdate(id, body, {
       new: true,
       runValidators: true,
     })
@@ -42,8 +44,9 @@ export async function PUT(request, { params }) {
 export async function DELETE(request, { params }) {
   try {
     await dbConnect()
+    const { id } = await params;
 
-    const recommendation = await Recommendation.findByIdAndDelete(params.id)
+    const recommendation = await Recommendation.findByIdAndDelete(id)
 
     if (!recommendation) {
       return NextResponse.json({ success: false, error: "Recommendation not found" }, { status: 404 })

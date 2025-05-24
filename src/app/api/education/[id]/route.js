@@ -5,7 +5,8 @@ import Education from "@/lib/models/education"
 export async function GET(request, { params }) {
   try {
     await dbConnect()
-    const education = await Education.findById(params.id)
+    const { id } = await params;
+    const education = await Education.findById(id)
 
     if (!education) {
       return NextResponse.json({ success: false, error: "Education not found" }, { status: 404 })
@@ -20,11 +21,12 @@ export async function GET(request, { params }) {
 export async function PUT(request, { params }) {
   try {
     await dbConnect()
+    const { id } = await params;
 
     const body = await request.json()
     body.updatedAt = Date.now()
 
-    const education = await Education.findByIdAndUpdate(params.id, body, {
+    const education = await Education.findByIdAndUpdate(id, body, {
       new: true,
       runValidators: true,
     })
@@ -42,8 +44,9 @@ export async function PUT(request, { params }) {
 export async function DELETE(request, { params }) {
   try {
     await dbConnect()
+    const { id } = await params;
 
-    const education = await Education.findByIdAndDelete(params.id)
+    const education = await Education.findByIdAndDelete(id)
 
     if (!education) {
       return NextResponse.json({ success: false, error: "Education not found" }, { status: 404 })
