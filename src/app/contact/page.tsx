@@ -52,7 +52,7 @@ export default function ContactPage() {
   };
 
   return (
-    <>
+    <div className="container mx-auto">
       {/* Add structured data for the contact page */}
       <PageSeo
         title="Contact - Baraa Alshaer"
@@ -95,6 +95,6 @@ export default function ContactPage() {
 
         <ContactForm />
       </div>
-    </>
+    </div>
   );
 }

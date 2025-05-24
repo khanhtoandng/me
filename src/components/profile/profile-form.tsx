@@ -1,43 +1,46 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { Camera, Github, Linkedin, Twitter, Globe, Upload, X, Plus } from "lucide-react"
-import { useToast } from "@/hooks/use-toast"
-import { motion, AnimatePresence } from "framer-motion"
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { Camera, Upload, X, Plus } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { motion, AnimatePresence } from "framer-motion";
+import { SocialLinksManager } from "@/components/profile/social-links-manager";
 
 type ProfileFormProps = {
   profile: {
-    id?: string
-    firstName: string
-    lastName: string
-    email: string
-    phone?: string
-    location?: string
-    bio?: string
-    avatar?: string
-    website?: string
-    github?: string
-    linkedin?: string
-    twitter?: string
-    skills?: string[]
-  }
-}
+    id?: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone?: string;
+    location?: string;
+    bio?: string;
+    avatar?: string;
+    skills?: string[];
+  };
+};
 
 export function ProfileForm({ profile }: ProfileFormProps) {
-  const { toast } = useToast()
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [activeTab, setActiveTab] = useState("personal")
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [activeTab, setActiveTab] = useState("personal");
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -47,14 +50,10 @@ export function ProfileForm({ profile }: ProfileFormProps) {
     location: "",
     bio: "",
     avatar: "",
-    website: "",
-    github: "",
-    linkedin: "",
-    twitter: "",
     skills: [] as string[],
-  })
+  });
 
-  const [skillInput, setSkillInput] = useState("")
+  const [skillInput, setSkillInput] = useState("");
 
   useEffect(() => {
     if (profile) {
@@ -66,40 +65,38 @@ export function ProfileForm({ profile }: ProfileFormProps) {
         location: profile.location || "",
         bio: profile.bio || "",
         avatar: profile.avatar || "",
-        website: profile.website || "",
-        github: profile.github || "",
-        linkedin: profile.linkedin || "",
-        twitter: profile.twitter || "",
         skills: profile.skills || [],
-      })
+      });
     }
-  }, [profile])
+  }, [profile]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const addSkill = () => {
     if (skillInput.trim() && !formData.skills.includes(skillInput.trim())) {
       setFormData((prev) => ({
         ...prev,
         skills: [...prev.skills, skillInput.trim()],
-      }))
-      setSkillInput("")
+      }));
+      setSkillInput("");
     }
-  }
+  };
 
   const removeSkill = (skill: string) => {
     setFormData((prev) => ({
       ...prev,
       skills: prev.skills.filter((s) => s !== skill),
-    }))
-  }
+    }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+    e.preventDefault();
+    setIsSubmitting(true);
 
     try {
       const response = await fetch("/api/profile", {
@@ -108,29 +105,29 @@ export function ProfileForm({ profile }: ProfileFormProps) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (data.success) {
         toast({
           title: "Success",
           description: "Profile updated successfully",
-        })
+        });
       } else {
-        throw new Error(data.error || "Something went wrong")
+        throw new Error(data.error || "Something went wrong");
       }
     } catch (error) {
-      console.error("Error updating profile:", error)
+      console.error("Error updating profile:", error);
       toast({
         title: "Error",
         description: "Failed to update profile. Please try again.",
         variant: "destructive",
-      })
+      });
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -140,7 +137,7 @@ export function ProfileForm({ profile }: ProfileFormProps) {
         staggerChildren: 0.1,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 10 },
@@ -151,11 +148,15 @@ export function ProfileForm({ profile }: ProfileFormProps) {
         duration: 0.3,
       },
     },
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit}>
-      <Tabs defaultValue={activeTab} onValueChange={setActiveTab} className="space-y-4">
+      <Tabs
+        defaultValue={activeTab}
+        onValueChange={setActiveTab}
+        className="space-y-4"
+      >
         <TabsList className="bg-[var(--card-background)] text-[var(--paragraph)]">
           <TabsTrigger
             value="personal"
@@ -177,52 +178,51 @@ export function ProfileForm({ profile }: ProfileFormProps) {
           </TabsTrigger>
         </TabsList>
 
-        <motion.div variants={containerVariants} initial="hidden" animate="visible" key={activeTab}>
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          key={activeTab}
+        >
           <TabsContent value="personal" className="space-y-4">
             <Card className="bg-[var(--card-background)] border-[var(--card-border-color)]">
               <CardHeader>
-                <CardTitle className="text-[var(--card-headline)]">Personal Information</CardTitle>
+                <CardTitle className="text-[var(--card-headline)]">
+                  Personal Information
+                </CardTitle>
                 <CardDescription className="text-[var(--card-paragraph)]">
                   Update your personal details and contact information
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <motion.div
-                  className="flex flex-col items-center justify-center space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0"
+                  className="flex justify-between items-center py-5"
                   variants={itemVariants}
                 >
                   <Avatar className="h-24 w-24">
-                    <AvatarImage src={formData.avatar || "/placeholder.svg"} alt="Profile" />
+                    <AvatarImage
+                      src={formData.avatar || "/placeholder.svg"}
+                      alt="Profile"
+                    />
                     <AvatarFallback className="bg-[var(--button)] text-[var(--button-text)] text-xl">
                       {formData.firstName && formData.lastName
                         ? `${formData.firstName[0]}${formData.lastName[0]}`
                         : "?"}
                     </AvatarFallback>
                   </Avatar>
-                  <div className="flex flex-col space-y-2">
-                    <Button
-                      type="button"
-                      className="bg-[var(--button)] text-[var(--button-text)] hover:bg-[var(--button2)]"
-                    >
-                      <Upload className="mr-2 h-4 w-4" />
-                      Upload Photo
-                    </Button>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      className="border-[var(--card-border-color)] text-[var(--paragraph)]"
-                    >
-                      <Camera className="mr-2 h-4 w-4" />
-                      Take Photo
-                    </Button>
-                  </div>
                 </motion.div>
 
                 <Separator className="bg-[var(--card-border-color)]" />
 
-                <motion.div className="grid gap-4 sm:grid-cols-2" variants={itemVariants}>
+                <motion.div
+                  className="grid gap-4 sm:grid-cols-2"
+                  variants={itemVariants}
+                >
                   <div className="space-y-2">
-                    <Label htmlFor="firstName" className="text-[var(--card-headline)]">
+                    <Label
+                      htmlFor="firstName"
+                      className="text-[var(--card-headline)]"
+                    >
                       First Name
                     </Label>
                     <Input
@@ -236,7 +236,10 @@ export function ProfileForm({ profile }: ProfileFormProps) {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="lastName" className="text-[var(--card-headline)]">
+                    <Label
+                      htmlFor="lastName"
+                      className="text-[var(--card-headline)]"
+                    >
                       Last Name
                     </Label>
                     <Input
@@ -250,7 +253,10 @@ export function ProfileForm({ profile }: ProfileFormProps) {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="email" className="text-[var(--card-headline)]">
+                    <Label
+                      htmlFor="email"
+                      className="text-[var(--card-headline)]"
+                    >
                       Email
                     </Label>
                     <Input
@@ -265,7 +271,10 @@ export function ProfileForm({ profile }: ProfileFormProps) {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="phone" className="text-[var(--card-headline)]">
+                    <Label
+                      htmlFor="phone"
+                      className="text-[var(--card-headline)]"
+                    >
                       Phone
                     </Label>
                     <Input
@@ -279,7 +288,10 @@ export function ProfileForm({ profile }: ProfileFormProps) {
                     />
                   </div>
                   <div className="space-y-2 sm:col-span-2">
-                    <Label htmlFor="location" className="text-[var(--card-headline)]">
+                    <Label
+                      htmlFor="location"
+                      className="text-[var(--card-headline)]"
+                    >
                       Location
                     </Label>
                     <Input
@@ -292,7 +304,10 @@ export function ProfileForm({ profile }: ProfileFormProps) {
                     />
                   </div>
                   <div className="space-y-2 sm:col-span-2">
-                    <Label htmlFor="bio" className="text-[var(--card-headline)]">
+                    <Label
+                      htmlFor="bio"
+                      className="text-[var(--card-headline)]"
+                    >
                       Bio
                     </Label>
                     <Textarea
@@ -310,92 +325,33 @@ export function ProfileForm({ profile }: ProfileFormProps) {
           </TabsContent>
 
           <TabsContent value="social" className="space-y-4">
-            <Card className="bg-[var(--card-background)] border-[var(--card-border-color)]">
-              <CardHeader>
-                <CardTitle className="text-[var(--card-headline)]">Social Profiles</CardTitle>
-                <CardDescription className="text-[var(--card-paragraph)]">
-                  Connect your social media accounts
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <motion.div className="space-y-2" variants={itemVariants}>
-                  <Label htmlFor="website" className="flex items-center gap-2 text-[var(--card-headline)]">
-                    <Globe className="h-4 w-4" />
-                    Website
-                  </Label>
-                  <Input
-                    id="website"
-                    name="website"
-                    value={formData.website}
-                    onChange={handleChange}
-                    placeholder="https://yourwebsite.com"
-                    className="bg-[var(--input-background)] border-[var(--input-border-color)] text-[var(--input-text)]"
-                  />
-                </motion.div>
-                <motion.div className="space-y-2" variants={itemVariants}>
-                  <Label htmlFor="github" className="flex items-center gap-2 text-[var(--card-headline)]">
-                    <Github className="h-4 w-4" />
-                    GitHub
-                  </Label>
-                  <Input
-                    id="github"
-                    name="github"
-                    value={formData.github}
-                    onChange={handleChange}
-                    placeholder="https://github.com/username"
-                    className="bg-[var(--input-background)] border-[var(--input-border-color)] text-[var(--input-text)]"
-                  />
-                </motion.div>
-                <motion.div className="space-y-2" variants={itemVariants}>
-                  <Label htmlFor="linkedin" className="flex items-center gap-2 text-[var(--card-headline)]">
-                    <Linkedin className="h-4 w-4" />
-                    LinkedIn
-                  </Label>
-                  <Input
-                    id="linkedin"
-                    name="linkedin"
-                    value={formData.linkedin}
-                    onChange={handleChange}
-                    placeholder="https://linkedin.com/in/username"
-                    className="bg-[var(--input-background)] border-[var(--input-border-color)] text-[var(--input-text)]"
-                  />
-                </motion.div>
-                <motion.div className="space-y-2" variants={itemVariants}>
-                  <Label htmlFor="twitter" className="flex items-center gap-2 text-[var(--card-headline)]">
-                    <Twitter className="h-4 w-4" />
-                    Twitter
-                  </Label>
-                  <Input
-                    id="twitter"
-                    name="twitter"
-                    value={formData.twitter}
-                    onChange={handleChange}
-                    placeholder="https://twitter.com/username"
-                    className="bg-[var(--input-background)] border-[var(--input-border-color)] text-[var(--input-text)]"
-                  />
-                </motion.div>
-              </CardContent>
-            </Card>
+            <SocialLinksManager />
           </TabsContent>
 
           <TabsContent value="skills" className="space-y-4">
             <Card className="bg-[var(--card-background)] border-[var(--card-border-color)]">
               <CardHeader>
-                <CardTitle className="text-[var(--card-headline)]">Skills</CardTitle>
+                <CardTitle className="text-[var(--card-headline)]">
+                  Skills
+                </CardTitle>
                 <CardDescription className="text-[var(--card-paragraph)]">
                   Add your technical and professional skills
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <motion.div className="space-y-2" variants={itemVariants}>
-                  <Label className="text-[var(--card-headline)]">Add Skills</Label>
+                  <Label className="text-[var(--card-headline)]">
+                    Add Skills
+                  </Label>
                   <div className="flex gap-2">
                     <Input
                       value={skillInput}
                       onChange={(e) => setSkillInput(e.target.value)}
                       placeholder="Add a skill"
                       className="bg-[var(--input-background)] border-[var(--input-border-color)] text-[var(--input-text)]"
-                      onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addSkill())}
+                      onKeyDown={(e) =>
+                        e.key === "Enter" && (e.preventDefault(), addSkill())
+                      }
                     />
                     <Button
                       type="button"
@@ -417,7 +373,10 @@ export function ProfileForm({ profile }: ProfileFormProps) {
                         >
                           <Badge className="bg-[var(--button2)] text-[var(--button-text)] flex items-center gap-1 px-3 py-1">
                             {skill}
-                            <X className="h-3 w-3 cursor-pointer ml-1" onClick={() => removeSkill(skill)} />
+                            <X
+                              className="h-3 w-3 cursor-pointer ml-1"
+                              onClick={() => removeSkill(skill)}
+                            />
                           </Badge>
                         </motion.div>
                       ))}
@@ -440,5 +399,5 @@ export function ProfileForm({ profile }: ProfileFormProps) {
         </Button>
       </div>
     </form>
-  )
+  );
 }

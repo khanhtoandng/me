@@ -1,31 +1,27 @@
+import { Metadata } from "next";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { DashboardStats } from "@/components/dashboard/stats";
-import { RecentActivity } from "@/components/dashboard/recent-activity";
-import { QuickActions } from "@/components/dashboard/quick-actions";
+import { DashboardStats } from "@/components/dashboard-stats";
+import { RecentActivity } from "@/components/recent-activity";
+import { QuickActions } from "@/components/quick-actions";
 
-export default async function DashboardPage() {
+export const metadata: Metadata = {
+  title: "Dashboard",
+  description: "Admin dashboard for portfolio website",
+};
+
+export default function DashboardPage() {
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold text-[var(--headline)]">
-        Dashboard Overview
-      </h1>
+      <div className="flex items-center justify-between">
+        <h1 className="text-3xl font-bold">Dashboard Overview</h1>
+      </div>
 
       <DashboardStats />
 
       <Tabs defaultValue="activity" className="space-y-4">
-        <TabsList className="bg-[var(--card-background)] text-[var(--paragraph)]">
-          <TabsTrigger
-            value="activity"
-            className="data-[state=active]:bg-[var(--button)] data-[state=active]:text-[var(--button-text)]"
-          >
-            Recent Activity
-          </TabsTrigger>
-          <TabsTrigger
-            value="actions"
-            className="data-[state=active]:bg-[var(--button)] data-[state=active]:text-[var(--button-text)]"
-          >
-            Quick Actions
-          </TabsTrigger>
+        <TabsList>
+          <TabsTrigger value="activity">Recent Activity</TabsTrigger>
+          <TabsTrigger value="actions">Quick Actions</TabsTrigger>
         </TabsList>
         <TabsContent value="activity" className="space-y-4">
           <RecentActivity />

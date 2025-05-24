@@ -132,7 +132,7 @@ export default function PostsPreview() {
             ))}
 
         {flag && (
-          <Card className="flex   h-max absolute inset-0 m-auto text-[var(--paragraph)] w-1/3  rounded-[10px] p-3 justify-center items-center flex-col gap-3">
+          <Card className="flex   h-max absolute inset-0 m-auto text-[var(--paragraph)] w-full  rounded-[10px] p-3 justify-center items-center flex-col gap-3">
             <CardContent>
               <div className="error flex items-center justify-center gap-1">
                 <FileWarning />

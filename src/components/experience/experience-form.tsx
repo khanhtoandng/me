@@ -1,105 +1,116 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Badge } from "@/components/ui/badge"
-import { X, Plus } from "lucide-react"
-import { useToast } from "@/hooks/use-toast"
-import { motion, AnimatePresence } from "framer-motion"
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Badge } from "@/components/ui/badge";
+import { X, Plus } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { motion, AnimatePresence } from "framer-motion";
+import { AITextEnhancer } from "@/components/ui/ai-text-enhancer";
 
 type ExperienceFormProps = {
   experience?: {
-    id?: string
-    title: string
-    company: string
-    location: string
-    startDate: string
-    endDate?: string
-    current: boolean
-    description: string
-    skills: string[]
-  }
-}
+    id?: string;
+    title: string;
+    company: string;
+    location: string;
+    startDate: string;
+    endDate?: string;
+    current: boolean;
+    description: string;
+    skills: string[];
+  };
+};
 
 export function ExperienceForm({ experience }: ExperienceFormProps) {
-  const router = useRouter()
-  const { toast } = useToast()
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const router = useRouter();
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [formData, setFormData] = useState({
     title: "",
     company: "",
+    companyUrl: "",
     location: "",
     startDate: "",
     endDate: "",
     current: false,
     description: "",
     skills: [] as string[],
-  })
+  });
 
-  const [skillInput, setSkillInput] = useState("")
+  const [skillInput, setSkillInput] = useState("");
 
   useEffect(() => {
     if (experience) {
       setFormData({
         title: experience.title || "",
         company: experience.company || "",
+        companyUrl: experience.companyUrl || "",
         location: experience.location || "",
-        startDate: experience.startDate ? new Date(experience.startDate).toISOString().split("T")[0] : "",
-        endDate: experience.endDate ? new Date(experience.endDate).toISOString().split("T")[0] : "",
+        startDate: experience.startDate
+          ? new Date(experience.startDate).toISOString().split("T")[0]
+          : "",
+        endDate: experience.endDate
+          ? new Date(experience.endDate).toISOString().split("T")[0]
+          : "",
         current: experience.current || false,
         description: experience.description || "",
         skills: experience.skills || [],
-      })
+      });
     }
-  }, [experience])
+  }, [experience]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target
-    setFormData((prev) => ({ ...prev, [name]: checked }))
+    const { name, checked } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: checked }));
 
     // Clear end date if current is checked
     if (name === "current" && checked) {
-      setFormData((prev) => ({ ...prev, endDate: "" }))
+      setFormData((prev) => ({ ...prev, endDate: "" }));
     }
-  }
+  };
 
   const addSkill = () => {
     if (skillInput.trim() && !formData.skills.includes(skillInput.trim())) {
       setFormData((prev) => ({
         ...prev,
         skills: [...prev.skills, skillInput.trim()],
-      }))
-      setSkillInput("")
+      }));
+      setSkillInput("");
     }
-  }
+  };
 
   const removeSkill = (skill: string) => {
     setFormData((prev) => ({
       ...prev,
       skills: prev.skills.filter((s) => s !== skill),
-    }))
-  }
+    }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+    e.preventDefault();
+    setIsSubmitting(true);
 
     try {
-      const url = experience?.id ? `/api/experiences/${experience.id}` : "/api/experiences"
-      const method = experience?.id ? "PUT" : "POST"
+      const url = experience?.id
+        ? `/api/experiences/${experience.id}`
+        : "/api/experiences";
+      const method = experience?.id ? "PUT" : "POST";
 
       const response = await fetch(url, {
         method,
@@ -107,31 +118,33 @@ export function ExperienceForm({ experience }: ExperienceFormProps) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (data.success) {
         toast({
           title: "Success",
-          description: experience?.id ? "Experience updated successfully" : "Experience created successfully",
-        })
-        router.push("/dashboard/experience")
-        router.refresh()
+          description: experience?.id
+            ? "Experience updated successfully"
+            : "Experience created successfully",
+        });
+        router.push("/dashboard/experience");
+        router.refresh();
       } else {
-        throw new Error(data.error || "Something went wrong")
+        throw new Error(data.error || "Something went wrong");
       }
     } catch (error) {
-      console.error("Error submitting experience:", error)
+      console.error("Error submitting experience:", error);
       toast({
         title: "Error",
         description: "Failed to save experience. Please try again.",
         variant: "destructive",
-      })
+      });
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -141,7 +154,7 @@ export function ExperienceForm({ experience }: ExperienceFormProps) {
         staggerChildren: 0.1,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 10 },
@@ -152,11 +165,16 @@ export function ExperienceForm({ experience }: ExperienceFormProps) {
         duration: 0.3,
       },
     },
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit}>
-      <motion.div className="space-y-6" variants={containerVariants} initial="hidden" animate="visible">
+      <motion.div
+        className="space-y-6"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         <Card className="bg-[var(--card-background)] border-[var(--card-border-color)]">
           <CardContent className="p-6 space-y-6">
             <motion.div className="space-y-2" variants={itemVariants}>
@@ -190,6 +208,23 @@ export function ExperienceForm({ experience }: ExperienceFormProps) {
             </motion.div>
 
             <motion.div className="space-y-2" variants={itemVariants}>
+              <Label
+                htmlFor="companyUrl"
+                className="text-[var(--card-headline)]"
+              >
+                Company URL (Optional)
+              </Label>
+              <Input
+                id="companyUrl"
+                name="companyUrl"
+                value={formData.companyUrl}
+                onChange={handleChange}
+                placeholder="e.g. https://company.com"
+                className="bg-[var(--input-background)] border-[var(--input-border-color)] text-[var(--input-text)]"
+              />
+            </motion.div>
+
+            <motion.div className="space-y-2" variants={itemVariants}>
               <Label htmlFor="location" className="text-[var(--card-headline)]">
                 Location
               </Label>
@@ -204,9 +239,15 @@ export function ExperienceForm({ experience }: ExperienceFormProps) {
               />
             </motion.div>
 
-            <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-6" variants={itemVariants}>
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-2 gap-6"
+              variants={itemVariants}
+            >
               <div className="space-y-2">
-                <Label htmlFor="startDate" className="text-[var(--card-headline)]">
+                <Label
+                  htmlFor="startDate"
+                  className="text-[var(--card-headline)]"
+                >
                   Start Date
                 </Label>
                 <Input
@@ -220,7 +261,10 @@ export function ExperienceForm({ experience }: ExperienceFormProps) {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="endDate" className="text-[var(--card-headline)]">
+                <Label
+                  htmlFor="endDate"
+                  className="text-[var(--card-headline)]"
+                >
                   End Date
                 </Label>
                 <Input
@@ -235,7 +279,10 @@ export function ExperienceForm({ experience }: ExperienceFormProps) {
               </div>
             </motion.div>
 
-            <motion.div className="flex items-center space-x-2" variants={itemVariants}>
+            <motion.div
+              className="flex items-center space-x-2"
+              variants={itemVariants}
+            >
               <input
                 type="checkbox"
                 id="current"
@@ -250,7 +297,10 @@ export function ExperienceForm({ experience }: ExperienceFormProps) {
             </motion.div>
 
             <motion.div className="space-y-2" variants={itemVariants}>
-              <Label htmlFor="description" className="text-[var(--card-headline)]">
+              <Label
+                htmlFor="description"
+                className="text-[var(--card-headline)]"
+              >
                 Description
               </Label>
               <Textarea
@@ -262,6 +312,14 @@ export function ExperienceForm({ experience }: ExperienceFormProps) {
                 className="min-h-32 bg-[var(--input-background)] border-[var(--input-border-color)] text-[var(--input-text)]"
                 required
               />
+              <AITextEnhancer
+                originalText={formData.description}
+                onTextUpdate={(newText) =>
+                  setFormData((prev) => ({ ...prev, description: newText }))
+                }
+                type="experience"
+                placeholder="Enhance experience description..."
+              />
             </motion.div>
 
             <motion.div className="space-y-2" variants={itemVariants}>
@@ -272,7 +330,9 @@ export function ExperienceForm({ experience }: ExperienceFormProps) {
                   onChange={(e) => setSkillInput(e.target.value)}
                   placeholder="Add a skill"
                   className="bg-[var(--input-background)] border-[var(--input-border-color)] text-[var(--input-text)]"
-                  onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addSkill())}
+                  onKeyDown={(e) =>
+                    e.key === "Enter" && (e.preventDefault(), addSkill())
+                  }
                 />
                 <Button
                   type="button"
@@ -294,7 +354,10 @@ export function ExperienceForm({ experience }: ExperienceFormProps) {
                     >
                       <Badge className="bg-[var(--button2)] text-[var(--button-text)] flex items-center gap-1">
                         {skill}
-                        <X className="h-3 w-3 cursor-pointer" onClick={() => removeSkill(skill)} />
+                        <X
+                          className="h-3 w-3 cursor-pointer"
+                          onClick={() => removeSkill(skill)}
+                        />
                       </Badge>
                     </motion.div>
                   ))}
@@ -316,11 +379,15 @@ export function ExperienceForm({ experience }: ExperienceFormProps) {
               disabled={isSubmitting}
               className="bg-[var(--button)] text-[var(--button-text)] hover:bg-[var(--button2)]"
             >
-              {isSubmitting ? "Saving..." : experience?.id ? "Update Experience" : "Create Experience"}
+              {isSubmitting
+                ? "Saving..."
+                : experience?.id
+                  ? "Update Experience"
+                  : "Create Experience"}
             </Button>
           </CardFooter>
         </Card>
       </motion.div>
     </form>
-  )
+  );
 }

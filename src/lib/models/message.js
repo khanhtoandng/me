@@ -1,4 +1,15 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
+
+const ReplySchema = new mongoose.Schema({
+  message: {
+    type: String,
+    required: [true, "Please provide a reply message."],
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
 
 const MessageSchema = new mongoose.Schema({
   sender: {
@@ -30,10 +41,22 @@ const MessageSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  replies: [ReplySchema],
   createdAt: {
     type: Date,
     default: Date.now,
   },
-})
+  updatedAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
 
-export default mongoose.models.Message || mongoose.model("Message", MessageSchema)
+// Update the updatedAt field before saving
+MessageSchema.pre("save", function (next) {
+  this.updatedAt = Date.now();
+  next();
+});
+
+export default mongoose.models.Message ||
+  mongoose.model("Message", MessageSchema);

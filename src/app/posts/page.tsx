@@ -62,7 +62,7 @@ export default function PostsPage() {
         type="WebPage"
       />
 
-      <div className="posts flex min-h-[100vh] w-full flex-col gap-5 max-md:pb-0 max-md:pt-[50px]">
+      <div className="posts container mx-auto flex min-h-[100vh] w-full flex-col gap-5 max-md:pb-0 max-md:pt-[50px]">
         <div className="header">
           <h1 className="header-title">Latest posts</h1>
           <p className="description max-w-[100%]">

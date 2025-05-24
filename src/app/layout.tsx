@@ -9,6 +9,7 @@ import BackgroundEffect from "@/components/ui/backgroundEffect";
 import FloatingActionButton from "@/components/ui/FloatingActionButton";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { ThemeProvider } from "@/components/theme-provider";
 
 // Define keywords for better SEO
 const keywords = [
@@ -33,9 +34,8 @@ const keywords = [
 export const metadata: Metadata = {
   metadataBase: new URL(`https://${domain}`),
   title: {
-    template: "Baraa Alshaer - %s",
-    default:
-      "Baraa Alshaer - Full Stack Developer | React, Node.js, TypeScript",
+    template: "b19r - %s",
+    default: "b19r",
   },
   description:
     "Portfolio of Baraa Alshaer, a skilled Full Stack Developer with expertise in React, Node.js, TypeScript, and more. Creating impactful web applications with a focus on user experience and modern technologies.",
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     alternateLocale: "ar_SA",
-    title: "Baraa Alshaer - Full Stack Developer",
+    title: "b19r",
     description:
       "Explore the portfolio of Baraa Alshaer, a passionate Full Stack Developer. Projects, blogs, and more showcasing expertise in modern web development with React, Node.js, and TypeScript.",
     url: websitePath.main,
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
         url: webImage,
         width: 400,
         height: 400,
-        alt: "Baraa Alshaer - Full Stack Developer",
+        alt: "b19r",
       },
     ],
     countryName: "Palestine",
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Baraa Alshaer - Full Stack Developer",
+    title: "b19r",
     description:
       "Explore the portfolio of Baraa Alshaer, a passionate Full Stack Developer. Projects, blogs, and more showcasing expertise in modern web development.",
     images: webImage,
@@ -184,14 +184,16 @@ export default function RootLayout({
       <body className="flex relative dark flex-col min-h-screen">
         <SpeedInsights />
         <Analytics />
-        <Toaster />
-        <Navbar />
-        <BackgroundEffect />
-        <main className="container z-40 max-md:z-30 py-8 mx-auto flex-grow">
-          {children}
-        </main>
-        <Footer />
-        <FloatingActionButton threshold={400} />
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <Toaster />
+          <Navbar />
+          <BackgroundEffect />
+          <main className=" z-40 max-md:z-30  mx-auto w-full flex-grow">
+            {children}
+          </main>
+          <Footer />
+          <FloatingActionButton threshold={400} />
+        </ThemeProvider>
       </body>
     </html>
   );

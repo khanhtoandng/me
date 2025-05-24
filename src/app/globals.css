@@ -11,9 +11,9 @@
     --paragraph: #94a1b2;
     --button: #7f5af0;
     --button2: #7f5af08a;
-    --button-border: #7f5af0;
+    --button-border: #7f5af054;
     --button-text: #fffffe;
-    --illustration-stroke: #010101;
+    --illustration-stroke: #01010179;
     --main: #fffffe;
     --highlight: #7f5af0;
     --secondary: #72757e;
@@ -55,6 +55,8 @@
     --headline: #16161a;
     --paragraph: #414245;
     --button: #7f5af0;
+    --button-border: #7f5af054;
+
     --button2: #7f5af08a;
     --button-text: #fffffe;
     --illustration-stroke: #010101;
@@ -596,4 +598,22 @@ p {
 
 .animated-gradient-bg:hover::before {
   opacity: 1;
+}
+
+.test {
+  background-color: greenyellow;
+  color: black;
+  border: 2px solid black;
+}
+
+.icon {
+  @apply bg-[var(--card-background)] p-2 rounded-[9px] border border-[var(--border)] hoverd;
+}
+
+.icon:hover {
+  opacity: 70%;
+}
+
+form {
+  @apply bg-[var(--card-background)];
 }

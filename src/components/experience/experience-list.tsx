@@ -1,91 +1,94 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import Link from "next/link"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Edit, Trash2, Calendar, MapPin, Building, Plus } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { useToast } from "@/hooks/use-toast"
-import { motion } from "framer-motion"
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Edit, Trash2, Calendar, MapPin, Building, Plus } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { useToast } from "@/hooks/use-toast";
+import { motion } from "framer-motion";
 
 type Experience = {
-  _id: string
-  title: string
-  company: string
-  location: string
-  startDate: string
-  endDate?: string
-  current: boolean
-  description: string
-  skills: string[]
-}
+  _id: string;
+  title: string;
+  company: string;
+  location: string;
+  startDate: string;
+  endDate?: string;
+  current: boolean;
+  description: string;
+  skills: string[];
+};
 
 export function ExperienceList() {
-  const { toast } = useToast()
-  const [experiences, setExperiences] = useState<Experience[]>([])
-  const [loading, setLoading] = useState(true)
+  const { toast } = useToast();
+  const [experiences, setExperiences] = useState<Experience[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchExperiences() {
       try {
-        setLoading(true)
-        const response = await fetch("/api/experiences")
-        const data = await response.json()
+        setLoading(true);
+        const response = await fetch("/api/experiences");
+        const data = await response.json();
 
         if (data.success) {
-          setExperiences(data.data)
+          setExperiences(data.data);
         }
       } catch (error) {
-        console.error("Error fetching experiences:", error)
+        console.error("Error fetching experiences:", error);
         toast({
           title: "Error",
           description: "Failed to load experience entries. Please try again.",
           variant: "destructive",
-        })
+        });
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
     }
 
-    fetchExperiences()
-  }, [toast])
+    fetchExperiences();
+  }, [toast]);
 
   const handleDelete = async (id: string) => {
     if (confirm("Are you sure you want to delete this experience entry?")) {
       try {
         const response = await fetch(`/api/experiences/${id}`, {
           method: "DELETE",
-        })
+        });
 
-        const data = await response.json()
+        const data = await response.json();
 
         if (data.success) {
-          setExperiences(experiences.filter((exp) => exp._id !== id))
+          setExperiences(experiences.filter((exp) => exp._id !== id));
           toast({
             title: "Success",
             description: "Experience entry deleted successfully",
-          })
+          });
         } else {
-          throw new Error(data.error || "Failed to delete experience entry")
+          throw new Error(data.error || "Failed to delete experience entry");
         }
       } catch (error) {
-        console.error("Error deleting experience:", error)
+        console.error("Error deleting experience:", error);
         toast({
           title: "Error",
           description: "Failed to delete experience entry. Please try again.",
           variant: "destructive",
-        })
+        });
       }
     }
-  }
+  };
 
   const formatDate = (dateString?: string) => {
-    if (!dateString) return "Present"
-    const date = new Date(dateString)
-    return date.toLocaleDateString("en-US", { month: "short", year: "numeric" })
-  }
+    if (!dateString) return "Present";
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      month: "short",
+      year: "numeric",
+    });
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -95,7 +98,7 @@ export function ExperienceList() {
         staggerChildren: 0.1,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -106,15 +109,18 @@ export function ExperienceList() {
         duration: 0.3,
       },
     },
-  }
+  };
 
   if (loading) {
     return (
       <div className="space-y-4">
         {[1, 2, 3].map((i) => (
-          <Card key={i} className="bg-[var(--card-background)] border-[var(--card-border-color)]">
+          <Card
+            key={i}
+            className="bg-[var(--card-background)] border-[var(--card-border-color)]"
+          >
             <CardHeader className="pb-2">
-              <div className="flex items-start justify-between">
+              <div className="flex items-start justify-between w-full">
                 <div className="space-y-2">
                   <div className="h-6 w-48 bg-[var(--skeleton-color)] rounded animate-pulse" />
                   <div className="h-4 w-32 bg-[var(--skeleton-color)] rounded animate-pulse" />
@@ -134,45 +140,63 @@ export function ExperienceList() {
           </Card>
         ))}
       </div>
-    )
+    );
   }
 
   if (experiences.length === 0) {
     return (
       <Card className="bg-[var(--card-background)] border-[var(--card-border-color)] p-8 text-center">
-        <h3 className="text-xl font-semibold text-[var(--card-headline)]">No experience entries found</h3>
-        <p className="text-[var(--card-paragraph)] mt-2">Start by adding your first work experience</p>
-        <Button asChild className="mt-4 bg-[var(--button)] text-[var(--button-text)] hover:bg-[var(--button2)]">
-          <Link href="/dashboard/experience/new">
-            <Plus className="mr-2 h-4 w-4" />
+        <h3 className="text-xl font-semibold text-[var(--card-headline)]">
+          No experience entries found
+        </h3>
+        <p className="text-[var(--card-paragraph)] mt-2">
+          Start by adding your first work experience
+        </p>
+        <Link href="/dashboard/experience/new">
+          <Button
+            icon={<Plus className="mr-2 h-4 w-4" />}
+            className="mt-4 mx-auto bg-[var(--button)] text-[var(--button-text)] hover:bg-[var(--button2)]"
+          >
             Add Experience
-          </Link>
-        </Button>
+          </Button>
+        </Link>
       </Card>
-    )
+    );
   }
 
   return (
-    <motion.div className="space-y-4" variants={containerVariants} initial="hidden" animate="visible">
+    <motion.div
+      className="space-y-4"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
       {experiences.map((experience) => (
         <motion.div key={experience._id} variants={itemVariants}>
           <Card className="bg-[var(--card-background)] border-[var(--card-border-color)]">
             <CardHeader className="pb-2">
-              <div className="flex items-start justify-between">
+              <div className="flex items-start justify-between w-full">
                 <div>
-                  <CardTitle className="text-xl text-[var(--card-headline)]">{experience.title}</CardTitle>
+                  <CardTitle className="text-xl text-[var(--card-headline)]">
+                    {experience.title}
+                  </CardTitle>
                   <div className="flex items-center gap-1 text-[var(--card-paragraph)]">
                     <Building className="h-3.5 w-3.5" />
                     {experience.company}
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <Button variant="ghost" size="icon" className="h-8 w-8 text-[var(--paragraph)]" asChild>
-                    <Link href={`/dashboard/experience/${experience._id}/edit`}>
+                  <Link href={`/dashboard/experience/${experience._id}/edit`}>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-8 w-8 text-[var(--paragraph)]"
+                    >
                       <Edit className="h-4 w-4" />
                       <span className="sr-only">Edit</span>
-                    </Link>
-                  </Button>
+                    </Button>
+                  </Link>
+
                   <Button
                     variant="ghost"
                     size="icon"
@@ -192,7 +216,9 @@ export function ExperienceList() {
                     <Calendar className="h-3.5 w-3.5" />
                     <span>
                       {formatDate(experience.startDate)} -{" "}
-                      {experience.current ? "Present" : formatDate(experience.endDate)}
+                      {experience.current
+                        ? "Present"
+                        : formatDate(experience.endDate)}
                     </span>
                   </div>
                   <div className="flex items-center gap-1">
@@ -200,11 +226,15 @@ export function ExperienceList() {
                     <span>{experience.location}</span>
                   </div>
                   {experience.current && (
-                    <Badge className="bg-[var(--tertiary)] text-[var(--button-text)]">Current</Badge>
+                    <Badge className="bg-[var(--tertiary)] text-[var(--button-text)]">
+                      Current
+                    </Badge>
                   )}
                 </div>
                 <Separator className="bg-[var(--card-border-color)]" />
-                <p className="text-sm text-[var(--card-paragraph)]">{experience.description}</p>
+                <p className="text-sm text-[var(--card-paragraph)]">
+                  {experience.description}
+                </p>
                 <div className="flex flex-wrap gap-2">
                   {experience.skills.map((skill) => (
                     <Badge
@@ -222,5 +252,5 @@ export function ExperienceList() {
         </motion.div>
       ))}
     </motion.div>
-  )
+  );
 }

@@ -1,84 +1,90 @@
-"use client"
+"use client";
 
-import { Label } from "@/components/ui/label"
+import { Label } from "@/components/ui/label";
 
-import type React from "react"
+import type React from "react";
 
-import { useEffect, useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Search, Archive, Trash2, Star, Mail, MailOpen } from "lucide-react"
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Checkbox } from "@/components/ui/checkbox"
-import { useToast } from "@/hooks/use-toast"
-import { motion } from "framer-motion"
+import { useEffect, useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Search, Archive, Trash2, Star, Mail, MailOpen } from "lucide-react";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Checkbox } from "@/components/ui/checkbox";
+import { useToast } from "@/hooks/use-toast";
+import { motion } from "framer-motion";
 
 type Message = {
-  _id: string
-  sender: string
-  email: string
-  subject: string
-  message: string
-  read: boolean
-  starred: boolean
-  archived: boolean
-  createdAt: string
-}
+  _id: string;
+  sender: string;
+  email: string;
+  subject: string;
+  message: string;
+  read: boolean;
+  starred: boolean;
+  archived: boolean;
+  createdAt: string;
+};
 
 export function MessagesList() {
-  const { toast } = useToast()
-  const [messages, setMessages] = useState<Message[]>([])
-  const [loading, setLoading] = useState(true)
-  const [filter, setFilter] = useState("all")
-  const [searchQuery, setSearchQuery] = useState("")
-  const [selectedMessages, setSelectedMessages] = useState<string[]>([])
+  const { toast } = useToast();
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedMessages, setSelectedMessages] = useState<string[]>([]);
 
   useEffect(() => {
-    fetchMessages()
-  }, [filter])
+    fetchMessages();
+  }, [filter]);
 
   const fetchMessages = async () => {
     try {
-      setLoading(true)
-      let url = "/api/messages"
-      const params = new URLSearchParams()
+      setLoading(true);
+      let url = "/api/messages";
+      const params = new URLSearchParams();
 
       if (filter === "unread") {
-        params.set("read", "false")
+        params.set("read", "false");
       } else if (filter === "starred") {
-        params.set("starred", "true")
+        params.set("starred", "true");
       } else if (filter === "archived") {
-        params.set("archived", "true")
+        params.set("archived", "true");
       } else {
-        params.set("archived", "false") // By default, show non-archived messages
+        params.set("archived", "false"); // By default, show non-archived messages
       }
 
       if (params.toString()) {
-        url += `?${params.toString()}`
+        url += `?${params.toString()}`;
       }
 
-      const response = await fetch(url)
-      const data = await response.json()
+      const response = await fetch(url);
+      const data = await response.json();
 
       if (data.success) {
-        setMessages(data.data)
+        setMessages(data.data);
       }
     } catch (error) {
-      console.error("Error fetching messages:", error)
+      console.error("Error fetching messages:", error);
       toast({
         title: "Error",
         description: "Failed to load messages. Please try again.",
         variant: "destructive",
-      })
+      });
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // Filter messages client-side for simplicity
     // In a real app, you might want to do this server-side
     if (searchQuery) {
@@ -86,13 +92,13 @@ export function MessagesList() {
         (message) =>
           message.subject.toLowerCase().includes(searchQuery.toLowerCase()) ||
           message.sender.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          message.message.toLowerCase().includes(searchQuery.toLowerCase()),
-      )
-      setMessages(filtered)
+          message.message.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setMessages(filtered);
     } else {
-      fetchMessages()
+      fetchMessages();
     }
-  }
+  };
 
   const handleMarkAsRead = async (id: string) => {
     try {
@@ -102,27 +108,31 @@ export function MessagesList() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ read: true }),
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (data.success) {
-        setMessages(messages.map((message) => (message._id === id ? { ...message, read: true } : message)))
+        setMessages(
+          messages.map((message) =>
+            message._id === id ? { ...message, read: true } : message
+          )
+        );
       }
     } catch (error) {
-      console.error("Error marking message as read:", error)
+      console.error("Error marking message as read:", error);
       toast({
         title: "Error",
         description: "Failed to mark message as read. Please try again.",
         variant: "destructive",
-      })
+      });
     }
-  }
+  };
 
   const handleToggleStar = async (id: string) => {
     try {
-      const message = messages.find((m) => m._id === id)
-      if (!message) return
+      const message = messages.find((m) => m._id === id);
+      if (!message) return;
 
       const response = await fetch(`/api/messages/${id}`, {
         method: "PUT",
@@ -130,32 +140,36 @@ export function MessagesList() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ starred: !message.starred }),
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (data.success) {
         setMessages(
-          messages.map((message) => (message._id === id ? { ...message, starred: !message.starred } : message)),
-        )
+          messages.map((message) =>
+            message._id === id
+              ? { ...message, starred: !message.starred }
+              : message
+          )
+        );
       }
     } catch (error) {
-      console.error("Error toggling star:", error)
+      console.error("Error toggling star:", error);
       toast({
         title: "Error",
         description: "Failed to update message. Please try again.",
         variant: "destructive",
-      })
+      });
     }
-  }
+  };
 
   const handleArchive = async () => {
     if (selectedMessages.length === 0) {
       toast({
         title: "Info",
         description: "Please select at least one message to archive.",
-      })
-      return
+      });
+      return;
     }
 
     try {
@@ -166,92 +180,108 @@ export function MessagesList() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ archived: true }),
-        }),
-      )
+        })
+      );
 
-      await Promise.all(promises)
+      await Promise.all(promises);
 
       toast({
         title: "Success",
         description: `${selectedMessages.length} message(s) archived.`,
-      })
+      });
 
-      setSelectedMessages([])
-      fetchMessages()
+      setSelectedMessages([]);
+      fetchMessages();
     } catch (error) {
-      console.error("Error archiving messages:", error)
+      console.error("Error archiving messages:", error);
       toast({
         title: "Error",
         description: "Failed to archive messages. Please try again.",
         variant: "destructive",
-      })
+      });
     }
-  }
+  };
 
   const handleDelete = async () => {
     if (selectedMessages.length === 0) {
       toast({
         title: "Info",
         description: "Please select at least one message to delete.",
-      })
-      return
+      });
+      return;
     }
 
-    if (!confirm(`Are you sure you want to delete ${selectedMessages.length} message(s)?`)) {
-      return
+    if (
+      !confirm(
+        `Are you sure you want to delete ${selectedMessages.length} message(s)?`
+      )
+    ) {
+      return;
     }
 
     try {
       const promises = selectedMessages.map((id) =>
         fetch(`/api/messages/${id}`, {
           method: "DELETE",
-        }),
-      )
+        })
+      );
 
-      await Promise.all(promises)
+      await Promise.all(promises);
 
       toast({
         title: "Success",
         description: `${selectedMessages.length} message(s) deleted.`,
-      })
+      });
 
-      setSelectedMessages([])
-      fetchMessages()
+      setSelectedMessages([]);
+      fetchMessages();
     } catch (error) {
-      console.error("Error deleting messages:", error)
+      console.error("Error deleting messages:", error);
       toast({
         title: "Error",
         description: "Failed to delete messages. Please try again.",
         variant: "destructive",
-      })
+      });
     }
-  }
+  };
 
   const toggleSelectMessage = (id: string) => {
-    setSelectedMessages((prev) => (prev.includes(id) ? prev.filter((messageId) => messageId !== id) : [...prev, id]))
-  }
+    setSelectedMessages((prev) =>
+      prev.includes(id)
+        ? prev.filter((messageId) => messageId !== id)
+        : [...prev, id]
+    );
+  };
 
   const toggleSelectAll = () => {
     if (selectedMessages.length === messages.length) {
-      setSelectedMessages([])
+      setSelectedMessages([]);
     } else {
-      setSelectedMessages(messages.map((message) => message._id))
+      setSelectedMessages(messages.map((message) => message._id));
     }
-  }
+  };
 
   const formatDate = (dateString: string) => {
-    const date = new Date(dateString)
-    const now = new Date()
-    const diffDays = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24))
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffDays = Math.floor(
+      (now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24)
+    );
 
     if (diffDays === 0) {
-      return date.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })
+      return date.toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
     } else if (diffDays < 7) {
-      return date.toLocaleDateString("en-US", { weekday: "short" })
+      return date.toLocaleDateString("en-US", { weekday: "short" });
     } else {
-      return date.toLocaleDateString("en-US", { month: "short", day: "numeric" })
+      return date.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+      });
     }
-  }
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -261,7 +291,7 @@ export function MessagesList() {
         staggerChildren: 0.05,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 10 },
@@ -272,7 +302,7 @@ export function MessagesList() {
         duration: 0.2,
       },
     },
-  }
+  };
 
   return (
     <div className="space-y-4">
@@ -340,9 +370,11 @@ export function MessagesList() {
 
       <Card className="bg-[var(--card-background)] border-[var(--card-border-color)]">
         <CardHeader className="p-4 pb-0">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between w-full">
             <div>
-              <CardTitle className="text-[var(--card-headline)]">Messages</CardTitle>
+              <CardTitle className="text-[var(--card-headline)]">
+                Messages
+              </CardTitle>
               <CardDescription className="text-[var(--card-paragraph)]">
                 Messages from your portfolio contact form
               </CardDescription>
@@ -351,10 +383,16 @@ export function MessagesList() {
               <Checkbox
                 id="select-all"
                 className="border-[var(--input-border-color)]"
-                checked={selectedMessages.length === messages.length && messages.length > 0}
+                checked={
+                  selectedMessages.length === messages.length &&
+                  messages.length > 0
+                }
                 onCheckedChange={toggleSelectAll}
               />
-              <Label htmlFor="select-all" className="ml-2 text-[var(--card-paragraph)]">
+              <Label
+                htmlFor="select-all"
+                className="ml-2 text-[var(--card-paragraph)]"
+              >
                 Select All
               </Label>
             </div>
@@ -389,7 +427,9 @@ export function MessagesList() {
             </div>
           ) : messages.length === 0 ? (
             <div className="p-8 text-center">
-              <h3 className="text-xl font-semibold text-[var(--card-headline)]">No messages found</h3>
+              <h3 className="text-xl font-semibold text-[var(--card-headline)]">
+                No messages found
+              </h3>
               <p className="text-[var(--card-paragraph)] mt-2">
                 {filter === "unread"
                   ? "You have no unread messages"
@@ -410,16 +450,16 @@ export function MessagesList() {
               {messages.map((message) => (
                 <motion.div
                   key={message._id}
-                  className={`flex items-start gap-4 p-4 hover:bg-[var(--card-hover)] ${
+                  className={`flex items-start gap-0 p-4 hover:bg-[var(--card-hover)] flex-row-reverse relative ${
                     !message.read ? "bg-[var(--card-background-effect)]" : ""
                   }`}
                   variants={itemVariants}
                   onClick={() => !message.read && handleMarkAsRead(message._id)}
                 >
-                  <div className="flex items-center gap-4">
+                  <div className="flex flex-row-reverse items-center gap-0">
                     <Checkbox
                       id={`select-${message._id}`}
-                      className="border-[var(--input-border-color)]"
+                      className="border-[var(--input-border-color)] "
                       checked={selectedMessages.includes(message._id)}
                       onCheckedChange={() => toggleSelectMessage(message._id)}
                       onClick={(e) => e.stopPropagation()}
@@ -429,11 +469,14 @@ export function MessagesList() {
                       size="icon"
                       className={`h-8 w-8 ${message.starred ? "text-yellow-400" : "text-[var(--paragraph)]"}`}
                       onClick={(e) => {
-                        e.stopPropagation()
-                        handleToggleStar(message._id)
+                        e.stopPropagation();
+                        handleToggleStar(message._id);
                       }}
                     >
-                      <Star className="h-4 w-4" fill={message.starred ? "currentColor" : "none"} />
+                      <Star
+                        className="h-4 w-4 me-2"
+                        fill={message.starred ? "currentColor" : "none"}
+                      />
                       <span className="sr-only">Star</span>
                     </Button>
                     <div className="flex h-8 w-8 items-center justify-center">
@@ -448,7 +491,10 @@ export function MessagesList() {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <Avatar className="h-8 w-8">
-                          <AvatarImage src="/placeholder.svg" alt={message.sender} />
+                          <AvatarImage
+                            src="/placeholder.svg"
+                            alt={message.sender}
+                          />
                           <AvatarFallback className="bg-[var(--button2)] text-[var(--button-text)]">
                             {message.sender
                               .split(" ")
@@ -459,24 +505,34 @@ export function MessagesList() {
                         <div>
                           <p
                             className={`text-sm font-medium ${
-                              !message.read ? "text-[var(--card-headline)]" : "text-[var(--card-paragraph)]"
+                              !message.read
+                                ? "text-[var(--card-headline)]"
+                                : "text-[var(--card-paragraph)]"
                             }`}
                           >
                             {message.sender}
                           </p>
-                          <p className="text-xs text-[var(--card-paragraph)]">{message.email}</p>
+                          <p className="text-xs text-[var(--card-paragraph)]">
+                            {message.email}
+                          </p>
                         </div>
                       </div>
-                      <span className="text-xs text-[var(--card-paragraph)]">{formatDate(message.createdAt)}</span>
+                      <span className="text-xs  right-0 absolute bottom-2 text-[var(--card-paragraph)]">
+                        {formatDate(message.createdAt)}
+                      </span>
                     </div>
                     <h3
                       className={`mt-1 text-sm ${
-                        !message.read ? "font-medium text-[var(--card-headline)]" : "text-[var(--card-paragraph)]"
+                        !message.read
+                          ? "font-medium text-[var(--card-headline)]"
+                          : "text-[var(--card-paragraph)]"
                       }`}
                     >
                       {message.subject}
                     </h3>
-                    <p className="mt-1 text-sm text-[var(--card-paragraph)] line-clamp-2">{message.message}</p>
+                    <p className="mt-1 text-sm text-[var(--card-paragraph)] line-clamp-2">
+                      {message.message}
+                    </p>
                   </div>
                 </motion.div>
               ))}
@@ -485,5 +541,5 @@ export function MessagesList() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

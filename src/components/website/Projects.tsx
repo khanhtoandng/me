@@ -2,13 +2,14 @@
 
 import type React from "react";
 import { useMemo } from "react";
-import { Globe, Github, ExternalLink } from "lucide-react";
+import { Globe, Github, Loader2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import ReusableCard from "@/components/common/ReusableCard";
 import Link from "next/link";
 import { ScrollEffect } from "@/lib/animations";
-import { Card } from "../ui/card";
-import { github, projects } from "@/data/Links";
+
+import { github } from "@/data/Links";
+import { useProjects, type Project } from "@/hooks/use-projects";
 
 const styles = {
   linkStyle:
@@ -38,108 +39,88 @@ const ProjectLink = ({
   </Link>
 );
 
-const OtherProjectLink = ({
-  href,
-  children,
-}: {
-  href: string;
-  children: React.ReactNode;
-}) => (
-  <ScrollEffect type="fadeUp">
-    <Link href={href} target="_blank">
-      <Card className="text-[var(--headline)]">
-        <h1 className="flex items-center gap-2 max-md:flex-wrap">
-          <ExternalLink className="h-4 w-4 max-md:hidden" />
-          {children}
-        </h1>
-      </Card>
-    </Link>
-  </ScrollEffect>
-);
-
-// Add `type` field to each project
-const ProjectsData = [
-  {
-    id: 2,
-    type: "frontend",
-    title: "SFB - Sustainable Star Form Builder",
-    description:
-      "A dynamic form builder for customizable data collection with a great UI.",
-    skills: ["React", "Tailwind CSS", "Shadcn UI"],
-    links: {
-      website: projects.sfb,
-      github: null,
-    },
-  },
-  {
-    id: 5,
-    type: "fullstack",
-    title: "Sam-Tax",
-    description:
-      "A professional website for a U.S.-based company offering tax and translation services.",
-    skills: ["React", "Tailwind CSS", "Express.js", "Mongodb", "Node.js"],
-    links: {
-      website: projects.samtax,
-      github: null,
-    },
-  },
-  {
-    id: 1,
-    type: "frontend",
-    title: "Gradients CSS",
-    description:
-      "A gradient design tool for developers and designers with live previews.",
-    skills: ["React JS", "Typescript", "Tailwind CSS", "RESTful APIs"],
-    links: {
-      website: projects.gradientscss.website,
-      github: projects.gradientscss.github,
-    },
-  },
-  {
-    id: 3,
-    type: "frontend",
-    title: "Raouf Zadi",
-    description:
-      "A stylish barber portfolio website built with modern React stack.",
-    skills: ["React JS", "Typescript", "Tailwind CSS", "Git"],
-    links: {
-      website: projects.raoufzadi,
-      github: null,
-    },
-  },
-  {
-    id: 4,
-    type: "frontend",
-    title: "Naj Training Center",
-    description:
-      "An educational platform for a dental training center in Saudi Arabia.",
-    skills: ["React JS", "Javascript", "MIUI"],
-    links: {
-      website: projects.najcenter,
-      github: null,
-    },
-  },
-];
-
 // Type for props
 type ProjectsProps = {
   filterType?: string; // e.g., "frontend", "backend", etc.
 };
 
+// Helper function to map database project to component format
+const mapProjectToComponentFormat = (project: Project) => ({
+  id: project._id,
+  type: project.projectType.toLowerCase(),
+  title: project.title,
+  description: project.description,
+  skills: project.technologies,
+  links: {
+    website: project.websiteUrl || undefined,
+    github: project.githubUrl || undefined,
+  },
+});
+
 export default function Projects({ filterType = "all" }: ProjectsProps) {
+  const { projects, loading, error } = useProjects({ publishedOnly: true });
+
   const filteredProjects = useMemo(() => {
-    if (filterType === "all") return ProjectsData;
-    return ProjectsData.filter(
+    const mappedProjects = projects.map(mapProjectToComponentFormat);
+
+    if (filterType === "all") return mappedProjects;
+    return mappedProjects.filter(
       (project) => project.type.toLowerCase() === filterType.toLowerCase()
     );
-  }, [filterType]);
+  }, [projects, filterType]);
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className="projects-cards flex flex-col gap-8 pb-16">
+        <div className="flex items-center justify-center py-12">
+          <div className="flex items-center gap-3 text-[var(--paragraph)]">
+            <Loader2 className="h-6 w-6 animate-spin" />
+            <span>Loading projects...</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className="projects-cards flex flex-col gap-8 pb-16">
+        <div className="flex items-center justify-center py-12">
+          <div className="text-center">
+            <p className="text-red-500 mb-2">Failed to load projects</p>
+            <p className="text-[var(--paragraph)] text-sm">{error}</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // No projects state
+  if (filteredProjects.length === 0) {
+    return (
+      <div className="projects-cards flex flex-col gap-8 pb-16">
+        <div className="flex items-center justify-center py-12">
+          <div className="text-center">
+            <p className="text-[var(--paragraph)] mb-2">No projects found</p>
+            <p className="text-[var(--paragraph)] text-sm opacity-70">
+              {filterType === "all"
+                ? "No projects have been published yet."
+                : `No ${filterType} projects found.`}
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="projects-cards flex flex-col gap-8 pb-16">
       {filteredProjects.map((project) => (
         <ScrollEffect key={project.id} type="fadeUp">
           <ReusableCard
-            id={project.id}
+            id={project.id.toString()}
             title={project.title}
             description={project.description}
             skills={project.skills}
@@ -155,13 +136,13 @@ export default function Projects({ filterType = "all" }: ProjectsProps) {
             </div>
 
             <div className="flex flex-wrap gap-4 max-md:mt-5">
-              {isValidLink(project.links.website) && (
+              {project.links.website && isValidLink(project.links.website) && (
                 <ProjectLink href={project.links.website} icon={Globe}>
                   Visit Website
                 </ProjectLink>
               )}
 
-              {isValidLink(project.links.github) && (
+              {project.links.github && isValidLink(project.links.github) && (
                 <ProjectLink href={project.links.github} icon={Github}>
                   View on GitHub
                 </ProjectLink>
@@ -172,33 +153,11 @@ export default function Projects({ filterType = "all" }: ProjectsProps) {
       ))}
 
       <h2 className="text-base text-[var(--paragraph)] opacity-80">
-        Here are some more projects that I have worked on, <br /> You can find
-        the complete list of projects on my{" "}
+        You can find more projects and open-source contributions on my{" "}
         <Link className="link text-base" href={github}>
           GitHub profile.
         </Link>
       </h2>
-
-      <ul className="space-y-2">
-        <OtherProjectLink href={projects.rove}>
-          Rove{" "}
-          <span className="opacity-60">
-            - A full-stack, open-source eCommerce web application.
-          </span>
-        </OtherProjectLink>
-        <OtherProjectLink href={projects.sustainablestar}>
-          Sustainable Star{" "}
-          <span className="opacity-60">
-            - A corporate website for a Saudi Arabian software company.
-          </span>
-        </OtherProjectLink>
-        <OtherProjectLink href={projects.bookstoreapi}>
-          Bookstore API{" "}
-          <span className="opacity-60">
-            - A robust API for managing bookstore operations.
-          </span>
-        </OtherProjectLink>
-      </ul>
     </div>
   );
 }

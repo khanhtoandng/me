@@ -1,11 +1,16 @@
+"use client";
+
 import { Timeline } from "@/components/ui/timeline";
 import { Badge } from "../ui/badge";
 import Link from "next/link";
-import { companies } from "@/data/Links";
-import { Briefcase } from "lucide-react";
+import { Briefcase, Loader2 } from "lucide-react";
 import { ScrollEffect } from "@/lib/animations";
+import { useExperiences } from "@/hooks/use-experiences";
+import { useMemo } from "react";
 
 export function TimelineDemo() {
+  const { experiences, loading, error } = useExperiences();
+
   const styles = {
     sectionTitle:
       "flex flex-row gap-1 pb-2 text-sm sm:text-lg md:text-xl max-md:text-base max-md:flex-wrap",
@@ -13,130 +18,151 @@ export function TimelineDemo() {
       "description opacity-80 mt-0 pb-2 pt-0 text-sm md:text-base",
   };
 
-  const data = [
-    {
-      title: "Jan 2024 - Present",
+  // Helper function to format date range
+  const formatDateRange = (
+    startDate: string,
+    endDate?: string,
+    current?: boolean
+  ) => {
+    const start = new Date(startDate);
+    const startFormatted = start.toLocaleDateString("en-US", {
+      month: "short",
+      year: "numeric",
+    });
+
+    if (current) {
+      return `${startFormatted} - Present`;
+    }
+
+    if (endDate) {
+      const end = new Date(endDate);
+      const endFormatted = end.toLocaleDateString("en-US", {
+        month: "short",
+        year: "numeric",
+      });
+      return `${startFormatted} - ${endFormatted}`;
+    }
+
+    return startFormatted;
+  };
+
+  // Transform experiences data for Timeline component
+  const timelineData = useMemo(() => {
+    return experiences.map((experience) => ({
+      title: formatDateRange(
+        experience.startDate,
+        experience.endDate,
+        experience.current
+      ),
       content: (
-        <section>
+        <section key={experience._id}>
           <header>
             <h2 className={styles.sectionTitle}>
-              <span>Full-Stack Engineer</span>{" "}
+              <span>{experience.title}</span>{" "}
               <span className="opacity-60">at</span>
               <span>
-                <Link href={companies.samtax} target="_blank">
-                  Samtax
-                </Link>
+                {experience.companyUrl && experience.companyUrl !== "#" ? (
+                  <Link href={experience.companyUrl} target="_blank">
+                    {experience.company}
+                  </Link>
+                ) : (
+                  <span>{experience.company}</span>
+                )}
               </span>
             </h2>
             <p className={styles.sectionDescription}>
-              Work as a Full-Stack Engineer, responsible for developing the main
-              website for Samtax. Build tools to help the company get work done
-              faster.
+              {experience.description}
             </p>
           </header>
 
           <div className="flex gap-3 pt-2 md:pb-[28px] flex-wrap max-md:overflow-hidden">
-            <Badge className="w-max">React js</Badge>
-            <Badge className="w-max">Typescript</Badge>
-            <Badge className="w-max">Tailwind CSS</Badge>
-            <Badge className="w-max">Express js</Badge>
-            <Badge className="w-max">MongoDB</Badge>
-            <Badge className="w-max">Node js</Badge>
-            <Badge className="w-max">Ai apis</Badge>
-            <Badge className="w-max">RESTful APIs</Badge>
+            {experience.skills.map((skill, index) => (
+              <Badge key={index} className="w-max">
+                {skill}
+              </Badge>
+            ))}
           </div>
         </section>
       ),
-    },
+    }));
+  }, [experiences, styles.sectionTitle, styles.sectionDescription]);
 
-    {
-      title: "Jul 2023 - Oct 2023",
-      content: (
-        <section>
-          <header>
-            <h2 className={styles.sectionTitle}>
-              <span>Frontend Developer</span>{" "}
-              <span className="opacity-60">at</span>
-              <span>
-                <Link href={companies.sustainablestar} target="_blank">
-                  Sustainable Star LLC
-                </Link>
-              </span>
+  // Loading state
+  if (loading) {
+    return (
+      <div id="work" className="h-max w-full px-0 py-10">
+        <ScrollEffect type="fadeIn">
+          <div className="section-header mb-8">
+            <h2 className="section-title flex items-center gap-2">
+              <Briefcase className="h-6 w-6 text-[var(--link-color)]" />
+              Work Experience
             </h2>
-            <p className={styles.sectionDescription}>
-              Worked as a frontend developer using React, responsible for
-              developing the main website for Sustainable Star LLC and
-              significantly contributing to the SFB project.
+            <p className="description">
+              My professional journey and the companies I've worked with.
             </p>
-          </header>
-
-          <div className="flex gap-3 pt-2 md:pb-[28px] flex-wrap max-md:overflow-hidden">
-            <Badge className="w-max">React js</Badge>
-            <Badge className="w-max">Typescript</Badge>
-            <Badge className="w-max">Tailwind CSS</Badge>
-            <Badge className="w-max">Github</Badge>
-            <Badge className="w-max">Git</Badge>
-            <Badge className="w-max">RESTful APIs</Badge>
           </div>
-        </section>
-      ),
-    },
-    {
-      title: "Jul 2023 - Sep 2023",
-      content: (
-        <section>
-          <header>
-            <h2 className={styles.sectionTitle}>
-              <span>Frontend Developer</span>{" "}
-              <span className="opacity-60">at</span>
-              <Link href={companies.ptit} target="_blank">
-                <span>PTIT</span>
-              </Link>
+        </ScrollEffect>
+        <div className="flex items-center justify-center py-12">
+          <div className="flex items-center gap-3 text-[var(--paragraph)]">
+            <Loader2 className="h-6 w-6 animate-spin" />
+            <span>Loading experience...</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div id="work" className="h-max w-full px-0 py-10">
+        <ScrollEffect type="fadeIn">
+          <div className="section-header mb-8">
+            <h2 className="section-title flex items-center gap-2">
+              <Briefcase className="h-6 w-6 text-[var(--link-color)]" />
+              Work Experience
             </h2>
-            <p className={styles.sectionDescription}>
-              Worked as a React developer, responsible for rebuilding and
-              updating several projects, as well as developing new projects.
+            <p className="description">
+              My professional journey and the companies I've worked with.
             </p>
-          </header>
-
-          <div className="flex gap-3 pt-2 md:pb-[28px] flex-wrap max-md:overflow-hidden">
-            <Badge className="w-max">React js</Badge>
-            <Badge className="w-max">Typescript</Badge>
-            <Badge className="w-max">Tailwind CSS</Badge>
-            <Badge className="w-max">Github</Badge>
-            <Badge className="w-max">Git</Badge>
-            <Badge className="w-max">RESTful APIs</Badge>
           </div>
-        </section>
-      ),
-    },
-    {
-      title: "Apr 2022 - Jun 2022",
-      content: (
-        <section>
-          <header>
-            <h2 className={styles.sectionTitle}>
-              <span>Software Engineer Intern</span>{" "}
-              <span className="opacity-60">at</span>
-              <Link href={companies.gedco} target="_blank">
-                <span>GEDCO</span>
-              </Link>
+        </ScrollEffect>
+        <div className="flex items-center justify-center py-12">
+          <div className="text-center">
+            <p className="text-red-500 mb-2">Failed to load experience</p>
+            <p className="text-[var(--paragraph)] text-sm">{error}</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // No experiences state
+  if (timelineData.length === 0) {
+    return (
+      <div id="work" className="h-max w-full px-0 py-10">
+        <ScrollEffect type="fadeIn">
+          <div className="section-header mb-8">
+            <h2 className="section-title flex items-center gap-2">
+              <Briefcase className="h-6 w-6 text-[var(--link-color)]" />
+              Work Experience
             </h2>
-            <p className={styles.sectionDescription}>
-              Completed an internship at GEDCO as a software engineer through my
-              college.
+            <p className="description">
+              My professional journey and the companies I've worked with.
             </p>
-          </header>
-
-          <div className="flex gap-3 pt-2 md:pb-[28px] flex-wrap max-md:overflow-hidden">
-            <Badge className="w-max">PHP</Badge>
-            <Badge className="w-max">MYSQL</Badge>
-            <Badge className="w-max">Java</Badge>
           </div>
-        </section>
-      ),
-    },
-  ];
+        </ScrollEffect>
+        <div className="flex items-center justify-center py-12">
+          <div className="text-center">
+            <p className="text-[var(--paragraph)] mb-2">No experience found</p>
+            <p className="text-[var(--paragraph)] text-sm opacity-70">
+              Experience data will be displayed here once available.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div id="work" className="h-max w-full px-0 py-10">
@@ -151,7 +177,7 @@ export function TimelineDemo() {
           </p>
         </div>
       </ScrollEffect>
-      <Timeline data={data} />
+      <Timeline data={timelineData} />
     </div>
   );
 }

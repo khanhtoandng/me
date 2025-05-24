@@ -19,14 +19,14 @@ const Toaster = ({ ...props }: ToasterProps) => {
             group-[.toaster]:border-border 
             group-[.toaster]:shadow-lg
           `,
-          description: "group-[.toast]:text-muted-foreground",
+          description: "group-[.toast]:text-[var(--paragraph)]",
           actionButton: `
             group-[.toast]:bg-primary 
             group-[.toast]:text-primary-foreground
           `,
           cancelButton: `
             group-[.toast]:bg-muted 
-            group-[.toast]:text-muted-foreground
+            group-[.toast]:text-[var(--paragraph)]
           `,
         },
       }}

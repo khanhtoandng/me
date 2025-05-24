@@ -1,27 +1,27 @@
-import { cn } from "@/lib/utils"
-import { Avatar, AvatarImage } from "@/components/ui/avatar"
+import { cn } from "@/lib/utils";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
 export interface TestimonialAuthor {
-  name: string
-  handle: string
-  avatar: string
+  name: string;
+  handle: string;
+  avatar: string;
 }
 
 export interface TestimonialCardProps {
-  author: TestimonialAuthor
-  text: string
-  href?: string
-  className?: string
+  author: TestimonialAuthor;
+  text: string;
+  href?: string;
+  className?: string;
 }
 
-export function TestimonialCard({ 
+export function TestimonialCard({
   author,
   text,
   href,
-  className
+  className,
 }: TestimonialCardProps) {
-  const Card = href ? 'a' : 'div'
-  
+  const Card = href ? "a" : "div";
+
   return (
     <Card
       {...(href ? { href } : {})}
@@ -40,17 +40,11 @@ export function TestimonialCard({
           <AvatarImage src={author.avatar} alt={author.name} />
         </Avatar>
         <div className="flex flex-col items-start">
-          <h3 className="text-md font-semibold leading-none">
-            {author.name}
-          </h3>
-          <p className="text-sm text-muted-foreground">
-            {author.handle}
-          </p>
+          <h3 className="text-md font-semibold leading-none">{author.name}</h3>
+          <p className="text-sm text-[var(--paragraph)]">{author.handle}</p>
         </div>
       </div>
-      <p className="sm:text-md mt-4 text-sm text-muted-foreground">
-        {text}
-      </p>
+      <p className="sm:text-md mt-4 text-sm text-[var(--paragraph)]">{text}</p>
     </Card>
-  )
+  );
 }

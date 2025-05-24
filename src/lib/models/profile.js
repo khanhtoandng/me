@@ -1,4 +1,4 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 
 const ProfileSchema = new mongoose.Schema({
   firstName: {
@@ -27,18 +27,6 @@ const ProfileSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
-  website: {
-    type: String,
-  },
-  github: {
-    type: String,
-  },
-  linkedin: {
-    type: String,
-  },
-  twitter: {
-    type: String,
-  },
   skills: {
     type: [String],
     default: [],
@@ -47,6 +35,7 @@ const ProfileSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-})
+});
 
-export default mongoose.models.Profile || mongoose.model("Profile", ProfileSchema)
+export default mongoose.models.Profile ||
+  mongoose.model("Profile", ProfileSchema);

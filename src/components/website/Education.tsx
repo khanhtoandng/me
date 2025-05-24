@@ -77,7 +77,8 @@ export default function Education() {
                 <span className="relative flex shrink-0 overflow-hidden rounded-full border border-[var(--card-border-color)] size-12 m-auto bg-[var(--background)]">
                   <Image
                     className="aspect-square h-full w-full object-contain"
-                    alt={item.logoAlt}
+                    alt={"Al-Azhar"}
+                    
                     src={item.logoSrc}
                     width={48}
                     height={48}

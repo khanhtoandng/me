@@ -1,37 +1,54 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Badge } from "@/components/ui/badge"
-import { X } from "lucide-react"
-import { useState } from "react"
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
+import { X } from "lucide-react";
+import { useState } from "react";
 
 export function ProjectForm({ project = null, onSubmit, onCancel }) {
-  const [tags, setTags] = useState(project?.tags || [])
-  const [tagInput, setTagInput] = useState("")
+  const [tags, setTags] = useState(project?.tags || []);
+  const [tagInput, setTagInput] = useState("");
 
   const addTag = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (tagInput.trim() && !tags.includes(tagInput.trim())) {
-      setTags([...tags, tagInput.trim()])
-      setTagInput("")
+      setTags([...tags, tagInput.trim()]);
+      setTagInput("");
     }
-  }
+  };
 
   const removeTag = (tagToRemove) => {
-    setTags(tags.filter((tag) => tag !== tagToRemove))
-  }
+    setTags(tags.filter((tag) => tag !== tagToRemove));
+  };
 
   return (
     <Card className="bg-[var(--card-background)] border-[var(--card-border-color)]">
       <CardHeader>
-        <CardTitle className="text-[var(--card-headline)]">{project ? "Edit Project" : "Add New Project"}</CardTitle>
+        <CardTitle className="text-[var(--card-headline)]">
+          {project ? "Edit Project" : "Add New Project"}
+        </CardTitle>
         <CardDescription className="text-[var(--card-paragraph)]">
-          {project ? "Update your project details" : "Fill in the details for your new project"}
+          {project
+            ? "Update your project details"
+            : "Fill in the details for your new project"}
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -81,15 +98,24 @@ export function ProjectForm({ project = null, onSubmit, onCancel }) {
               onKeyDown={(e) => e.key === "Enter" && addTag(e)}
               className="bg-[var(--input-background)] border-[var(--input-border-color)] text-[var(--input-text)]"
             />
-            <Button onClick={addTag} className="bg-[var(--button)] text-[var(--button-text)] hover:bg-[var(--button2)]">
+            <Button
+              onClick={addTag}
+              className="bg-[var(--button)] text-[var(--button-text)] hover:bg-[var(--button2)]"
+            >
               Add
             </Button>
           </div>
           <div className="flex flex-wrap gap-2 mt-2">
             {tags.map((tag) => (
-              <Badge key={tag} className="bg-[var(--button2)] text-[var(--button-text)] flex items-center gap-1">
+              <Badge
+                key={tag}
+                className="bg-[var(--button2)] text-[var(--button-text)] flex items-center gap-1"
+              >
                 {tag}
-                <X className="h-3 w-3 cursor-pointer" onClick={() => removeTag(tag)} />
+                <X
+                  className="h-3 w-3 cursor-pointer"
+                  onClick={() => removeTag(tag)}
+                />
               </Badge>
             ))}
           </div>
@@ -118,10 +144,13 @@ export function ProjectForm({ project = null, onSubmit, onCancel }) {
         >
           Cancel
         </Button>
-        <Button onClick={onSubmit} className="bg-[var(--button)] text-[var(--button-text)] hover:bg-[var(--button2)]">
+        <Button
+          onClick={onSubmit}
+          className="bg-[var(--button)] text-[var(--button-text)] hover:bg-[var(--button2)]"
+        >
           {project ? "Update Project" : "Create Project"}
         </Button>
       </CardFooter>
     </Card>
-  )
+  );
 }

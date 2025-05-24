@@ -1,48 +1,81 @@
-// No "use client" here — this stays a server component
-import { Metadata } from "next";
-import { webImage, websitePath } from "@/data/Links";
-import PageSeo from "@/components/seo/PageSeo";
-import ProjectsPageClient from "@/components/website/ProjectsPageClient";
-
-export const metadata: Metadata = {
-  title: "Projects | Web Applications & Software Solutions",
-  description:
-    "Explore Baraa Alshaer's portfolio of innovative projects, from responsive web applications to cutting-edge software solutions...",
-  keywords:
-    "web projects, React projects, Node.js applications, TypeScript projects, full stack development, portfolio projects, software solutions",
-  openGraph: {
-    title: "Projects - Baraa Alshaer | Web Applications & Software Solutions",
-    description:
-      "Discover Baraa Alshaer's latest projects showcasing expertise in full-stack web development...",
-    url: websitePath.projects,
-    images: [
-      {
-        url: webImage,
-        width: 400,
-        height: 400,
-        alt: "Baraa Alshaer Projects Portfolio",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Projects - Baraa Alshaer | Web Applications & Software Solutions",
-    description:
-      "Check out Baraa Alshaer's portfolio of innovative projects and web applications...",
-    images: webImage,
-  },
-};
+"use client";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import Projects from "@/components/website/Projects";
+import ProjectTypeSelect from "@/components/website/ProjectTypeSelect";
+import { SocialLinksDisplay } from "@/components/common/SocialLinksDisplay";
+import { useState } from "react";
 
 export default function ProjectsPage() {
+  const [filterType, setFilterType] = useState<string>("all");
+
+  const styles = {
+    breadcrumbLink: "hover:text-[var(--paragraph)] hoverd",
+    arrowIcon:
+      "text-[var(--paragraph)] text-3xl hoverd hover:text-[var(--link-color)] cursor-pointer ml-[-16px] max-md:ml-[-8px]",
+    linkStyle:
+      "flex items-center justify-center gap-1 text-sm text-[var(--headline)] opacity-70 hoverd hover:opacity-100",
+  };
+
   return (
-    <>
-      <PageSeo
-        title="Projects - Baraa Alshaer"
-        description="Explore Baraa Alshaer's portfolio of innovative projects..."
-        image={webImage}
-        type="WebPage"
-      />
-      <ProjectsPageClient />
-    </>
+    <div className="container mx-auto">
+      <div className="projectCards flex min-h-[100vh] w-full flex-col gap-5 max-md:pb-0 max-md:pt-[50px]">
+        <div className="header">
+          <h1 className="header-title">Projects</h1>
+          <p className="description max-w-[100%]">
+            I have worked on a variety of projects, here are some of the ones
+            I'm particularly proud of.
+          </p>
+          <div className="py-5 flex justify-between items-center w-full">
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href={"/"} className={styles.breadcrumbLink}>
+                    Home
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbLink
+                    href={"/projects"}
+                    className={styles.breadcrumbLink}
+                  >
+                    Projects
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+
+            <ProjectTypeSelect onSelect={(value) => setFilterType(value)} />
+          </div>
+        </div>
+
+        {/* Social Links Section */}
+        <div className="mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 bg-[var(--card-background)] border border-[var(--card-border-color)] rounded-lg">
+            <div>
+              <h3 className="text-lg font-semibold text-[var(--headline)] mb-2">
+                Connect with me
+              </h3>
+              <p className="text-[var(--paragraph)] text-sm">
+                Follow my work and connect on social media
+              </p>
+            </div>
+            <SocialLinksDisplay
+              variant="inline"
+              showLabels={true}
+              className="flex-shrink-0"
+            />
+          </div>
+        </div>
+
+        <Projects filterType={filterType} />
+      </div>
+    </div>
   );
 }

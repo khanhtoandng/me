@@ -1,37 +1,19 @@
+"use client";
+
 import HeroSection from "@/components/website/HeroSection";
 import RecommendationsSection from "@/components/website/RecommendationsSection";
-import { TimelineDemo } from "@/components/website/TimelineDemo";
+import { ExperienceTimeline } from "@/components/website/ExperienceTimeline";
 import Education from "@/components/website/Education";
 import { mailto, webImage } from "@/data/Links";
 import { ScrollEffect } from "@/lib/animations";
 import Link from "next/link";
-import { Metadata } from "next";
 import PageSeo from "@/components/seo/PageSeo";
 
-// Enhanced metadata for the home page
-export const metadata: Metadata = {
-  title: "Full Stack Developer | React, Node.js, TypeScript Expert",
-  description:
-    "Baraa Alshaer is a skilled Full Stack Developer specializing in React, Node.js, TypeScript, and modern web technologies. Explore portfolio, projects, and professional services.",
-  openGraph: {
-    title:
-      "Baraa Alshaer - Full Stack Developer | React, Node.js, TypeScript Expert",
-    description:
-      "Explore the portfolio of Baraa Alshaer, a passionate Full Stack Developer with expertise in React, Node.js, TypeScript, and modern web technologies.",
-    images: [
-      {
-        url: webImage,
-        width: 400,
-        height: 400,
-        alt: "Baraa Alshaer - Full Stack Developer",
-      },
-    ],
-  },
-};
+// Note: Metadata is handled by PageSeo component since this is now a client component
 
 export default function HomePage() {
   return (
-    <div>
+    <div className="container mx-auto">
       {/* Add structured data for the home page */}
       <PageSeo
         title="Baraa Alshaer - Full Stack Developer"
@@ -50,7 +32,7 @@ export default function HomePage() {
 
       {/* Work Experience Section */}
       <div className="py-4">
-        <TimelineDemo />
+        <ExperienceTimeline />
       </div>
 
       {/* Recommendations Section */}
