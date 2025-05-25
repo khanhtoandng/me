@@ -1,27 +1,19 @@
 import { EducationForm } from "@/components/education/education-form";
-import dbConnect from "@/lib/mongodb";
-import Education from "@/lib/models/education";
 
-export default async function EditEducationPage({
+// Force dynamic rendering - don't statically generate this page
+export const dynamic = "force-dynamic";
+
+export default function EditEducationPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  await dbConnect();
-  const { id } = await params;
-  const education = await Education.findById(id).lean();
-
-  // Convert MongoDB document to plain object and handle _id
-  const educationData = JSON.parse(JSON.stringify(education));
-  educationData.id = educationData._id;
-  delete educationData._id;
-
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold text-[var(--headline)]">
         Edit Education
       </h1>
-      <EducationForm education={educationData} />
+      <EducationForm />
     </div>
   );
 }

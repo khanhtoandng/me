@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 // MongoDB connection strings with the specified credentials
 const ATLAS_URI =
-  "mongodb+srv://b19r:12345678@alshaer.m6fqcnd.mongodb.net/?retryWrites=true&w=majority&appName=alshaer";
+  "mongodb+srv://alshaercontact:12345678Samtax@cluster0.k44ex3a.mongodb.net/alshaer?retryWrites=true&w=majority";
 const LOCAL_URI = "mongodb://127.0.0.1:27017/alshaer";
 
 // We'll use the local URI by default, but will fall back to Atlas if local fails
@@ -27,35 +27,67 @@ async function dbConnect() {
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
+      serverSelectionTimeoutMS: 5000, // 5 second timeout
+      connectTimeoutMS: 5000, // 5 second timeout
     };
 
-    // Try to connect to the local MongoDB first
+    // In production/build environment, prioritize Atlas
+    const isProduction =
+      process.env.NODE_ENV === "production" ||
+      process.env.VERCEL ||
+      process.env.RENDER;
+    const primaryURI = isProduction ? ATLAS_URI : LOCAL_URI;
+    const fallbackURI = isProduction ? LOCAL_URI : ATLAS_URI;
+
+    // Try to connect to the primary MongoDB first
     cached.promise = mongoose
-      .connect(LOCAL_URI, opts)
+      .connect(primaryURI, opts)
       .then((mongoose) => {
-        console.log("Connected to local MongoDB");
+        console.log(
+          `Connected to ${isProduction ? "MongoDB Atlas" : "local MongoDB"}`
+        );
         return mongoose;
       })
-      .catch((localErr) => {
+      .catch((primaryErr) => {
         console.warn(
-          "Local MongoDB connection failed, trying Atlas:",
-          localErr.message
+          `${isProduction ? "Atlas" : "Local"} MongoDB connection failed, trying ${isProduction ? "local" : "Atlas"}:`,
+          primaryErr.message
         );
 
-        // If local connection fails, try Atlas
+        // If primary connection fails, try fallback
         return mongoose
-          .connect(ATLAS_URI, opts)
+          .connect(fallbackURI, opts)
           .then((mongoose) => {
-            console.log("Connected to MongoDB Atlas");
+            console.log(
+              `Connected to ${isProduction ? "local MongoDB" : "MongoDB Atlas"}`
+            );
             // Update the URI for future connections
-            MONGODB_URI = ATLAS_URI;
+            MONGODB_URI = fallbackURI;
             return mongoose;
           })
-          .catch((atlasErr) => {
+          .catch((fallbackErr) => {
             console.error("Both MongoDB connections failed:");
-            console.error("Local error:", localErr.message);
-            console.error("Atlas error:", atlasErr.message);
-            throw atlasErr;
+            console.error(
+              `${isProduction ? "Atlas" : "Local"} error:`,
+              primaryErr.message
+            );
+            console.error(
+              `${isProduction ? "Local" : "Atlas"} error:`,
+              fallbackErr.message
+            );
+
+            // During build time, we might not have database access
+            if (
+              process.env.NODE_ENV === "production" &&
+              process.env.NEXT_PHASE === "phase-production-build"
+            ) {
+              console.warn(
+                "Database connection failed during build - this is expected for static generation"
+              );
+              throw new Error("Database not available during build");
+            }
+
+            throw fallbackErr;
           });
       });
   }

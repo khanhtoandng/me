@@ -1,23 +1,23 @@
-const fs = require('fs');
-const path = require('path');
-const globby = require('globby');
-const prettier = require('prettier');
+const fs = require("fs");
+const path = require("path");
+const globby = require("globby");
+const prettier = require("prettier");
 
 (async () => {
-  const prettierConfig = await prettier.resolveConfig('./.prettierrc');
+  const prettierConfig = await prettier.resolveConfig("./.prettierrc");
   const pages = await globby([
-    'src/app/**/*.tsx',
-    '!src/app/**/*.test.tsx',
-    '!src/app/**/_*.tsx',
-    '!src/app/**/layout.tsx',
-    '!src/app/**/loading.tsx',
-    '!src/app/**/error.tsx',
-    '!src/app/**/not-found.tsx',
-    '!src/app/api/**',
+    "src/app/**/*.tsx",
+    "!src/app/**/*.test.tsx",
+    "!src/app/**/_*.tsx",
+    "!src/app/**/layout.tsx",
+    "!src/app/**/loading.tsx",
+    "!src/app/**/error.tsx",
+    "!src/app/**/not-found.tsx",
+    "!src/app/api/**",
   ]);
 
-  const domain = 'https://alshaer.vercel.app';
-  const locales = ['en', 'ar'];
+  const domain = "https://alshaer.onrender.com";
+  const locales = ["en", "ar"];
   const currentDate = new Date().toISOString();
 
   // Create sitemap entries for each page
@@ -25,43 +25,43 @@ const prettier = require('prettier');
     .map((page) => {
       // Get the route from the file path
       const route = page
-        .replace('src/app', '')
-        .replace('/page.tsx', '')
-        .replace('.tsx', '');
+        .replace("src/app", "")
+        .replace("/page.tsx", "")
+        .replace(".tsx", "");
 
       // Skip dynamic routes
-      if (route.includes('[') || route.includes('(')) {
+      if (route.includes("[") || route.includes("(")) {
         return null;
       }
 
       // Create entries for each locale
       const localeEntries = locales.map((locale) => {
-        const localePath = `${domain}/${locale}${route === '/page' ? '' : route}`;
+        const localePath = `${domain}/${locale}${route === "/page" ? "" : route}`;
         return `
           <url>
             <loc>${localePath}</loc>
             <lastmod>${currentDate}</lastmod>
             <changefreq>weekly</changefreq>
-            <priority>${route === '/page' ? '1.0' : '0.8'}</priority>
+            <priority>${route === "/page" ? "1.0" : "0.8"}</priority>
           </url>
         `;
       });
 
       // Also include the non-localized route
-      const nonLocalizedPath = `${domain}${route === '/page' ? '' : route}`;
+      const nonLocalizedPath = `${domain}${route === "/page" ? "" : route}`;
       const nonLocalizedEntry = `
         <url>
           <loc>${nonLocalizedPath}</loc>
           <lastmod>${currentDate}</lastmod>
           <changefreq>weekly</changefreq>
-          <priority>${route === '/page' ? '1.0' : '0.8'}</priority>
+          <priority>${route === "/page" ? "1.0" : "0.8"}</priority>
         </url>
       `;
 
-      return [nonLocalizedEntry, ...localeEntries].join('');
+      return [nonLocalizedEntry, ...localeEntries].join("");
     })
     .filter(Boolean)
-    .join('');
+    .join("");
 
   // Create the sitemap XML
   const sitemap = `
@@ -74,11 +74,14 @@ const prettier = require('prettier');
   // Format the XML
   const formattedSitemap = prettier.format(sitemap, {
     ...prettierConfig,
-    parser: 'html',
+    parser: "html",
   });
 
   // Write the sitemap to the public directory
-  fs.writeFileSync(path.join(process.cwd(), 'public', 'sitemap.xml'), formattedSitemap);
+  fs.writeFileSync(
+    path.join(process.cwd(), "public", "sitemap.xml"),
+    formattedSitemap
+  );
 
-  console.log('Sitemap generated successfully!');
+  console.log("Sitemap generated successfully!");
 })();

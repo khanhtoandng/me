@@ -1,17 +1,15 @@
 services:
   - type: web
     name: alshaer-portfolio
-    env: node
+    runtime: node
     buildCommand: npm install && npm run build
     startCommand: npm start
     envVars:
       - key: NODE_ENV
         value: production
-      - key: JWT_SECRET
-        generateValue: true
     autoDeploy: true
     plan: free
     healthCheckPath: /api/health
     domains:
-      - alshaer.vercel.app
-      - www.alshaer.vercel.app
+      - alshaer.onrender.com
+      - www.alshaer.onrender.com

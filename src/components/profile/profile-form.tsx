@@ -23,23 +23,10 @@ import { useToast } from "@/hooks/use-toast";
 import { motion, AnimatePresence } from "framer-motion";
 import { SocialLinksManager } from "@/components/profile/social-links-manager";
 
-type ProfileFormProps = {
-  profile: {
-    id?: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    phone?: string;
-    location?: string;
-    bio?: string;
-    avatar?: string;
-    skills?: string[];
-  };
-};
-
-export function ProfileForm({ profile }: ProfileFormProps) {
+export function ProfileForm() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("personal");
 
   const [formData, setFormData] = useState({
@@ -55,20 +42,41 @@ export function ProfileForm({ profile }: ProfileFormProps) {
 
   const [skillInput, setSkillInput] = useState("");
 
+  // Fetch profile data on component mount
   useEffect(() => {
-    if (profile) {
-      setFormData({
-        firstName: profile.firstName || "",
-        lastName: profile.lastName || "",
-        email: profile.email || "",
-        phone: profile.phone || "",
-        location: profile.location || "",
-        bio: profile.bio || "",
-        avatar: profile.avatar || "",
-        skills: profile.skills || [],
-      });
-    }
-  }, [profile]);
+    const fetchProfile = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetch("/api/profile");
+        const data = await response.json();
+
+        if (data.success && data.data) {
+          const profile = data.data;
+          setFormData({
+            firstName: profile.firstName || "",
+            lastName: profile.lastName || "",
+            email: profile.email || "",
+            phone: profile.phone || "",
+            location: profile.location || "",
+            bio: profile.bio || "",
+            avatar: profile.avatar || "",
+            skills: profile.skills || [],
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+        toast({
+          title: "Error",
+          description: "Failed to load profile data",
+          variant: "destructive",
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchProfile();
+  }, [toast]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -149,6 +157,15 @@ export function ProfileForm({ profile }: ProfileFormProps) {
       },
     },
   };
+
+  if (isLoading) {
+    return (
+      <div className="space-y-4">
+        <div className="h-8 bg-gray-200 rounded animate-pulse"></div>
+        <div className="h-64 bg-gray-200 rounded animate-pulse"></div>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit}>
