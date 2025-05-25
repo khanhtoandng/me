@@ -18,13 +18,18 @@ import {
   Settings,
   Sparkles,
   User,
+  XIcon,
 } from "lucide-react";
 import { Button } from "../ui/button";
 
-export function DashboardSidebar() {
+interface SidebarProps {
+  toggleSidebar?: () => void;
+}
+export function DashboardSidebar({ toggleSidebar }: SidebarProps) {
   const router = useRouter();
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
+  const [show, setShow] = useState(false);
   const { logout } = useAuth();
 
   const handleLogout = async () => {
@@ -56,7 +61,7 @@ export function DashboardSidebar() {
   return (
     <>
       <div
-        className={`h-screen bg-[var(--card-background)]  border-r border-[var(--card-border-color)] flex flex-col ${
+        className={`h-screen  max-md:fixed z-50 bg-[var(--card-background)]  border-r border-[var(--card-border-color)] flex flex-col ${
           collapsed ? "w-[80px]" : "w-[240px]"
         } transition-all duration-300`}
       >
@@ -66,9 +71,16 @@ export function DashboardSidebar() {
           )}
           <button
             onClick={() => setCollapsed(!collapsed)}
-            className="p-2 rounded-md hover:bg-[var(--card-hover)] text-[var(--paragraph)]"
+            className="p-2 max-md:hidden rounded-md hover:bg-[var(--card-hover)]  text-[var(--paragraph)]"
           >
             {collapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
+          </button>
+
+          <button
+            onClick={toggleSidebar}
+            className="p-2 md:hidden rounded-md hover:bg-[var(--card-hover)]  text-[var(--paragraph)]"
+          >
+            <XIcon size={20} />
           </button>
         </div>
         <nav className="flex-1 overflow-y-auto py-4">

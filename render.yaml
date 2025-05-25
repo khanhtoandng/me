@@ -13,5 +13,5 @@ services:
     plan: free
     healthCheckPath: /api/health
     domains:
-      - alshaer.com
-      - www.alshaer.com
+      - alshaer.vercel.app
+      - www.alshaer.vercel.app

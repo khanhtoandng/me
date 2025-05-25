@@ -123,11 +123,11 @@ export function IconPicker({
           <Button
             type="button"
             variant="outline"
-            className="w-full justify-start border-[var(--input-border-color)] bg-[var(--input-background)] text-[var(--input-text)]"
+            className="w-full  justify-start border-[var(--input-border-color)] bg-[var(--input-background)] text-[var(--input-text)]"
           >
-            <div className="flex items-center gap-2">
+            <div className="flex text-sm items-center gap-2">
               {getCurrentIcon() || <Palette size={20} />}
-              <span>{selectedIcon || "Select an icon"}</span>
+              <span >{selectedIcon || "Select an icon"}</span>
             </div>
           </Button>
         </DialogTrigger>

@@ -8,10 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "generate-sitemap": "node scripts/generate-sitemap.js",
-    "init-admin": "node scripts/init-admin.js",
-    "deploy": "node scripts/deploy.js",
-    "test-db": "node scripts/test-db-connection.js",
-    "test-user": "node scripts/test-user.js"
+    "deploy": "node scripts/deploy.js"
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.6.0",

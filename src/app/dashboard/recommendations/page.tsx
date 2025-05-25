@@ -13,16 +13,18 @@ export default function RecommendationsPage() {
         <h1 className="text-3xl font-bold text-[var(--headline)]">
           Recommendations
         </h1>
-        <Button className="bg-[var(--button)] text-[var(--button-text)] hover:bg-[var(--button2)]">
-          <Link href="/dashboard/recommendations/new">
-            <Plus className="mr-2 h-4 w-4" />
+        <Link href="/dashboard/recommendations/new">
+          <Button
+            icon={<Plus className="mr-2 h-4 w-4" />}
+            className="bg-[var(--button)] text-[var(--button-text)] hover:bg-[var(--button2)]"
+          >
             Add Recommendation
-          </Link>
-        </Button>
+          </Button>
+        </Link>
       </div>
 
       <div className="relative w-full md:w-96">
-        <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-[var(--paragraph)]" />
+        <Search className="absolute hiddenh-4 w-4 text-[var(--paragraph)]" />
         <Input
           type="search"
           placeholder="Search recommendations..."

@@ -55,24 +55,7 @@ export default function ProjectsPage() {
           </div>
         </div>
 
-        {/* Social Links Section */}
-        <div className="mb-8">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 bg-[var(--card-background)] border border-[var(--card-border-color)] rounded-lg">
-            <div>
-              <h3 className="text-lg font-semibold text-[var(--headline)] mb-2">
-                Connect with me
-              </h3>
-              <p className="text-[var(--paragraph)] text-sm">
-                Follow my work and connect on social media
-              </p>
-            </div>
-            <SocialLinksDisplay
-              variant="inline"
-              showLabels={true}
-              className="flex-shrink-0"
-            />
-          </div>
-        </div>
+ 
 
         <Projects filterType={filterType} />
       </div>

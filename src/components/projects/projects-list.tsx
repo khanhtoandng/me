@@ -215,8 +215,8 @@ export function ProjectsList() {
                   }}
                 />
               ) : (
-                <div className="h-full w-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
-                  <div className="text-center text-gray-500">
+                <div className="h-full w-full flex items-center justify-center bg-[var(--card-background)] border-2  rounded-[12px]">
+                  <div className="text-center ">
                     <svg
                       className="mx-auto h-12 w-12 mb-2"
                       fill="none"

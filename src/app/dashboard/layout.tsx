@@ -48,7 +48,7 @@ export default function DashboardLayout({
   }
 
   return (
-    <>
+    <div>
       <div className="w-full">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <AuthProvider>
@@ -56,7 +56,7 @@ export default function DashboardLayout({
               {sidebarOpen && <DashboardSidebar />}
               <div className="flex-1 flex flex-col">
                 <DashboardHeader toggleSidebar={toggleSidebar} />
-                <div className="flex-1 p-6 overflow-auto overflow-y-scroll">
+                <div className="flex-1 p-6 max-h-screen overflow-auto overflow-y-scroll">
                   {children}
                 </div>
                 <Toaster />
@@ -65,6 +65,6 @@ export default function DashboardLayout({
           </AuthProvider>
         </ThemeProvider>
       </div>
-    </>
+    </div>
   );
 }

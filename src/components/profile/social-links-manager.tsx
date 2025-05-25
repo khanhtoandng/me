@@ -342,7 +342,7 @@ export function SocialLinksManager({
                   className={`flex items-center justify-between p-4 rounded-lg border ${
                     link.isActive
                       ? "border-[var(--card-border-color)] bg-[var(--input-background)]"
-                      : "border-gray-300 bg-gray-50 opacity-60"
+                      : "  opacity-60"
                   }`}
                 >
                   <div className="flex items-center gap-3">
@@ -381,10 +381,9 @@ export function SocialLinksManager({
                       <Edit className="h-4 w-4" />
                     </Button>
                     <Button
-                      variant="outline"
+                      variant="destructive"
                       size="sm"
                       onClick={() => handleDelete(link._id!)}
-                      className="border-red-300 text-red-600 hover:bg-red-50"
                     >
                       <Trash2 className="h-4 w-4" />
                     </Button>

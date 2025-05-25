@@ -185,7 +185,7 @@ export function ProfileForm({ profile }: ProfileFormProps) {
           key={activeTab}
         >
           <TabsContent value="personal" className="space-y-4">
-            <Card className="bg-[var(--card-background)] border-[var(--card-border-color)]">
+            <Card className="border-none">
               <CardHeader>
                 <CardTitle className="text-[var(--card-headline)]">
                   Personal Information

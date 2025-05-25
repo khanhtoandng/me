@@ -6,15 +6,15 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { 
-  Sparkles, 
-  Lightbulb, 
-  RefreshCw, 
-  Copy, 
-  Check, 
+import {
+  Sparkles,
+  Lightbulb,
+  RefreshCw,
+  Copy,
+  Check,
   X,
   Loader2,
-  Wand2
+  Wand2,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { motion, AnimatePresence } from "framer-motion";
@@ -32,7 +32,7 @@ export function AITextEnhancer({
   onTextUpdate,
   type,
   placeholder = "Enter text to enhance...",
-  className = ""
+  className = "",
 }: AITextEnhancerProps) {
   const { toast } = useToast();
   const [isOpen, setIsOpen] = useState(false);
@@ -40,10 +40,14 @@ export function AITextEnhancer({
   const [enhancedText, setEnhancedText] = useState("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [variations, setVariations] = useState<string[]>([]);
-  const [activeTab, setActiveTab] = useState<"enhance" | "suggestions" | "variations">("enhance");
+  const [activeTab, setActiveTab] = useState<
+    "enhance" | "suggestions" | "variations"
+  >("enhance");
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
-  const handleAIAction = async (action: "enhance" | "suggestions" | "variations") => {
+  const handleAIAction = async (
+    action: "enhance" | "suggestions" | "variations"
+  ) => {
     if (!originalText.trim()) {
       toast({
         title: "Error",
@@ -84,9 +88,9 @@ export function AITextEnhancer({
             setActiveTab("variations");
             break;
         }
-        
+
         if (!isOpen) setIsOpen(true);
-        
+
         toast({
           title: "Success",
           description: data.message,
@@ -98,7 +102,8 @@ export function AITextEnhancer({
       console.error("AI enhancement error:", error);
       toast({
         title: "Error",
-        description: error instanceof Error ? error.message : "Failed to enhance text",
+        description:
+          error instanceof Error ? error.message : "Failed to enhance text",
         variant: "destructive",
       });
     } finally {
@@ -137,11 +142,16 @@ export function AITextEnhancer({
 
   const getTypeLabel = () => {
     switch (type) {
-      case "hero": return "Hero Section";
-      case "footer": return "Footer";
-      case "project": return "Project";
-      case "experience": return "Experience";
-      default: return "Content";
+      case "hero":
+        return "Hero Section";
+      case "footer":
+        return "Footer";
+      case "project":
+        return "Project";
+      case "experience":
+        return "Experience";
+      default:
+        return "Content";
     }
   };
 
@@ -153,7 +163,7 @@ export function AITextEnhancer({
           onClick={() => handleAIAction("enhance")}
           disabled={loading}
           size="sm"
-          className="bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600"
+          className="bg-gradient-to-r from-[var(--button)] to-[var(--button2)] text-white  "
         >
           {loading && activeTab === "enhance" ? (
             <Loader2 className="h-4 w-4 mr-2 animate-spin" />
@@ -162,13 +172,12 @@ export function AITextEnhancer({
           )}
           Enhance with AI
         </Button>
-        
+
         <Button
           onClick={() => handleAIAction("suggestions")}
           disabled={loading}
           size="sm"
           variant="outline"
-          className="border-blue-300 text-blue-600 hover:bg-blue-50"
         >
           {loading && activeTab === "suggestions" ? (
             <Loader2 className="h-4 w-4 mr-2 animate-spin" />
@@ -177,13 +186,12 @@ export function AITextEnhancer({
           )}
           Get Suggestions
         </Button>
-        
+
         <Button
           onClick={() => handleAIAction("variations")}
           disabled={loading}
           size="sm"
           variant="outline"
-          className="border-green-300 text-green-600 hover:bg-green-50"
         >
           {loading && activeTab === "variations" ? (
             <Loader2 className="h-4 w-4 mr-2 animate-spin" />
@@ -219,22 +227,30 @@ export function AITextEnhancer({
                     <X className="h-4 w-4" />
                   </Button>
                 </div>
-                
+
                 {/* Tab Navigation */}
                 <div className="flex gap-2 mt-4">
                   <Button
                     onClick={() => setActiveTab("enhance")}
                     variant={activeTab === "enhance" ? "default" : "outline"}
                     size="sm"
-                    className={activeTab === "enhance" ? "bg-purple-500 text-white" : ""}
+                    className={
+                      activeTab === "enhance" ? "bg-purple-500 text-white" : ""
+                    }
                   >
                     Enhanced Text
                   </Button>
                   <Button
                     onClick={() => setActiveTab("suggestions")}
-                    variant={activeTab === "suggestions" ? "default" : "outline"}
+                    variant={
+                      activeTab === "suggestions" ? "default" : "outline"
+                    }
                     size="sm"
-                    className={activeTab === "suggestions" ? "bg-blue-500 text-white" : ""}
+                    className={
+                      activeTab === "suggestions"
+                        ? "bg-blue-500 text-white"
+                        : ""
+                    }
                   >
                     Suggestions
                   </Button>
@@ -242,13 +258,17 @@ export function AITextEnhancer({
                     onClick={() => setActiveTab("variations")}
                     variant={activeTab === "variations" ? "default" : "outline"}
                     size="sm"
-                    className={activeTab === "variations" ? "bg-green-500 text-white" : ""}
+                    className={
+                      activeTab === "variations"
+                        ? "bg-green-500 text-white"
+                        : ""
+                    }
                   >
                     Variations
                   </Button>
                 </div>
               </CardHeader>
-              
+
               <CardContent className="space-y-4">
                 {/* Enhanced Text Tab */}
                 {activeTab === "enhance" && enhancedText && (
@@ -336,7 +356,9 @@ export function AITextEnhancer({
                             <p className="text-sm flex-1">{variation}</p>
                             <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                               <Button
-                                onClick={() => copyToClipboard(variation, index)}
+                                onClick={() =>
+                                  copyToClipboard(variation, index)
+                                }
                                 variant="ghost"
                                 size="sm"
                                 className="h-6 w-6 p-0"
@@ -372,7 +394,9 @@ export function AITextEnhancer({
                   (activeTab === "variations" && variations.length === 0)) && (
                   <div className="text-center py-8 text-[var(--paragraph)]">
                     <Sparkles className="h-12 w-12 mx-auto mb-4 text-gray-400" />
-                    <p>Click the buttons above to generate AI-enhanced content</p>
+                    <p>
+                      Click the buttons above to generate AI-enhanced content
+                    </p>
                   </div>
                 )}
               </CardContent>

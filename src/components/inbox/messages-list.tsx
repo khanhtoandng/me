@@ -308,7 +308,7 @@ export function MessagesList() {
     <div className="space-y-4">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <form onSubmit={handleSearch} className="relative w-full md:w-96">
-          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-[var(--paragraph)]" />
+          <Search className="absolute hiddenh-4 w-4 text-[var(--paragraph)]" />
           <Input
             type="search"
             placeholder="Search messages..."
