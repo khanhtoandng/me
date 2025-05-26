@@ -4,7 +4,18 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { Bell, Settings, User, LogOut, Moon, Sun, Menu } from "lucide-react";
+import {
+  Bell,
+  Settings,
+  User,
+  LogOut,
+  Moon,
+  Sun,
+  Menu,
+  Check,
+  CheckCheck,
+  Trash2,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -29,6 +40,7 @@ export function DashboardHeader({ toggleSidebar }: HeaderProps) {
   const [mounted, setMounted] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
   const [username, setUsername] = useState("Admin");
+  const [recentMessages, setRecentMessages] = useState<any[]>([]);
 
   // Ensure theme component is mounted before rendering
   useEffect(() => {
@@ -43,14 +55,49 @@ export function DashboardHeader({ toggleSidebar }: HeaderProps) {
 
   const fetchUnreadCount = async () => {
     try {
-      const response = await fetch("/api/messages?unread=true");
+      const response = await fetch("/api/messages?unread=true&limit=5");
       const data = await response.json();
 
       if (response.ok && data.success) {
         setUnreadCount(data.data.length);
+        setRecentMessages(data.data.slice(0, 5)); // Show only 5 recent messages
       }
     } catch (error) {
       console.error("Error fetching unread messages:", error);
+    }
+  };
+
+  const markAllAsRead = async () => {
+    try {
+      const response = await fetch("/api/messages/mark-all-read", {
+        method: "POST",
+      });
+
+      if (response.ok) {
+        setUnreadCount(0);
+        setRecentMessages([]);
+        toast.success("All notifications marked as read");
+      }
+    } catch (error) {
+      console.error("Error marking all as read:", error);
+      toast.error("Failed to mark all as read");
+    }
+  };
+
+  const clearAllNotifications = async () => {
+    try {
+      const response = await fetch("/api/messages/clear-all", {
+        method: "POST",
+      });
+
+      if (response.ok) {
+        setUnreadCount(0);
+        setRecentMessages([]);
+        toast.success("All notifications cleared");
+      }
+    } catch (error) {
+      console.error("Error clearing notifications:", error);
+      toast.error("Failed to clear notifications");
     }
   };
 
@@ -123,18 +170,82 @@ export function DashboardHeader({ toggleSidebar }: HeaderProps) {
               )}
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Notifications</DropdownMenuLabel>
+          <DropdownMenuContent align="end" className="w-80">
+            <div className="flex items-center justify-between p-2">
+              <DropdownMenuLabel className="p-0">
+                Notifications
+              </DropdownMenuLabel>
+              {unreadCount > 0 && (
+                <div className="flex gap-1">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={markAllAsRead}
+                    className="h-6 px-2 text-xs"
+                  >
+                    <CheckCheck className="h-3 w-3 mr-1" />
+                    Mark All Read
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={clearAllNotifications}
+                    className="h-6 px-2 text-xs text-red-500 hover:text-red-600"
+                  >
+                    <Trash2 className="h-3 w-3 mr-1" />
+                    Clear All
+                  </Button>
+                </div>
+              )}
+            </div>
             <DropdownMenuSeparator />
+
             {unreadCount > 0 ? (
-              <DropdownMenuItem asChild>
-                <Link href="/dashboard/inbox">
-                  You have {unreadCount} unread message
-                  {unreadCount !== 1 ? "s" : ""}
-                </Link>
-              </DropdownMenuItem>
+              <div className="max-h-64 overflow-y-auto">
+                {recentMessages.map((message, index) => (
+                  <DropdownMenuItem
+                    key={message._id || index}
+                    asChild
+                    className="cursor-pointer"
+                  >
+                    <Link
+                      href="/dashboard/inbox"
+                      className="flex flex-col items-start p-3 space-y-1"
+                    >
+                      <div className="flex items-center justify-between w-full">
+                        <span className="font-medium text-sm truncate">
+                          {message.sender}
+                        </span>
+                        <span className="text-xs text-[var(--paragraph)]">
+                          {new Date(message.createdAt).toLocaleDateString()}
+                        </span>
+                      </div>
+                      <span className="text-sm text-[var(--paragraph)] truncate w-full">
+                        {message.subject}
+                      </span>
+                      <span className="text-xs text-[var(--paragraph)] line-clamp-2">
+                        {message.message}
+                      </span>
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link
+                    href="/dashboard/inbox"
+                    className="text-center w-full text-[var(--link-color)]"
+                  >
+                    View All Messages
+                  </Link>
+                </DropdownMenuItem>
+              </div>
             ) : (
-              <DropdownMenuItem>No new notifications</DropdownMenuItem>
+              <div className="p-4 text-center">
+                <Bell className="h-8 w-8 mx-auto text-[var(--paragraph)] mb-2" />
+                <p className="text-sm text-[var(--paragraph)]">
+                  No new notifications
+                </p>
+              </div>
             )}
           </DropdownMenuContent>
         </DropdownMenu>

@@ -21,8 +21,12 @@ import { X, Plus, Upload, Trash2, Link2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { motion, AnimatePresence } from "framer-motion";
 import { AITextEnhancer } from "@/components/ui/ai-text-enhancer";
+import { FileUpload } from "@/components/ui/file-upload";
+import { useActiveProjectTypes } from "@/hooks/use-project-types";
+import { useProfile } from "@/hooks/use-profile";
 
 type ProjectFormProps = {
+  projectId?: string;
   project?: {
     id?: string;
     title: string;
@@ -38,15 +42,22 @@ type ProjectFormProps = {
   };
 };
 
-export function ProjectForm({ project }: ProjectFormProps) {
+export function ProjectForm({ projectId, project }: ProjectFormProps) {
   const router = useRouter();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [fetchedProject, setFetchedProject] = useState<any>(null);
+
+  // Fetch project types and profile data
+  const { projectTypes, loading: projectTypesLoading } =
+    useActiveProjectTypes();
+  const { profile, loading: profileLoading } = useProfile();
 
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    projectType: "Full-stack",
+    projectType: "",
     images: [] as string[],
     videoUrl: "",
     githubUrl: "",
@@ -59,22 +70,71 @@ export function ProjectForm({ project }: ProjectFormProps) {
   const [techInput, setTechInput] = useState("");
   const [imageInput, setImageInput] = useState("");
 
+  // Fetch project data if projectId is provided
   useEffect(() => {
-    if (project) {
+    if (projectId && !project) {
+      const fetchProject = async () => {
+        setIsLoading(true);
+        try {
+          const response = await fetch(`/api/projects/${projectId}`);
+          const data = await response.json();
+
+          if (data.success) {
+            setFetchedProject(data.data);
+          } else {
+            throw new Error(data.error || "Failed to fetch project");
+          }
+        } catch (error) {
+          console.error("Error fetching project:", error);
+          toast({
+            title: "Error",
+            description: "Failed to load project data",
+            variant: "destructive",
+          });
+          router.push("/dashboard/projects");
+        } finally {
+          setIsLoading(false);
+        }
+      };
+
+      fetchProject();
+    }
+  }, [projectId, project, toast, router]);
+
+  // Set default project type when project types are loaded
+  useEffect(() => {
+    if (
+      projectTypes.length > 0 &&
+      !formData.projectType &&
+      !project &&
+      !fetchedProject
+    ) {
+      setFormData((prev) => ({
+        ...prev,
+        projectType: projectTypes[0].name,
+      }));
+    }
+  }, [projectTypes, formData.projectType, project, fetchedProject]);
+
+  useEffect(() => {
+    const projectData = project || fetchedProject;
+    if (projectData) {
       setFormData({
-        title: project.title || "",
-        description: project.description || "",
-        projectType: project.projectType || "Full-stack",
-        images: project.images || [],
-        videoUrl: project.videoUrl || "",
-        githubUrl: project.githubUrl || "",
-        websiteUrl: project.websiteUrl || "",
-        technologies: project.technologies || [],
-        featured: project.featured || false,
-        status: project.status || "Draft",
+        title: projectData.title || "",
+        description: projectData.description || "",
+        projectType:
+          projectData.projectType ||
+          (projectTypes.length > 0 ? projectTypes[0].name : ""),
+        images: projectData.images || [],
+        videoUrl: projectData.videoUrl || "",
+        githubUrl: projectData.githubUrl || "",
+        websiteUrl: projectData.websiteUrl || "",
+        technologies: projectData.technologies || [],
+        featured: projectData.featured || false,
+        status: projectData.status || "Draft",
       });
     }
-  }, [project]);
+  }, [project, fetchedProject, projectTypes]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -162,8 +222,11 @@ export function ProjectForm({ project }: ProjectFormProps) {
 
       console.log("Submitting project data:", submitData);
 
-      const url = project?.id ? `/api/projects/${project.id}` : "/api/projects";
-      const method = project?.id ? "PUT" : "POST";
+      const currentProjectId = projectId || project?.id || fetchedProject?._id;
+      const url = currentProjectId
+        ? `/api/projects/${currentProjectId}`
+        : "/api/projects";
+      const method = currentProjectId ? "PUT" : "POST";
 
       const response = await fetch(url, {
         method,
@@ -178,7 +241,7 @@ export function ProjectForm({ project }: ProjectFormProps) {
       if (data.success) {
         toast({
           title: "Success",
-          description: project?.id
+          description: currentProjectId
             ? "Project updated successfully"
             : "Project created successfully",
         });
@@ -222,6 +285,17 @@ export function ProjectForm({ project }: ProjectFormProps) {
       },
     },
   };
+
+  if (isLoading) {
+    return (
+      <Card className="bg-[var(--card-background)] border-[var(--card-border-color)]">
+        <CardContent className="p-8 text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--link-color)] mx-auto mb-4"></div>
+          <p className="text-[var(--paragraph)]">Loading project data...</p>
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -286,31 +360,87 @@ export function ProjectForm({ project }: ProjectFormProps) {
                 onValueChange={(value) =>
                   handleSelectChange("projectType", value)
                 }
+                disabled={projectTypesLoading}
               >
                 <SelectTrigger className="bg-[var(--input-background)] border-[var(--input-border-color)] text-[var(--input-text)]">
-                  <SelectValue placeholder="Select project type" />
+                  <SelectValue
+                    placeholder={
+                      projectTypesLoading
+                        ? "Loading project types..."
+                        : "Select project type"
+                    }
+                  />
                 </SelectTrigger>
                 <SelectContent className="bg-[var(--card-background)] border-[var(--card-border-color)] text-[var(--card-headline)]">
-                  <SelectItem value="AI">AI</SelectItem>
-                  <SelectItem value="Full-stack">Full-stack</SelectItem>
-                  <SelectItem value="Frontend">Frontend</SelectItem>
-                  <SelectItem value="Backend">Backend</SelectItem>
-                  <SelectItem value="Mobile">Mobile</SelectItem>
-                  <SelectItem value="Cybersecurity">Cybersecurity</SelectItem>
-                  <SelectItem value="Other">Other</SelectItem>
+                  {projectTypes.map((type) => (
+                    <SelectItem key={type._id} value={type.name}>
+                      {type.name}
+                    </SelectItem>
+                  ))}
+                  {projectTypes.length === 0 && !projectTypesLoading && (
+                    <SelectItem value="" disabled>
+                      No project types available. Create one first.
+                    </SelectItem>
+                  )}
                 </SelectContent>
               </Select>
+              {projectTypes.length === 0 && !projectTypesLoading && (
+                <p className="text-sm text-yellow-600">
+                  No project types found. Please create project types in the{" "}
+                  <button
+                    type="button"
+                    onClick={() => router.push("/dashboard/project-types")}
+                    className="underline hover:text-yellow-700"
+                  >
+                    Project Types
+                  </button>{" "}
+                  section first.
+                </p>
+              )}
             </motion.div>
 
             <motion.div className="space-y-2" variants={itemVariants}>
               <Label className="text-[var(--card-headline)]">
                 Technologies
               </Label>
+
+              {/* Available skills from profile */}
+              {profile?.skills && profile.skills.length > 0 && (
+                <div className="space-y-2">
+                  <p className="text-sm text-[var(--paragraph)]">
+                    Select from your profile skills:
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {profile.skills
+                      .filter((skill) => !formData.technologies.includes(skill))
+                      .map((skill) => (
+                        <Button
+                          key={skill}
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => {
+                            setFormData((prev) => ({
+                              ...prev,
+                              technologies: [...prev.technologies, skill],
+                            }));
+                          }}
+                          className="text-xs"
+                        >
+                          <Plus className="h-3 w-3 mr-1" />
+                          {skill}
+                        </Button>
+                      ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Manual input for additional technologies */}
               <div className="flex gap-2">
                 <Input
                   value={techInput}
                   onChange={(e) => setTechInput(e.target.value)}
-                  placeholder="Add a technology"
+                  placeholder="Add custom technology"
                   className="bg-[var(--input-background)] border-[var(--input-border-color)] text-[var(--input-text)]"
                   onKeyDown={(e) =>
                     e.key === "Enter" && (e.preventDefault(), addTechnology())
@@ -324,6 +454,8 @@ export function ProjectForm({ project }: ProjectFormProps) {
                   <Plus className="h-4 w-4" />
                 </Button>
               </div>
+
+              {/* Selected technologies */}
               <div className="flex flex-wrap gap-2 mt-2">
                 <AnimatePresence>
                   {formData.technologies.map((tech) => (
@@ -345,61 +477,73 @@ export function ProjectForm({ project }: ProjectFormProps) {
                   ))}
                 </AnimatePresence>
               </div>
+
+              {/* Message if no profile skills */}
+              {(!profile?.skills || profile.skills.length === 0) &&
+                !profileLoading && (
+                  <p className="text-sm text-yellow-600">
+                    No skills found in your profile. Add skills in your{" "}
+                    <button
+                      type="button"
+                      onClick={() => router.push("/dashboard/profile")}
+                      className="underline hover:text-yellow-700"
+                    >
+                      Profile
+                    </button>{" "}
+                    to quickly select them here.
+                  </p>
+                )}
             </motion.div>
 
             <motion.div className="space-y-2" variants={itemVariants}>
-              <Label className="text-[var(--card-headline)]">Images</Label>
-              <div className="flex gap-2">
-                <Input
-                  value={imageInput}
-                  onChange={(e) => setImageInput(e.target.value)}
-                  placeholder="Image URL"
-                  className="bg-[var(--input-background)] border-[var(--input-border-color)] text-[var(--input-text)]"
-                  onKeyDown={(e) =>
-                    e.key === "Enter" && (e.preventDefault(), addImage())
-                  }
-                />
-                <Button
-                  type="button"
-                  onClick={addImage}
-                  className="bg-[var(--button)] text-[var(--button-text)] hover:bg-[var(--button2)]"
-                >
-                  <Upload className="h-4 w-4" />
-                </Button>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-2">
-                <AnimatePresence>
-                  {formData.images.map((image) => (
-                    <motion.div
-                      key={image}
-                      className="relative group rounded-md overflow-hidden aspect-video"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 20 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <img
-                        src={image || "/placeholder.svg"}
-                        alt="Project"
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          e.currentTarget.src = "/placeholder.svg";
-                        }}
-                      />
-                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                        <Button
-                          type="button"
-                          variant="destructive"
-                          size="sm"
-                          onClick={() => removeImage(image)}
-                          className="bg-red-500 text-white"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </motion.div>
-                  ))}
-                </AnimatePresence>
+              <Label className="text-[var(--card-headline)]">
+                Project Images
+              </Label>
+              <FileUpload
+                onUpload={(urls) => {
+                  setFormData((prev) => ({
+                    ...prev,
+                    images: [...prev.images, ...urls],
+                  }));
+                }}
+                onRemove={(url) => {
+                  setFormData((prev) => ({
+                    ...prev,
+                    images: prev.images.filter((img) => img !== url),
+                  }));
+                }}
+                existingFiles={formData.images}
+                accept="image/*"
+                multiple={true}
+                maxFiles={5}
+                maxSize={5}
+                className="w-full"
+              />
+
+              {/* Optional: Still allow URL input for external images */}
+              <div className="mt-4 p-4 bg-[var(--card-background-effect)] rounded-lg border border-[var(--card-border-color)]">
+                <Label className="text-sm text-[var(--card-headline)] mb-2 block">
+                  Or add image URL
+                </Label>
+                <div className="flex gap-2">
+                  <Input
+                    value={imageInput}
+                    onChange={(e) => setImageInput(e.target.value)}
+                    placeholder="External image URL"
+                    className="bg-[var(--input-background)] border-[var(--input-border-color)] text-[var(--input-text)]"
+                    onKeyDown={(e) =>
+                      e.key === "Enter" && (e.preventDefault(), addImage())
+                    }
+                  />
+                  <Button
+                    type="button"
+                    onClick={addImage}
+                    variant="outline"
+                    className="border-[var(--input-border-color)]"
+                  >
+                    <Link2 className="h-4 w-4" />
+                  </Button>
+                </div>
               </div>
             </motion.div>
 
@@ -511,7 +655,7 @@ export function ProjectForm({ project }: ProjectFormProps) {
             >
               {isSubmitting
                 ? "Saving..."
-                : project?.id
+                : projectId || project?.id || fetchedProject?._id
                   ? "Update Project"
                   : "Create Project"}
             </Button>

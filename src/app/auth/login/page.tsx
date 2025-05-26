@@ -15,7 +15,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Logo from "@/components/common/Logo";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, LogInIcon } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useAuth } from "@/contexts/auth-context";
 import { debugCookies, setCookie } from "@/lib/client-cookies";
@@ -144,7 +144,12 @@ export default function Page() {
             </div>
           </CardContent>
           <CardFooter className="flex flex-col gap-4">
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button
+              icon={<LogInIcon />}
+              type="submit"
+              className="w-full flex-row-reverse"
+              disabled={loading}
+            >
               {loading ? "Logging in..." : "Login"}
             </Button>
           </CardFooter>

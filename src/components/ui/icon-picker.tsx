@@ -55,11 +55,13 @@ const iconLibraries = {
 
 // Popular social media icons for quick access
 const popularSocialIcons = [
+  { icon: "SiGithub", library: "si", name: "GitHub" },
+  { icon: "SiLinkedin", library: "si", name: "LinkedIn" },
+  { icon: "SiX", library: "si", name: "X (Twitter)" },
+  { icon: "SiBluesky", library: "si", name: "Bluesky" },
+  { icon: "SiMastodon", library: "si", name: "Mastodon" },
   { icon: "FaFacebook", library: "fa", name: "Facebook" },
-  { icon: "FaTwitter", library: "fa", name: "Twitter" },
   { icon: "FaInstagram", library: "fa", name: "Instagram" },
-  { icon: "FaLinkedin", library: "fa", name: "LinkedIn" },
-  { icon: "FaGithub", library: "fa", name: "GitHub" },
   { icon: "FaYoutube", library: "fa", name: "YouTube" },
   { icon: "FaTiktok", library: "fa", name: "TikTok" },
   { icon: "FaDiscord", library: "fa", name: "Discord" },
@@ -69,8 +71,6 @@ const popularSocialIcons = [
   { icon: "FaPinterest", library: "fa", name: "Pinterest" },
   { icon: "FaReddit", library: "fa", name: "Reddit" },
   { icon: "FaTwitch", library: "fa", name: "Twitch" },
-  { icon: "FaSlack", library: "fa", name: "Slack" },
-  { icon: "FaSkype", library: "fa", name: "Skype" },
 ];
 
 export function IconPicker({
@@ -127,7 +127,7 @@ export function IconPicker({
           >
             <div className="flex text-sm items-center gap-2">
               {getCurrentIcon() || <Palette size={20} />}
-              <span >{selectedIcon || "Select an icon"}</span>
+              <span>{selectedIcon || "Select an icon"}</span>
             </div>
           </Button>
         </DialogTrigger>

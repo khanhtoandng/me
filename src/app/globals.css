@@ -615,7 +615,7 @@ p {
 }
 
 form {
-  @apply bg-[var(--card-background)] p-4 rounded-[12px] border border-[var(--border)];
+  @apply bg-[var(--card-background)] p-4 rounded-[12px] ;
 }
 
 button {

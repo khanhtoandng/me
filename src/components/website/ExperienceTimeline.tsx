@@ -38,7 +38,7 @@ export function ExperienceTimeline() {
       try {
         setLoading(true);
         setError(null);
-        
+
         const response = await fetch("/api/experiences");
         const data = await response.json();
 
@@ -60,26 +60,30 @@ export function ExperienceTimeline() {
   }, [isMounted]);
 
   // Helper function to format date range
-  const formatDateRange = (startDate: string, endDate?: string, current?: boolean) => {
+  const formatDateRange = (
+    startDate: string,
+    endDate?: string,
+    current?: boolean
+  ) => {
     const start = new Date(startDate);
-    const startFormatted = start.toLocaleDateString('en-US', { 
-      month: 'short', 
-      year: 'numeric' 
+    const startFormatted = start.toLocaleDateString("en-US", {
+      month: "short",
+      year: "numeric",
     });
-    
+
     if (current) {
       return `${startFormatted} - Present`;
     }
-    
+
     if (endDate) {
       const end = new Date(endDate);
-      const endFormatted = end.toLocaleDateString('en-US', { 
-        month: 'short', 
-        year: 'numeric' 
+      const endFormatted = end.toLocaleDateString("en-US", {
+        month: "short",
+        year: "numeric",
       });
       return `${startFormatted} - ${endFormatted}`;
     }
-    
+
     return startFormatted;
   };
 
@@ -191,21 +195,30 @@ export function ExperienceTimeline() {
             <div className="relative pl-8 border-l-2 border-[var(--card-border-color)] last:border-l-0">
               {/* Timeline dot */}
               <div className="absolute -left-2 top-0 w-4 h-4 bg-[var(--link-color)] rounded-full border-2 border-[var(--background)]"></div>
-              
+
               {/* Date */}
               <div className="text-sm text-[var(--link-color)] font-medium mb-2">
-                {formatDateRange(experience.startDate, experience.endDate, experience.current)}
+                {formatDateRange(
+                  experience.startDate,
+                  experience.endDate,
+                  experience.current
+                )}
               </div>
-              
+
               {/* Content */}
-              <div className="bg-[var(--card-background)] border border-[var(--card-border-color)] rounded-lg p-6 shadow-sm">
+              <div className="bg-[var(--card-background)] border border-[var(--card-border-color)] rounded-[12px] p-6 shadow-sm">
                 <header>
                   <h3 className={styles.sectionTitle}>
                     <span>{experience.title}</span>{" "}
                     <span className="opacity-60">at</span>
                     <span>
-                      {experience.companyUrl && experience.companyUrl !== "#" ? (
-                        <Link href={experience.companyUrl} target="_blank" className="text-[var(--link-color)] hover:underline">
+                      {experience.companyUrl &&
+                      experience.companyUrl !== "#" ? (
+                        <Link
+                          href={experience.companyUrl}
+                          target="_blank"
+                          className="text-[var(--link-color)] hover:underline"
+                        >
                           {experience.company}
                         </Link>
                       ) : (

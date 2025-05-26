@@ -118,7 +118,7 @@ export default function ContactForm() {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="space-y-4 bg-transparent py-[20px]"
+              className="space-y-4 bg-transparent py-[20px] border-none"
             >
               <FormField
                 control={form.control}

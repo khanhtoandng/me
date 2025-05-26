@@ -244,6 +244,9 @@ export function RecommendationsList() {
                   >
                     {recommendation.relationship}
                   </Badge>
+
+                  <div className="flex flex-row-reverse gap-3 items-center">
+
                   <div className="flex items-center gap-1 text-sm text-[var(--card-paragraph)]">
                     <Calendar className="h-3.5 w-3.5" />
                     {formatDate(recommendation.date)}
@@ -253,6 +256,8 @@ export function RecommendationsList() {
                       Featured
                     </Badge>
                   )}
+                  </div>
+
                 </div>
                 <Separator className="bg-[var(--card-border-color)]" />
                 <div className="relative pl-6 text-sm text-[var(--card-paragraph)]">

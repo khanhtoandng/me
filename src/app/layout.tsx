@@ -10,6 +10,7 @@ import FloatingActionButton from "@/components/ui/FloatingActionButton";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "@/components/theme-provider";
+import { CustomDialogProvider } from "@/components/ui/custom-dialog";
 
 // Define keywords for better SEO
 const keywords = [
@@ -185,6 +186,7 @@ export default function RootLayout({
         <SpeedInsights />
         <Analytics />
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <CustomDialogProvider />
           <Toaster />
           <Navbar />
           <BackgroundEffect />

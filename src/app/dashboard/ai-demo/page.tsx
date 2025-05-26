@@ -172,33 +172,33 @@ export default function AIDemoPage() {
 
         {/* Features Overview */}
         <motion.div variants={itemVariants}>
-          <Card className="bg-gradient-to-br from-purple-50 to-pink-50 border-purple-200">
+          <Card >
             <CardHeader>
-              <CardTitle className="text-purple-800 flex items-center gap-2">
+              <CardTitle className=" flex items-center gap-2">
                 <Sparkles className="h-5 w-5" />
                 AI Enhancement Features
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="text-center p-4 bg-white rounded-lg border border-purple-100">
-                  <Sparkles className="h-8 w-8 text-purple-500 mx-auto mb-2" />
-                  <h3 className="font-semibold text-purple-800 mb-1">Text Enhancement</h3>
-                  <p className="text-sm text-purple-600">
+                <div className="text-center p-4  rounded-lg ">
+                  <Sparkles className="h-8 w-8  mx-auto mb-2" />
+                  <h3 className="font-semibold  mb-1">Text Enhancement</h3>
+                  <p className="text-sm ">
                     Transform your content into professional, engaging copy
                   </p>
                 </div>
-                <div className="text-center p-4 bg-white rounded-lg border border-blue-100">
-                  <Lightbulb className="h-8 w-8 text-blue-500 mx-auto mb-2" />
-                  <h3 className="font-semibold text-blue-800 mb-1">Smart Suggestions</h3>
-                  <p className="text-sm text-blue-600">
+                <div className="text-center p-4 ">
+                  <Lightbulb className="h-8 w-8  mx-auto mb-2" />
+                  <h3 className="font-semibold  mb-1">Smart Suggestions</h3>
+                  <p className="text-sm ">
                     Get actionable recommendations to improve your content
                   </p>
                 </div>
-                <div className="text-center p-4 bg-white rounded-lg border border-green-100">
-                  <Wand2 className="h-8 w-8 text-green-500 mx-auto mb-2" />
-                  <h3 className="font-semibold text-green-800 mb-1">Multiple Variations</h3>
-                  <p className="text-sm text-green-600">
+                <div className="text-center p-4  rounded-lg ">
+                  <Wand2 className="h-8 w-8  mx-auto mb-2" />
+                  <h3 className="font-semibold  mb-1">Multiple Variations</h3>
+                  <p className="text-sm ">
                     Generate different versions with various tones and styles
                   </p>
                 </div>
@@ -216,7 +216,7 @@ export default function AIDemoPage() {
             <CardContent>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <Badge className="bg-purple-500 text-white min-w-6 h-6 flex items-center justify-center text-xs">1</Badge>
+                  <Badge className=" min-w-6 h-6 flex items-center justify-center text-xs">1</Badge>
                   <div>
                     <h4 className="font-medium text-[var(--card-headline)]">Enter Your Content</h4>
                     <p className="text-sm text-[var(--card-paragraph)]">
@@ -225,7 +225,7 @@ export default function AIDemoPage() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Badge className="bg-purple-500 text-white min-w-6 h-6 flex items-center justify-center text-xs">2</Badge>
+                  <Badge className=" min-w-6 h-6 flex items-center justify-center text-xs">2</Badge>
                   <div>
                     <h4 className="font-medium text-[var(--card-headline)]">Choose Enhancement Type</h4>
                     <p className="text-sm text-[var(--card-paragraph)]">
@@ -234,7 +234,7 @@ export default function AIDemoPage() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Badge className="bg-purple-500 text-white min-w-6 h-6 flex items-center justify-center text-xs">3</Badge>
+                  <Badge className=" min-w-6 h-6 flex items-center justify-center text-xs">3</Badge>
                   <div>
                     <h4 className="font-medium text-[var(--card-headline)]">Review and Apply</h4>
                     <p className="text-sm text-[var(--card-paragraph)]">

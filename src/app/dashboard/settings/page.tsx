@@ -305,7 +305,7 @@ export default function SettingsPage() {
                   action cannot be undone.
                 </p>
                 {deleteAccountForm.showOtpInput && (
-                  <div className="space-y-3 p-4 border border-red-200 rounded-md bg-red-50">
+                  <div className="space-y-3 p-4 border border-red-500 rounded-[12px] ">
                     <div className="space-y-2">
                       <Label htmlFor="otpCode" className="text-red-800">
                         Enter OTP Code to Confirm Deletion

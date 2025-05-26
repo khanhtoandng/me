@@ -32,6 +32,9 @@ export default function PostsPreview() {
 
   React.useEffect(() => {
     const fetchPosts = async () => {
+      const startTime = Date.now();
+      const minLoadingTime = 1500; // Minimum 1.5 seconds for skeleton
+
       try {
         const response = await fetch(
           "https://dev.to/api/articles?username=baraa"
@@ -42,7 +45,13 @@ export default function PostsPreview() {
         console.error("Error fetching posts:", error);
         setflag(true);
       } finally {
-        setLoading(false);
+        // Ensure minimum loading time
+        const elapsedTime = Date.now() - startTime;
+        const remainingTime = Math.max(0, minLoadingTime - elapsedTime);
+
+        setTimeout(() => {
+          setLoading(false);
+        }, remainingTime);
       }
     };
 
@@ -64,12 +73,44 @@ export default function PostsPreview() {
           ? Array(3)
               .fill(null)
               .map((_, index) => (
-                <div key={index} className="w-full">
-                  <Skeleton className="mb-4 h-48" />
-                  <Skeleton className="mb-2 h-8" />
-                  <Skeleton className="mb-2 h-6" />
-                  <Skeleton className="h-10" />
-                </div>
+                <motion.div
+                  key={index}
+                  className="w-full"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <div className="bg-[var(--card-background)] border-[var(--card-border-color)] border rounded-[10px] p-6 space-y-4">
+                    {/* Cover image skeleton */}
+                    <Skeleton className="w-full h-48 rounded-[8px]" />
+
+                    {/* Title skeleton */}
+                    <div className="space-y-2">
+                      <Skeleton className="h-6 w-3/4" />
+                      <Skeleton className="h-4 w-1/2" />
+                    </div>
+
+                    {/* Description skeleton */}
+                    <div className="space-y-2">
+                      <Skeleton className="h-4 w-full" />
+                      <Skeleton className="h-4 w-5/6" />
+                      <Skeleton className="h-4 w-2/3" />
+                    </div>
+
+                    {/* Tags skeleton */}
+                    <div className="flex gap-2">
+                      <Skeleton className="h-6 w-16 rounded-full" />
+                      <Skeleton className="h-6 w-20 rounded-full" />
+                      <Skeleton className="h-6 w-14 rounded-full" />
+                    </div>
+
+                    {/* Links skeleton */}
+                    <div className="flex gap-4 pt-2">
+                      <Skeleton className="h-8 w-24" />
+                      <Skeleton className="h-8 w-20" />
+                    </div>
+                  </div>
+                </motion.div>
               ))
           : // Show posts once data is fetched
             posts.map((post: any) => (

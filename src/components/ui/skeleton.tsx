@@ -7,8 +7,8 @@ function Skeleton({
   return (
     <div
       className={cn(
-        "animate-pulse rounded-[10px] bg-[var(--card-border-color)]",
-        className,
+        "animate-pulse rounded-[10px] bg-[var(--card-background)]",
+        className
       )}
       {...props}
     />

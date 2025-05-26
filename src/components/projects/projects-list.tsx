@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
 import {
   Card,
@@ -23,6 +22,11 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
 
+interface ProjectsListProps {
+  searchQuery?: string;
+  filters?: Record<string, any>;
+}
+
 type Project = {
   _id: string;
   title: string;
@@ -39,35 +43,19 @@ type Project = {
   videoUrl?: string;
 };
 
-export function ProjectsList() {
-  const searchParams = useSearchParams();
+export function ProjectsList({
+  searchQuery = "",
+  filters = {},
+}: ProjectsListProps) {
   const { toast } = useToast();
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
-
-  const status = searchParams.get("status");
-  const search = searchParams.get("search");
 
   useEffect(() => {
     async function fetchProjects() {
       try {
         setLoading(true);
-        let url = "/api/projects";
-        const params = new URLSearchParams();
-
-        if (status) {
-          params.set("status", status);
-        }
-
-        if (search) {
-          params.set("search", search);
-        }
-
-        if (params.toString()) {
-          url += `?${params.toString()}`;
-        }
-
-        const response = await fetch(url);
+        const response = await fetch("/api/projects");
         const data = await response.json();
 
         if (data.success) {
@@ -86,7 +74,56 @@ export function ProjectsList() {
     }
 
     fetchProjects();
-  }, [status, search, toast]);
+  }, [toast]);
+
+  // Client-side filtering and searching
+  const filteredProjects = useMemo(() => {
+    let filtered = [...projects];
+
+    // Apply search query
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(
+        (project) =>
+          project.title.toLowerCase().includes(query) ||
+          project.description.toLowerCase().includes(query) ||
+          project.projectType.toLowerCase().includes(query) ||
+          project.technologies.some((tech) =>
+            tech.toLowerCase().includes(query)
+          )
+      );
+    }
+
+    // Apply filters
+    Object.entries(filters).forEach(([key, value]) => {
+      if (!value || (Array.isArray(value) && value.length === 0)) return;
+
+      switch (key) {
+        case "projectType":
+          filtered = filtered.filter(
+            (project) => project.projectType === value
+          );
+          break;
+        case "status":
+          filtered = filtered.filter((project) => project.status === value);
+          break;
+        case "featured":
+          filtered = filtered.filter((project) =>
+            value === "true" ? project.featured : !project.featured
+          );
+          break;
+        case "technologies":
+          if (Array.isArray(value)) {
+            filtered = filtered.filter((project) =>
+              value.some((tech) => project.technologies.includes(tech))
+            );
+          }
+          break;
+      }
+    });
+
+    return filtered;
+  }, [projects, searchQuery, filters]);
 
   const handleDelete = async (id: string) => {
     if (confirm("Are you sure you want to delete this project?")) {
@@ -171,25 +208,28 @@ export function ProjectsList() {
     );
   }
 
-  if (projects.length === 0) {
+  if (filteredProjects.length === 0 && !loading) {
+    const hasFilters =
+      searchQuery.trim() || Object.keys(filters).some((key) => filters[key]);
+
     return (
       <Card className="bg-[var(--card-background)] border-[var(--card-border-color)] p-8 text-center">
         <h3 className="text-xl font-semibold text-[var(--card-headline)]">
-          No projects found
+          {hasFilters ? "No projects match your criteria" : "No projects found"}
         </h3>
         <p className="text-[var(--card-paragraph)] mt-2">
-          {search
-            ? `No projects matching "${search}"`
-            : status
-              ? `No projects with status "${status}"`
-              : "Start by adding your first project"}
+          {hasFilters
+            ? "Try adjusting your search or filters to find what you're looking for."
+            : "Start by adding your first project to showcase your work."}
         </p>
-        <Link href="/dashboard/projects/new">
-          <Button className="mt-4 mx-auto bg-[var(--button)] text-[var(--button-text)] hover:bg-[var(--button2)]">
-            <Plus className="mr-2 h-4 w-4" />
-            Add Project
-          </Button>
-        </Link>
+        {!hasFilters && (
+          <Link href="/dashboard/projects/new">
+            <Button className="mt-4 mx-auto bg-[var(--button)] text-[var(--button-text)] hover:bg-[var(--button2)]">
+              <Plus className="mr-2 h-4 w-4" />
+              Add Project
+            </Button>
+          </Link>
+        )}
       </Card>
     );
   }
@@ -201,7 +241,7 @@ export function ProjectsList() {
       initial="hidden"
       animate="visible"
     >
-      {projects.map((project) => (
+      {filteredProjects.map((project) => (
         <motion.div key={project._id} variants={itemVariants}>
           <Card className="overflow-hidden bg-[var(--card-background)] border-[var(--card-border-color)]">
             <div className="aspect-video w-full overflow-hidden bg-[var(--card-background-effect)]">

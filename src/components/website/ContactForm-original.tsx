@@ -82,13 +82,14 @@ export default function ContactForm() {
         )}
         ref={undefined}
       >
-        <div className="flex flex-col bg-transparent">
-          <Form {...form}>
+        <div className="flex flex-col border-none bg-transparent">
+          <Form  {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="space-y-2 bg-transparent py-[20px]"
+              className="space-y-2 bg-transparent py-[20px] border-none"
             >
               <FormField
+              
                 control={form.control}
                 name="name"
                 render={({ field }) => (
