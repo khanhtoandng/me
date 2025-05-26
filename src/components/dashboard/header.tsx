@@ -11,7 +11,6 @@ import {
   LogOut,
   Moon,
   Sun,
-  Menu,
   Check,
   CheckCheck,
   Trash2,
@@ -25,18 +24,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useTheme } from "next-themes";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { ThemeToggle } from "../ui/theme-toggle";
+import { MobileSidebar } from "./MobileSidebar";
 
-interface HeaderProps {
-  toggleSidebar?: () => void;
-}
-
-export function DashboardHeader({ toggleSidebar }: HeaderProps) {
+export function DashboardHeader() {
   const router = useRouter();
-  const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
   const [username, setUsername] = useState("Admin");
@@ -142,15 +137,7 @@ export function DashboardHeader({ toggleSidebar }: HeaderProps) {
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b bg-[var(--card-background)] px-4 md:px-6">
       <div className="flex items-center gap-2">
-        <Button
-          variant="ghost"
-          size="icon"
-          className="md:hidden"
-          onClick={toggleSidebar}
-        >
-          <Menu className="h-5 w-5" />
-          <span className="sr-only">Toggle sidebar</span>
-        </Button>
+        <MobileSidebar />
         <h1 className="text-xl font-semibold">Dashboard</h1>
       </div>
       <div className="flex items-center gap-4">
