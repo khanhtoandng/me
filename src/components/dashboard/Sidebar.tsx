@@ -20,7 +20,7 @@ import {
   Sparkles,
   Tag,
   User,
-  XIcon,
+  X,
 } from "lucide-react";
 import { Button } from "../ui/button";
 
@@ -80,8 +80,9 @@ export function DashboardSidebar({
       opacity: 1,
       transition: {
         type: "spring",
-        stiffness: 300,
-        damping: 30,
+        stiffness: 400,
+        damping: 40,
+        duration: 0.3,
       },
     },
     closed: {
@@ -89,8 +90,9 @@ export function DashboardSidebar({
       opacity: isMobile ? 0 : 1,
       transition: {
         type: "spring",
-        stiffness: 300,
-        damping: 30,
+        stiffness: 400,
+        damping: 40,
+        duration: 0.2,
       },
     },
   };
@@ -124,7 +126,7 @@ export function DashboardSidebar({
             animate="open"
             exit="closed"
             variants={overlayVariants}
-            className="fixed inset-0 bg-black/50 z-40 md:hidden"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
             onClick={onClose}
           />
         )}
@@ -139,10 +141,14 @@ export function DashboardSidebar({
             exit="closed"
             variants={sidebarVariants}
             className={`h-screen ${
-              isMobile ? "fixed" : "relative"
+              isMobile ? "fixed top-0 left-0" : "relative"
             } z-50 bg-[var(--card-background)] border-r border-[var(--card-border-color)] flex flex-col ${
-              collapsed && !isMobile ? "w-[80px]" : "w-[240px]"
-            } ${isMobile ? "" : "transition-all duration-300"}`}
+              collapsed && !isMobile
+                ? "w-[80px]"
+                : isMobile
+                  ? "w-[280px] max-w-[85vw]"
+                  : "w-[240px] lg:w-[280px]"
+            } ${isMobile ? "shadow-2xl" : "transition-all duration-300"}`}
           >
             <div className="p-4 border-b border-[var(--card-border-color)] flex items-center justify-between">
               {(!collapsed || isMobile) && (
@@ -178,7 +184,7 @@ export function DashboardSidebar({
                   onClick={onClose}
                   className="p-2 rounded-md hover:bg-[var(--card-hover)] text-[var(--paragraph)]"
                 >
-                  <XIcon size={20} />
+                  <X size={20} />
                 </motion.button>
               )}
             </div>
@@ -197,11 +203,13 @@ export function DashboardSidebar({
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         onClick={() => handleNavigation(item.href)}
-                        className={`w-full flex items-center p-2 rounded-md transition-colors ${
+                        className={`w-full flex items-center ${
+                          isMobile ? "p-3" : "p-2"
+                        } rounded-md transition-colors ${
                           isActive
                             ? "bg-[var(--button)] text-[var(--button-text)]"
                             : "text-[var(--nav-item)] hover:bg-[var(--card-hover)] hover:text-[var(--link-hover)]"
-                        }`}
+                        } ${isMobile ? "active:bg-[var(--card-hover)]" : ""}`}
                       >
                         <item.icon size={20} className="shrink-0" />
                         {(!collapsed || isMobile) && (
@@ -227,7 +235,9 @@ export function DashboardSidebar({
                 transition={{ delay: 0.2 }}
               >
                 <Button
-                  className="w-full flex justify-center gap-3 flex-row-reverse"
+                  className={`w-full flex justify-center gap-3 flex-row-reverse ${
+                    isMobile ? "py-3" : ""
+                  }`}
                   variant="outline"
                   onClick={handleLogout}
                 >
