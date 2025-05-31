@@ -23,8 +23,10 @@ import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
 
 interface ProjectsListProps {
+  projects?: Project[];
   searchQuery?: string;
   filters?: Record<string, any>;
+  isLoading?: boolean;
 }
 
 type Project = {
@@ -44,14 +46,22 @@ type Project = {
 };
 
 export function ProjectsList({
+  projects: propProjects,
   searchQuery = "",
   filters = {},
+  isLoading = false,
 }: ProjectsListProps) {
   const { toast } = useToast();
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [projects, setProjects] = useState<Project[]>(propProjects || []);
+  const [loading, setLoading] = useState(!propProjects);
 
   useEffect(() => {
+    if (propProjects) {
+      setProjects(propProjects);
+      setLoading(isLoading);
+      return;
+    }
+
     async function fetchProjects() {
       try {
         setLoading(true);
@@ -74,7 +84,7 @@ export function ProjectsList({
     }
 
     fetchProjects();
-  }, [toast]);
+  }, [propProjects, isLoading, toast]);
 
   // Client-side filtering and searching
   const filteredProjects = useMemo(() => {

@@ -39,10 +39,15 @@ let dialogState: DialogState = {
   isOpen: false,
 };
 
-let setDialogState: React.Dispatch<React.SetStateAction<DialogState>> | null = null;
+let setDialogState: React.Dispatch<React.SetStateAction<DialogState>> | null =
+  null;
 
 // Global dialog functions
-export const showAlert = (title: string, message: string, variant: DialogOptions["variant"] = "default"): Promise<boolean> => {
+export const showAlert = (
+  title: string,
+  message: string,
+  variant: DialogOptions["variant"] = "default"
+): Promise<boolean> => {
   return new Promise((resolve) => {
     if (setDialogState) {
       setDialogState({
@@ -55,7 +60,7 @@ export const showAlert = (title: string, message: string, variant: DialogOptions
         resolve: () => {
           resolve(true);
           if (setDialogState) {
-            setDialogState(prev => ({ ...prev, isOpen: false }));
+            setDialogState((prev) => ({ ...prev, isOpen: false }));
           }
         },
       });
@@ -64,9 +69,9 @@ export const showAlert = (title: string, message: string, variant: DialogOptions
 };
 
 export const showConfirm = (
-  title: string, 
-  message: string, 
-  options: { 
+  title: string,
+  message: string,
+  options: {
     variant?: DialogOptions["variant"];
     confirmText?: string;
     cancelText?: string;
@@ -85,7 +90,7 @@ export const showConfirm = (
         resolve: (value) => {
           resolve(value as boolean);
           if (setDialogState) {
-            setDialogState(prev => ({ ...prev, isOpen: false }));
+            setDialogState((prev) => ({ ...prev, isOpen: false }));
           }
         },
       });
@@ -94,8 +99,8 @@ export const showConfirm = (
 };
 
 export const showPrompt = (
-  title: string, 
-  message: string, 
+  title: string,
+  message: string,
   options: {
     placeholder?: string;
     defaultValue?: string;
@@ -118,7 +123,7 @@ export const showPrompt = (
         resolve: (value) => {
           resolve(value as string | null);
           if (setDialogState) {
-            setDialogState(prev => ({ ...prev, isOpen: false }));
+            setDialogState((prev) => ({ ...prev, isOpen: false }));
           }
         },
       });
@@ -186,11 +191,14 @@ export function CustomDialogProvider() {
   };
 
   return (
-    <Dialog open={state.isOpen} onOpenChange={(open) => {
-      if (!open && state.resolve) {
-        handleCancel();
-      }
-    }}>
+    <Dialog
+      open={state.isOpen}
+      onOpenChange={(open) => {
+        if (!open && state.resolve) {
+          handleCancel();
+        }
+      }}
+    >
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-3">
@@ -224,17 +232,11 @@ export function CustomDialogProvider() {
 
         <DialogFooter className="flex gap-2">
           {state.type !== "alert" && (
-            <Button
-              variant="outline"
-              onClick={handleCancel}
-            >
+            <Button variant="outline" onClick={handleCancel}>
               {state.cancelText}
             </Button>
           )}
-          <Button
-            variant={getButtonVariant()}
-            onClick={handleConfirm}
-          >
+          <Button variant={getButtonVariant()} onClick={handleConfirm}>
             {state.confirmText}
           </Button>
         </DialogFooter>
@@ -250,4 +252,77 @@ export function useDialog() {
     showConfirm,
     showPrompt,
   };
+}
+
+// Simple CustomDialog component for direct use
+interface CustomDialogProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onConfirm?: () => void;
+  title: string;
+  description: string;
+  confirmText?: string;
+  cancelText?: string;
+  confirmVariant?:
+    | "default"
+    | "destructive"
+    | "outline"
+    | "secondary"
+    | "ghost"
+    | "link";
+  isLoading?: boolean;
+  showHeader?: boolean;
+  className?: string;
+  children?: React.ReactNode;
+}
+
+export function CustomDialog({
+  isOpen,
+  onClose,
+  onConfirm,
+  title,
+  description,
+  confirmText = "Confirm",
+  cancelText = "Cancel",
+  confirmVariant = "default",
+  isLoading = false,
+  showHeader = true,
+  className = "",
+  children,
+}: CustomDialogProps) {
+  const handleConfirm = () => {
+    if (onConfirm && !isLoading) {
+      onConfirm();
+    }
+  };
+
+  return (
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent className={`sm:max-w-md ${className}`}>
+        {showHeader && (
+          <DialogHeader>
+            <DialogTitle>{title}</DialogTitle>
+            <DialogDescription>{description}</DialogDescription>
+          </DialogHeader>
+        )}
+
+        {children}
+
+        {onConfirm && (
+          <DialogFooter className="flex gap-2">
+            <Button variant="outline" onClick={onClose} disabled={isLoading}>
+              {cancelText}
+            </Button>
+            <Button
+              variant={confirmVariant}
+              onClick={handleConfirm}
+              disabled={isLoading}
+            >
+              {isLoading ? "Loading..." : confirmText}
+            </Button>
+          </DialogFooter>
+        )}
+      </DialogContent>
+    </Dialog>
+  );
 }

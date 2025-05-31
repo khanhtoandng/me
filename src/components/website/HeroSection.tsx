@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, memo } from "react";
 import { annotate } from "rough-notation";
-import { alazhar } from "@/data/Links";
+// University link constant
+const ALAZHAR_URL = "https://www.alazhar.edu.ps";
 import Link from "next/link";
 import { useContent } from "@/hooks/use-content";
 import { useSocialLinks } from "@/hooks/use-social-links";
@@ -121,7 +122,7 @@ function HeroSection() {
                     ) : (
                       parts[0]
                     )}
-                    <Link target="_blank" href={alazhar} className="link">
+                    <Link target="_blank" href={ALAZHAR_URL} className="link">
                       Al-Azhar University
                     </Link>
                     {parts[1]}
