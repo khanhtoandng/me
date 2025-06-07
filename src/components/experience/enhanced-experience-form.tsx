@@ -78,17 +78,18 @@ export function EnhancedExperienceForm({
   const [formData, setFormData] = useState<
     Omit<Experience, "_id"> & { _id?: string }
   >({
-    company: "",
-    position: "",
-    description: "",
-    startDate: "",
-    endDate: "",
-    current: false,
-    location: "",
-    type: "full-time",
-    skills: [],
-    achievements: [],
-    ...experience,
+    company: experience?.company || "",
+    position: experience?.position || "",
+    description: experience?.description || "",
+    startDate: experience?.startDate || "",
+    endDate: experience?.endDate || "",
+    current: experience?.current || false,
+    location: experience?.location || "",
+    type: experience?.type || "full-time",
+    skills: experience?.skills || [],
+    achievements: experience?.achievements || [],
+    order: experience?.order,
+    _id: experience?._id,
   });
 
   const [aiEnhancing, setAiEnhancing] = useState({
@@ -118,6 +119,22 @@ export function EnhancedExperienceForm({
         achievements: experience.achievements || [],
         order: experience.order,
         _id: experience._id,
+      });
+    } else {
+      // Reset form when not editing
+      setFormData({
+        company: "",
+        position: "",
+        description: "",
+        startDate: "",
+        endDate: "",
+        current: false,
+        location: "",
+        type: "full-time",
+        skills: [],
+        achievements: [],
+        order: undefined,
+        _id: undefined,
       });
     }
   }, [experience]);

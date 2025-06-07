@@ -156,7 +156,9 @@ export function EnhancedProjectsDashboard({
     }
   };
 
-  const handleFormSubmit = async (formData: Project) => {
+  const handleFormSubmit = async (
+    formData: Omit<Project, "_id"> & { _id?: string }
+  ) => {
     setFormLoading(true);
 
     try {

@@ -71,11 +71,12 @@ interface Project {
   challenges?: string;
   solutions?: string;
   results?: string;
+  order?: number;
 }
 
 interface EnhancedProjectFormProps {
   project?: Project;
-  onSubmit: (data: Project) => Promise<void>;
+  onSubmit: (data: Omit<Project, "_id"> & { _id?: string }) => Promise<void>;
   onCancel: () => void;
   isLoading?: boolean;
 }
@@ -87,25 +88,26 @@ export function EnhancedProjectForm({
   isLoading = false,
 }: EnhancedProjectFormProps) {
   const [formData, setFormData] = useState<Project>({
-    title: "",
-    description: "",
-    projectType: "web-app",
-    images: [],
-    technologies: [],
-    status: "draft",
-    featured: false,
-    githubUrl: "",
-    websiteUrl: "",
-    videoUrl: "",
-    startDate: "",
-    endDate: "",
-    client: "",
-    teamSize: 1,
-    role: "",
-    challenges: "",
-    solutions: "",
-    results: "",
-    ...project,
+    title: project?.title || "",
+    description: project?.description || "",
+    projectType: project?.projectType || "web-app",
+    images: project?.images || [],
+    technologies: project?.technologies || [],
+    status: project?.status || "draft",
+    featured: project?.featured || false,
+    githubUrl: project?.githubUrl || "",
+    websiteUrl: project?.websiteUrl || "",
+    videoUrl: project?.videoUrl || "",
+    startDate: project?.startDate || "",
+    endDate: project?.endDate || "",
+    client: project?.client || "",
+    teamSize: project?.teamSize || 1,
+    role: project?.role || "",
+    challenges: project?.challenges || "",
+    solutions: project?.solutions || "",
+    results: project?.results || "",
+    order: project?.order,
+    _id: project?._id,
   });
 
   const [aiEnhancing, setAiEnhancing] = useState({
@@ -143,7 +145,32 @@ export function EnhancedProjectForm({
         challenges: project.challenges || "",
         solutions: project.solutions || "",
         results: project.results || "",
-        ...project,
+        order: project.order,
+        _id: project._id,
+      });
+    } else {
+      // Reset form when not editing
+      setFormData({
+        title: "",
+        description: "",
+        projectType: "web-app",
+        images: [],
+        technologies: [],
+        status: "draft",
+        featured: false,
+        githubUrl: "",
+        websiteUrl: "",
+        videoUrl: "",
+        startDate: "",
+        endDate: "",
+        client: "",
+        teamSize: 1,
+        role: "",
+        challenges: "",
+        solutions: "",
+        results: "",
+        order: undefined,
+        _id: undefined,
       });
     }
   }, [project]);
@@ -631,7 +658,7 @@ export function EnhancedProjectForm({
                     variant="outline"
                     size="sm"
                     onClick={() =>
-                      enhanceField("challenges", formData.challenges)
+                      enhanceField("challenges", formData.challenges || "")
                     }
                     disabled={aiEnhancing.challenges}
                     className="w-full"
@@ -670,7 +697,7 @@ export function EnhancedProjectForm({
                     variant="outline"
                     size="sm"
                     onClick={() =>
-                      enhanceField("solutions", formData.solutions)
+                      enhanceField("solutions", formData.solutions || "")
                     }
                     disabled={aiEnhancing.solutions}
                     className="w-full"
@@ -706,7 +733,9 @@ export function EnhancedProjectForm({
                     type="button"
                     variant="outline"
                     size="sm"
-                    onClick={() => enhanceField("results", formData.results)}
+                    onClick={() =>
+                      enhanceField("results", formData.results || "")
+                    }
                     disabled={aiEnhancing.results}
                     className="w-full"
                   >
