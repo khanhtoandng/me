@@ -35,8 +35,8 @@ const keywords = [
 export const metadata: Metadata = {
   metadataBase: new URL(`https://${domain}`),
   title: {
-    template: "b19r - %s",
-    default: "b19r",
+    template: "balshaer - %s",
+    default: "balshaer",
   },
   description:
     "Portfolio of Baraa Alshaer, a skilled Full Stack Developer with expertise in React, Node.js, TypeScript, and more. Creating impactful web applications with a focus on user experience and modern technologies.",
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     alternateLocale: "ar_SA",
-    title: "b19r",
+    title: "balshaer",
     description:
       "Explore the portfolio of Baraa Alshaer, a passionate Full Stack Developer. Projects, blogs, and more showcasing expertise in modern web development with React, Node.js, and TypeScript.",
     url: websitePath.main,
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
         url: webImage,
         width: 400,
         height: 400,
-        alt: "b19r",
+        alt: "balshaer",
       },
     ],
     countryName: "Palestine",
@@ -78,7 +78,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "b19r",
+    title: "balshaer",
     description:
       "Explore the portfolio of Baraa Alshaer, a passionate Full Stack Developer. Projects, blogs, and more showcasing expertise in modern web development.",
     images: webImage,

@@ -8,7 +8,7 @@ const crypto = require("crypto");
 
 // MongoDB connection strings with the specified credentials
 const ATLAS_URI =
-  "mongodb+srv://b19r:12345678@alshaer.m6fqcnd.mongodb.net/?retryWrites=true&w=majority&appName=alshaer";
+  "mongodb+srv://balshaer:12345678@alshaer.m6fqcnd.mongodb.net/?retryWrites=true&w=majority&appName=alshaer";
 const LOCAL_URI = "mongodb://127.0.0.1:27017/alshaer";
 
 // We'll try both connections
@@ -87,18 +87,18 @@ async function initAdmin() {
     // Create User model
     const User = mongoose.models.User || mongoose.model("User", UserSchema);
 
-    // Check if user with username "b19r" already exists
-    const existingUser = await User.findOne({ username: "b19r" });
+    // Check if user with username "balshaer" already exists
+    const existingUser = await User.findOne({ username: "balshaer" });
 
     if (existingUser) {
-      console.log('User "b19r" already exists');
+      console.log('User "balshaer" already exists');
       process.exit(0);
     }
 
     // Create admin user with specified credentials
     const adminUser = new User({
-      username: "b19r",
-      email: "b19r@example.com",
+      username: "balshaer",
+      email: "balshaer@example.com",
       password: hashPassword("12345678"),
       role: "admin",
     });
@@ -106,7 +106,7 @@ async function initAdmin() {
     await adminUser.save();
     console.log("Admin user created successfully");
     console.log("----------------------------------");
-    console.log("Username: b19r");
+    console.log("Username: balshaer");
     console.log("Password: 12345678");
     console.log("----------------------------------");
     console.log(

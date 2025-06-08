@@ -104,28 +104,28 @@ async function testSocialLinks() {
     const testLinks = [
       {
         platform: "GitHub",
-        url: "https://github.com/b19r",
+        url: "https://github.com/balshaer",
         icon: "FaGithub",
         iconLibrary: "fa",
         order: 1,
       },
       {
         platform: "LinkedIn",
-        url: "https://linkedin.com/in/b19r",
+        url: "https://linkedin.com/in/balshaer",
         icon: "FaLinkedin",
         iconLibrary: "fa",
         order: 2,
       },
       {
         platform: "Twitter",
-        url: "https://twitter.com/b19r",
+        url: "https://twitter.com/balshaer",
         icon: "FaTwitter",
         iconLibrary: "fa",
         order: 3,
       },
       {
         platform: "Portfolio",
-        url: "https://b19r.dev",
+        url: "https://balshaer.dev",
         icon: "FaGlobe",
         iconLibrary: "fa",
         order: 4,

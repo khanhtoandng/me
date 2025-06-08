@@ -55,7 +55,7 @@ A comprehensive admin dashboard for managing your portfolio website.
 
    This will create an admin user with the following credentials:
 
-   - Username: b19r
+   - Username: balshaer
    - Password: 12345678
 
 6. Start the development server:

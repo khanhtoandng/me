@@ -7,6 +7,7 @@ const ALAZHAR_URL = "https://www.alazhar.edu.ps";
 import Link from "next/link";
 import { useContent } from "@/hooks/use-content";
 import { useSocialLinks } from "@/hooks/use-social-links";
+import { Skeleton } from "@/components/ui/skeleton";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import * as BiIcons from "react-icons/bi";
@@ -95,47 +96,66 @@ function HeroSection() {
   return (
     <div className="header max-md:pt-[50px]">
       <div className="header-content">
-        <h1 className="header-title">{displayContent.title}</h1>
-        <h1 className="subtitle capitalize">{displayContent.subtitle}</h1>
         {loading ? (
-          <div className="space-y-4">
-            <div className="h-4 bg-gray-200 rounded animate-pulse"></div>
-            <div className="h-4 bg-gray-200 rounded animate-pulse"></div>
-            <div className="h-4 bg-gray-200 rounded animate-pulse"></div>
-          </div>
+          <>
+            {/* Title Skeleton */}
+            <Skeleton className="h-12 w-[300px] mb-4 max-md:w-[250px]" />
+            {/* Subtitle Skeleton */}
+            <Skeleton className="h-6 w-[400px] mb-6 max-md:w-[300px]" />
+            {/* Content Paragraphs Skeleton */}
+            <div className="space-y-4">
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-4 w-[90%]" />
+              <Skeleton className="h-4 w-[95%]" />
+              <div className="space-y-3 mt-6">
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-[85%]" />
+                <Skeleton className="h-4 w-[92%]" />
+              </div>
+              <div className="space-y-3 mt-6">
+                <Skeleton className="h-4 w-[88%]" />
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-[80%]" />
+              </div>
+            </div>
+          </>
         ) : (
-          displayContent.content.paragraphs?.map(
-            (paragraph: string, index: number) => {
-              if (index === 0) {
-                // First paragraph with highlighted text and university link
-                const parts = paragraph.split("Al-Azhar University");
+          <>
+            <h1 className="header-title">{displayContent.title}</h1>
+            <h1 className="subtitle capitalize">{displayContent.subtitle}</h1>
+            {displayContent.content.paragraphs?.map(
+              (paragraph: string, index: number) => {
+                if (index === 0) {
+                  // First paragraph with highlighted text and university link
+                  const parts = paragraph.split("Al-Azhar University");
+                  return (
+                    <p key={index} className="description">
+                      {parts[0].includes("Full-Stack Developer") ? (
+                        <>
+                          {parts[0].split("Full-Stack Developer")[0]}
+                          <span ref={highlightedWordRef}>
+                            Full-Stack Developer
+                          </span>
+                          {parts[0].split("Full-Stack Developer")[1]}
+                        </>
+                      ) : (
+                        parts[0]
+                      )}
+                      <Link target="_blank" href={ALAZHAR_URL} className="link">
+                        Al-Azhar University
+                      </Link>
+                      {parts[1]}
+                    </p>
+                  );
+                }
                 return (
                   <p key={index} className="description">
-                    {parts[0].includes("Full-Stack Developer") ? (
-                      <>
-                        {parts[0].split("Full-Stack Developer")[0]}
-                        <span ref={highlightedWordRef}>
-                          Full-Stack Developer
-                        </span>
-                        {parts[0].split("Full-Stack Developer")[1]}
-                      </>
-                    ) : (
-                      parts[0]
-                    )}
-                    <Link target="_blank" href={ALAZHAR_URL} className="link">
-                      Al-Azhar University
-                    </Link>
-                    {parts[1]}
+                    {paragraph}
                   </p>
                 );
               }
-              return (
-                <p key={index} className="description">
-                  {paragraph}
-                </p>
-              );
-            }
-          )
+            )}
+          </>
         )}
       </div>
 
@@ -143,10 +163,7 @@ function HeroSection() {
       {socialLoading ? (
         <div className="flex items-start gap-4 py-[8px] max-md:w-full max-md:flex-col">
           {[...Array(4)].map((_, i) => (
-            <div
-              key={i}
-              className="h-[40px] w-[120px] bg-gray-200 rounded-lg animate-pulse max-md:w-full"
-            />
+            <Skeleton key={i} className="h-[40px] w-[120px] max-md:w-full" />
           ))}
         </div>
       ) : socialLinks.length > 0 ? (

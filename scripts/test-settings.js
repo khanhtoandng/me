@@ -60,8 +60,10 @@ async function testSettings() {
     const User = mongoose.models.User || mongoose.model("User", UserSchema);
 
     // Find user
-    console.log("Looking for user with username: b19r");
-    const user = await User.findOne({ username: "b19r" }).select("+password");
+    console.log("Looking for user with username: balshaer");
+    const user = await User.findOne({ username: "balshaer" }).select(
+      "+password"
+    );
 
     if (user) {
       console.log("User found:");

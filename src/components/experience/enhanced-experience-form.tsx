@@ -75,9 +75,8 @@ export function EnhancedExperienceForm({
   onCancel,
   isLoading = false,
 }: EnhancedExperienceFormProps) {
-  const [formData, setFormData] = useState<
-    Omit<Experience, "_id"> & { _id?: string }
-  >({
+  // Initialize form data with proper defaults
+  const getInitialFormData = () => ({
     company: experience?.company || "",
     position: experience?.position || "",
     description: experience?.description || "",
@@ -92,6 +91,10 @@ export function EnhancedExperienceForm({
     _id: experience?._id,
   });
 
+  const [formData, setFormData] = useState<
+    Omit<Experience, "_id"> & { _id?: string }
+  >(getInitialFormData);
+
   const [aiEnhancing, setAiEnhancing] = useState({
     description: false,
     location: false,
@@ -103,10 +106,13 @@ export function EnhancedExperienceForm({
   const [newSkill, setNewSkill] = useState("");
   const [newAchievement, setNewAchievement] = useState("");
 
-  // Pre-populate form when editing
+  // Pre-populate form when editing - ensure proper updates
   useEffect(() => {
+    console.log("Experience prop changed:", experience); // Debug log
+
     if (experience) {
-      setFormData({
+      // When editing, populate with experience data
+      const updatedFormData = {
         company: experience.company || "",
         position: experience.position || "",
         description: experience.description || "",
@@ -119,10 +125,13 @@ export function EnhancedExperienceForm({
         achievements: experience.achievements || [],
         order: experience.order,
         _id: experience._id,
-      });
+      };
+
+      console.log("Setting form data:", updatedFormData); // Debug log
+      setFormData(updatedFormData);
     } else {
-      // Reset form when not editing
-      setFormData({
+      // Reset form when adding new experience
+      const resetFormData = {
         company: "",
         position: "",
         description: "",
@@ -135,7 +144,10 @@ export function EnhancedExperienceForm({
         achievements: [],
         order: undefined,
         _id: undefined,
-      });
+      };
+
+      console.log("Resetting form data"); // Debug log
+      setFormData(resetFormData);
     }
   }, [experience]);
 
