@@ -3,9 +3,9 @@
 import type React from "react";
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, Filter } from "lucide-react";
+import { UnifiedSearchInput } from "@/components/ui/unified-search-input";
+import { Filter } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export function ProjectsFilter() {
@@ -15,11 +15,10 @@ export function ProjectsFilter() {
 
   const status = searchParams.get("status") || "all";
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSearch = (query: string) => {
     const params = new URLSearchParams(searchParams);
-    if (searchQuery) {
-      params.set("search", searchQuery);
+    if (query.trim()) {
+      params.set("search", query);
     } else {
       params.delete("search");
     }
@@ -38,16 +37,16 @@ export function ProjectsFilter() {
 
   return (
     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-      <form onSubmit={handleSearch} className="relative  w-full md:w-96">
-        <Search className="absolute  hiddenh-4 w-4 text-[var(--paragraph)]" />
-        <Input
-          type="search"
+      <div className="w-full md:w-96">
+        <UnifiedSearchInput
           placeholder="Search projects..."
-          className="w-full bg-[var(--input-background)] border-[var(--input-border-color)] pl-8 text-[var(--input-text)]"
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={setSearchQuery}
+          onSearch={handleSearch}
+          className="w-full"
+          showSearchButton={true}
         />
-      </form>
+      </div>
       <div className="flex items-center gap-2 w-full justify-end">
         <Button
           variant="outline"

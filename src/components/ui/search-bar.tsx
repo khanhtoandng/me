@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, X, Filter } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { UnifiedSearchInput } from "@/components/ui/unified-search-input";
+import { Filter, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Popover,
@@ -57,14 +58,14 @@ export function SearchBar({
   }, [activeFilters, onFilterChange]);
 
   const handleFilterChange = (key: string, value: any) => {
-    setActiveFilters(prev => ({
+    setActiveFilters((prev) => ({
       ...prev,
       [key]: value,
     }));
   };
 
   const removeFilter = (key: string) => {
-    setActiveFilters(prev => {
+    setActiveFilters((prev) => {
       const newFilters = { ...prev };
       delete newFilters[key];
       return newFilters;
@@ -80,129 +81,135 @@ export function SearchBar({
   };
 
   const activeFilterCount = Object.keys(activeFilters).filter(
-    key => activeFilters[key] !== undefined && activeFilters[key] !== ""
+    (key) => activeFilters[key] !== undefined && activeFilters[key] !== ""
   ).length;
 
   return (
     <div className={`space-y-3 ${className}`}>
-      {/* Search Input */}
-      <div className="relative">
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-[var(--paragraph)]" />
-        <Input
-          type="text"
+      {/* Unified Search Input */}
+      <div className="flex items-center gap-2">
+        <UnifiedSearchInput
           placeholder={placeholder}
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          className="pl-10 pr-20 bg-[var(--input-background)] border-[var(--input-border-color)] text-[var(--input-text)]"
+          onChange={setQuery}
+          onSearch={onSearch}
+          className="flex-1"
         />
-        <div className="absolute right-2 top-1/2 transform -translate-y-1/2 flex items-center gap-1">
-          {query && (
-            <motion.button
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              onClick={clearSearch}
-              className="p-1 hover:bg-[var(--card-hover)] rounded"
-            >
-              <X className="h-3 w-3" />
-            </motion.button>
-          )}
-          
-          {showFilters && filters.length > 0 && (
-            <Popover open={showFilterPanel} onOpenChange={setShowFilterPanel}>
-              <PopoverTrigger asChild>
+
+        {showFilters && filters.length > 0 && (
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setShowFilterPanel(!showFilterPanel)}
+            className="flex items-center gap-2"
+          >
+            <Filter className="h-4 w-4" />
+            Filters
+            {activeFilterCount > 0 && (
+              <Badge variant="secondary" className="ml-1">
+                {activeFilterCount}
+              </Badge>
+            )}
+          </Button>
+        )}
+      </div>
+
+      {/* Filter Panel */}
+      {showFilters && filters.length > 0 && showFilterPanel && (
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: "auto" }}
+          exit={{ opacity: 0, height: 0 }}
+          className="border border-[var(--card-border-color)] rounded-lg p-4 bg-[var(--card-background)]"
+        >
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h4 className="font-medium">Filters</h4>
+              {activeFilterCount > 0 && (
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="h-8 w-8 p-0 relative"
+                  onClick={clearAllFilters}
+                  className="text-xs"
                 >
-                  <Filter className="h-4 w-4" />
-                  {activeFilterCount > 0 && (
-                    <Badge
-                      variant="destructive"
-                      className="absolute -top-1 -right-1 h-4 w-4 p-0 text-xs"
-                    >
-                      {activeFilterCount}
-                    </Badge>
-                  )}
+                  Clear All
                 </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-80 p-4" align="end">
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <h4 className="font-medium">Filters</h4>
-                    {activeFilterCount > 0 && (
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={clearAllFilters}
-                        className="text-xs"
+              )}
+            </div>
+
+            {filters.map((filter) => (
+              <div key={filter.key} className="space-y-2">
+                <label className="text-sm font-medium">{filter.label}</label>
+
+                {filter.type === "select" && (
+                  <select
+                    value={activeFilters[filter.key] || ""}
+                    onChange={(e) =>
+                      handleFilterChange(filter.key, e.target.value)
+                    }
+                    className="w-full p-2 border rounded-md bg-[var(--input-background)] border-[var(--input-border-color)]"
+                  >
+                    <option value="">All</option>
+                    {filter.options?.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                )}
+
+                {filter.type === "multiselect" && (
+                  <div className="space-y-1">
+                    {filter.options?.map((option) => (
+                      <label
+                        key={option.value}
+                        className="flex items-center space-x-2"
                       >
-                        Clear All
-                      </Button>
-                    )}
-                  </div>
-
-                  {filters.map((filter) => (
-                    <div key={filter.key} className="space-y-2">
-                      <label className="text-sm font-medium">
-                        {filter.label}
-                      </label>
-                      
-                      {filter.type === "select" && (
-                        <select
-                          value={activeFilters[filter.key] || ""}
-                          onChange={(e) => handleFilterChange(filter.key, e.target.value)}
-                          className="w-full p-2 border rounded-md bg-[var(--input-background)] border-[var(--input-border-color)]"
-                        >
-                          <option value="">All</option>
-                          {filter.options?.map((option) => (
-                            <option key={option.value} value={option.value}>
-                              {option.label}
-                            </option>
-                          ))}
-                        </select>
-                      )}
-
-                      {filter.type === "multiselect" && (
-                        <div className="space-y-1">
-                          {filter.options?.map((option) => (
-                            <label key={option.value} className="flex items-center space-x-2">
-                              <input
-                                type="checkbox"
-                                checked={(activeFilters[filter.key] || []).includes(option.value)}
-                                onChange={(e) => {
-                                  const currentValues = activeFilters[filter.key] || [];
-                                  if (e.target.checked) {
-                                    handleFilterChange(filter.key, [...currentValues, option.value]);
-                                  } else {
-                                    handleFilterChange(filter.key, currentValues.filter((v: string) => v !== option.value));
-                                  }
-                                }}
-                                className="rounded"
-                              />
-                              <span className="text-sm">{option.label}</span>
-                            </label>
-                          ))}
-                        </div>
-                      )}
-
-                      {filter.type === "date" && (
-                        <Input
-                          type="date"
-                          value={activeFilters[filter.key] || ""}
-                          onChange={(e) => handleFilterChange(filter.key, e.target.value)}
-                          className="bg-[var(--input-background)] border-[var(--input-border-color)]"
+                        <input
+                          type="checkbox"
+                          checked={(activeFilters[filter.key] || []).includes(
+                            option.value
+                          )}
+                          onChange={(e) => {
+                            const currentValues =
+                              activeFilters[filter.key] || [];
+                            if (e.target.checked) {
+                              handleFilterChange(filter.key, [
+                                ...currentValues,
+                                option.value,
+                              ]);
+                            } else {
+                              handleFilterChange(
+                                filter.key,
+                                currentValues.filter(
+                                  (v: string) => v !== option.value
+                                )
+                              );
+                            }
+                          }}
+                          className="rounded"
                         />
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </PopoverContent>
-            </Popover>
-          )}
-        </div>
-      </div>
+                        <span className="text-sm">{option.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                )}
+
+                {filter.type === "date" && (
+                  <Input
+                    type="date"
+                    value={activeFilters[filter.key] || ""}
+                    onChange={(e) =>
+                      handleFilterChange(filter.key, e.target.value)
+                    }
+                    className="bg-[var(--input-background)] border-[var(--input-border-color)]"
+                  />
+                )}
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      )}
 
       {/* Active Filters */}
       <AnimatePresence>
@@ -214,14 +221,16 @@ export function SearchBar({
             className="flex flex-wrap gap-2"
           >
             {Object.entries(activeFilters).map(([key, value]) => {
-              if (!value || (Array.isArray(value) && value.length === 0)) return null;
-              
-              const filter = filters.find(f => f.key === key);
+              if (!value || (Array.isArray(value) && value.length === 0))
+                return null;
+
+              const filter = filters.find((f) => f.key === key);
               if (!filter) return null;
 
-              const displayValue = Array.isArray(value) 
-                ? value.join(", ") 
-                : filter.options?.find(opt => opt.value === value)?.label || value;
+              const displayValue = Array.isArray(value)
+                ? value.join(", ")
+                : filter.options?.find((opt) => opt.value === value)?.label ||
+                  value;
 
               return (
                 <motion.div

@@ -22,6 +22,7 @@ import { Camera, Upload, X, Plus } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { motion, AnimatePresence } from "framer-motion";
 import { SocialLinksManager } from "@/components/profile/social-links-manager";
+import { ProfilePhotoManager } from "@/components/profile/profile-photo-manager";
 
 export function ProfileForm() {
   const { toast } = useToast();
@@ -212,21 +213,59 @@ export function ProfileForm() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                <motion.div
-                  className="flex justify-between items-center py-5"
-                  variants={itemVariants}
-                >
-                  <Avatar className="h-24 w-24">
-                    <AvatarImage
-                      src={formData.avatar || "/placeholder.svg"}
-                      alt="Profile"
-                    />
-                    <AvatarFallback className="bg-[var(--button)] text-[var(--button-text)] text-xl">
-                      {formData.firstName && formData.lastName
-                        ? `${formData.firstName[0]}${formData.lastName[0]}`
-                        : "?"}
-                    </AvatarFallback>
-                  </Avatar>
+                <motion.div className="mb-6" variants={itemVariants}>
+                  <ProfilePhotoManager
+                    currentPhoto={formData.avatar}
+                    userName={
+                      `${formData.firstName} ${formData.lastName}`.trim() ||
+                      "User"
+                    }
+                    onPhotoUpdate={async (photoUrl) => {
+                      setFormData((prev) => ({
+                        ...prev,
+                        avatar: photoUrl || "",
+                      }));
+
+                      // Auto-save the photo update
+                      try {
+                        const response = await fetch("/api/profile", {
+                          method: "PUT",
+                          headers: {
+                            "Content-Type": "application/json",
+                          },
+                          body: JSON.stringify({
+                            ...formData,
+                            avatar: photoUrl || "",
+                          }),
+                        });
+
+                        if (!response.ok) {
+                          throw new Error("Failed to update profile photo");
+                        }
+
+                        toast({
+                          title: "Success",
+                          description: photoUrl
+                            ? "Profile photo updated successfully"
+                            : "Profile photo removed successfully",
+                        });
+                      } catch (error) {
+                        console.error("Error updating profile photo:", error);
+                        toast({
+                          title: "Error",
+                          description: "Failed to update profile photo",
+                          variant: "destructive",
+                        });
+                        // Revert the change
+                        setFormData((prev) => ({
+                          ...prev,
+                          avatar: formData.avatar,
+                        }));
+                        throw error;
+                      }
+                    }}
+                    isLoading={isSubmitting}
+                  />
                 </motion.div>
 
                 <Separator className="bg-[var(--card-border-color)]" />

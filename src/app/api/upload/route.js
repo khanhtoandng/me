@@ -1,12 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
-import { writeFile, mkdir } from "fs/promises";
-import { join } from "path";
-import { existsSync } from "fs";
+import {
+  uploadToCloudinary,
+  uploadProfilePhoto,
+  uploadProjectImage,
+  uploadDocument,
+} from "@/lib/cloudinary";
 
 export async function POST(request) {
   try {
     const formData = await request.formData();
     const file = formData.get("file");
+    const uploadType = formData.get("type") || "general"; // profile, project, document, general
+    const entityId = formData.get("entityId") || "default"; // user ID, project ID, etc.
 
     if (!file) {
       return NextResponse.json(
@@ -18,13 +23,15 @@ export async function POST(request) {
     // Validate file type
     const allowedTypes = [
       "image/jpeg",
-      "image/jpg", 
+      "image/jpg",
       "image/png",
       "image/gif",
       "image/webp",
       "video/mp4",
       "video/webm",
       "application/pdf",
+      "application/msword",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     ];
 
     if (!allowedTypes.includes(file.type)) {
@@ -34,43 +41,60 @@ export async function POST(request) {
       );
     }
 
-    // Validate file size (5MB limit)
-    const maxSize = 5 * 1024 * 1024; // 5MB
+    // Validate file size (10MB limit for Cloudinary)
+    const maxSize = 10 * 1024 * 1024; // 10MB
     if (file.size > maxSize) {
       return NextResponse.json(
-        { success: false, error: "File size too large (max 5MB)" },
+        { success: false, error: "File size too large (max 10MB)" },
         { status: 400 }
       );
     }
 
-    // Create uploads directory if it doesn't exist
-    const uploadsDir = join(process.cwd(), "public", "uploads");
-    if (!existsSync(uploadsDir)) {
-      await mkdir(uploadsDir, { recursive: true });
-    }
-
-    // Generate unique filename
-    const timestamp = Date.now();
-    const randomString = Math.random().toString(36).substring(2, 15);
-    const extension = file.name.split(".").pop();
-    const filename = `${timestamp}-${randomString}.${extension}`;
-
-    // Convert file to buffer and save
+    // Convert file to buffer
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const filepath = join(uploadsDir, filename);
-    
-    await writeFile(filepath, buffer);
 
-    // Return the public URL
-    const url = `/uploads/${filename}`;
+    let uploadResult;
 
+    // Choose upload method based on type
+    switch (uploadType) {
+      case "profile":
+        uploadResult = await uploadProfilePhoto(buffer, entityId, file.type);
+        break;
+      case "project":
+        uploadResult = await uploadProjectImage(buffer, entityId, file.type);
+        break;
+      case "document":
+        uploadResult = await uploadDocument(buffer, file.name, file.type);
+        break;
+      default:
+        // General upload
+        uploadResult = await uploadToCloudinary(buffer, {
+          folder: "alshaer-portfolio/general",
+          mimeType: file.type,
+        });
+    }
+
+    if (!uploadResult.success) {
+      return NextResponse.json(
+        { success: false, error: uploadResult.error },
+        { status: 500 }
+      );
+    }
+
+    // Return the Cloudinary URL and metadata
     return NextResponse.json({
       success: true,
-      url,
-      filename,
+      url: uploadResult.url,
+      publicId: uploadResult.publicId,
+      filename: file.name,
       size: file.size,
       type: file.type,
+      width: uploadResult.width,
+      height: uploadResult.height,
+      format: uploadResult.format,
+      bytes: uploadResult.bytes,
+      resourceType: uploadResult.resourceType,
     });
   } catch (error) {
     console.error("Upload error:", error);

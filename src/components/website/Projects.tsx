@@ -51,6 +51,8 @@ const mapProjectToComponentFormat = (project: Project) => ({
   title: project.title,
   description: project.description,
   skills: project.technologies,
+  coverImg:
+    project.images && project.images.length > 0 ? project.images[0] : undefined,
   links: {
     website: project.websiteUrl || undefined,
     github: project.githubUrl || undefined,
@@ -126,6 +128,7 @@ export default function Projects({ filterType = "all" }: ProjectsProps) {
             skills={project.skills}
             websiteLink={project.links.website}
             githubLink={project.links.github}
+            coverImg={project.coverImg}
             linkStyle={styles.linkStyle}
             className="pb-4 pt-2"
           >

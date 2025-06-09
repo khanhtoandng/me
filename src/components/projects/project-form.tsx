@@ -516,7 +516,12 @@ export function ProjectForm({ projectId, project }: ProjectFormProps) {
                 accept="image/*"
                 multiple={true}
                 maxFiles={5}
-                maxSize={5}
+                maxSize={10}
+                uploadType="project"
+                entityId={
+                  formData.title.toLowerCase().replace(/\s+/g, "_") ||
+                  "new_project"
+                }
                 className="w-full"
               />
 

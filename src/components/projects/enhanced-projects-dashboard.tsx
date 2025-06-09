@@ -540,6 +540,20 @@ function ProjectCard({
                 </div>
               </div>
 
+              {/* Project Image */}
+              {project.images && project.images.length > 0 && (
+                <div className="w-20 h-20 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 flex-shrink-0">
+                  <img
+                    src={project.images[0]}
+                    alt={project.title}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.currentTarget.src = "/placeholder.svg";
+                    }}
+                  />
+                </div>
+              )}
+
               {/* Content */}
               <div className="flex-1">
                 <div className="flex items-start justify-between mb-2">

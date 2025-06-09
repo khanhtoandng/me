@@ -47,11 +47,56 @@ export default function SettingsPage() {
     showOtpInput: false,
   });
 
+  const [usernameForm, setUsernameForm] = useState({
+    currentUsername: "Baraa Alshaer", // This would come from API
+    newUsername: "",
+    showConfirmation: false,
+  });
+
   const [appearanceSettings, setAppearanceSettings] = useState({
     theme: theme || "system",
     compactMode: false,
     animationsEnabled: true,
   });
+
+  const handleUsernameChange = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+    setSuccess("");
+
+    if (!usernameForm.newUsername.trim()) {
+      setError("Username cannot be empty");
+      setLoading(false);
+      return;
+    }
+
+    if (usernameForm.newUsername.length < 2) {
+      setError("Username must be at least 2 characters long");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      // In a real app, you would make an API call here
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      setUsernameForm((prev) => ({
+        ...prev,
+        currentUsername: prev.newUsername,
+        newUsername: "",
+        showConfirmation: false,
+      }));
+
+      setSuccess("Username updated successfully");
+      toast.success("Username updated successfully");
+    } catch (error) {
+      setError("Failed to update username");
+      toast.error("Failed to update username");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handlePasswordChange = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -208,6 +253,73 @@ export default function SettingsPage() {
         </TabsList>
 
         <TabsContent value="account" className="space-y-4">
+          {/* Username Management */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Username</CardTitle>
+              <CardDescription>
+                Change your display name and username
+              </CardDescription>
+            </CardHeader>
+            <form onSubmit={handleUsernameChange}>
+              <CardContent className="space-y-4">
+                {error && (
+                  <Alert variant="destructive">
+                    <AlertCircle className="h-4 w-4" />
+                    <AlertDescription>{error}</AlertDescription>
+                  </Alert>
+                )}
+
+                {success && (
+                  <Alert className="bg-green-50 border-green-200 text-green-800">
+                    <AlertCircle className="h-4 w-4 text-green-500" />
+                    <AlertDescription>{success}</AlertDescription>
+                  </Alert>
+                )}
+
+                <div className="space-y-2">
+                  <Label htmlFor="currentUsername">Current Username</Label>
+                  <Input
+                    id="currentUsername"
+                    type="text"
+                    value={usernameForm.currentUsername}
+                    disabled
+                    className="bg-gray-50 dark:bg-gray-800"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="newUsername">New Username</Label>
+                  <Input
+                    id="newUsername"
+                    type="text"
+                    placeholder="Enter new username"
+                    value={usernameForm.newUsername}
+                    onChange={(e) =>
+                      setUsernameForm((prev) => ({
+                        ...prev,
+                        newUsername: e.target.value,
+                      }))
+                    }
+                    required
+                  />
+                  <p className="text-xs text-[var(--paragraph)]">
+                    Username must be at least 2 characters long
+                  </p>
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button
+                  type="submit"
+                  disabled={loading || !usernameForm.newUsername.trim()}
+                >
+                  {loading ? "Updating..." : "Update Username"}
+                </Button>
+              </CardFooter>
+            </form>
+          </Card>
+
+          {/* Password Management */}
           <Card>
             <CardHeader>
               <CardTitle>Password</CardTitle>

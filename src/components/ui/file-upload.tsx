@@ -25,6 +25,8 @@ interface FileUploadProps {
   maxSize?: number; // in MB
   className?: string;
   disabled?: boolean;
+  uploadType?: "profile" | "project" | "document" | "general";
+  entityId?: string;
 }
 
 interface UploadFile {
@@ -42,9 +44,11 @@ export function FileUpload({
   accept = "image/*",
   multiple = true,
   maxFiles = 5,
-  maxSize = 5, // 5MB default
+  maxSize = 10, // 10MB default for Cloudinary
   className = "",
   disabled = false,
+  uploadType = "general",
+  entityId = "default",
 }: FileUploadProps) {
   const { toast } = useToast();
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -54,6 +58,8 @@ export function FileUpload({
   const uploadFile = async (file: File): Promise<string> => {
     const formData = new FormData();
     formData.append("file", file);
+    formData.append("type", uploadType);
+    formData.append("entityId", entityId);
 
     const response = await fetch("/api/upload", {
       method: "POST",

@@ -137,9 +137,11 @@ export function ProfilePhotoManager({
                     }
                   }}
                   accept="image/*"
-                  maxSize={5}
+                  maxSize={10}
                   multiple={false}
                   maxFiles={1}
+                  uploadType="profile"
+                  entityId={userName.toLowerCase().replace(/\s+/g, "_")}
                   className="w-full"
                 />
 
@@ -167,9 +169,10 @@ export function ProfilePhotoManager({
             <ul className="text-sm text-blue-700 dark:text-blue-300 space-y-1">
               <li>• Use a high-quality, professional photo</li>
               <li>• Square aspect ratio works best</li>
-              <li>• Maximum file size: 5MB</li>
-              <li>• Supported formats: JPG, PNG, WebP</li>
+              <li>• Maximum file size: 10MB</li>
+              <li>• Supported formats: JPG, PNG, WebP, GIF</li>
               <li>• Face should be clearly visible</li>
+              <li>• Images are automatically optimized via Cloudinary</li>
             </ul>
           </div>
 
