@@ -12,7 +12,6 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import { MagicCard } from "../ui/MagicCard";
-import OptimizedImage from "../ui/OptimizedImage";
 import Link from "next/link";
 
 interface ReusableCardProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -69,14 +68,14 @@ const ReusableCard = React.forwardRef<HTMLDivElement, ReusableCardProps>(
               className="absolute inset-0 bg-cover bg-center blur-[100px]"
               style={{ backgroundImage: `url(${coverImg})` }}
             ></div>
-            <OptimizedImage
+            <img
               src={coverImg}
               alt={title ? `${title} - Cover Image` : "Cover Image"}
-              fill
-              className="object-contain z-50 transition-transform duration-300 rounded-lg scale-105"
-              loadingClassName="animate-pulse bg-gray-300/20"
-              fallbackSrc="https://via.placeholder.com/400x225?text=Loading..."
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="w-full h-full object-contain z-50 transition-transform duration-300 rounded-lg scale-105"
+              onError={(e) => {
+                e.currentTarget.src =
+                  "https://via.placeholder.com/400x225?text=Loading...";
+              }}
             />
           </div>
         )}
@@ -106,14 +105,14 @@ const ReusableCard = React.forwardRef<HTMLDivElement, ReusableCardProps>(
               <span>{date}</span>
               {img && (
                 <div className="h-12 w-12 rounded-full overflow-hidden">
-                  <OptimizedImage
-                    fill
+                  <img
                     src={img}
                     alt={title ? `${title} - Profile Image` : "Profile Image"}
-                    className="object-cover"
-                    loadingClassName="animate-pulse bg-gray-300/20"
-                    fallbackSrc="https://via.placeholder.com/100?text=Profile"
-                    sizes="48px"
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.currentTarget.src =
+                        "https://via.placeholder.com/100?text=Profile";
+                    }}
                   />
                 </div>
               )}
