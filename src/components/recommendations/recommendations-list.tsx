@@ -23,6 +23,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
+import { Skeleton } from "@/components/ui/skeleton";
 
 type Recommendation = {
   _id: string;
@@ -132,24 +133,38 @@ export function RecommendationsList() {
             <CardHeader className="pb-2">
               <div className="flex items-start justify-between w-full">
                 <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-[var(--skeleton-color)] animate-pulse" />
+                  <Skeleton className="h-10 w-10 rounded-full" />
                   <div className="space-y-2">
-                    <div className="h-5 w-32 bg-[var(--skeleton-color)] rounded animate-pulse" />
-                    <div className="h-4 w-48 bg-[var(--skeleton-color)] rounded animate-pulse" />
+                    <Skeleton className="h-5 w-32" />
+                    <Skeleton className="h-4 w-48" />
                   </div>
+                </div>
+                <div className="flex gap-2">
+                  <Skeleton className="h-8 w-8" />
+                  <Skeleton className="h-8 w-8" />
                 </div>
               </div>
             </CardHeader>
             <CardContent className="pb-2">
               <div className="flex flex-col gap-4">
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <div className="h-5 w-24 bg-[var(--skeleton-color)] rounded animate-pulse" />
-                  <div className="h-5 w-20 bg-[var(--skeleton-color)] rounded animate-pulse" />
+                  <Skeleton className="h-5 w-24" />
+                  <div className="flex gap-2">
+                    <Skeleton className="h-5 w-20" />
+                    <Skeleton className="h-5 w-16" />
+                  </div>
                 </div>
                 <Separator className="bg-[var(--card-border-color)]" />
-                <div className="h-20 w-full bg-[var(--skeleton-color)] rounded animate-pulse" />
+                <div className="space-y-2">
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-3/4" />
+                  <Skeleton className="h-4 w-1/2" />
+                </div>
               </div>
             </CardContent>
+            <CardFooter className="flex justify-end pt-2">
+              <Skeleton className="h-8 w-32" />
+            </CardFooter>
           </Card>
         ))}
       </div>
@@ -246,18 +261,16 @@ export function RecommendationsList() {
                   </Badge>
 
                   <div className="flex flex-row-reverse gap-3 items-center">
-
-                  <div className="flex items-center gap-1 text-sm text-[var(--card-paragraph)]">
-                    <Calendar className="h-3.5 w-3.5" />
-                    {formatDate(recommendation.date)}
+                    <div className="flex items-center gap-1 text-sm text-[var(--card-paragraph)]">
+                      <Calendar className="h-3.5 w-3.5" />
+                      {formatDate(recommendation.date)}
+                    </div>
+                    {recommendation.featured && (
+                      <Badge className="bg-[var(--tertiary)] text-[var(--button-text)]">
+                        Featured
+                      </Badge>
+                    )}
                   </div>
-                  {recommendation.featured && (
-                    <Badge className="bg-[var(--tertiary)] text-[var(--button-text)]">
-                      Featured
-                    </Badge>
-                  )}
-                  </div>
-
                 </div>
                 <Separator className="bg-[var(--card-border-color)]" />
                 <div className="relative pl-6 text-sm text-[var(--card-paragraph)]">

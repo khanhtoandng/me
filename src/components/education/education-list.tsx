@@ -17,6 +17,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
+import { Skeleton } from "@/components/ui/skeleton";
 
 type Education = {
   _id: string;
@@ -130,19 +131,31 @@ export function EducationList() {
             <CardHeader className="pb-2">
               <div className="flex items-start justify-between w-full">
                 <div className="space-y-2">
-                  <div className="h-6 w-48 bg-[var(--skeleton-color)] rounded animate-pulse" />
-                  <div className="h-4 w-32 bg-[var(--skeleton-color)] rounded animate-pulse" />
+                  <Skeleton className="h-6 w-48" />
+                  <Skeleton className="h-4 w-32" />
+                </div>
+                <div className="flex gap-2">
+                  <Skeleton className="h-8 w-8" />
+                  <Skeleton className="h-8 w-8" />
                 </div>
               </div>
             </CardHeader>
             <CardContent className="pb-2">
               <div className="flex flex-col gap-4">
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-                  <div className="h-4 w-32 bg-[var(--skeleton-color)] rounded animate-pulse" />
-                  <div className="h-4 w-24 bg-[var(--skeleton-color)] rounded animate-pulse" />
+                  <Skeleton className="h-4 w-32" />
+                  <Skeleton className="h-4 w-24" />
+                  <Skeleton className="h-5 w-16" />
                 </div>
                 <Separator className="bg-[var(--card-border-color)]" />
-                <div className="h-16 w-full bg-[var(--skeleton-color)] rounded animate-pulse" />
+                <Skeleton className="h-16 w-full" />
+                <div className="space-y-2">
+                  <Skeleton className="h-4 w-24" />
+                  <div className="space-y-1">
+                    <Skeleton className="h-3 w-full" />
+                    <Skeleton className="h-3 w-3/4" />
+                  </div>
+                </div>
               </div>
             </CardContent>
           </Card>

@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface ProjectsListProps {
   projects?: Project[];
@@ -193,24 +194,32 @@ export function ProjectsList({
             key={i}
             className="overflow-hidden bg-[var(--card-background)] border-[var(--card-border-color)]"
           >
-            <div className="aspect-video w-full bg-[var(--skeleton-color)] animate-pulse" />
+            <Skeleton className="aspect-video w-full" />
             <CardHeader className="py-4">
               <div className="flex items-start justify-between w-full">
                 <div className="space-y-2">
-                  <div className="h-6 w-32 bg-[var(--skeleton-color)] rounded animate-pulse" />
-                  <div className="h-4 w-48 bg-[var(--skeleton-color)] rounded animate-pulse" />
+                  <Skeleton className="h-6 w-32" />
+                  <Skeleton className="h-4 w-24" />
                 </div>
+                <Skeleton className="h-8 w-8" />
               </div>
             </CardHeader>
             <CardContent className="p-4 pt-0">
-              <div className="flex flex-wrap gap-2">
-                <div className="h-5 w-16 bg-[var(--skeleton-color)] rounded animate-pulse" />
-                <div className="h-5 w-20 bg-[var(--skeleton-color)] rounded animate-pulse" />
+              <div className="space-y-3">
+                <div className="space-y-2">
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-3/4" />
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <Skeleton className="h-5 w-16" />
+                  <Skeleton className="h-5 w-20" />
+                  <Skeleton className="h-5 w-14" />
+                </div>
               </div>
             </CardContent>
             <CardFooter className="flex items-center justify-between p-4 pt-0">
-              <div className="h-5 w-24 bg-[var(--skeleton-color)] rounded animate-pulse" />
-              <div className="h-4 w-20 bg-[var(--skeleton-color)] rounded animate-pulse" />
+              <Skeleton className="h-5 w-24" />
+              <Skeleton className="h-5 w-16" />
             </CardFooter>
           </Card>
         ))}

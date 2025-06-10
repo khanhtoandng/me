@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { GraduationCap } from "lucide-react";
 import { useEducation } from "@/hooks/use-education";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Education() {
   const [isMounted, setIsMounted] = useState(false);
@@ -29,10 +30,31 @@ export default function Education() {
   if (loading) {
     return (
       <div className="flex min-h-0 flex-col gap-y-3">
-        <div className="animate-pulse">
-          <div className="h-6 bg-gray-200 rounded w-24 mb-3"></div>
-          <div className="h-16 bg-gray-200 rounded"></div>
-        </div>
+        {/* Title Skeleton */}
+        <Skeleton className="h-6 w-24" />
+
+        {/* Education Items Skeleton */}
+        {[...Array(2)].map((_, index) => (
+          <div
+            key={index}
+            className="rounded-[12px] bg-[var(--card-background)] border border-[var(--card-border-color)] p-3"
+          >
+            <div className="flex">
+              <div className="flex-none">
+                <Skeleton className="h-12 w-12 rounded-full" />
+              </div>
+              <div className="flex-grow ml-4 space-y-2">
+                <div className="flex items-center justify-between">
+                  <Skeleton className="h-4 w-32" />
+                  <Skeleton className="h-3 w-20" />
+                </div>
+                <Skeleton className="h-3 w-24" />
+                <Skeleton className="h-3 w-16" />
+                <Skeleton className="h-3 w-full" />
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     );
   }
