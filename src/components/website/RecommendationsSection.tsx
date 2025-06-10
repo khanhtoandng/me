@@ -6,6 +6,7 @@ import { ScrollEffect } from "@/lib/animations";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { MessageSquareQuote } from "lucide-react";
 import { useFeaturedRecommendations } from "@/hooks/use-recommendations";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const RecommendationsSection = () => {
   const { recommendations, loading, error } = useFeaturedRecommendations();
@@ -36,8 +37,28 @@ const RecommendationsSection = () => {
           {[...Array(3)].map((_, i) => (
             <div
               key={i}
-              className="w-full max-w-2xl h-32 bg-gray-200 rounded-lg animate-pulse"
-            />
+              className="w-full max-w-2xl rounded-lg border border-[var(--card-border-color)] bg-[var(--card-background)] p-8"
+            >
+              <div className="flex items-start gap-4">
+                {/* Avatar Skeleton */}
+                <Skeleton className="h-10 w-10 rounded-full flex-shrink-0" />
+
+                {/* Header Content Skeleton */}
+                <div className="flex-1 space-y-2">
+                  <Skeleton className="h-4 w-32" />
+                  <Skeleton className="h-3 w-48" />
+                </div>
+              </div>
+
+              {/* Quote Content Skeleton */}
+              <div className="mt-6 space-y-3">
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-[95%]" />
+                <Skeleton className="h-4 w-[88%]" />
+                <Skeleton className="h-4 w-[92%]" />
+                <Skeleton className="h-4 w-[75%]" />
+              </div>
+            </div>
           ))}
         </div>
       </div>
@@ -79,7 +100,11 @@ const RecommendationsSection = () => {
       </ScrollEffect>
       <div className="flex flex-col items-center  justify-center gap-6">
         {recommendations.map((recommendation) => (
-          <ScrollEffect key={recommendation._id} className="w-full" type="fadeUp">
+          <ScrollEffect
+            key={recommendation._id}
+            className="w-full"
+            type="fadeUp"
+          >
             <MagicCard
               data-aos="fade-up"
               data-aos-easing="ease-in-out"
