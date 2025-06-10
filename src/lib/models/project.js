@@ -1,4 +1,4 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 
 const ProjectSchema = new mongoose.Schema({
   title: {
@@ -12,7 +12,6 @@ const ProjectSchema = new mongoose.Schema({
   },
   projectType: {
     type: String,
-    enum: ["AI", "Full-stack", "Frontend", "Backend", "Mobile", "Cybersecurity", "Other"],
     required: [true, "Please specify the project type."],
   },
   images: {
@@ -52,6 +51,7 @@ const ProjectSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-})
+});
 
-export default mongoose.models.Project || mongoose.model("Project", ProjectSchema)
+export default mongoose.models.Project ||
+  mongoose.model("Project", ProjectSchema);
