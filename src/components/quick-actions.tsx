@@ -125,12 +125,7 @@ export function QuickActions() {
     <Card className="hover:shadow-lg transition-shadow duration-300">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-          >
-            <Settings className="h-5 w-5" />
-          </motion.div>
+          <Settings className="h-5 w-5" />
           Quick Actions
         </CardTitle>
         <CardDescription>Common tasks and shortcuts</CardDescription>
@@ -145,6 +140,7 @@ export function QuickActions() {
           {actions.map((action, index) => (
             <motion.div
               key={action.id}
+              className="rounded-[12px]"
               variants={itemVariants}
               whileHover={{
                 scale: 1.05,
@@ -153,7 +149,7 @@ export function QuickActions() {
               whileTap={{ scale: 0.95 }}
             >
               <div
-                className={`relative group cursor-pointer rounded-lg p-4 bg-gradient-to-br ${action.color} text-white overflow-hidden transition-all duration-300 hover:shadow-xl`}
+                className={`relative group cursor-pointer rounded-[12px] p-4 bg-gradient-to-br ${action.color} text-white overflow-hidden transition-all duration-300 hover:shadow-xl`}
                 onClick={() => router.push(action.href)}
               >
                 {/* Background pattern */}
@@ -168,7 +164,7 @@ export function QuickActions() {
                     <motion.div
                       whileHover={{ rotate: 15 }}
                       transition={{ duration: 0.2 }}
-                      className="p-2 bg-white/20 rounded-lg backdrop-blur-sm"
+                      className="p-2 /20 rounded-[12px] backdrop-blur-sm"
                     >
                       {action.icon}
                     </motion.div>
@@ -183,7 +179,7 @@ export function QuickActions() {
 
                 {/* Hover indicator */}
                 <motion.div
-                  className="absolute bottom-0 left-0 h-1 bg-white/50"
+                  className="absolute bottom-0 left-0 h-1 /50"
                   initial={{ width: 0 }}
                   whileHover={{ width: "100%" }}
                   transition={{ duration: 0.3 }}

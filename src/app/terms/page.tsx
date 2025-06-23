@@ -17,7 +17,7 @@ export default function TermsPage() {
         {/* Header */}
         <div className="text-center space-y-4">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-green-500 to-blue-600 flex items-center justify-center">
+            <div className="w-12 h-12 rounded-[12px] bg-gradient-to-br from-green-500 to-blue-600 flex items-center justify-center">
               <FileText className="h-6 w-6 text-white" />
             </div>
             <h1 className="text-4xl font-bold text-[var(--headline)]">Terms of Service</h1>

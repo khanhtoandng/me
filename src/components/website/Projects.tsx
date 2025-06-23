@@ -2,7 +2,7 @@
 
 import type React from "react";
 import { useMemo } from "react";
-import { Globe, Github, Loader2 } from "lucide-react";
+import { Globe, Github, Loader2, Play } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import ReusableCard from "@/components/common/ReusableCard";
 import Link from "next/link";
@@ -56,6 +56,7 @@ const mapProjectToComponentFormat = (project: Project) => ({
   links: {
     website: project.websiteUrl || undefined,
     github: project.githubUrl || undefined,
+    video: project.videoUrl || undefined,
   },
 });
 
@@ -148,6 +149,12 @@ export default function Projects({ filterType = "all" }: ProjectsProps) {
               {project.links.github && isValidLink(project.links.github) && (
                 <ProjectLink href={project.links.github} icon={Github}>
                   View on GitHub
+                </ProjectLink>
+              )}
+
+              {project.links.video && isValidLink(project.links.video) && (
+                <ProjectLink href={project.links.video} icon={Play}>
+                  Watch Demo
                 </ProjectLink>
               )}
             </div>

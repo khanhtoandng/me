@@ -181,7 +181,7 @@ export function ResponsiveSidebar({ user }: ResponsiveSidebarProps) {
           variant="ghost"
           size="icon"
           onClick={toggleSidebar}
-          className="fixed top-4 left-4 z-50 md:hidden bg-white/90 backdrop-blur-sm shadow-lg"
+          className="fixed top-4 left-4 z-50 md:hidden /90 backdrop-blur-sm shadow-lg"
         >
           {sidebarOpen ? (
             <X className="h-5 w-5" />
@@ -212,7 +212,7 @@ export function ResponsiveSidebar({ user }: ResponsiveSidebarProps) {
         animate={sidebarOpen ? "open" : "closed"}
         variants={sidebarVariants}
         className={`
-          fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800
+          fixed inset-y-0 left-0 z-50 w-64  dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800
           ${isMobile ? "shadow-xl" : ""}
         `}
       >
@@ -227,7 +227,7 @@ export function ResponsiveSidebar({ user }: ResponsiveSidebarProps) {
                 Alshaer
               </span>
             </Link>
-            
+
             {isMobile && (
               <Button variant="ghost" size="icon" onClick={closeSidebar}>
                 <X className="h-5 w-5" />
@@ -305,7 +305,7 @@ export function ResponsiveSidebar({ user }: ResponsiveSidebarProps) {
                   View Site
                 </Button>
               </Link>
-              
+
               <Button
                 variant="ghost"
                 className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950"

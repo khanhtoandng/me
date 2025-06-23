@@ -4,23 +4,23 @@ import { useState, useEffect, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Search, 
-  X, 
+import {
+  Search,
+  X,
   Filter,
   SortAsc,
   SortDesc,
   Calendar,
   Tag,
   User,
-  Building
+  Building,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export interface SearchFilter {
   key: string;
   label: string;
-  type: 'text' | 'select' | 'date' | 'multiselect';
+  type: "text" | "select" | "date" | "multiselect";
   options?: { value: string; label: string }[];
   placeholder?: string;
 }
@@ -28,7 +28,7 @@ export interface SearchFilter {
 export interface SortOption {
   key: string;
   label: string;
-  direction: 'asc' | 'desc';
+  direction: "asc" | "desc";
 }
 
 interface UnifiedSearchProps {
@@ -40,7 +40,7 @@ interface UnifiedSearchProps {
   onFiltersChange?: (filters: Record<string, any>) => void;
   sortOptions?: SortOption[];
   activeSortOption?: string;
-  onSortChange?: (sortKey: string, direction: 'asc' | 'desc') => void;
+  onSortChange?: (sortKey: string, direction: "asc" | "desc") => void;
   showFilters?: boolean;
   showSort?: boolean;
   className?: string;
@@ -62,7 +62,7 @@ export function UnifiedSearch({
   showSort = true,
   className = "",
   resultCount,
-  isLoading = false
+  isLoading = false,
 }: UnifiedSearchProps) {
   const [showFilterPanel, setShowFilterPanel] = useState(false);
   const [localFilters, setLocalFilters] = useState(activeFilters);
@@ -78,7 +78,12 @@ export function UnifiedSearch({
 
   const handleFilterChange = (filterKey: string, value: any) => {
     const newFilters = { ...localFilters, [filterKey]: value };
-    if (value === '' || value === null || value === undefined || (Array.isArray(value) && value.length === 0)) {
+    if (
+      value === "" ||
+      value === null ||
+      value === undefined ||
+      (Array.isArray(value) && value.length === 0)
+    ) {
       delete newFilters[filterKey];
     }
     setLocalFilters(newFilters);
@@ -88,11 +93,11 @@ export function UnifiedSearch({
   const clearAllFilters = () => {
     setLocalFilters({});
     onFiltersChange?.({});
-    onSearchChange('');
+    onSearchChange("");
   };
 
   const clearSearch = () => {
-    onSearchChange('');
+    onSearchChange("");
     searchInputRef.current?.focus();
   };
 
@@ -102,18 +107,22 @@ export function UnifiedSearch({
 
   const getSortIcon = (sortKey: string) => {
     if (activeSortOption === sortKey) {
-      const option = sortOptions.find(opt => opt.key === sortKey);
-      return option?.direction === 'asc' ? <SortAsc className="h-4 w-4" /> : <SortDesc className="h-4 w-4" />;
+      const option = sortOptions.find((opt) => opt.key === sortKey);
+      return option?.direction === "asc" ? (
+        <SortAsc className="h-4 w-4" />
+      ) : (
+        <SortDesc className="h-4 w-4" />
+      );
     }
     return <SortAsc className="h-4 w-4 opacity-50" />;
   };
 
-  const getFilterIcon = (type: SearchFilter['type']) => {
+  const getFilterIcon = (type: SearchFilter["type"]) => {
     switch (type) {
-      case 'date':
+      case "date":
         return <Calendar className="h-4 w-4" />;
-      case 'select':
-      case 'multiselect':
+      case "select":
+      case "multiselect":
         return <Tag className="h-4 w-4" />;
       default:
         return <User className="h-4 w-4" />;
@@ -135,7 +144,7 @@ export function UnifiedSearch({
             className="pl-10 pr-20 h-12 text-base"
             disabled={isLoading}
           />
-          
+
           {/* Clear Search Button */}
           {hasActiveSearch && (
             <Button
@@ -148,7 +157,7 @@ export function UnifiedSearch({
               <X className="h-4 w-4" />
             </Button>
           )}
-          
+
           {/* Filter Toggle Button */}
           {showFilters && filters.length > 0 && (
             <Button
@@ -158,10 +167,12 @@ export function UnifiedSearch({
               className="absolute right-2 top-1/2 transform -translate-y-1/2 h-8 w-8 p-0"
               disabled={isLoading}
             >
-              <Filter className={`h-4 w-4 ${hasActiveFilters ? 'text-blue-500' : ''}`} />
+              <Filter
+                className={`h-4 w-4 ${hasActiveFilters ? "text-blue-500" : ""}`}
+              />
               {activeFilterCount > 0 && (
-                <Badge 
-                  variant="destructive" 
+                <Badge
+                  variant="destructive"
                   className="absolute -top-1 -right-1 h-4 w-4 p-0 text-xs"
                 >
                   {activeFilterCount}
@@ -170,10 +181,10 @@ export function UnifiedSearch({
             </Button>
           )}
         </div>
-        
+
         {/* Loading Indicator */}
         {isLoading && (
-          <div className="absolute inset-0 bg-white/50 dark:bg-gray-900/50 rounded-md flex items-center justify-center">
+          <div className="absolute inset-0 /50 dark:bg-gray-900/50 rounded-md flex items-center justify-center">
             <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
           </div>
         )}
@@ -185,8 +196,7 @@ export function UnifiedSearch({
           {/* Active Search Term */}
           {hasActiveSearch && (
             <Badge variant="secondary" className="flex items-center gap-1">
-              <Search className="h-3 w-3" />
-              "{searchValue}"
+              <Search className="h-3 w-3" />"{searchValue}"
               <Button
                 variant="ghost"
                 size="sm"
@@ -197,16 +207,22 @@ export function UnifiedSearch({
               </Button>
             </Badge>
           )}
-          
+
           {/* Active Filters */}
           {Object.entries(localFilters).map(([key, value]) => {
-            const filter = filters.find(f => f.key === key);
+            const filter = filters.find((f) => f.key === key);
             if (!filter || !value) return null;
-            
-            const displayValue = Array.isArray(value) ? value.join(', ') : value;
-            
+
+            const displayValue = Array.isArray(value)
+              ? value.join(", ")
+              : value;
+
             return (
-              <Badge key={key} variant="outline" className="flex items-center gap-1">
+              <Badge
+                key={key}
+                variant="outline"
+                className="flex items-center gap-1"
+              >
                 {getFilterIcon(filter.type)}
                 {filter.label}: {displayValue}
                 <Button
@@ -220,7 +236,7 @@ export function UnifiedSearch({
               </Badge>
             );
           })}
-          
+
           {/* Clear All Button */}
           {(hasActiveSearch || hasActiveFilters) && (
             <Button
@@ -233,7 +249,7 @@ export function UnifiedSearch({
             </Button>
           )}
         </div>
-        
+
         {/* Sort Options */}
         {showSort && sortOptions.length > 0 && (
           <div className="flex items-center gap-2">
@@ -257,7 +273,7 @@ export function UnifiedSearch({
       {/* Result Count */}
       {resultCount !== undefined && (
         <div className="text-sm text-gray-500">
-          {resultCount} result{resultCount !== 1 ? 's' : ''} found
+          {resultCount} result{resultCount !== 1 ? "s" : ""} found
         </div>
       )}
 
@@ -266,7 +282,7 @@ export function UnifiedSearch({
         {showFilterPanel && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-gray-800"
           >
@@ -277,20 +293,24 @@ export function UnifiedSearch({
                     {getFilterIcon(filter.type)}
                     {filter.label}
                   </label>
-                  
-                  {filter.type === 'text' && (
+
+                  {filter.type === "text" && (
                     <Input
                       type="text"
                       placeholder={filter.placeholder}
-                      value={localFilters[filter.key] || ''}
-                      onChange={(e) => handleFilterChange(filter.key, e.target.value)}
+                      value={localFilters[filter.key] || ""}
+                      onChange={(e) =>
+                        handleFilterChange(filter.key, e.target.value)
+                      }
                     />
                   )}
-                  
-                  {filter.type === 'select' && (
+
+                  {filter.type === "select" && (
                     <select
-                      value={localFilters[filter.key] || ''}
-                      onChange={(e) => handleFilterChange(filter.key, e.target.value)}
+                      value={localFilters[filter.key] || ""}
+                      onChange={(e) =>
+                        handleFilterChange(filter.key, e.target.value)
+                      }
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
                       <option value="">All</option>
@@ -301,12 +321,14 @@ export function UnifiedSearch({
                       ))}
                     </select>
                   )}
-                  
-                  {filter.type === 'date' && (
+
+                  {filter.type === "date" && (
                     <Input
                       type="date"
-                      value={localFilters[filter.key] || ''}
-                      onChange={(e) => handleFilterChange(filter.key, e.target.value)}
+                      value={localFilters[filter.key] || ""}
+                      onChange={(e) =>
+                        handleFilterChange(filter.key, e.target.value)
+                      }
                     />
                   )}
                 </div>

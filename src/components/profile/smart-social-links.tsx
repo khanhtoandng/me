@@ -427,7 +427,7 @@ export function SmartSocialLinks({
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -20 }}
-                      className="flex items-center justify-between p-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg"
+                      className="flex items-center justify-between p-3  dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg"
                     >
                       <div className="flex items-center gap-3">
                         <div className="flex items-center gap-2">

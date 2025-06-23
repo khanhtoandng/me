@@ -19,9 +19,10 @@ import * as MdIcons from "react-icons/md";
 import * as RiIcons from "react-icons/ri";
 import * as SiIcons from "react-icons/si";
 import * as TiIcons from "react-icons/ti";
+import { Skeleton } from "@/components/ui";
 
 // Force dynamic rendering
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 const iconLibraries = {
   fa: FaIcons,
@@ -43,14 +44,20 @@ export default function ProjectTypesPage() {
   const [showForm, setShowForm] = useState(false);
   const [editingType, setEditingType] = useState(null);
 
-  const renderIcon = (icon: { library: string; name: string }, color: string = "#3B82F6") => {
+  const renderIcon = (
+    icon: { library: string; name: string },
+    color: string = "#3B82F6"
+  ) => {
     const library = iconLibraries[icon.library as keyof typeof iconLibraries];
     if (!library) return null;
 
     const IconComponent = library[icon.name as keyof typeof library];
     if (!IconComponent) return null;
 
-    const Icon = IconComponent as React.ComponentType<{ size?: number; color?: string }>;
+    const Icon = IconComponent as React.ComponentType<{
+      size?: number;
+      color?: string;
+    }>;
     return <Icon size={20} color={color} />;
   };
 
@@ -60,7 +67,11 @@ export default function ProjectTypesPage() {
   };
 
   const handleDelete = async (id: string, name: string) => {
-    if (window.confirm(`Are you sure you want to delete "${name}"? This action cannot be undone.`)) {
+    if (
+      window.confirm(
+        `Are you sure you want to delete "${name}"? This action cannot be undone.`
+      )
+    ) {
       try {
         await deleteProjectType(id);
         toast({
@@ -70,7 +81,10 @@ export default function ProjectTypesPage() {
       } catch (error) {
         toast({
           title: "Error",
-          description: error instanceof Error ? error.message : "Failed to delete project type",
+          description:
+            error instanceof Error
+              ? error.message
+              : "Failed to delete project type",
           variant: "destructive",
         });
       }
@@ -86,11 +100,13 @@ export default function ProjectTypesPage() {
     return (
       <div className="space-y-6">
         <div className="flex justify-between items-center">
-          <h1 className="text-3xl font-bold text-[var(--headline)]">Project Types</h1>
+          <h1 className="text-3xl font-bold text-[var(--headline)]">
+            Project Types
+          </h1>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {[...Array(6)].map((_, i) => (
-            <div key={i} className="h-32 bg-gray-200 rounded-lg animate-pulse" />
+            <Skeleton className="h-32" />
           ))}
         </div>
       </div>
@@ -100,7 +116,9 @@ export default function ProjectTypesPage() {
   if (error) {
     return (
       <div className="space-y-6">
-        <h1 className="text-3xl font-bold text-[var(--headline)]">Project Types</h1>
+        <h1 className="text-3xl font-bold text-[var(--headline)]">
+          Project Types
+        </h1>
         <div className="text-center py-8">
           <p className="text-red-500">Error: {error}</p>
         </div>
@@ -112,7 +130,9 @@ export default function ProjectTypesPage() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-[var(--headline)]">Project Types</h1>
+          <h1 className="text-3xl font-bold text-[var(--headline)]">
+            Project Types
+          </h1>
           <p className="text-[var(--paragraph)] mt-1">
             Manage project categories and their visual representations
           </p>
@@ -148,9 +168,12 @@ export default function ProjectTypesPage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {projectTypes.map((projectType) => (
-            <Card key={projectType._id} className="hover:shadow-md transition-shadow">
+            <Card
+              key={projectType._id}
+              className="hover:shadow-md transition-shadow"
+            >
               <CardHeader className="pb-3">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between w-full">
                   <div className="flex items-center space-x-3">
                     <div
                       className="p-2 rounded-lg"
@@ -162,9 +185,14 @@ export default function ProjectTypesPage() {
                       <CardTitle className="text-lg text-[var(--headline)]">
                         {projectType.name}
                       </CardTitle>
-                      <Badge variant={projectType.isActive ? "default" : "secondary"}>
-                        {projectType.isActive ? "Active" : "Inactive"}
-                      </Badge>
+
+                      {projectType.description && (
+                        <CardContent className="pt-0">
+                          <p className="text-sm text-[var(--paragraph)]">
+                            {projectType.description}
+                          </p>
+                        </CardContent>
+                      )}
                     </div>
                   </div>
                   <div className="flex space-x-1">
@@ -178,30 +206,29 @@ export default function ProjectTypesPage() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={() => handleDelete(projectType._id, projectType.name)}
+                      onClick={() =>
+                        handleDelete(projectType._id, projectType.name)
+                      }
                     >
                       <Trash2 className="h-4 w-4" />
                     </Button>
                   </div>
                 </div>
               </CardHeader>
-              {projectType.description && (
-                <CardContent className="pt-0">
-                  <p className="text-sm text-[var(--paragraph)]">
-                    {projectType.description}
-                  </p>
-                </CardContent>
-              )}
+
+              <Badge
+                className="w-max"
+                variant={projectType.isActive ? "default" : "secondary"}
+              >
+                {projectType.isActive ? "Active" : "Inactive"}
+              </Badge>
             </Card>
           ))}
         </div>
       )}
 
       {showForm && (
-        <ProjectTypeForm
-          projectType={editingType}
-          onClose={handleFormClose}
-        />
+        <ProjectTypeForm projectType={editingType} onClose={handleFormClose} />
       )}
     </div>
   );

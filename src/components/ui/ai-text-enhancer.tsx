@@ -173,7 +173,7 @@ export function AITextEnhancer({
           Enhance with AI
         </Button>
 
-        <Button
+        {/* <Button
           onClick={() => handleAIAction("suggestions")}
           disabled={loading}
           size="sm"
@@ -185,9 +185,9 @@ export function AITextEnhancer({
             <Lightbulb className="h-4 w-4 mr-2" />
           )}
           Get Suggestions
-        </Button>
+        </Button> */}
 
-        <Button
+        {/* <Button
           onClick={() => handleAIAction("variations")}
           disabled={loading}
           size="sm"
@@ -199,7 +199,7 @@ export function AITextEnhancer({
             <Wand2 className="h-4 w-4 mr-2" />
           )}
           Generate Variations
-        </Button>
+        </Button> */}
       </div>
 
       {/* AI Results Modal */}

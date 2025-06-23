@@ -30,6 +30,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import Logo from "./Logo";
+import { SiRender } from "react-icons/si";
+import { RiNextjsFill } from "react-icons/ri";
 
 interface FooterLink {
   title: string;
@@ -281,13 +283,6 @@ export default function Footer() {
                     orientation="vertical"
                     className="hidden md:block h-4"
                   />
-                  <div className="flex items-center gap-1 text-xs">
-                    <span>Made with</span>
-                    <Heart className="h-3 w-3 text-red-500 fill-current animate-pulse" />
-                    <span>and</span>
-                    <Coffee className="h-3 w-3 text-amber-600" />
-                    <span>in Palestine</span>
-                  </div>
                 </div>
 
                 {/* Action Buttons */}
@@ -318,12 +313,18 @@ export default function Footer() {
               <div className="mt-6 pt-6 border-t border-[var(--footer-border-color)]/50">
                 <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-[var(--paragraph)]/70">
                   <div className="flex items-center gap-4">
-                    <span>Built with Next.js, TypeScript & Tailwind CSS</span>
+                    <span className="flex items-center justify-center gap-1 text-[var(--paragraph)] hover:text-[var(--headline)] hoverd">
+                      <span>Built with Next.js </span>
+                      <RiNextjsFill className="h-4 w-4" />
+                    </span>
                     <Separator
                       orientation="vertical"
                       className="hidden md:block h-3"
                     />
-                    <span>Deployed on Render</span>
+                    <span className="flex items-center justify-center gap-1 text-[var(--paragraph)] hover:text-[var(--headline)] hoverd">
+                      <span>Deployed on Render </span>
+                      <SiRender className="h-4 w-4" />
+                    </span>
                   </div>
                   <div className="flex items-center gap-4">
                     <Link
@@ -337,7 +338,7 @@ export default function Footer() {
                       href="/terms"
                       className="hover:text-[var(--link-color)] transition-colors"
                     >
-                      Terms of Service
+                      Baraa Alshaer
                     </Link>
                     <Separator orientation="vertical" className="h-3" />
                     <Link

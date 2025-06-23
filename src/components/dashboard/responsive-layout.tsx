@@ -2,7 +2,10 @@
 
 import { ReactNode } from "react";
 import { ResponsiveSidebar } from "./responsive-sidebar";
-import { SidebarProvider, useResponsiveSidebar } from "@/contexts/sidebar-context";
+import {
+  SidebarProvider,
+  useResponsiveSidebar,
+} from "@/contexts/sidebar-context";
 import { PageTransition } from "@/components/ui/page-transition";
 import { motion } from "framer-motion";
 
@@ -26,7 +29,7 @@ function DashboardLayoutContent({
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <ResponsiveSidebar user={user} />
-      
+
       {/* Main Content */}
       <motion.main
         className={`
@@ -43,16 +46,16 @@ function DashboardLayoutContent({
         }}
       >
         <PageTransition>
-          <div className="p-4 md:p-6 lg:p-8">
-            {children}
-          </div>
+          <div className="p-4 md:p-6 lg:p-8">{children}</div>
         </PageTransition>
       </motion.main>
     </div>
   );
 }
 
-export function ResponsiveDashboardLayout(props: ResponsiveDashboardLayoutProps) {
+export function ResponsiveDashboardLayout(
+  props: ResponsiveDashboardLayoutProps
+) {
   return (
     <SidebarProvider>
       <DashboardLayoutContent {...props} />
@@ -63,7 +66,7 @@ export function ResponsiveDashboardLayout(props: ResponsiveDashboardLayoutProps)
 // Hook for components that need to interact with the layout
 export function useDashboardLayout() {
   const sidebarContext = useResponsiveSidebar();
-  
+
   return {
     ...sidebarContext,
     // Helper to get responsive padding classes
@@ -183,7 +186,7 @@ export function ResponsiveCard({
   return (
     <motion.div
       className={`
-        bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700
+         dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700
         ${paddingClasses[padding]}
         ${hover ? "hover:shadow-lg transition-shadow duration-200" : ""}
         ${className}
@@ -221,18 +224,20 @@ export function ResponsiveHeader({
       `}
     >
       <div>
-        <h1 className={`font-bold text-gray-900 dark:text-white ${isMobile ? "text-2xl" : "text-3xl"}`}>
+        <h1
+          className={`font-bold text-gray-900 dark:text-white ${isMobile ? "text-2xl" : "text-3xl"}`}
+        >
           {title}
         </h1>
         {subtitle && (
-          <p className="text-gray-600 dark:text-gray-400 mt-1">
-            {subtitle}
-          </p>
+          <p className="text-gray-600 dark:text-gray-400 mt-1">{subtitle}</p>
         )}
       </div>
-      
+
       {actions && (
-        <div className={`flex ${isMobile ? "justify-center" : "justify-end"} space-x-2`}>
+        <div
+          className={`flex ${isMobile ? "justify-center" : "justify-end"} space-x-2`}
+        >
           {actions}
         </div>
       )}
@@ -254,12 +259,19 @@ interface ResponsiveStatsProps {
   className?: string;
 }
 
-export function ResponsiveStats({ stats, className = "" }: ResponsiveStatsProps) {
+export function ResponsiveStats({
+  stats,
+  className = "",
+}: ResponsiveStatsProps) {
   const { isMobile } = useResponsiveSidebar();
 
   return (
     <ResponsiveGrid
-      cols={{ mobile: 1, tablet: 2, desktop: stats.length > 3 ? 4 : stats.length }}
+      cols={{
+        mobile: 1,
+        tablet: 2,
+        desktop: stats.length > 3 ? 4 : stats.length,
+      }}
       className={className}
     >
       {stats.map((stat, index) => (
@@ -270,19 +282,21 @@ export function ResponsiveStats({ stats, className = "" }: ResponsiveStatsProps)
               {stat.label}
             </span>
           </div>
-          
-          <div className={`font-bold text-gray-900 dark:text-white ${isMobile ? "text-2xl" : "text-3xl"}`}>
+
+          <div
+            className={`font-bold text-gray-900 dark:text-white ${isMobile ? "text-2xl" : "text-3xl"}`}
+          >
             {stat.value}
           </div>
-          
+
           {stat.change && (
             <div
               className={`text-sm mt-1 ${
                 stat.change.type === "increase"
                   ? "text-green-600"
                   : stat.change.type === "decrease"
-                  ? "text-red-600"
-                  : "text-gray-600"
+                    ? "text-red-600"
+                    : "text-gray-600"
               }`}
             >
               {stat.change.value}

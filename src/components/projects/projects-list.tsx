@@ -12,7 +12,15 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MoreVertical, ExternalLink, Edit, Trash2, Plus } from "lucide-react";
+import {
+  MoreVertical,
+  ExternalLink,
+  Edit,
+  Trash2,
+  Plus,
+  Play,
+  Github,
+} from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -334,6 +342,30 @@ export function ProjectsList({
                         >
                           <ExternalLink className="mr-2 h-4 w-4" />
                           View Live
+                        </a>
+                      </DropdownMenuItem>
+                    )}
+                    {project.githubUrl && (
+                      <DropdownMenuItem asChild className="cursor-pointer">
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Github className="mr-2 h-4 w-4" />
+                          View Code
+                        </a>
+                      </DropdownMenuItem>
+                    )}
+                    {project.videoUrl && (
+                      <DropdownMenuItem asChild className="cursor-pointer">
+                        <a
+                          href={project.videoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Play className="mr-2 h-4 w-4" />
+                          Watch Demo
                         </a>
                       </DropdownMenuItem>
                     )}

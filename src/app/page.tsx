@@ -42,7 +42,7 @@ export default function HomePage() {
 
       {/* Contact CTA Section */}
       <ScrollEffect type="fadeIn">
-        <div className="mt-16 mb-12 text-center max-w-3xl mx-auto">
+        <div className="mt-16 mb-12 text-center w-full mx-auto">
           <div className="p-8 rounded-2xl bg-[var(--card-background)] border border-[var(--card-border-color)] shadow-lg">
             <h2 className="text-2xl md:text-3xl font-bold mb-4 gradient-text">
               Let's Work Together

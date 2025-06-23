@@ -33,20 +33,20 @@ const RecommendationsSection = () => {
             </p>
           </div>
         </ScrollEffect>
-        <div className="flex flex-col items-center justify-center gap-6">
+        <div className="flex flex-col w-full  items-center justify-center gap-6">
           {[...Array(3)].map((_, i) => (
             <div
               key={i}
-              className="w-full max-w-2xl rounded-lg border border-[var(--card-border-color)] bg-[var(--card-background)] p-8"
+              className="w-full  rounded-[12px] pt-16 flex flex-col "
             >
               <div className="flex items-start gap-4">
                 {/* Avatar Skeleton */}
-                <Skeleton className="h-10 w-10 rounded-full flex-shrink-0" />
+                <Skeleton className="h-10 w-full rounded-full flex-shrink-0" />
 
                 {/* Header Content Skeleton */}
                 <div className="flex-1 space-y-2">
-                  <Skeleton className="h-4 w-32" />
-                  <Skeleton className="h-3 w-48" />
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-3 w-full" />
                 </div>
               </div>
 
