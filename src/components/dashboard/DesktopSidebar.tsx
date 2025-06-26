@@ -87,11 +87,7 @@ export function DesktopSidebar() {
             onClick={() => setCollapsed(!collapsed)}
             className="p-2 rounded-md hover:bg-[var(--card-hover)] text-[var(--paragraph)]"
           >
-            {collapsed ? (
-              <ChevronRight size={20} />
-            ) : (
-              <ChevronLeft size={20} />
-            )}
+            {collapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
           </motion.button>
         </div>
 
@@ -127,10 +123,7 @@ export function DesktopSidebar() {
         </nav>
 
         <div className="p-4 border-t border-[var(--card-border-color)]">
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
+          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
             <Button
               className="w-full flex justify-center gap-3 flex-row-reverse"
               variant="outline"

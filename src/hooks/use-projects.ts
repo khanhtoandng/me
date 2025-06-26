@@ -33,7 +33,7 @@ interface UseProjectsOptions {
 }
 
 export function useProjects(
-  options: UseProjectsOptions = {}
+  options: UseProjectsOptions = {},
 ): UseProjectsReturn {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);

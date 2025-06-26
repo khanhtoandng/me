@@ -85,7 +85,7 @@ export default function Page() {
       toast.error(
         error instanceof Error
           ? error.message
-          : "Login failed. Please try again."
+          : "Login failed. Please try again.",
       );
     }
   };

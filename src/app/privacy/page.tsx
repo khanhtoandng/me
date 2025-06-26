@@ -5,7 +5,8 @@ import { Shield, Eye, Lock, Database, Mail, Calendar } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "Privacy policy for Baraa Alshaer's portfolio website. Learn how we collect, use, and protect your personal information.",
+  description:
+    "Privacy policy for Baraa Alshaer's portfolio website. Learn how we collect, use, and protect your personal information.",
 };
 
 export default function PrivacyPage() {
@@ -20,10 +21,13 @@ export default function PrivacyPage() {
             <div className="w-12 h-12 rounded-[12px] bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
               <Shield className="h-6 w-6 text-white" />
             </div>
-            <h1 className="text-4xl font-bold text-[var(--headline)]">Privacy Policy</h1>
+            <h1 className="text-4xl font-bold text-[var(--headline)]">
+              Privacy Policy
+            </h1>
           </div>
           <p className="text-lg text-[var(--paragraph)] max-w-2xl mx-auto">
-            Your privacy is important to us. This policy explains how we collect, use, and protect your personal information.
+            Your privacy is important to us. This policy explains how we
+            collect, use, and protect your personal information.
           </p>
           <div className="flex items-center justify-center gap-2 text-sm text-[var(--paragraph)]/70">
             <Calendar className="h-4 w-4" />
@@ -46,7 +50,8 @@ export default function PrivacyPage() {
               <div>
                 <h4 className="font-semibold mb-2">Personal Information</h4>
                 <p className="text-[var(--paragraph)]">
-                  When you contact us through our contact form or email, we may collect:
+                  When you contact us through our contact form or email, we may
+                  collect:
                 </p>
                 <ul className="list-disc list-inside mt-2 space-y-1 text-[var(--paragraph)]">
                   <li>Your name and email address</li>
@@ -57,7 +62,8 @@ export default function PrivacyPage() {
               <div>
                 <h4 className="font-semibold mb-2">Automatic Information</h4>
                 <p className="text-[var(--paragraph)]">
-                  We automatically collect certain information when you visit our website:
+                  We automatically collect certain information when you visit
+                  our website:
                 </p>
                 <ul className="list-disc list-inside mt-2 space-y-1 text-[var(--paragraph)]">
                   <li>IP address and browser information</li>
@@ -81,7 +87,9 @@ export default function PrivacyPage() {
                 We use the collected information for the following purposes:
               </p>
               <ul className="list-disc list-inside space-y-2 text-[var(--paragraph)]">
-                <li>To respond to your inquiries and provide customer support</li>
+                <li>
+                  To respond to your inquiries and provide customer support
+                </li>
                 <li>To improve our website and user experience</li>
                 <li>To analyze website traffic and usage patterns</li>
                 <li>To prevent fraud and ensure website security</li>
@@ -99,7 +107,8 @@ export default function PrivacyPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-[var(--paragraph)]">
-                We implement appropriate security measures to protect your personal information:
+                We implement appropriate security measures to protect your
+                personal information:
               </p>
               <ul className="list-disc list-inside space-y-2 text-[var(--paragraph)]">
                 <li>SSL encryption for data transmission</li>
@@ -120,25 +129,29 @@ export default function PrivacyPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-[var(--paragraph)]">
-                Our website may use third-party services that have their own privacy policies:
+                Our website may use third-party services that have their own
+                privacy policies:
               </p>
               <div className="space-y-3">
                 <div>
                   <h4 className="font-semibold">Analytics</h4>
                   <p className="text-sm text-[var(--paragraph)]">
-                    We use Vercel Analytics to understand website usage and improve performance.
+                    We use Vercel Analytics to understand website usage and
+                    improve performance.
                   </p>
                 </div>
                 <div>
                   <h4 className="font-semibold">Hosting</h4>
                   <p className="text-sm text-[var(--paragraph)]">
-                    Our website is hosted on Render, which may collect server logs and technical data.
+                    Our website is hosted on Render, which may collect server
+                    logs and technical data.
                   </p>
                 </div>
                 <div>
                   <h4 className="font-semibold">Email Services</h4>
                   <p className="text-sm text-[var(--paragraph)]">
-                    Contact form submissions may be processed through email service providers.
+                    Contact form submissions may be processed through email
+                    service providers.
                   </p>
                 </div>
               </div>
@@ -151,7 +164,8 @@ export default function PrivacyPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-[var(--paragraph)]">
-                You have the following rights regarding your personal information:
+                You have the following rights regarding your personal
+                information:
               </p>
               <ul className="list-disc list-inside space-y-2 text-[var(--paragraph)]">
                 <li>Right to access your personal data</li>
@@ -162,7 +176,10 @@ export default function PrivacyPage() {
               </ul>
               <p className="text-[var(--paragraph)] mt-4">
                 To exercise these rights, please contact us at{" "}
-                <a href="mailto:alshaercontact@gmail.com" className="text-[var(--link-color)] hover:underline">
+                <a
+                  href="mailto:alshaercontact@gmail.com"
+                  className="text-[var(--link-color)] hover:underline"
+                >
                   alshaercontact@gmail.com
                 </a>
               </p>
@@ -175,7 +192,8 @@ export default function PrivacyPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-[var(--paragraph)]">
-                Our website may use cookies and similar technologies to enhance your browsing experience:
+                Our website may use cookies and similar technologies to enhance
+                your browsing experience:
               </p>
               <ul className="list-disc list-inside space-y-2 text-[var(--paragraph)]">
                 <li>Essential cookies for website functionality</li>
@@ -183,7 +201,8 @@ export default function PrivacyPage() {
                 <li>Preference cookies to remember your settings</li>
               </ul>
               <p className="text-[var(--paragraph)] mt-4">
-                You can control cookie settings through your browser preferences.
+                You can control cookie settings through your browser
+                preferences.
               </p>
             </CardContent>
           </Card>
@@ -194,12 +213,20 @@ export default function PrivacyPage() {
             </CardHeader>
             <CardContent>
               <p className="text-[var(--paragraph)] mb-4">
-                If you have any questions about this Privacy Policy, please contact us:
+                If you have any questions about this Privacy Policy, please
+                contact us:
               </p>
               <div className="space-y-2 text-[var(--paragraph)]">
-                <p><strong>Email:</strong> alshaercontact@gmail.com</p>
-                <p><strong>Website:</strong> https://alshaer.onrender.com</p>
-                <p><strong>Response Time:</strong> We aim to respond within 48 hours</p>
+                <p>
+                  <strong>Email:</strong> alshaercontact@gmail.com
+                </p>
+                <p>
+                  <strong>Website:</strong> https://alshaer.onrender.com
+                </p>
+                <p>
+                  <strong>Response Time:</strong> We aim to respond within 48
+                  hours
+                </p>
               </div>
             </CardContent>
           </Card>
@@ -210,8 +237,9 @@ export default function PrivacyPage() {
             </CardHeader>
             <CardContent>
               <p className="text-[var(--paragraph)]">
-                We may update this Privacy Policy from time to time. Any changes will be posted on this page 
-                with an updated revision date. We encourage you to review this policy periodically to stay 
+                We may update this Privacy Policy from time to time. Any changes
+                will be posted on this page with an updated revision date. We
+                encourage you to review this policy periodically to stay
                 informed about how we protect your information.
               </p>
             </CardContent>

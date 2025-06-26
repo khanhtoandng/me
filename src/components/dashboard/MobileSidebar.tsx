@@ -117,7 +117,7 @@ export function MobileSidebar() {
             {navigationItems.map((item) => {
               const Icon = item.icon;
               const isActive = pathname === item.href;
-              
+
               return (
                 <Button
                   key={item.name}
@@ -131,7 +131,7 @@ export function MobileSidebar() {
               );
             })}
           </nav>
-          
+
           <div className="border-t pt-4">
             <Button
               variant="ghost"

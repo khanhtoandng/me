@@ -195,7 +195,7 @@ export function EnhancedProjectForm({
       toast.success(
         project
           ? "Project updated successfully!"
-          : "Project added successfully!"
+          : "Project added successfully!",
       );
     } catch (error) {
       toast.error("Failed to save project");
@@ -204,7 +204,7 @@ export function EnhancedProjectForm({
 
   const enhanceField = async (
     field: keyof typeof aiEnhancing,
-    fieldValue: string
+    fieldValue: string,
   ) => {
     if (!fieldValue.trim()) {
       toast.error(`Please enter ${field} first`);
@@ -228,7 +228,7 @@ export function EnhancedProjectForm({
           [field]: result.data as string,
         }));
         toast.success(
-          `${field.charAt(0).toUpperCase() + field.slice(1)} enhanced successfully!`
+          `${field.charAt(0).toUpperCase() + field.slice(1)} enhanced successfully!`,
         );
       } else {
         toast.error(result.error || `Failed to enhance ${field}`);
@@ -265,7 +265,7 @@ export function EnhancedProjectForm({
         setRawTechnologiesText("");
         setShowTechnologiesProcessor(false);
         toast.success(
-          `Added ${newTechnologies.length} technologies successfully!`
+          `Added ${newTechnologies.length} technologies successfully!`,
         );
       } else {
         toast.error(result.error || "Failed to process technologies");
@@ -294,7 +294,7 @@ export function EnhancedProjectForm({
     setFormData((prev) => ({
       ...prev,
       technologies: prev.technologies.filter(
-        (tech) => tech !== technologyToRemove
+        (tech) => tech !== technologyToRemove,
       ),
     }));
   };

@@ -58,7 +58,7 @@ export default function ContactForm() {
           email: data.email,
           message: data.message,
         },
-        userId
+        userId,
       );
 
       console.log("Email sent successfully:", result.text);
@@ -78,18 +78,17 @@ export default function ContactForm() {
         gradientColor="#7e7e7e12"
         className={cn(
           "group container overflow-hidden transition-all duration-300",
-          "border-[var(--card-border-color)] bg-[var(--card-background)]"
+          "border-[var(--card-border-color)] bg-[var(--card-background)]",
         )}
         ref={undefined}
       >
         <div className="flex flex-col border-none bg-transparent">
-          <Form  {...form}>
+          <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
               className="space-y-2 bg-transparent py-[20px] border-none"
             >
               <FormField
-              
                 control={form.control}
                 name="name"
                 render={({ field }) => (

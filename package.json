@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "generate-sitemap": "node scripts/generate-sitemap.js",
-    "deploy": "node scripts/deploy.js"
+    "deploy": "node scripts/deploy.js",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.6.0",

@@ -43,4 +43,5 @@ ContentSchema.pre("save", function (next) {
   next();
 });
 
-export default mongoose.models.Content || mongoose.model("Content", ContentSchema);
+export default mongoose.models.Content ||
+  mongoose.model("Content", ContentSchema);

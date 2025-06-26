@@ -62,7 +62,7 @@ async function testSettings() {
     // Find user
     console.log("Looking for user with username: balshaer");
     const user = await User.findOne({ username: "balshaer" }).select(
-      "+password"
+      "+password",
     );
 
     if (user) {

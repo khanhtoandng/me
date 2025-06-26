@@ -8,14 +8,14 @@
  * Get a cookie by name
  */
 export function getCookie(name: string): string | null {
-  if (typeof document === 'undefined') {
+  if (typeof document === "undefined") {
     return null;
   }
-  
-  const cookies = document.cookie.split(';');
+
+  const cookies = document.cookie.split(";");
   for (let i = 0; i < cookies.length; i++) {
     const cookie = cookies[i].trim();
-    if (cookie.startsWith(name + '=')) {
+    if (cookie.startsWith(name + "=")) {
       return cookie.substring(name.length + 1);
     }
   }
@@ -32,40 +32,40 @@ export function setCookie(
     path?: string;
     maxAge?: number;
     secure?: boolean;
-    sameSite?: 'strict' | 'lax' | 'none';
-  } = {}
+    sameSite?: "strict" | "lax" | "none";
+  } = {},
 ): void {
-  if (typeof document === 'undefined') {
+  if (typeof document === "undefined") {
     return;
   }
-  
-  const { path = '/', maxAge, secure, sameSite = 'lax' } = options;
-  
+
+  const { path = "/", maxAge, secure, sameSite = "lax" } = options;
+
   let cookie = `${name}=${value}; path=${path}`;
-  
+
   if (maxAge !== undefined) {
     cookie += `; max-age=${maxAge}`;
   }
-  
+
   if (secure) {
-    cookie += '; secure';
+    cookie += "; secure";
   }
-  
+
   if (sameSite) {
     cookie += `; samesite=${sameSite}`;
   }
-  
+
   document.cookie = cookie;
 }
 
 /**
  * Delete a cookie
  */
-export function deleteCookie(name: string, path = '/'): void {
-  if (typeof document === 'undefined') {
+export function deleteCookie(name: string, path = "/"): void {
+  if (typeof document === "undefined") {
     return;
   }
-  
+
   document.cookie = `${name}=; path=${path}; max-age=0`;
 }
 
@@ -73,23 +73,23 @@ export function deleteCookie(name: string, path = '/'): void {
  * Get all cookies as an object
  */
 export function getAllCookies(): Record<string, string> {
-  if (typeof document === 'undefined') {
+  if (typeof document === "undefined") {
     return {};
   }
-  
+
   const cookies: Record<string, string> = {};
   const cookieStr = document.cookie;
-  
+
   if (cookieStr) {
-    const cookiePairs = cookieStr.split(';');
+    const cookiePairs = cookieStr.split(";");
     for (const cookiePair of cookiePairs) {
-      const [name, value] = cookiePair.trim().split('=');
+      const [name, value] = cookiePair.trim().split("=");
       if (name && value) {
         cookies[name] = value;
       }
     }
   }
-  
+
   return cookies;
 }
 
@@ -97,9 +97,9 @@ export function getAllCookies(): Record<string, string> {
  * Debug function to check cookies (silent version)
  */
 export function debugCookies(): Record<string, string> {
-  if (typeof document === 'undefined') {
+  if (typeof document === "undefined") {
     return {};
   }
-  
+
   return getAllCookies();
 }

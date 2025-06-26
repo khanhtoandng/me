@@ -34,7 +34,9 @@ export function BulkDeleteDialog({
   itemType,
   isDeleting = false,
 }: BulkDeleteDialogProps) {
-  const [step, setStep] = useState<"warning" | "otp" | "deleting" | "success">("warning");
+  const [step, setStep] = useState<"warning" | "otp" | "deleting" | "success">(
+    "warning",
+  );
   const [error, setError] = useState("");
 
   const handleClose = () => {
@@ -55,7 +57,7 @@ export function BulkDeleteDialog({
       setStep("deleting");
       await onConfirm();
       setStep("success");
-      
+
       // Auto-close after success
       setTimeout(() => {
         handleClose();
@@ -91,10 +93,8 @@ export function BulkDeleteDialog({
               <h3 className="text-lg font-semibold text-[var(--card-headline)]">
                 {title}
               </h3>
-              <p className="text-[var(--card-paragraph)]">
-                {description}
-              </p>
-              <div className="bg-red-50 border border-red-200 rounded-lg p-4 mt-4">
+              <p className="text-[var(--card-paragraph)]">{description}</p>
+              <div className="bg-red-50 border border-red-200 rounded-[12px] p-4 mt-4">
                 <p className="text-sm text-red-800">
                   <strong>Warning:</strong> You are about to permanently delete{" "}
                   <span className="font-bold">{itemCount}</span> {itemType}
@@ -141,7 +141,7 @@ export function BulkDeleteDialog({
               description={`Enter the confirmation code to delete ${itemCount} ${itemType}${itemCount !== 1 ? "s" : ""}`}
               disabled={isDeleting}
             />
-            
+
             {error && (
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
@@ -216,7 +216,8 @@ export function BulkDeleteDialog({
                 Successfully Deleted!
               </h3>
               <p className="text-[var(--card-paragraph)]">
-                {itemCount} {itemType}{itemCount !== 1 ? "s" : ""} have been permanently deleted.
+                {itemCount} {itemType}
+                {itemCount !== 1 ? "s" : ""} have been permanently deleted.
               </p>
             </div>
           </motion.div>
@@ -237,9 +238,7 @@ export function BulkDeleteDialog({
           </DialogDescription>
         </DialogHeader>
 
-        <AnimatePresence mode="wait">
-          {getStepContent()}
-        </AnimatePresence>
+        <AnimatePresence mode="wait">{getStepContent()}</AnimatePresence>
       </DialogContent>
     </Dialog>
   );

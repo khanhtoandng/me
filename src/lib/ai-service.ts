@@ -21,11 +21,11 @@ interface AIResponse {
  */
 export async function enhanceTextWithAI(
   text: string,
-  options: AIEnhancementOptions
+  options: AIEnhancementOptions,
 ): Promise<AIResponse> {
   try {
     const prompt = generatePrompt(text, options);
-    
+
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/${AI_CONFIG.model}:generateContent?key=${AI_CONFIG.geminiApiKey}`,
       {
@@ -48,7 +48,7 @@ export async function enhanceTextWithAI(
             maxOutputTokens: AI_CONFIG.maxTokens,
           },
         }),
-      }
+      },
     );
 
     if (!response.ok) {
@@ -85,7 +85,9 @@ function generatePrompt(text: string, options: AIEnhancementOptions): string {
   const { type, context, maxLength } = options;
 
   const baseInstructions = `Please enhance the following text. Return only the enhanced text without any additional commentary or formatting.`;
-  const lengthLimit = maxLength ? ` Keep the response under ${maxLength} characters.` : "";
+  const lengthLimit = maxLength
+    ? ` Keep the response under ${maxLength} characters.`
+    : "";
 
   switch (type) {
     case "description":
@@ -137,7 +139,9 @@ function processAIResponse(response: string, type: string): string | string[] {
 /**
  * Enhance project description
  */
-export async function enhanceProjectDescription(description: string): Promise<AIResponse> {
+export async function enhanceProjectDescription(
+  description: string,
+): Promise<AIResponse> {
   return enhanceTextWithAI(description, {
     type: "description",
     context: "project",
@@ -148,7 +152,9 @@ export async function enhanceProjectDescription(description: string): Promise<AI
 /**
  * Enhance experience description
  */
-export async function enhanceExperienceDescription(description: string): Promise<AIResponse> {
+export async function enhanceExperienceDescription(
+  description: string,
+): Promise<AIResponse> {
   return enhanceTextWithAI(description, {
     type: "description",
     context: "work experience",
@@ -168,7 +174,9 @@ export async function enhanceLocation(location: string): Promise<AIResponse> {
 /**
  * Process skills with AI
  */
-export async function processSkillsWithAI(rawSkills: string): Promise<AIResponse> {
+export async function processSkillsWithAI(
+  rawSkills: string,
+): Promise<AIResponse> {
   return enhanceTextWithAI(rawSkills, {
     type: "skills",
   });
@@ -177,7 +185,9 @@ export async function processSkillsWithAI(rawSkills: string): Promise<AIResponse
 /**
  * Process technologies with AI
  */
-export async function processTechnologiesWithAI(rawTechnologies: string): Promise<AIResponse> {
+export async function processTechnologiesWithAI(
+  rawTechnologies: string,
+): Promise<AIResponse> {
   return enhanceTextWithAI(rawTechnologies, {
     type: "technologies",
   });
@@ -187,14 +197,20 @@ export async function processTechnologiesWithAI(rawTechnologies: string): Promis
  * Batch enhance multiple fields
  */
 export async function batchEnhanceFields(
-  fields: Array<{ text: string; type: AIEnhancementOptions["type"]; key: string }>
+  fields: Array<{
+    text: string;
+    type: AIEnhancementOptions["type"];
+    key: string;
+  }>,
 ): Promise<Record<string, AIResponse>> {
   const results: Record<string, AIResponse> = {};
 
   // Process fields sequentially to avoid rate limiting
   for (const field of fields) {
     try {
-      results[field.key] = await enhanceTextWithAI(field.text, { type: field.type });
+      results[field.key] = await enhanceTextWithAI(field.text, {
+        type: field.type,
+      });
       // Small delay between requests
       await new Promise((resolve) => setTimeout(resolve, 500));
     } catch (error) {
@@ -218,7 +234,11 @@ export function isAIServiceAvailable(): boolean {
 /**
  * Validate text for AI enhancement
  */
-export function validateTextForAI(text: string, minLength = 3, maxLength = 5000): {
+export function validateTextForAI(
+  text: string,
+  minLength = 3,
+  maxLength = 5000,
+): {
   isValid: boolean;
   error?: string;
 } {
@@ -227,11 +247,17 @@ export function validateTextForAI(text: string, minLength = 3, maxLength = 5000)
   }
 
   if (text.trim().length < minLength) {
-    return { isValid: false, error: `Text must be at least ${minLength} characters long` };
+    return {
+      isValid: false,
+      error: `Text must be at least ${minLength} characters long`,
+    };
   }
 
   if (text.length > maxLength) {
-    return { isValid: false, error: `Text must be less than ${maxLength} characters long` };
+    return {
+      isValid: false,
+      error: `Text must be less than ${maxLength} characters long`,
+    };
   }
 
   return { isValid: true };

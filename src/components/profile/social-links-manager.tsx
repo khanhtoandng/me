@@ -339,7 +339,7 @@ export function SocialLinksManager({
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className={`flex items-center justify-between p-4 rounded-lg border ${
+                  className={`flex items-center justify-between p-4 rounded-[12px] border ${
                     link.isActive
                       ? "border-[var(--card-border-color)] bg-[var(--input-background)]"
                       : "  opacity-60"

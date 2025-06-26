@@ -1,16 +1,17 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUp, Menu, X, Home, Briefcase, Mail, FileText } from "lucide-react";
-import { scrollToTop } from "@/lib/helper";
+import { AnimatePresence, motion } from "framer-motion";
+import { Briefcase, FileText, Home, Mail, Menu, X } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 interface FloatingActionButtonProps {
   threshold?: number;
 }
 
-export default function FloatingActionButton({ threshold = 300 }: FloatingActionButtonProps) {
+export default function FloatingActionButton({
+  threshold = 300,
+}: FloatingActionButtonProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -31,7 +32,11 @@ export default function FloatingActionButton({ threshold = 300 }: FloatingAction
   const menuItems = [
     { icon: <Home className="h-5 w-5" />, label: "Home", href: "/" },
     { icon: <Briefcase className="h-5 w-5" />, label: "Work", href: "/#work" },
-    { icon: <FileText className="h-5 w-5" />, label: "Projects", href: "/projects" },
+    {
+      icon: <FileText className="h-5 w-5" />,
+      label: "Projects",
+      href: "/projects",
+    },
     { icon: <Mail className="h-5 w-5" />, label: "Contact", href: "/contact" },
   ];
 
@@ -49,7 +54,7 @@ export default function FloatingActionButton({ threshold = 300 }: FloatingAction
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className="fixed bottom-6 right-6 z-50 flex flex-col items-end"
+          className="fixed bottom-6 right-6 z-30 flex flex-col items-end"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.8 }}
@@ -89,15 +94,20 @@ export default function FloatingActionButton({ threshold = 300 }: FloatingAction
           {/* Main button */}
           <motion.button
             className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--link-color)] text-white shadow-lg hover:bg-[var(--button)] transition-colors"
-            onClick={() => (isMenuOpen ? setIsMenuOpen(false) : setIsMenuOpen(true))}
+            onClick={() =>
+              isMenuOpen ? setIsMenuOpen(false) : setIsMenuOpen(true)
+            }
             whileTap={{ scale: 0.9 }}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
-            {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {isMenuOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
           </motion.button>
 
           {/* Back to top button */}
-     
         </motion.div>
       )}
     </AnimatePresence>

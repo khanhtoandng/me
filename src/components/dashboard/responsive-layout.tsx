@@ -54,7 +54,7 @@ function DashboardLayoutContent({
 }
 
 export function ResponsiveDashboardLayout(
-  props: ResponsiveDashboardLayoutProps
+  props: ResponsiveDashboardLayoutProps,
 ) {
   return (
     <SidebarProvider>
@@ -186,7 +186,7 @@ export function ResponsiveCard({
   return (
     <motion.div
       className={`
-         dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700
+         dark:bg-gray-800 rounded-[12px] border border-gray-200 dark:border-gray-700
         ${paddingClasses[padding]}
         ${hover ? "hover:shadow-lg transition-shadow duration-200" : ""}
         ${className}

@@ -1,11 +1,19 @@
 import { Metadata } from "next";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { FileText, Scale, AlertTriangle, Shield, Mail, Calendar } from "lucide-react";
+import {
+  FileText,
+  Scale,
+  AlertTriangle,
+  Shield,
+  Mail,
+  Calendar,
+} from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: "Terms of service for Baraa Alshaer's portfolio website. Learn about the terms and conditions for using our website.",
+  description:
+    "Terms of service for Baraa Alshaer's portfolio website. Learn about the terms and conditions for using our website.",
 };
 
 export default function TermsPage() {
@@ -20,10 +28,13 @@ export default function TermsPage() {
             <div className="w-12 h-12 rounded-[12px] bg-gradient-to-br from-green-500 to-blue-600 flex items-center justify-center">
               <FileText className="h-6 w-6 text-white" />
             </div>
-            <h1 className="text-4xl font-bold text-[var(--headline)]">Terms of Service</h1>
+            <h1 className="text-4xl font-bold text-[var(--headline)]">
+              Terms of Service
+            </h1>
           </div>
           <p className="text-lg text-[var(--paragraph)] max-w-2xl mx-auto">
-            Please read these terms and conditions carefully before using our website and services.
+            Please read these terms and conditions carefully before using our
+            website and services.
           </p>
           <div className="flex items-center justify-center gap-2 text-sm text-[var(--paragraph)]/70">
             <Calendar className="h-4 w-4" />
@@ -44,10 +55,13 @@ export default function TermsPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-[var(--paragraph)]">
-                By accessing and using this website (https://alshaer.onrender.com), you accept and agree to be bound by the terms and provision of this agreement.
+                By accessing and using this website
+                (https://alshaer.onrender.com), you accept and agree to be bound
+                by the terms and provision of this agreement.
               </p>
               <p className="text-[var(--paragraph)]">
-                If you do not agree to abide by the above, please do not use this service.
+                If you do not agree to abide by the above, please do not use
+                this service.
               </p>
             </CardContent>
           </Card>
@@ -58,7 +72,8 @@ export default function TermsPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-[var(--paragraph)]">
-                This website is provided for informational and portfolio purposes. You may:
+                This website is provided for informational and portfolio
+                purposes. You may:
               </p>
               <ul className="list-disc list-inside space-y-2 text-[var(--paragraph)]">
                 <li>Browse and view the content for personal use</li>
@@ -66,14 +81,16 @@ export default function TermsPage() {
                 <li>Share links to our content with proper attribution</li>
                 <li>Use the information to evaluate our services</li>
               </ul>
-              
-              <p className="text-[var(--paragraph)] mt-4">
-                You may not:
-              </p>
+
+              <p className="text-[var(--paragraph)] mt-4">You may not:</p>
               <ul className="list-disc list-inside space-y-2 text-[var(--paragraph)]">
-                <li>Copy, reproduce, or distribute content without permission</li>
+                <li>
+                  Copy, reproduce, or distribute content without permission
+                </li>
                 <li>Use automated systems to access or scrape the website</li>
-                <li>Attempt to gain unauthorized access to any part of the website</li>
+                <li>
+                  Attempt to gain unauthorized access to any part of the website
+                </li>
                 <li>Use the website for any illegal or unauthorized purpose</li>
                 <li>Interfere with or disrupt the website's functionality</li>
               </ul>
@@ -86,19 +103,24 @@ export default function TermsPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-[var(--paragraph)]">
-                All content on this website, including but not limited to text, graphics, logos, images, code, and design, is the property of Baraa Alshaer and is protected by copyright and other intellectual property laws.
+                All content on this website, including but not limited to text,
+                graphics, logos, images, code, and design, is the property of
+                Baraa Alshaer and is protected by copyright and other
+                intellectual property laws.
               </p>
               <div className="space-y-3">
                 <div>
                   <h4 className="font-semibold">Portfolio Content</h4>
                   <p className="text-sm text-[var(--paragraph)]">
-                    Project descriptions, code samples, and design work are original creations or used with proper licensing.
+                    Project descriptions, code samples, and design work are
+                    original creations or used with proper licensing.
                   </p>
                 </div>
                 <div>
                   <h4 className="font-semibold">Third-Party Content</h4>
                   <p className="text-sm text-[var(--paragraph)]">
-                    Some content may include third-party libraries, frameworks, or resources used under their respective licenses.
+                    Some content may include third-party libraries, frameworks,
+                    or resources used under their respective licenses.
                   </p>
                 </div>
               </div>
@@ -116,19 +138,25 @@ export default function TermsPage() {
               <div>
                 <h4 className="font-semibold mb-2">Website Availability</h4>
                 <p className="text-[var(--paragraph)]">
-                  While we strive to maintain website availability, we do not guarantee uninterrupted access. The website may be temporarily unavailable due to maintenance, updates, or technical issues.
+                  While we strive to maintain website availability, we do not
+                  guarantee uninterrupted access. The website may be temporarily
+                  unavailable due to maintenance, updates, or technical issues.
                 </p>
               </div>
               <div>
                 <h4 className="font-semibold mb-2">Information Accuracy</h4>
                 <p className="text-[var(--paragraph)]">
-                  We make every effort to ensure the accuracy of information on this website, but we cannot guarantee that all information is current, complete, or error-free.
+                  We make every effort to ensure the accuracy of information on
+                  this website, but we cannot guarantee that all information is
+                  current, complete, or error-free.
                 </p>
               </div>
               <div>
                 <h4 className="font-semibold mb-2">External Links</h4>
                 <p className="text-[var(--paragraph)]">
-                  Our website may contain links to external websites. We are not responsible for the content, privacy policies, or practices of these external sites.
+                  Our website may contain links to external websites. We are not
+                  responsible for the content, privacy policies, or practices of
+                  these external sites.
                 </p>
               </div>
             </CardContent>
@@ -140,7 +168,9 @@ export default function TermsPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-[var(--paragraph)]">
-                To the fullest extent permitted by law, Baraa Alshaer shall not be liable for any direct, indirect, incidental, special, consequential, or punitive damages arising from:
+                To the fullest extent permitted by law, Baraa Alshaer shall not
+                be liable for any direct, indirect, incidental, special,
+                consequential, or punitive damages arising from:
               </p>
               <ul className="list-disc list-inside space-y-2 text-[var(--paragraph)]">
                 <li>Your use or inability to use the website</li>
@@ -159,13 +189,18 @@ export default function TermsPage() {
             <CardContent className="space-y-4">
               <p className="text-[var(--paragraph)]">
                 Your privacy is important to us. Please review our{" "}
-                <a href="/privacy" className="text-[var(--link-color)] hover:underline">
+                <a
+                  href="/privacy"
+                  className="text-[var(--link-color)] hover:underline"
+                >
                   Privacy Policy
                 </a>{" "}
-                to understand how we collect, use, and protect your personal information.
+                to understand how we collect, use, and protect your personal
+                information.
               </p>
               <p className="text-[var(--paragraph)]">
-                By using this website, you consent to the collection and use of information as outlined in our Privacy Policy.
+                By using this website, you consent to the collection and use of
+                information as outlined in our Privacy Policy.
               </p>
             </CardContent>
           </Card>
@@ -176,13 +211,24 @@ export default function TermsPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-[var(--paragraph)]">
-                If you engage our professional services for web development, consulting, or other work:
+                If you engage our professional services for web development,
+                consulting, or other work:
               </p>
               <ul className="list-disc list-inside space-y-2 text-[var(--paragraph)]">
-                <li>Separate service agreements will govern the work relationship</li>
-                <li>Project scope, timeline, and payment terms will be clearly defined</li>
-                <li>Intellectual property rights will be specified in the service agreement</li>
-                <li>Professional standards and best practices will be maintained</li>
+                <li>
+                  Separate service agreements will govern the work relationship
+                </li>
+                <li>
+                  Project scope, timeline, and payment terms will be clearly
+                  defined
+                </li>
+                <li>
+                  Intellectual property rights will be specified in the service
+                  agreement
+                </li>
+                <li>
+                  Professional standards and best practices will be maintained
+                </li>
               </ul>
             </CardContent>
           </Card>
@@ -193,10 +239,14 @@ export default function TermsPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-[var(--paragraph)]">
-                We reserve the right to modify these terms at any time. Changes will be effective immediately upon posting on this page. Your continued use of the website after any changes constitutes acceptance of the new terms.
+                We reserve the right to modify these terms at any time. Changes
+                will be effective immediately upon posting on this page. Your
+                continued use of the website after any changes constitutes
+                acceptance of the new terms.
               </p>
               <p className="text-[var(--paragraph)]">
-                We recommend reviewing these terms periodically to stay informed of any updates.
+                We recommend reviewing these terms periodically to stay informed
+                of any updates.
               </p>
             </CardContent>
           </Card>
@@ -207,7 +257,10 @@ export default function TermsPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-[var(--paragraph)]">
-                These terms shall be governed by and construed in accordance with applicable international laws and regulations. Any disputes arising from these terms or website use will be resolved through appropriate legal channels.
+                These terms shall be governed by and construed in accordance
+                with applicable international laws and regulations. Any disputes
+                arising from these terms or website use will be resolved through
+                appropriate legal channels.
               </p>
             </CardContent>
           </Card>
@@ -221,12 +274,20 @@ export default function TermsPage() {
             </CardHeader>
             <CardContent>
               <p className="text-[var(--paragraph)] mb-4">
-                If you have any questions about these Terms of Service, please contact us:
+                If you have any questions about these Terms of Service, please
+                contact us:
               </p>
               <div className="space-y-2 text-[var(--paragraph)]">
-                <p><strong>Email:</strong> alshaercontact@gmail.com</p>
-                <p><strong>Website:</strong> https://alshaer.onrender.com</p>
-                <p><strong>Response Time:</strong> We aim to respond within 48 hours</p>
+                <p>
+                  <strong>Email:</strong> alshaercontact@gmail.com
+                </p>
+                <p>
+                  <strong>Website:</strong> https://alshaer.onrender.com
+                </p>
+                <p>
+                  <strong>Response Time:</strong> We aim to respond within 48
+                  hours
+                </p>
               </div>
             </CardContent>
           </Card>

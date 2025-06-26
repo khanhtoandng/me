@@ -108,8 +108,8 @@ export function ProjectsList({
           project.description.toLowerCase().includes(query) ||
           project.projectType.toLowerCase().includes(query) ||
           project.technologies.some((tech) =>
-            tech.toLowerCase().includes(query)
-          )
+            tech.toLowerCase().includes(query),
+          ),
       );
     }
 
@@ -120,7 +120,7 @@ export function ProjectsList({
       switch (key) {
         case "projectType":
           filtered = filtered.filter(
-            (project) => project.projectType === value
+            (project) => project.projectType === value,
           );
           break;
         case "status":
@@ -128,13 +128,13 @@ export function ProjectsList({
           break;
         case "featured":
           filtered = filtered.filter((project) =>
-            value === "true" ? project.featured : !project.featured
+            value === "true" ? project.featured : !project.featured,
           );
           break;
         case "technologies":
           if (Array.isArray(value)) {
             filtered = filtered.filter((project) =>
-              value.some((tech) => project.technologies.includes(tech))
+              value.some((tech) => project.technologies.includes(tech)),
             );
           }
           break;

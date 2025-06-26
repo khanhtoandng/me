@@ -47,7 +47,7 @@ const ReusableCard = React.forwardRef<HTMLDivElement, ReusableCardProps>(
       className,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <MagicCard
@@ -58,7 +58,7 @@ const ReusableCard = React.forwardRef<HTMLDivElement, ReusableCardProps>(
         className={cn(
           "group overflow-hidden transition-all duration-300",
           "border-[var(--card-border-color)] bg-[var(--card-background)]",
-          className
+          className,
         )}
         {...props}
       >
@@ -71,7 +71,7 @@ const ReusableCard = React.forwardRef<HTMLDivElement, ReusableCardProps>(
             <img
               src={coverImg}
               alt={title ? `${title} - Cover Image` : "Cover Image"}
-              className="w-full h-full object-contain z-50 transition-transform duration-300 rounded-lg scale-105"
+              className="w-full h-full object-contain z-50 transition-transform duration-300 rounded-[12px] scale-105"
               onError={(e) => {
                 e.currentTarget.src =
                   "https://via.placeholder.com/400x225?text=Loading...";
@@ -153,7 +153,7 @@ const ReusableCard = React.forwardRef<HTMLDivElement, ReusableCardProps>(
                   "flex items-center gap-1 text-sm transition-colors",
                   "text-[var(--link-color)] hover:text-[var(--link-hover)]",
                   "max-md:w-full max-md:bg-[var(--border)] max-md:p-2 max-md:rounded-[8px] max-md:text-center ",
-                  linkStyle
+                  linkStyle,
                 )}
               >
                 <Globe className="h-4 w-4" />
@@ -170,7 +170,7 @@ const ReusableCard = React.forwardRef<HTMLDivElement, ReusableCardProps>(
                   "flex items-center gap-1 text-sm transition-colors",
                   "text-[var(--link-color)] hover:text-[var(--link-hover)]",
                   "max-md:w-full max-md:bg-[var(--border)] max-md:p-2 max-md:rounded-[8px] max-md:text-center ",
-                  linkStyle
+                  linkStyle,
                 )}
               >
                 <svg
@@ -188,7 +188,7 @@ const ReusableCard = React.forwardRef<HTMLDivElement, ReusableCardProps>(
         </CardFooter>
       </MagicCard>
     );
-  }
+  },
 );
 
 ReusableCard.displayName = "ReusableCard";

@@ -26,7 +26,7 @@ export async function GET(request) {
     console.error("Error fetching project types:", error);
     return NextResponse.json(
       { success: false, error: "Failed to fetch project types" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -43,19 +43,19 @@ export async function POST(request) {
     if (!name || !icon || !icon.library || !icon.name) {
       return NextResponse.json(
         { success: false, error: "Name and icon are required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     // Check if project type with same name already exists
-    const existingType = await ProjectType.findOne({ 
-      name: { $regex: new RegExp(`^${name}$`, 'i') } 
+    const existingType = await ProjectType.findOne({
+      name: { $regex: new RegExp(`^${name}$`, "i") },
     });
 
     if (existingType) {
       return NextResponse.json(
         { success: false, error: "Project type with this name already exists" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -74,17 +74,17 @@ export async function POST(request) {
     });
   } catch (error) {
     console.error("Error creating project type:", error);
-    
+
     if (error.code === 11000) {
       return NextResponse.json(
         { success: false, error: "Project type with this name already exists" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     return NextResponse.json(
       { success: false, error: "Failed to create project type" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

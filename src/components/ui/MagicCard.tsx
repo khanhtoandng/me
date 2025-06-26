@@ -31,7 +31,7 @@ export function MagicCard({
         mouseY.set(clientY - top);
       }
     },
-    [mouseX, mouseY]
+    [mouseX, mouseY],
   );
 
   const handleMouseOut = useCallback(
@@ -42,7 +42,7 @@ export function MagicCard({
         mouseY.set(-gradientSize);
       }
     },
-    [handleMouseMove, mouseX, gradientSize, mouseY]
+    [handleMouseMove, mouseX, gradientSize, mouseY],
   );
 
   const handleMouseEnter = useCallback(() => {
@@ -74,7 +74,7 @@ export function MagicCard({
       data-aos="fade-up"
       className={cn(
         "group relative flex size-full overflow-hidden rounded-xl border border-[var(--card-border-color)] bg-[var(--card-background)] transition-all duration-300 hover-lift",
-        className
+        className,
       )}
     >
       <div className="relative z-10 w-full">{children}</div>

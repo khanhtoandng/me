@@ -22,12 +22,12 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
     const checkMobile = () => {
       const mobile = window.innerWidth < 768; // md breakpoint
       setIsMobile(mobile);
-      
+
       // Auto-close sidebar on mobile when switching to mobile view
       if (mobile && sidebarOpen) {
         setSidebarOpen(false);
       }
-      
+
       // Auto-open sidebar on desktop when switching from mobile
       if (!mobile && !sidebarOpen) {
         setSidebarOpen(true);
@@ -39,7 +39,7 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
 
     // Listen for resize events
     window.addEventListener("resize", checkMobile);
-    
+
     return () => window.removeEventListener("resize", checkMobile);
   }, [sidebarOpen]);
 
@@ -47,10 +47,10 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (!isMobile || !sidebarOpen) return;
-      
+
       const sidebar = document.getElementById("dashboard-sidebar");
       const target = event.target as Node;
-      
+
       if (sidebar && !sidebar.contains(target)) {
         setSidebarOpen(false);
       }
@@ -58,7 +58,8 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
 
     if (isMobile && sidebarOpen) {
       document.addEventListener("mousedown", handleClickOutside);
-      return () => document.removeEventListener("mousedown", handleClickOutside);
+      return () =>
+        document.removeEventListener("mousedown", handleClickOutside);
     }
   }, [isMobile, sidebarOpen]);
 
@@ -111,9 +112,7 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <SidebarContext.Provider value={value}>
-      {children}
-    </SidebarContext.Provider>
+    <SidebarContext.Provider value={value}>{children}</SidebarContext.Provider>
   );
 }
 
@@ -128,7 +127,7 @@ export function useSidebar() {
 // Hook for responsive behavior
 export function useResponsiveSidebar() {
   const { sidebarOpen, isMobile, toggleSidebar, closeSidebar } = useSidebar();
-  
+
   return {
     sidebarOpen,
     isMobile,

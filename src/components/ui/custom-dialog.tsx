@@ -46,7 +46,7 @@ let setDialogState: React.Dispatch<React.SetStateAction<DialogState>> | null =
 export const showAlert = (
   title: string,
   message: string,
-  variant: DialogOptions["variant"] = "default"
+  variant: DialogOptions["variant"] = "default",
 ): Promise<boolean> => {
   return new Promise((resolve) => {
     if (setDialogState) {
@@ -75,7 +75,7 @@ export const showConfirm = (
     variant?: DialogOptions["variant"];
     confirmText?: string;
     cancelText?: string;
-  } = {}
+  } = {},
 ): Promise<boolean> => {
   return new Promise((resolve) => {
     if (setDialogState) {
@@ -106,7 +106,7 @@ export const showPrompt = (
     defaultValue?: string;
     confirmText?: string;
     cancelText?: string;
-  } = {}
+  } = {},
 ): Promise<string | null> => {
   return new Promise((resolve) => {
     if (setDialogState) {

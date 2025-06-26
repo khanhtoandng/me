@@ -25,7 +25,9 @@ import { useState } from "react";
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   email: z.string().email({ message: "Invalid email address." }),
-  subject: z.string().min(5, { message: "Subject must be at least 5 characters." }),
+  subject: z
+    .string()
+    .min(5, { message: "Subject must be at least 5 characters." }),
   message: z
     .string()
     .min(10, { message: "Message must be at least 10 characters." }),
@@ -33,7 +35,7 @@ const formSchema = z.object({
 
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -46,7 +48,7 @@ export default function ContactForm() {
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     setIsSubmitting(true);
-    
+
     try {
       // First, save to database
       const response = await fetch("/api/messages", {
@@ -81,12 +83,15 @@ export default function ContactForm() {
                 subject: data.subject,
                 message: data.message,
               },
-              userId
+              userId,
             );
             console.log("Email sent successfully via EmailJS");
           }
         } catch (emailError) {
-          console.error("EmailJS failed, but message was saved to database:", emailError);
+          console.error(
+            "EmailJS failed, but message was saved to database:",
+            emailError,
+          );
         }
 
         form.reset();
@@ -110,7 +115,7 @@ export default function ContactForm() {
         gradientColor="#7e7e7e12"
         className={cn(
           "group container overflow-hidden transition-all duration-300",
-          "border-[var(--card-border-color)] bg-[var(--card-background)]"
+          "border-[var(--card-border-color)] bg-[var(--card-background)]",
         )}
         ref={undefined}
       >
@@ -139,7 +144,7 @@ export default function ContactForm() {
                   </FormItem>
                 )}
               />
-              
+
               <FormField
                 control={form.control}
                 name="email"
@@ -179,7 +184,7 @@ export default function ContactForm() {
                   </FormItem>
                 )}
               />
-              
+
               <FormField
                 control={form.control}
                 name="message"
@@ -199,9 +204,9 @@ export default function ContactForm() {
                   </FormItem>
                 )}
               />
-              
-              <Button 
-                type="submit" 
+
+              <Button
+                type="submit"
                 disabled={isSubmitting}
                 className="w-full bg-[var(--button)] text-[var(--button-text)] hover:bg-[var(--button2)]"
               >

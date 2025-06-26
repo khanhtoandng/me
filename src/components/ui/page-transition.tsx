@@ -75,7 +75,10 @@ const fadeTransition = {
   duration: 0.2,
 };
 
-export function PageTransition({ children, className = "" }: PageTransitionProps) {
+export function PageTransition({
+  children,
+  className = "",
+}: PageTransitionProps) {
   const pathname = usePathname();
 
   return (
@@ -95,7 +98,10 @@ export function PageTransition({ children, className = "" }: PageTransitionProps
   );
 }
 
-export function SlideTransition({ children, className = "" }: PageTransitionProps) {
+export function SlideTransition({
+  children,
+  className = "",
+}: PageTransitionProps) {
   const pathname = usePathname();
 
   return (
@@ -115,7 +121,10 @@ export function SlideTransition({ children, className = "" }: PageTransitionProp
   );
 }
 
-export function FadeTransition({ children, className = "" }: PageTransitionProps) {
+export function FadeTransition({
+  children,
+  className = "",
+}: PageTransitionProps) {
   const pathname = usePathname();
 
   return (

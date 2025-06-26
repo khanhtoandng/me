@@ -127,15 +127,38 @@ export interface Notification {
 // Enum Types
 // ============================================================================
 
-export type ProjectStatus = "draft" | "in-progress" | "completed" | "published" | "archived";
+export type ProjectStatus =
+  | "draft"
+  | "in-progress"
+  | "completed"
+  | "published"
+  | "archived";
 
-export type NotificationType = "message" | "system" | "success" | "warning" | "error" | "info";
+export type NotificationType =
+  | "message"
+  | "system"
+  | "success"
+  | "warning"
+  | "error"
+  | "info";
 
 export type UserRole = "admin" | "user" | "moderator";
 
-export type ProjectType = "web-app" | "mobile-app" | "desktop-app" | "api" | "library" | "tool" | "other";
+export type ProjectType =
+  | "web-app"
+  | "mobile-app"
+  | "desktop-app"
+  | "api"
+  | "library"
+  | "tool"
+  | "other";
 
-export type ExperienceType = "full-time" | "part-time" | "contract" | "freelance" | "internship";
+export type ExperienceType =
+  | "full-time"
+  | "part-time"
+  | "contract"
+  | "freelance"
+  | "internship";
 
 export type MessagePriority = "low" | "medium" | "high";
 

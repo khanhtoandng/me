@@ -126,7 +126,7 @@ export function EnhancedExperienceDashboard({
   const handleDeleteExperience = async (experienceId: string) => {
     try {
       const updatedExperiences = experiences.filter(
-        (exp) => exp._id !== experienceId
+        (exp) => exp._id !== experienceId,
       );
       await onUpdate(updatedExperiences);
       setExperiences(updatedExperiences);
@@ -137,7 +137,7 @@ export function EnhancedExperienceDashboard({
   };
 
   const handleFormSubmit = async (
-    formData: Omit<Experience, "_id"> & { _id?: string }
+    formData: Omit<Experience, "_id"> & { _id?: string },
   ) => {
     setFormLoading(true);
 
@@ -149,7 +149,7 @@ export function EnhancedExperienceDashboard({
         updatedExperiences = experiences.map((exp) =>
           exp._id === editingExperience._id
             ? { ...formData, _id: editingExperience._id }
-            : exp
+            : exp,
         );
       } else {
         // Add new experience
@@ -330,7 +330,7 @@ export function EnhancedExperienceDashboard({
           </DialogHeader>
 
           <div className="space-y-4">
-            <div className="bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
+            <div className="bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 rounded-[12px] p-4">
               <div className="flex items-center gap-2 text-red-800 dark:text-red-200 mb-2">
                 <Shield className="h-4 w-4" />
                 <span className="font-medium">

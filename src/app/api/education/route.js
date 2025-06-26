@@ -10,7 +10,7 @@ export async function GET() {
   } catch (error) {
     return NextResponse.json(
       { success: false, error: error.message },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }
@@ -22,12 +22,12 @@ export async function POST(request) {
     const education = await Education.create(body);
     return NextResponse.json(
       { success: true, data: education },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     return NextResponse.json(
       { success: false, error: error.message },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }

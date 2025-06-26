@@ -9,7 +9,7 @@ export async function POST() {
     // Archive all messages instead of deleting them
     const result = await Message.updateMany(
       { archived: false },
-      { archived: true, read: true, updatedAt: Date.now() }
+      { archived: true, read: true, updatedAt: Date.now() },
     );
 
     return NextResponse.json({
@@ -21,7 +21,7 @@ export async function POST() {
     console.error("Error clearing all messages:", error);
     return NextResponse.json(
       { success: false, error: "Failed to clear messages" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

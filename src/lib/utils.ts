@@ -45,7 +45,7 @@ export function getInitials(name: string, maxLength = 2): string {
  */
 export function formatDate(
   dateString: string | Date,
-  options?: Intl.DateTimeFormatOptions
+  options?: Intl.DateTimeFormatOptions,
 ) {
   const date =
     typeof dateString === "string" ? new Date(dateString) : dateString;
@@ -92,7 +92,7 @@ export function formatRelativeTime(date: string | Date): string {
  */
 export function getDuration(
   startDate: string | Date,
-  endDate?: string | Date
+  endDate?: string | Date,
 ): string {
   const start = typeof startDate === "string" ? new Date(startDate) : startDate;
   const end = endDate
@@ -205,7 +205,7 @@ export function unique<T>(array: T[]): T[] {
  */
 export function debounce<T extends (...args: any[]) => any>(
   func: T,
-  wait: number
+  wait: number,
 ): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout;
 

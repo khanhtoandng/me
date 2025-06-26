@@ -1,18 +1,18 @@
 "use client";
 
-import React, { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import {
-  Menu,
-  X,
   Briefcase,
   FolderGit2,
-  MessageCircleCode,
   LucideFileSpreadsheet,
+  Menu,
+  MessageCircleCode,
+  X,
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ThemeToggle } from "../ui/theme-toggle";
-import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { ThemeToggle } from "../ui/theme-toggle";
 import Logo from "./Logo";
 
 const styles = {
@@ -65,8 +65,9 @@ export default function Navbar() {
       {!ispath && (
         <motion.nav
           dir="ltr"
+          id="navbar"
           transition={{ duration: 0.5 }}
-          className="container mb-8 max-md:bg-[var(--background)] max-md:z-50 mx-auto z-50 flex items-center justify-between gap-5 rounded-full border border-[var(--border)] max-md:border-t-0 max-md:border-x-0 bg-[var(--mobile-nav)] px-5 text-base backdrop-blur-lg max-md:fixed max-md:left-0 max-md:right-0 max-md:top-0 max-md:w-full max-md:rounded-none max-md:px-3 sm:px-6 md:mt-4 max-[900]:hidden shadow-sm"
+          className="container mb-8 max-md:bg-[var(--background)] max-md:z-40 mx-auto z-40 flex items-center justify-between gap-5 rounded-full border border-[var(--border)] max-md:border-t-0 max-md:border-x-0 bg-[var(--mobile-nav)] px-5 text-base backdrop-blur-lg max-md:fixed max-md:left-0 max-md:right-0 max-md:top-0 max-md:w-full max-md:rounded-none max-md:px-3 sm:px-6 md:mt-4 max-[900]:hidden shadow-sm"
         >
           <div className="container mx-auto px-0">
             <div className="flex h-16 items-center justify-between max-md:flex-wrap">
@@ -173,10 +174,10 @@ export default function Navbar() {
                         >
                           <Link
                             href={item.path}
-                            className="flex items-center justify-center gap-3 py-3 px-4 rounded-lg hover:bg-[var(--card-background)] transition-colors text-[var(--headline)] text-xl font-medium"
+                            className="flex items-center justify-center gap-3 py-3 px-4 rounded-[12px] hover:bg-[var(--card-background)] transition-colors text-[var(--headline)] text-xl font-bold"
                             onClick={() => setIsMobileMenuOpen(false)}
                           >
-                            <item.icon className="h-5 w-5 text-[var(--link-color)]" />
+                            {/* <item.icon className="h-5 w-5 text-[var(--link-color)]" /> */}
                             {item.name}
                           </Link>
                         </motion.div>

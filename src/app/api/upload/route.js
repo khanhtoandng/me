@@ -16,7 +16,7 @@ export async function POST(request) {
     if (!file) {
       return NextResponse.json(
         { success: false, error: "No file provided" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -37,7 +37,7 @@ export async function POST(request) {
     if (!allowedTypes.includes(file.type)) {
       return NextResponse.json(
         { success: false, error: "File type not allowed" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -46,7 +46,7 @@ export async function POST(request) {
     if (file.size > maxSize) {
       return NextResponse.json(
         { success: false, error: "File size too large (max 10MB)" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -78,7 +78,7 @@ export async function POST(request) {
     if (!uploadResult.success) {
       return NextResponse.json(
         { success: false, error: uploadResult.error },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -100,7 +100,7 @@ export async function POST(request) {
     console.error("Upload error:", error);
     return NextResponse.json(
       { success: false, error: "Upload failed" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

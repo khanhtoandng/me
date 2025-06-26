@@ -20,7 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
       priority: route.url === `${baseUrl}` ? 0.9 : 0.7,
-    }))
+    })),
   );
 
   return [...routes, ...localizedRoutes];

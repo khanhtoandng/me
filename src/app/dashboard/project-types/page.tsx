@@ -46,7 +46,7 @@ export default function ProjectTypesPage() {
 
   const renderIcon = (
     icon: { library: string; name: string },
-    color: string = "#3B82F6"
+    color: string = "#3B82F6",
   ) => {
     const library = iconLibraries[icon.library as keyof typeof iconLibraries];
     if (!library) return null;
@@ -69,7 +69,7 @@ export default function ProjectTypesPage() {
   const handleDelete = async (id: string, name: string) => {
     if (
       window.confirm(
-        `Are you sure you want to delete "${name}"? This action cannot be undone.`
+        `Are you sure you want to delete "${name}"? This action cannot be undone.`,
       )
     ) {
       try {
@@ -176,7 +176,7 @@ export default function ProjectTypesPage() {
                 <div className="flex items-center justify-between w-full">
                   <div className="flex items-center space-x-3">
                     <div
-                      className="p-2 rounded-lg"
+                      className="p-2 rounded-[12px]"
                       style={{ backgroundColor: `${projectType.color}20` }}
                     >
                       {renderIcon(projectType.icon, projectType.color)}

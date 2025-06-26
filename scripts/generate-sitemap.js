@@ -80,7 +80,7 @@ const prettier = require("prettier");
   // Write the sitemap to the public directory
   fs.writeFileSync(
     path.join(process.cwd(), "public", "sitemap.xml"),
-    formattedSitemap
+    formattedSitemap,
   );
 
   console.log("Sitemap generated successfully!");

@@ -1,7 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import {
   Select,
   SelectContent,
@@ -9,16 +14,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Input } from "@/components/ui/input";
-import * as FaIcons from "react-icons/fa";
+import { useState } from "react";
 import * as AiIcons from "react-icons/ai";
 import * as BiIcons from "react-icons/bi";
 import * as BsIcons from "react-icons/bs";
+import * as FaIcons from "react-icons/fa";
 import * as FiIcons from "react-icons/fi";
 import * as HiIcons from "react-icons/hi";
 import * as IoIcons from "react-icons/io";
@@ -43,17 +43,50 @@ const iconLibraries = {
 
 // Popular icons for each library
 const popularIcons = {
-  fa: ["FaCode", "FaLaptop", "FaMobile", "FaDesktop", "FaDatabase", "FaCloud", "FaRocket", "FaCog"],
-  ai: ["AiOutlineCode", "AiOutlineLaptop", "AiOutlineMobile", "AiOutlineDesktop", "AiOutlineDatabase"],
+  fa: [
+    "FaCode",
+    "FaLaptop",
+    "FaMobile",
+    "FaDesktop",
+    "FaDatabase",
+    "FaCloud",
+    "FaRocket",
+    "FaCog",
+  ],
+  ai: [
+    "AiOutlineCode",
+    "AiOutlineLaptop",
+    "AiOutlineMobile",
+    "AiOutlineDesktop",
+    "AiOutlineDatabase",
+  ],
   bi: ["BiCode", "BiLaptop", "BiMobile", "BiDesktop", "BiData"],
   bs: ["BsCode", "BsLaptop", "BsPhone", "BsDisplay", "BsDatabase"],
   fi: ["FiCode", "FiMonitor", "FiSmartphone", "FiServer", "FiDatabase"],
-  hi: ["HiCode", "HiDesktopComputer", "HiDeviceMobile", "HiServer", "HiDatabase"],
+  hi: [
+    "HiCode",
+    "HiDesktopComputer",
+    "HiDeviceMobile",
+    "HiServer",
+    "HiDatabase",
+  ],
   io: ["IoCodeSlash", "IoLaptop", "IoPhonePortrait", "IoDesktop", "IoServer"],
   md: ["MdCode", "MdLaptop", "MdPhoneAndroid", "MdDesktopMac", "MdStorage"],
-  ri: ["RiCodeLine", "RiComputerLine", "RiSmartphoneLine", "RiMacLine", "RiDatabase2Line"],
+  ri: [
+    "RiCodeLine",
+    "RiComputerLine",
+    "RiSmartphoneLine",
+    "RiMacLine",
+    "RiDatabase2Line",
+  ],
   si: ["SiJavascript", "SiReact", "SiNodedotjs", "SiPython", "SiMongodb"],
-  ti: ["TiCode", "TiDeviceDesktop", "TiDevicePhone", "TiDeviceTablet", "TiDatabase"],
+  ti: [
+    "TiCode",
+    "TiDeviceDesktop",
+    "TiDevicePhone",
+    "TiDeviceTablet",
+    "TiDatabase",
+  ],
 };
 
 interface IconSelectorProps {
@@ -62,7 +95,11 @@ interface IconSelectorProps {
   onIconSelect: (library: string, iconName: string) => void;
 }
 
-export function IconSelector({ selectedLibrary, selectedIcon, onIconSelect }: IconSelectorProps) {
+export function IconSelector({
+  selectedLibrary,
+  selectedIcon,
+  onIconSelect,
+}: IconSelectorProps) {
   const [open, setOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -82,12 +119,14 @@ export function IconSelector({ selectedLibrary, selectedIcon, onIconSelect }: Ic
     if (!iconLib) return [];
 
     let icons = popularIcons[library as keyof typeof popularIcons] || [];
-    
+
     if (searchTerm) {
       const allIcons = Object.keys(iconLib.icons);
-      icons = allIcons.filter(iconName =>
-        iconName.toLowerCase().includes(searchTerm.toLowerCase())
-      ).slice(0, 50); // Limit to 50 results
+      icons = allIcons
+        .filter((iconName) =>
+          iconName.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+        .slice(0, 50); // Limit to 50 results
     }
 
     return icons;
@@ -99,7 +138,8 @@ export function IconSelector({ selectedLibrary, selectedIcon, onIconSelect }: Ic
         <Select
           value={selectedLibrary}
           onValueChange={(library) => {
-            const defaultIcon = popularIcons[library as keyof typeof popularIcons]?.[0] || "Icon";
+            const defaultIcon =
+              popularIcons[library as keyof typeof popularIcons]?.[0] || "Icon";
             onIconSelect(library, defaultIcon);
           }}
         >

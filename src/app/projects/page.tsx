@@ -55,8 +55,6 @@ export default function ProjectsPage() {
           </div>
         </div>
 
- 
-
         <Projects filterType={filterType} />
       </div>
     </div>

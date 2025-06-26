@@ -18,7 +18,7 @@ export function RandomizedTextEffect({
   const getRandomChar = useCallback(
     () =>
       lettersAndSymbols[Math.floor(Math.random() * lettersAndSymbols.length)],
-    []
+    [],
   );
 
   const animateText = useCallback(async () => {
@@ -49,7 +49,7 @@ export function RandomizedTextEffect({
             .slice(i + 1)
             .split("")
             .map(() => getRandomChar())
-            .join("")
+            .join(""),
       );
     }
   }, [text, getRandomChar]);
@@ -61,7 +61,7 @@ export function RandomizedTextEffect({
       animateText();
       localStorage.setItem("hasSeenAnimation", "true");
     } else {
-      setHasSeenAnimation(true); 
+      setHasSeenAnimation(true);
     }
 
     const handleBeforeUnload = () => {

@@ -26,13 +26,13 @@ export function TestimonialCard({
     <Card
       {...(href ? { href } : {})}
       className={cn(
-        "flex flex-col rounded-lg border-t",
+        "flex flex-col rounded-[12px] border-t",
         "bg-gradient-to-b from-muted/50 to-muted/10",
         "p-4 text-start sm:p-6",
         "hover:from-muted/60 hover:to-muted/20",
         "max-w-[320px] sm:max-w-[320px]",
         "transition-colors duration-300",
-        className
+        className,
       )}
     >
       <div className="flex items-center gap-3">

@@ -21,7 +21,7 @@ interface Recommendation {
 export default function EditRecommendationPage() {
   const params = useParams();
   const [recommendation, setRecommendation] = useState<Recommendation | null>(
-    null
+    null,
   );
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

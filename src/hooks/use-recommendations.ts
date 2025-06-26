@@ -28,7 +28,9 @@ interface UseRecommendationsReturn {
   refetch: () => Promise<void>;
 }
 
-export function useRecommendations(options: UseRecommendationsOptions = {}): UseRecommendationsReturn {
+export function useRecommendations(
+  options: UseRecommendationsOptions = {},
+): UseRecommendationsReturn {
   const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -86,6 +88,8 @@ export function useFeaturedRecommendations(): UseRecommendationsReturn {
 }
 
 // Helper hook for recommendations with limit
-export function useRecommendationsWithLimit(limit: number): UseRecommendationsReturn {
+export function useRecommendationsWithLimit(
+  limit: number,
+): UseRecommendationsReturn {
   return useRecommendations({ limit });
 }

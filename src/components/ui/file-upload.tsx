@@ -1,19 +1,18 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { useToast } from "@/hooks/use-toast";
+import { AnimatePresence, motion } from "framer-motion";
 import {
+  AlertCircle,
+  CheckCircle,
+  File,
+  Loader2,
   Upload,
   X,
-  Image as ImageIcon,
-  File,
-  CheckCircle,
-  AlertCircle,
-  Loader2,
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useToast } from "@/hooks/use-toast";
+import { useCallback, useRef, useState } from "react";
 
 interface FileUploadProps {
   onUpload: (urls: string[]) => void;
@@ -234,7 +233,7 @@ export function FileUpload({
       {/* Upload Area */}
       <div
         className={`
-          border-2 border-dashed rounded-lg p-6 text-center transition-colors
+          border-2 border-dashed rounded-[12px] p-6 text-center transition-colors
           ${
             isDragOver
               ? "border-[var(--link-color)] bg-[var(--link-color)]/5"
@@ -275,7 +274,7 @@ export function FileUpload({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="flex items-center gap-3 p-3 bg-[var(--card-background)] border border-[var(--card-border-color)] rounded-lg"
+            className="flex items-center gap-3 p-3 bg-[var(--card-background)] border border-[var(--card-border-color)] rounded-[12px]2px]"
           >
             <div className="flex-shrink-0">
               {uploadFile.status === "uploading" && (
@@ -317,7 +316,7 @@ export function FileUpload({
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
-                className="relative group rounded-lg overflow-hidden bg-[var(--card-background)] border border-[var(--card-border-color)]"
+                className="relative group rounded-[12px]2px] overflow-hidden bg-[var(--card-background)] border border-[var(--card-border-color)]"
               >
                 {isImage(url) ? (
                   <div className="aspect-video">

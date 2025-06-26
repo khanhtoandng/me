@@ -66,7 +66,7 @@ export const Spinner = ({ size = "md", color = "slate" }: SpinnerProps) => {
         className={cn(
           "animate-spin",
           sizesClasses[size as keyof SizeProps],
-          strokeClasses[color as keyof StrokeProps]
+          strokeClasses[color as keyof StrokeProps],
         )}
       />
     </div>
@@ -83,7 +83,7 @@ export const RoundSpinner = ({
         className={cn(
           "animate-spin",
           sizesClasses[size as keyof SizeProps],
-          fillClasses[color as keyof FillProps]
+          fillClasses[color as keyof FillProps],
         )}
         viewBox="3 3 18 18"
       >

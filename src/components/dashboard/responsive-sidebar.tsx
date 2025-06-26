@@ -1,33 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { useResponsiveSidebar, useSidebar } from "@/contexts/sidebar-context";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  Briefcase,
+  ChevronRight,
+  Cog,
+  FolderOpen,
+  GraduationCap,
+  Home,
+  LayoutDashboard,
+  LogOut,
+  Mail,
+  Menu,
+  Star,
+  User,
+  X,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useSidebar, useResponsiveSidebar } from "@/contexts/sidebar-context";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  LayoutDashboard,
-  User,
-  FolderOpen,
-  BookOpen,
-  Award,
-  MessageSquare,
-  Settings,
-  LogOut,
-  Menu,
-  X,
-  ChevronRight,
-  Bell,
-  Home,
-  Briefcase,
-  GraduationCap,
-  Star,
-  Mail,
-  Cog,
-} from "lucide-react";
+import { useState } from "react";
 
 interface NavItem {
   href: string;
@@ -220,7 +215,7 @@ export function ResponsiveSidebar({ user }: ResponsiveSidebarProps) {
           {/* Header */}
           <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-800">
             <Link href="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-[12px] flex items-center justify-center">
                 <span className="text-white font-bold text-sm">A</span>
               </div>
               <span className="font-semibold text-gray-900 dark:text-white">
@@ -344,7 +339,7 @@ function NavItem({
         <button
           onClick={onToggleExpanded}
           className={`
-            w-full flex items-center justify-between px-3 py-2 text-sm font-medium rounded-lg transition-colors
+            w-full flex items-center justify-between px-3 py-2 text-sm font-medium rounded-[12px]2px] transition-colors
             ${
               isActive
                 ? "bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300"
@@ -371,7 +366,7 @@ function NavItem({
         <Link href={item.href} onClick={onNavClick}>
           <div
             className={`
-              flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors
+              flex items-center px-3 py-2 text-sm font-medium rounded-[12px]2px] transition-colors
               ${
                 isActive
                   ? "bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300"
@@ -402,7 +397,7 @@ function NavItem({
           >
             {item.children?.map((child) => (
               <Link key={child.href} href={child.href} onClick={onNavClick}>
-                <div className="flex items-center px-3 py-2 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                <div className="flex items-center px-3 py-2 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 rounded-[12px]2px] transition-colors">
                   {child.icon}
                   <span className="ml-3">{child.label}</span>
                   {child.badge && (

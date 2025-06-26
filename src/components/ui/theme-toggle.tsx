@@ -17,7 +17,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
     setMounted(true);
     const savedTheme = localStorage.getItem("theme");
     const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
+      "(prefers-color-scheme: dark)",
     ).matches;
     const theme = savedTheme || (prefersDark ? "dark" : "light");
     setIsDark(theme === "dark");
@@ -48,7 +48,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
       className={cn(
         "flex h-8 w-16 cursor-pointer rounded-full p-1 transition-all duration-300",
         "border border-[var(--card-border-color)]",
-        className
+        className,
       )}
       onClick={toggleTheme}
       role="button"
@@ -61,7 +61,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
             "flex h-6 w-6 items-center justify-center rounded-full transition-transform duration-300",
             isDark
               ? "translate-x-0 transform bg-[var(--border)]"
-              : "translate-x-8 transform bg-[var(--border)]"
+              : "translate-x-8 transform bg-[var(--border)]",
           )}
         >
           {isDark ? (
@@ -79,7 +79,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
         <div
           className={cn(
             "flex h-6 w-6 items-center justify-center rounded-full transition-transform duration-300",
-            isDark ? "bg-transparent" : "-translate-x-8 transform"
+            isDark ? "bg-transparent" : "-translate-x-8 transform",
           )}
         >
           {isDark ? (

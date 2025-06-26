@@ -1,4 +1,4 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 
 const RecommendationSchema = new mongoose.Schema({
   name: {
@@ -43,6 +43,7 @@ const RecommendationSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-})
+});
 
-export default mongoose.models.Recommendation || mongoose.model("Recommendation", RecommendationSchema)
+export default mongoose.models.Recommendation ||
+  mongoose.model("Recommendation", RecommendationSchema);

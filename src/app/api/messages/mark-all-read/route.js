@@ -9,7 +9,7 @@ export async function POST() {
     // Mark all unread messages as read
     const result = await Message.updateMany(
       { read: false },
-      { read: true, updatedAt: Date.now() }
+      { read: true, updatedAt: Date.now() },
     );
 
     return NextResponse.json({
@@ -21,7 +21,7 @@ export async function POST() {
     console.error("Error marking all messages as read:", error);
     return NextResponse.json(
       { success: false, error: "Failed to mark messages as read" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

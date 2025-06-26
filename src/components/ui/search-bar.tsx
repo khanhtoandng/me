@@ -81,7 +81,7 @@ export function SearchBar({
   };
 
   const activeFilterCount = Object.keys(activeFilters).filter(
-    (key) => activeFilters[key] !== undefined && activeFilters[key] !== ""
+    (key) => activeFilters[key] !== undefined && activeFilters[key] !== "",
   ).length;
 
   return (
@@ -120,7 +120,7 @@ export function SearchBar({
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: 0 }}
-          className="border border-[var(--card-border-color)] rounded-lg p-4 bg-[var(--card-background)]"
+          className="border border-[var(--card-border-color)] rounded-[12px] p-4 bg-[var(--card-background)]"
         >
           <div className="space-y-4">
             <div className="flex items-center justify-between">
@@ -168,7 +168,7 @@ export function SearchBar({
                         <input
                           type="checkbox"
                           checked={(activeFilters[filter.key] || []).includes(
-                            option.value
+                            option.value,
                           )}
                           onChange={(e) => {
                             const currentValues =
@@ -182,8 +182,8 @@ export function SearchBar({
                               handleFilterChange(
                                 filter.key,
                                 currentValues.filter(
-                                  (v: string) => v !== option.value
-                                )
+                                  (v: string) => v !== option.value,
+                                ),
                               );
                             }
                           }}

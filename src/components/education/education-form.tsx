@@ -1,36 +1,36 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { X, Plus } from "lucide-react"
-import { useToast } from "@/hooks/use-toast"
-import { motion, AnimatePresence } from "framer-motion"
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { X, Plus } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { motion, AnimatePresence } from "framer-motion";
 
 type EducationFormProps = {
   education?: {
-    id?: string
-    degree: string
-    institution: string
-    location: string
-    startDate: string
-    endDate?: string
-    current: boolean
-    description: string
-    achievements: string[]
-  }
-}
+    id?: string;
+    degree: string;
+    institution: string;
+    location: string;
+    startDate: string;
+    endDate?: string;
+    current: boolean;
+    description: string;
+    achievements: string[];
+  };
+};
 
 export function EducationForm({ education }: EducationFormProps) {
-  const router = useRouter()
-  const { toast } = useToast()
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const router = useRouter();
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [formData, setFormData] = useState({
     degree: "",
@@ -41,9 +41,9 @@ export function EducationForm({ education }: EducationFormProps) {
     current: false,
     description: "",
     achievements: [] as string[],
-  })
+  });
 
-  const [achievementInput, setAchievementInput] = useState("")
+  const [achievementInput, setAchievementInput] = useState("");
 
   useEffect(() => {
     if (education) {
@@ -51,54 +51,65 @@ export function EducationForm({ education }: EducationFormProps) {
         degree: education.degree || "",
         institution: education.institution || "",
         location: education.location || "",
-        startDate: education.startDate ? new Date(education.startDate).toISOString().split("T")[0] : "",
-        endDate: education.endDate ? new Date(education.endDate).toISOString().split("T")[0] : "",
+        startDate: education.startDate
+          ? new Date(education.startDate).toISOString().split("T")[0]
+          : "",
+        endDate: education.endDate
+          ? new Date(education.endDate).toISOString().split("T")[0]
+          : "",
         current: education.current || false,
         description: education.description || "",
         achievements: education.achievements || [],
-      })
+      });
     }
-  }, [education])
+  }, [education]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target
-    setFormData((prev) => ({ ...prev, [name]: checked }))
+    const { name, checked } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: checked }));
 
     // Clear end date if current is checked
     if (name === "current" && checked) {
-      setFormData((prev) => ({ ...prev, endDate: "" }))
+      setFormData((prev) => ({ ...prev, endDate: "" }));
     }
-  }
+  };
 
   const addAchievement = () => {
-    if (achievementInput.trim() && !formData.achievements.includes(achievementInput.trim())) {
+    if (
+      achievementInput.trim() &&
+      !formData.achievements.includes(achievementInput.trim())
+    ) {
       setFormData((prev) => ({
         ...prev,
         achievements: [...prev.achievements, achievementInput.trim()],
-      }))
-      setAchievementInput("")
+      }));
+      setAchievementInput("");
     }
-  }
+  };
 
   const removeAchievement = (achievement: string) => {
     setFormData((prev) => ({
       ...prev,
       achievements: prev.achievements.filter((a) => a !== achievement),
-    }))
-  }
+    }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+    e.preventDefault();
+    setIsSubmitting(true);
 
     try {
-      const url = education?.id ? `/api/education/${education.id}` : "/api/education"
-      const method = education?.id ? "PUT" : "POST"
+      const url = education?.id
+        ? `/api/education/${education.id}`
+        : "/api/education";
+      const method = education?.id ? "PUT" : "POST";
 
       const response = await fetch(url, {
         method,
@@ -106,31 +117,33 @@ export function EducationForm({ education }: EducationFormProps) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (data.success) {
         toast({
           title: "Success",
-          description: education?.id ? "Education updated successfully" : "Education created successfully",
-        })
-        router.push("/dashboard/education")
-        router.refresh()
+          description: education?.id
+            ? "Education updated successfully"
+            : "Education created successfully",
+        });
+        router.push("/dashboard/education");
+        router.refresh();
       } else {
-        throw new Error(data.error || "Something went wrong")
+        throw new Error(data.error || "Something went wrong");
       }
     } catch (error) {
-      console.error("Error submitting education:", error)
+      console.error("Error submitting education:", error);
       toast({
         title: "Error",
         description: "Failed to save education. Please try again.",
         variant: "destructive",
-      })
+      });
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -140,7 +153,7 @@ export function EducationForm({ education }: EducationFormProps) {
         staggerChildren: 0.1,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 10 },
@@ -151,11 +164,16 @@ export function EducationForm({ education }: EducationFormProps) {
         duration: 0.3,
       },
     },
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit}>
-      <motion.div className="space-y-6" variants={containerVariants} initial="hidden" animate="visible">
+      <motion.div
+        className="space-y-6"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         <Card className="bg-[var(--card-background)] border-[var(--card-border-color)]">
           <CardContent className="p-6 space-y-6">
             <motion.div className="space-y-2" variants={itemVariants}>
@@ -174,7 +192,10 @@ export function EducationForm({ education }: EducationFormProps) {
             </motion.div>
 
             <motion.div className="space-y-2" variants={itemVariants}>
-              <Label htmlFor="institution" className="text-[var(--card-headline)]">
+              <Label
+                htmlFor="institution"
+                className="text-[var(--card-headline)]"
+              >
                 Institution
               </Label>
               <Input
@@ -203,9 +224,15 @@ export function EducationForm({ education }: EducationFormProps) {
               />
             </motion.div>
 
-            <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-6" variants={itemVariants}>
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-2 gap-6"
+              variants={itemVariants}
+            >
               <div className="space-y-2">
-                <Label htmlFor="startDate" className="text-[var(--card-headline)]">
+                <Label
+                  htmlFor="startDate"
+                  className="text-[var(--card-headline)]"
+                >
                   Start Date
                 </Label>
                 <Input
@@ -219,7 +246,10 @@ export function EducationForm({ education }: EducationFormProps) {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="endDate" className="text-[var(--card-headline)]">
+                <Label
+                  htmlFor="endDate"
+                  className="text-[var(--card-headline)]"
+                >
                   End Date
                 </Label>
                 <Input
@@ -234,7 +264,10 @@ export function EducationForm({ education }: EducationFormProps) {
               </div>
             </motion.div>
 
-            <motion.div className="flex items-center space-x-2" variants={itemVariants}>
+            <motion.div
+              className="flex items-center space-x-2"
+              variants={itemVariants}
+            >
               <input
                 type="checkbox"
                 id="current"
@@ -249,7 +282,10 @@ export function EducationForm({ education }: EducationFormProps) {
             </motion.div>
 
             <motion.div className="space-y-2" variants={itemVariants}>
-              <Label htmlFor="description" className="text-[var(--card-headline)]">
+              <Label
+                htmlFor="description"
+                className="text-[var(--card-headline)]"
+              >
                 Description (Optional)
               </Label>
               <Textarea
@@ -263,14 +299,18 @@ export function EducationForm({ education }: EducationFormProps) {
             </motion.div>
 
             <motion.div className="space-y-2" variants={itemVariants}>
-              <Label className="text-[var(--card-headline)]">Achievements</Label>
+              <Label className="text-[var(--card-headline)]">
+                Achievements
+              </Label>
               <div className="flex gap-2">
                 <Input
                   value={achievementInput}
                   onChange={(e) => setAchievementInput(e.target.value)}
                   placeholder="Add an achievement"
                   className="bg-[var(--input-background)] border-[var(--input-border-color)] text-[var(--input-text)]"
-                  onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addAchievement())}
+                  onKeyDown={(e) =>
+                    e.key === "Enter" && (e.preventDefault(), addAchievement())
+                  }
                 />
                 <Button
                   type="button"
@@ -323,11 +363,15 @@ export function EducationForm({ education }: EducationFormProps) {
               disabled={isSubmitting}
               className="bg-[var(--button)] text-[var(--button-text)] hover:bg-[var(--button2)]"
             >
-              {isSubmitting ? "Saving..." : education?.id ? "Update Education" : "Create Education"}
+              {isSubmitting
+                ? "Saving..."
+                : education?.id
+                  ? "Update Education"
+                  : "Create Education"}
             </Button>
           </CardFooter>
         </Card>
       </motion.div>
     </form>
-  )
+  );
 }

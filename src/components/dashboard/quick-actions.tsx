@@ -1,13 +1,25 @@
-"use client"
+"use client";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { FolderKanban, Briefcase, GraduationCap, MessageSquare, User } from "lucide-react"
-import { useRouter } from "next/navigation"
-import { motion } from "framer-motion"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import {
+  FolderKanban,
+  Briefcase,
+  GraduationCap,
+  MessageSquare,
+  User,
+} from "lucide-react";
+import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 
 export function QuickActions() {
-  const router = useRouter()
+  const router = useRouter();
 
   const actions = [
     {
@@ -40,7 +52,7 @@ export function QuickActions() {
       color: "text-[var(--paragraph)]",
       href: "/dashboard/profile",
     },
-  ]
+  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -50,7 +62,7 @@ export function QuickActions() {
         staggerChildren: 0.1,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -61,13 +73,17 @@ export function QuickActions() {
         duration: 0.3,
       },
     },
-  }
+  };
 
   return (
     <Card className="bg-[var(--card-background)] border-[var(--card-border-color)]">
       <CardHeader>
-        <CardTitle className="text-[var(--card-headline)]">Quick Actions</CardTitle>
-        <CardDescription className="text-[var(--card-paragraph)]">Shortcuts to common tasks</CardDescription>
+        <CardTitle className="text-[var(--card-headline)]">
+          Quick Actions
+        </CardTitle>
+        <CardDescription className="text-[var(--card-paragraph)]">
+          Shortcuts to common tasks
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <motion.div
@@ -91,5 +107,5 @@ export function QuickActions() {
         </motion.div>
       </CardContent>
     </Card>
-  )
+  );
 }

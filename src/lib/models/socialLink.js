@@ -21,7 +21,38 @@ const SocialLinkSchema = new mongoose.Schema({
   },
   iconLibrary: {
     type: String,
-    enum: ["fa", "ai", "bi", "bs", "cg", "ci", "di", "fc", "fi", "gi", "go", "gr", "hi", "hi2", "im", "io", "io5", "lia", "lu", "md", "pi", "ri", "rx", "si", "sl", "tb", "tfi", "ti", "vsc", "wi"],
+    enum: [
+      "fa",
+      "ai",
+      "bi",
+      "bs",
+      "cg",
+      "ci",
+      "di",
+      "fc",
+      "fi",
+      "gi",
+      "go",
+      "gr",
+      "hi",
+      "hi2",
+      "im",
+      "io",
+      "io5",
+      "lia",
+      "lu",
+      "md",
+      "pi",
+      "ri",
+      "rx",
+      "si",
+      "sl",
+      "tb",
+      "tfi",
+      "ti",
+      "vsc",
+      "wi",
+    ],
     default: "fa",
   },
   isActive: {
@@ -52,4 +83,5 @@ SocialLinkSchema.pre("save", function (next) {
 SocialLinkSchema.index({ isActive: 1, order: 1 });
 SocialLinkSchema.index({ platform: 1 });
 
-export default mongoose.models.SocialLink || mongoose.model("SocialLink", SocialLinkSchema);
+export default mongoose.models.SocialLink ||
+  mongoose.model("SocialLink", SocialLinkSchema);

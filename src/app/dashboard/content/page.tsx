@@ -135,7 +135,7 @@ export default function ContentManagementPage() {
       content: {
         ...prev.content,
         paragraphs: prev.content.paragraphs.map((p: string, i: number) =>
-          i === index ? value : p
+          i === index ? value : p,
         ),
       },
     }));
@@ -308,7 +308,7 @@ export default function ContentManagementPage() {
                             placeholder={`Enhance paragraph ${index + 1}...`}
                           />
                         </div>
-                      )
+                      ),
                     )}
                   </div>
                 </CardContent>

@@ -51,7 +51,7 @@ export default function ForgotPasswordPage() {
       setError(
         error instanceof Error
           ? error.message
-          : "Failed to process request. Please try again."
+          : "Failed to process request. Please try again.",
       );
     } finally {
       setLoading(false);

@@ -125,7 +125,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setError(
         error instanceof Error
           ? error.message
-          : "Login failed. Please try again."
+          : "Login failed. Please try again.",
       );
       throw error;
     } finally {

@@ -51,7 +51,7 @@ function OptimizedImage({
     className,
     loading && loadingClassName,
     !loading && !error && loadedClassName,
-    error && errorClassName
+    error && errorClassName,
   );
 
   return (

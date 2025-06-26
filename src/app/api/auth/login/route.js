@@ -17,7 +17,7 @@ export async function POST(request) {
           success: false,
           error: "Database connection failed: " + dbError.message,
         },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -29,7 +29,7 @@ export async function POST(request) {
       console.error("Error parsing request body:", parseError);
       return NextResponse.json(
         { success: false, error: "Invalid request format" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -40,7 +40,7 @@ export async function POST(request) {
       console.log("Missing username or password");
       return NextResponse.json(
         { success: false, error: "Please provide username and password" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -52,7 +52,7 @@ export async function POST(request) {
       console.log("User not found with username:", username);
       return NextResponse.json(
         { success: false, error: "Invalid credentials" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -65,7 +65,7 @@ export async function POST(request) {
       console.log("Password does not match for user:", username);
       return NextResponse.json(
         { success: false, error: "Invalid credentials" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -110,7 +110,7 @@ export async function POST(request) {
     console.error("Login error:", error);
     return NextResponse.json(
       { success: false, error: "Authentication failed: " + error.message },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

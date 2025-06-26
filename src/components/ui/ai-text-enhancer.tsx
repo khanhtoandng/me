@@ -46,7 +46,7 @@ export function AITextEnhancer({
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
   const handleAIAction = async (
-    action: "enhance" | "suggestions" | "variations"
+    action: "enhance" | "suggestions" | "variations",
   ) => {
     if (!originalText.trim()) {
       toast({

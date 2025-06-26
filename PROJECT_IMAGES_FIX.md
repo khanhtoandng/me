@@ -73,7 +73,7 @@ Added image display to dashboard project cards:
 ```typescript
 {/* Project Image */}
 {project.images && project.images.length > 0 && (
-  <div className="w-20 h-20 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 flex-shrink-0">
+  <div className="w-20 h-20 rounded-[12px] overflow-hidden bg-gray-100 dark:bg-gray-800 flex-shrink-0">
     <img
       src={project.images[0]}
       alt={project.title}
@@ -113,7 +113,7 @@ Replaced OptimizedImage with regular img tags to avoid Next.js loader errors:
   src={coverImg}
   alt={title ? `${title} - Cover Image` : "Cover Image"}
   fill
-  className="object-contain z-50 transition-transform duration-300 rounded-lg scale-105"
+  className="object-contain z-50 transition-transform duration-300 rounded-[12px]2px] scale-105"
   loadingClassName="animate-pulse bg-gray-300/20"
   fallbackSrc="https://via.placeholder.com/400x225?text=Loading..."
   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -123,7 +123,7 @@ Replaced OptimizedImage with regular img tags to avoid Next.js loader errors:
 <img
   src={coverImg}
   alt={title ? `${title} - Cover Image` : "Cover Image"}
-  className="w-full h-full object-contain z-50 transition-transform duration-300 rounded-lg scale-105"
+  className="w-full h-full object-contain z-50 transition-transform duration-300 rounded-[12px]2px] scale-105"
   onError={(e) => {
     e.currentTarget.src = "https://via.placeholder.com/400x225?text=Loading...";
   }}

@@ -17,7 +17,7 @@ export default function Education() {
   const formatDateRange = (
     startDate: string,
     endDate?: string,
-    current?: boolean
+    current?: boolean,
   ) => {
     const start = new Date(startDate).getFullYear();
     if (current) {
@@ -121,7 +121,7 @@ export default function Education() {
                       {formatDateRange(
                         item.startDate,
                         item.endDate,
-                        item.current
+                        item.current,
                       )}
                     </div>
                   </div>

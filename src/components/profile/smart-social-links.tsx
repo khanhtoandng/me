@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import {
   Select,
   SelectContent,
@@ -13,26 +12,24 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { AnimatePresence, motion } from "framer-motion";
 import {
-  Plus,
-  X,
+  Briefcase,
   ExternalLink,
-  Github,
-  Linkedin,
-  Twitter,
-  Instagram,
   Facebook,
-  Youtube,
+  Github,
   Globe,
+  Instagram,
+  Linkedin,
   Mail,
   MessageCircle,
-  Code,
-  Briefcase,
-  Camera,
-  Music,
+  Plus,
+  Twitter,
   Users,
+  X,
+  Youtube,
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import { toast } from "sonner";
 
 interface SocialPlatform {
@@ -306,7 +303,7 @@ export function SmartSocialLinks({
 
       <CardContent className="space-y-6">
         {/* Add New Link */}
-        <div className="space-y-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+        <div className="space-y-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-[12px]">
           <h4 className="font-medium text-[var(--card-headline)]">
             Add New Social Link
           </h4>
@@ -427,7 +424,7 @@ export function SmartSocialLinks({
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -20 }}
-                      className="flex items-center justify-between p-3  dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg"
+                      className="flex items-center justify-between p-3  dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-[12px]2px]"
                     >
                       <div className="flex items-center gap-3">
                         <div className="flex items-center gap-2">
@@ -477,7 +474,7 @@ export function SmartSocialLinks({
         </div>
 
         {/* Platform Guidelines */}
-        <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+        <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-[12px]2px] p-4">
           <h4 className="text-sm font-medium text-blue-800 dark:text-blue-200 mb-2">
             Smart Link Generation
           </h4>

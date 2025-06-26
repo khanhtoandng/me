@@ -137,7 +137,7 @@ export function ProjectForm({ projectId, project }: ProjectFormProps) {
   }, [project, fetchedProject, projectTypes]);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -526,7 +526,7 @@ export function ProjectForm({ projectId, project }: ProjectFormProps) {
               />
 
               {/* Optional: Still allow URL input for external images */}
-              <div className="mt-4 p-4 bg-[var(--card-background-effect)] rounded-lg border border-[var(--card-border-color)]">
+              <div className="mt-4 p-4 bg-[var(--card-background-effect)] rounded-[12px] border border-[var(--card-border-color)]">
                 <Label className="text-sm text-[var(--card-headline)] mb-2 block">
                   Or add image URL
                 </Label>

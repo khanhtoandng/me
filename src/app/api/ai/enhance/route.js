@@ -1,5 +1,9 @@
+import {
+  enhanceText,
+  generateSuggestions,
+  generateVariations,
+} from "@/lib/gemini";
 import { NextResponse } from "next/server";
-import { enhanceText, generateSuggestions, generateVariations } from "@/lib/gemini";
 
 export async function POST(request) {
   try {
@@ -8,7 +12,7 @@ export async function POST(request) {
     if (!text || text.trim().length === 0) {
       return NextResponse.json(
         { success: false, error: "Text is required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -20,7 +24,7 @@ export async function POST(request) {
         return NextResponse.json({
           success: true,
           data: { enhancedText: result },
-          message: "Text enhanced successfully"
+          message: "Text enhanced successfully",
         });
 
       case "suggestions":
@@ -28,7 +32,7 @@ export async function POST(request) {
         return NextResponse.json({
           success: true,
           data: { suggestions: result },
-          message: "Suggestions generated successfully"
+          message: "Suggestions generated successfully",
         });
 
       case "variations":
@@ -37,39 +41,46 @@ export async function POST(request) {
         return NextResponse.json({
           success: true,
           data: { variations: result },
-          message: "Variations generated successfully"
+          message: "Variations generated successfully",
         });
 
       default:
         return NextResponse.json(
-          { success: false, error: "Invalid action. Use 'enhance', 'suggestions', or 'variations'" },
-          { status: 400 }
+          {
+            success: false,
+            error:
+              "Invalid action. Use 'enhance', 'suggestions', or 'variations'",
+          },
+          { status: 400 },
         );
     }
   } catch (error) {
     console.error("AI enhancement error:", error);
-    
+
     // Handle specific Gemini API errors
     if (error.message.includes("API key")) {
       return NextResponse.json(
         { success: false, error: "AI service configuration error" },
-        { status: 500 }
+        { status: 500 },
       );
     }
-    
+
     if (error.message.includes("quota") || error.message.includes("limit")) {
       return NextResponse.json(
-        { success: false, error: "AI service quota exceeded. Please try again later." },
-        { status: 429 }
+        {
+          success: false,
+          error: "AI service quota exceeded. Please try again later.",
+        },
+        { status: 429 },
       );
     }
 
     return NextResponse.json(
-      { 
-        success: false, 
-        error: error.message || "Failed to process text with AI" 
+      {
+        success: false,
+        error: error.message || "Failed to process text with AI",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

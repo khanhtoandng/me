@@ -37,7 +37,7 @@ export default function PostsPreview() {
 
       try {
         const response = await fetch(
-          "https://dev.to/api/articles?username=baraa"
+          "https://dev.to/api/articles?username=baraa",
         );
         const data = await response.json();
         setPosts(data);

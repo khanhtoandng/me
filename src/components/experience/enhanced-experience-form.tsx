@@ -153,7 +153,7 @@ export function EnhancedExperienceForm({
 
   const handleInputChange = (
     field: keyof (Omit<Experience, "_id"> & { _id?: string }),
-    value: any
+    value: any,
   ) => {
     setFormData((prev) => ({
       ...prev,
@@ -174,7 +174,7 @@ export function EnhancedExperienceForm({
       toast.success(
         experience
           ? "Experience updated successfully!"
-          : "Experience added successfully!"
+          : "Experience added successfully!",
       );
     } catch (error) {
       toast.error("Failed to save experience");
@@ -308,7 +308,7 @@ export function EnhancedExperienceForm({
     setFormData((prev) => ({
       ...prev,
       achievements: prev.achievements.filter(
-        (achievement) => achievement !== achievementToRemove
+        (achievement) => achievement !== achievementToRemove,
       ),
     }));
   };
@@ -597,7 +597,7 @@ export function EnhancedExperienceForm({
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
                       transition={{ duration: 0.2 }}
-                      className="flex items-center gap-2 p-2 bg-gray-50 dark:bg-gray-800 rounded-lg"
+                      className="flex items-center gap-2 p-2 bg-gray-50 dark:bg-gray-800 rounded-[12px]"
                     >
                       <CheckCircle className="h-4 w-4 text-green-500 shrink-0" />
                       <span className="flex-1 text-sm">{achievement}</span>

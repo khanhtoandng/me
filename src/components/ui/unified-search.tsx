@@ -284,7 +284,7 @@ export function UnifiedSearch({
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-gray-800"
+            className="border border-gray-200 dark:border-gray-700 rounded-[12px] p-4 bg-gray-50 dark:bg-gray-800"
           >
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {filters.map((filter) => (

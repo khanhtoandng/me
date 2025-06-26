@@ -30,7 +30,7 @@ interface UseExperiencesReturn {
 }
 
 export function useExperiences(
-  options: UseExperiencesOptions = {}
+  options: UseExperiencesOptions = {},
 ): UseExperiencesReturn {
   const [experiences, setExperiences] = useState<Experience[]>([]);
   const [loading, setLoading] = useState(true);

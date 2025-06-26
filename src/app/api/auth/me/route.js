@@ -12,7 +12,7 @@ export async function GET(request) {
     if (!token) {
       return NextResponse.json(
         { success: false, error: "Not authenticated" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -22,7 +22,7 @@ export async function GET(request) {
     if (!payload || !payload.id) {
       return NextResponse.json(
         { success: false, error: "Invalid token" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -34,7 +34,7 @@ export async function GET(request) {
       if (!mongoose.Types.ObjectId.isValid(payload.id)) {
         return NextResponse.json(
           { success: false, error: "Invalid user ID format" },
-          { status: 400 }
+          { status: 400 },
         );
       }
 
@@ -45,7 +45,7 @@ export async function GET(request) {
       } catch (findError) {
         return NextResponse.json(
           { success: false, error: "Error finding user: " + findError.message },
-          { status: 500 }
+          { status: 500 },
         );
       }
 
@@ -54,7 +54,7 @@ export async function GET(request) {
         try {
           if (payload.username) {
             user = await User.findOne({ username: payload.username }).select(
-              "-password"
+              "-password",
             );
           }
         } catch (usernameError) {
@@ -64,7 +64,7 @@ export async function GET(request) {
         if (!user) {
           return NextResponse.json(
             { success: false, error: "User not found" },
-            { status: 404 }
+            { status: 404 },
           );
         }
       }
@@ -82,14 +82,14 @@ export async function GET(request) {
     } catch (dbError) {
       return NextResponse.json(
         { success: false, error: "Database error: " + dbError.message },
-        { status: 500 }
+        { status: 500 },
       );
     }
   } catch (error) {
     console.error("Auth check error:", error);
     return NextResponse.json(
       { success: false, error: "Authentication failed: " + error.message },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

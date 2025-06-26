@@ -89,7 +89,7 @@ export function NotificationsManager({
     setSelectedIds((prev) =>
       prev.includes(id)
         ? prev.filter((selectedId) => selectedId !== id)
-        : [...prev, id]
+        : [...prev, id],
     );
   };
 
@@ -239,7 +239,7 @@ export function NotificationsManager({
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     className={`
-                      flex items-start gap-3 p-3 rounded-lg border transition-colors
+                      flex items-start gap-3 p-3 rounded-[12px] border transition-colors
                       ${
                         notification.read
                           ? "bg-[var(--card-background-effect)] border-[var(--card-border-color)]"
@@ -284,7 +284,7 @@ export function NotificationsManager({
                           </p>
                           <p className="text-xs text-[var(--card-paragraph)] mt-2">
                             {new Date(
-                              notification.createdAt
+                              notification.createdAt,
                             ).toLocaleDateString()}
                           </p>
                         </div>

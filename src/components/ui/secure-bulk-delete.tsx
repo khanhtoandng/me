@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { CustomDialog } from "@/components/ui/custom-dialog";
 import { OTPInput } from "@/components/ui/otp-input";
-import { AlertTriangle, Trash2, Shield, CheckCircle } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { AlertTriangle, CheckCircle, Shield, Trash2 } from "lucide-react";
+import { useState } from "react";
 import { toast } from "sonner";
 
 interface SecureBulkDeleteProps {
@@ -113,7 +113,7 @@ export function SecureBulkDelete({
               </h3>
               <p className="text-[var(--card-paragraph)]">{description}</p>
 
-              <div className="bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 rounded-lg p-4 mt-4">
+              <div className="bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 rounded-[12px] p-4 mt-4">
                 <div className="flex items-start gap-3">
                   <AlertTriangle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
                   <div className="text-left">
@@ -131,7 +131,7 @@ export function SecureBulkDelete({
               </div>
 
               {requireOTP && (
-                <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-[12px]2px] p-4">
                   <div className="flex items-start gap-3">
                     <Shield className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
                     <div className="text-left">

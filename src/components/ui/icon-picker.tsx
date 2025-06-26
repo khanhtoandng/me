@@ -104,7 +104,7 @@ export function IconPicker({
     if (!iconLib) return [];
 
     const iconNames = Object.keys(iconLib.icons).filter((iconName) =>
-      iconName.toLowerCase().includes(searchTerm.toLowerCase())
+      iconName.toLowerCase().includes(searchTerm.toLowerCase()),
     );
 
     return iconNames.slice(0, 100); // Limit to 100 icons for performance

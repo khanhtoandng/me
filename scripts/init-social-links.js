@@ -173,7 +173,7 @@ async function initSocialLinks() {
     console.log("\n📋 Created social links:");
     createdLinks.forEach((link) => {
       console.log(
-        `   - ${link.platform}: ${link.url} (${link.isActive ? "Active" : "Inactive"})`
+        `   - ${link.platform}: ${link.url} (${link.isActive ? "Active" : "Inactive"})`,
       );
     });
 

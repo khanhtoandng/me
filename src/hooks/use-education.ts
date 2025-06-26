@@ -28,7 +28,9 @@ interface UseEducationReturn {
   refetch: () => Promise<void>;
 }
 
-export function useEducation(options: UseEducationOptions = {}): UseEducationReturn {
+export function useEducation(
+  options: UseEducationOptions = {},
+): UseEducationReturn {
   const [education, setEducation] = useState<Education[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

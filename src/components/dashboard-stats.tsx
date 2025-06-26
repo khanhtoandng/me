@@ -98,7 +98,7 @@ export function DashboardStats() {
           ? projectTypesData.data.map((type: any) => {
               const projectCount = projectsData.success
                 ? projectsData.data.filter(
-                    (project: any) => project.projectType === type.name
+                    (project: any) => project.projectType === type.name,
                   ).length
                 : 0;
               return {

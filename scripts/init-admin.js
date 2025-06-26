@@ -110,7 +110,7 @@ async function initAdmin() {
     console.log("Password: 12345678");
     console.log("----------------------------------");
     console.log(
-      "Please change these credentials after first login for better security"
+      "Please change these credentials after first login for better security",
     );
   } catch (error) {
     console.error("Error initializing admin user:", error);

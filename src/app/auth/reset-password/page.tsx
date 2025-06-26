@@ -23,7 +23,7 @@ export default function ResetPasswordPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
-  
+
   const [form, setForm] = useState({
     password: "",
     confirmPassword: "",
@@ -47,21 +47,21 @@ export default function ResetPasswordPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Validate passwords
     if (form.password !== form.confirmPassword) {
       setError("Passwords do not match");
       return;
     }
-    
+
     if (form.password.length < 8) {
       setError("Password must be at least 8 characters long");
       return;
     }
-    
+
     setLoading(true);
     setError("");
-    
+
     try {
       const response = await fetch("/api/auth/reset-password", {
         method: "POST",
@@ -73,23 +73,27 @@ export default function ResetPasswordPage() {
           password: form.password,
         }),
       });
-      
+
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.error || "Failed to reset password");
       }
-      
+
       setSuccess(true);
       toast.success("Password reset successful!");
-      
+
       // Redirect to login page after 3 seconds
       setTimeout(() => {
         router.push("/auth/login");
       }, 3000);
     } catch (error) {
       console.error("Reset password error:", error);
-      setError(error instanceof Error ? error.message : "Failed to reset password. Please try again.");
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Failed to reset password. Please try again.",
+      );
     } finally {
       setLoading(false);
     }
@@ -100,7 +104,9 @@ export default function ResetPasswordPage() {
       <Card className="w-full max-w-xl">
         <CardHeader className="flex justify-center items-center flex-col w-full">
           <Logo />
-          <CardTitle className="mt-4 text-2xl font-bold">Reset Password</CardTitle>
+          <CardTitle className="mt-4 text-2xl font-bold">
+            Reset Password
+          </CardTitle>
           <CardDescription className="text-center mt-2">
             Enter your new password below
           </CardDescription>
@@ -113,12 +119,13 @@ export default function ResetPasswordPage() {
                 <AlertDescription>{error}</AlertDescription>
               </Alert>
             )}
-            
+
             {success ? (
               <Alert className="bg-green-50 border-green-200 text-green-800">
                 <CheckCircle className="h-4 w-4 text-green-500" />
                 <AlertDescription>
-                  Your password has been reset successfully. Redirecting to login page...
+                  Your password has been reset successfully. Redirecting to
+                  login page...
                 </AlertDescription>
               </Alert>
             ) : (
@@ -140,7 +147,10 @@ export default function ResetPasswordPage() {
                   />
                 </div>
                 <div>
-                  <Label className="text-[var(--paragraph)]" htmlFor="confirmPassword">
+                  <Label
+                    className="text-[var(--paragraph)]"
+                    htmlFor="confirmPassword"
+                  >
                     Confirm Password
                   </Label>
                   <Input
@@ -160,16 +170,16 @@ export default function ResetPasswordPage() {
           </CardContent>
           <CardFooter className="flex flex-col gap-4">
             {!success && (
-              <Button 
-                type="submit" 
-                className="w-full" 
+              <Button
+                type="submit"
+                className="w-full"
                 disabled={loading || !token || form.password.length < 8}
               >
                 {loading ? "Resetting..." : "Reset Password"}
               </Button>
             )}
-            <Link 
-              href="/auth/login" 
+            <Link
+              href="/auth/login"
               className="flex items-center justify-center text-sm text-[var(--link)] hover:text-[var(--link-hover)] transition-colors"
             >
               <ArrowLeft className="h-4 w-4 mr-1" />

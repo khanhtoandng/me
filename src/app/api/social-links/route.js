@@ -14,7 +14,10 @@ export async function GET(request) {
       query.isActive = true;
     }
 
-    const socialLinks = await SocialLink.find(query).sort({ order: 1, createdAt: 1 });
+    const socialLinks = await SocialLink.find(query).sort({
+      order: 1,
+      createdAt: 1,
+    });
 
     return NextResponse.json({
       success: true,
@@ -24,7 +27,7 @@ export async function GET(request) {
     console.error("Error fetching social links:", error);
     return NextResponse.json(
       { success: false, error: error.message },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }
@@ -34,7 +37,7 @@ export async function POST(request) {
     await dbConnect();
 
     const body = await request.json();
-    
+
     // Set order to be the highest + 1 if not provided
     if (!body.order) {
       const lastLink = await SocialLink.findOne().sort({ order: -1 });
@@ -49,13 +52,13 @@ export async function POST(request) {
         data: socialLink,
         message: "Social link created successfully",
       },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     console.error("Error creating social link:", error);
     return NextResponse.json(
       { success: false, error: error.message },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }

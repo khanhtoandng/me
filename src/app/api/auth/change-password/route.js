@@ -13,7 +13,7 @@ export async function POST(request) {
     if (!currentUser || !currentUser.id) {
       return NextResponse.json(
         { success: false, error: "Unauthorized" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -22,7 +22,7 @@ export async function POST(request) {
     if (!currentPassword || !newPassword) {
       return NextResponse.json(
         { success: false, error: "Please provide current and new password" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -32,7 +32,7 @@ export async function POST(request) {
     if (!user) {
       return NextResponse.json(
         { success: false, error: "User not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -43,11 +43,11 @@ export async function POST(request) {
       console.log("Password verification failed for user:", user.username);
       console.log(
         "Stored password format:",
-        user.password ? "exists" : "missing"
+        user.password ? "exists" : "missing",
       );
       return NextResponse.json(
         { success: false, error: "Current password is incorrect" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -71,7 +71,7 @@ export async function POST(request) {
     console.error("Change password error:", error);
     return NextResponse.json(
       { success: false, error: "Failed to change password" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

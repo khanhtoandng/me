@@ -12,7 +12,7 @@ export async function GET(request, { params }) {
     if (!socialLink) {
       return NextResponse.json(
         { success: false, error: "Social link not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -24,7 +24,7 @@ export async function GET(request, { params }) {
     console.error("Error fetching social link:", error);
     return NextResponse.json(
       { success: false, error: error.message },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }
@@ -44,7 +44,7 @@ export async function PUT(request, { params }) {
     if (!socialLink) {
       return NextResponse.json(
         { success: false, error: "Social link not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -57,7 +57,7 @@ export async function PUT(request, { params }) {
     console.error("Error updating social link:", error);
     return NextResponse.json(
       { success: false, error: error.message },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }
@@ -72,7 +72,7 @@ export async function DELETE(request, { params }) {
     if (!socialLink) {
       return NextResponse.json(
         { success: false, error: "Social link not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -84,7 +84,7 @@ export async function DELETE(request, { params }) {
     console.error("Error deleting social link:", error);
     return NextResponse.json(
       { success: false, error: error.message },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }

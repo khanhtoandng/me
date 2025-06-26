@@ -26,7 +26,10 @@ const ProjectTypeSchema = new mongoose.Schema({
   color: {
     type: String,
     default: "#3B82F6", // Default blue color
-    match: [/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/, "Please provide a valid hex color"],
+    match: [
+      /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/,
+      "Please provide a valid hex color",
+    ],
   },
   isActive: {
     type: Boolean,
@@ -52,4 +55,5 @@ ProjectTypeSchema.pre("save", function (next) {
 ProjectTypeSchema.index({ name: 1 });
 ProjectTypeSchema.index({ isActive: 1 });
 
-export default mongoose.models.ProjectType || mongoose.model("ProjectType", ProjectTypeSchema);
+export default mongoose.models.ProjectType ||
+  mongoose.model("ProjectType", ProjectTypeSchema);

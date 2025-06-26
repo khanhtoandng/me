@@ -162,7 +162,7 @@ export function ProfilePhotoManager({
           </div>
 
           {/* Photo Guidelines */}
-          <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+          <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-[12px] p-4">
             <h4 className="text-sm font-medium text-blue-800 dark:text-blue-200 mb-2">
               Photo Guidelines
             </h4>

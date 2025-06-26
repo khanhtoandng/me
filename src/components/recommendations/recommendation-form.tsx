@@ -1,36 +1,44 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { useToast } from "@/hooks/use-toast"
-import { motion } from "framer-motion"
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useToast } from "@/hooks/use-toast";
+import { motion } from "framer-motion";
 
 type RecommendationFormProps = {
   recommendation?: {
-    id?: string
-    name: string
-    position: string
-    company: string
-    text: string
-    relationship: string
-    avatar?: string
-    featured: boolean
-    date: string
-  }
-}
+    id?: string;
+    name: string;
+    position: string;
+    company: string;
+    text: string;
+    relationship: string;
+    avatar?: string;
+    featured: boolean;
+    date: string;
+  };
+};
 
-export function RecommendationForm({ recommendation }: RecommendationFormProps) {
-  const router = useRouter()
-  const { toast } = useToast()
-  const [isSubmitting, setIsSubmitting] = useState(false)
+export function RecommendationForm({
+  recommendation,
+}: RecommendationFormProps) {
+  const router = useRouter();
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -41,7 +49,7 @@ export function RecommendationForm({ recommendation }: RecommendationFormProps) 
     avatar: "",
     featured: false,
     date: new Date().toISOString().split("T")[0],
-  })
+  });
 
   useEffect(() => {
     if (recommendation) {
@@ -56,31 +64,35 @@ export function RecommendationForm({ recommendation }: RecommendationFormProps) 
         date: recommendation.date
           ? new Date(recommendation.date).toISOString().split("T")[0]
           : new Date().toISOString().split("T")[0],
-      })
+      });
     }
-  }, [recommendation])
+  }, [recommendation]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSelectChange = (name: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target
-    setFormData((prev) => ({ ...prev, [name]: checked }))
-  }
+    const { name, checked } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: checked }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+    e.preventDefault();
+    setIsSubmitting(true);
 
     try {
-      const url = recommendation?.id ? `/api/recommendations/${recommendation.id}` : "/api/recommendations"
-      const method = recommendation?.id ? "PUT" : "POST"
+      const url = recommendation?.id
+        ? `/api/recommendations/${recommendation.id}`
+        : "/api/recommendations";
+      const method = recommendation?.id ? "PUT" : "POST";
 
       const response = await fetch(url, {
         method,
@@ -88,9 +100,9 @@ export function RecommendationForm({ recommendation }: RecommendationFormProps) 
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (data.success) {
         toast({
@@ -98,23 +110,23 @@ export function RecommendationForm({ recommendation }: RecommendationFormProps) 
           description: recommendation?.id
             ? "Recommendation updated successfully"
             : "Recommendation created successfully",
-        })
-        router.push("/dashboard/recommendations")
-        router.refresh()
+        });
+        router.push("/dashboard/recommendations");
+        router.refresh();
       } else {
-        throw new Error(data.error || "Something went wrong")
+        throw new Error(data.error || "Something went wrong");
       }
     } catch (error) {
-      console.error("Error submitting recommendation:", error)
+      console.error("Error submitting recommendation:", error);
       toast({
         title: "Error",
         description: "Failed to save recommendation. Please try again.",
         variant: "destructive",
-      })
+      });
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -124,7 +136,7 @@ export function RecommendationForm({ recommendation }: RecommendationFormProps) 
         staggerChildren: 0.1,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 10 },
@@ -135,11 +147,16 @@ export function RecommendationForm({ recommendation }: RecommendationFormProps) 
         duration: 0.3,
       },
     },
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit}>
-      <motion.div className="space-y-6" variants={containerVariants} initial="hidden" animate="visible">
+      <motion.div
+        className="space-y-6"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         <Card className="bg-[var(--card-background)] border-[var(--card-border-color)]">
           <CardContent className="p-6 space-y-6">
             <motion.div className="space-y-2" variants={itemVariants}>
@@ -157,9 +174,15 @@ export function RecommendationForm({ recommendation }: RecommendationFormProps) 
               />
             </motion.div>
 
-            <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-6" variants={itemVariants}>
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-2 gap-6"
+              variants={itemVariants}
+            >
               <div className="space-y-2">
-                <Label htmlFor="position" className="text-[var(--card-headline)]">
+                <Label
+                  htmlFor="position"
+                  className="text-[var(--card-headline)]"
+                >
                   Position
                 </Label>
                 <Input
@@ -173,7 +196,10 @@ export function RecommendationForm({ recommendation }: RecommendationFormProps) 
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="company" className="text-[var(--card-headline)]">
+                <Label
+                  htmlFor="company"
+                  className="text-[var(--card-headline)]"
+                >
                   Company
                 </Label>
                 <Input
@@ -203,14 +229,22 @@ export function RecommendationForm({ recommendation }: RecommendationFormProps) 
               />
             </motion.div>
 
-            <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-6" variants={itemVariants}>
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-2 gap-6"
+              variants={itemVariants}
+            >
               <div className="space-y-2">
-                <Label htmlFor="relationship" className="text-[var(--card-headline)]">
+                <Label
+                  htmlFor="relationship"
+                  className="text-[var(--card-headline)]"
+                >
                   Relationship
                 </Label>
                 <Select
                   value={formData.relationship}
-                  onValueChange={(value) => handleSelectChange("relationship", value)}
+                  onValueChange={(value) =>
+                    handleSelectChange("relationship", value)
+                  }
                 >
                   <SelectTrigger className="bg-[var(--input-background)] border-[var(--input-border-color)] text-[var(--input-text)]">
                     <SelectValue placeholder="Select relationship" />
@@ -253,7 +287,10 @@ export function RecommendationForm({ recommendation }: RecommendationFormProps) 
               />
             </motion.div>
 
-            <motion.div className="flex items-center space-x-2" variants={itemVariants}>
+            <motion.div
+              className="flex items-center space-x-2"
+              variants={itemVariants}
+            >
               <input
                 type="checkbox"
                 id="featured"
@@ -281,11 +318,15 @@ export function RecommendationForm({ recommendation }: RecommendationFormProps) 
               disabled={isSubmitting}
               className="bg-[var(--button)] text-[var(--button-text)] hover:bg-[var(--button2)]"
             >
-              {isSubmitting ? "Saving..." : recommendation?.id ? "Update Recommendation" : "Create Recommendation"}
+              {isSubmitting
+                ? "Saving..."
+                : recommendation?.id
+                  ? "Update Recommendation"
+                  : "Create Recommendation"}
             </Button>
           </CardFooter>
         </Card>
       </motion.div>
     </form>
-  )
+  );
 }

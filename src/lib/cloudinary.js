@@ -1,10 +1,10 @@
-import { v2 as cloudinary } from 'cloudinary';
+import { v2 as cloudinary } from "cloudinary";
 
 // Configure Cloudinary with your credentials
 cloudinary.config({
-  cloud_name: 'dp9roufx3',
-  api_key: '615162185557522',
-  api_secret: 'I7JVgk6NlJ4zfqGWg-c3tvIslp8',
+  cloud_name: "dp9roufx3",
+  api_key: "615162185557522",
+  api_secret: "I7JVgk6NlJ4zfqGWg-c3tvIslp8",
   secure: true,
 });
 
@@ -17,8 +17,8 @@ cloudinary.config({
 export async function uploadToCloudinary(fileBuffer, options = {}) {
   try {
     const {
-      folder = 'alshaer-portfolio',
-      resourceType = 'auto',
+      folder = "alshaer-portfolio",
+      resourceType = "auto",
       transformation = {},
       publicId = null,
     } = options;
@@ -31,7 +31,7 @@ export async function uploadToCloudinary(fileBuffer, options = {}) {
     };
 
     // Convert buffer to base64 data URI
-    const base64Data = `data:${options.mimeType || 'application/octet-stream'};base64,${fileBuffer.toString('base64')}`;
+    const base64Data = `data:${options.mimeType || "application/octet-stream"};base64,${fileBuffer.toString("base64")}`;
 
     const result = await cloudinary.uploader.upload(base64Data, uploadOptions);
 
@@ -46,10 +46,10 @@ export async function uploadToCloudinary(fileBuffer, options = {}) {
       resourceType: result.resource_type,
     };
   } catch (error) {
-    console.error('Cloudinary upload error:', error);
+    console.error("Cloudinary upload error:", error);
     return {
       success: false,
-      error: error.message || 'Upload failed',
+      error: error.message || "Upload failed",
     };
   }
 }
@@ -60,21 +60,21 @@ export async function uploadToCloudinary(fileBuffer, options = {}) {
  * @param {string} resourceType - The resource type (image, video, raw)
  * @returns {Promise<Object>} - Deletion result
  */
-export async function deleteFromCloudinary(publicId, resourceType = 'image') {
+export async function deleteFromCloudinary(publicId, resourceType = "image") {
   try {
     const result = await cloudinary.uploader.destroy(publicId, {
       resource_type: resourceType,
     });
 
     return {
-      success: result.result === 'ok',
+      success: result.result === "ok",
       result: result.result,
     };
   } catch (error) {
-    console.error('Cloudinary delete error:', error);
+    console.error("Cloudinary delete error:", error);
     return {
       success: false,
-      error: error.message || 'Delete failed',
+      error: error.message || "Delete failed",
     };
   }
 }
@@ -88,10 +88,10 @@ export function getImageTransformations(options = {}) {
   const {
     width = null,
     height = null,
-    quality = 'auto',
-    format = 'auto',
-    crop = 'fill',
-    gravity = 'auto',
+    quality = "auto",
+    format = "auto",
+    crop = "fill",
+    gravity = "auto",
   } = options;
 
   const transformations = {
@@ -117,7 +117,7 @@ export function getImageTransformations(options = {}) {
  */
 export function getOptimizedImageUrl(publicId, options = {}) {
   const transformations = getImageTransformations(options);
-  
+
   return cloudinary.url(publicId, {
     ...transformations,
     secure: true,
@@ -135,14 +135,14 @@ export async function uploadProfilePhoto(fileBuffer, userId, mimeType) {
   const transformations = getImageTransformations({
     width: 400,
     height: 400,
-    quality: 'auto:good',
-    format: 'auto',
-    crop: 'fill',
-    gravity: 'face',
+    quality: "auto:good",
+    format: "auto",
+    crop: "fill",
+    gravity: "face",
   });
 
   return uploadToCloudinary(fileBuffer, {
-    folder: 'alshaer-portfolio/profiles',
+    folder: "alshaer-portfolio/profiles",
     publicId: `profile_${userId}_${Date.now()}`,
     transformation: transformations,
     mimeType,
@@ -160,13 +160,13 @@ export async function uploadProjectImage(fileBuffer, projectId, mimeType) {
   const transformations = getImageTransformations({
     width: 1200,
     height: 800,
-    quality: 'auto:good',
-    format: 'auto',
-    crop: 'fill',
+    quality: "auto:good",
+    format: "auto",
+    crop: "fill",
   });
 
   return uploadToCloudinary(fileBuffer, {
-    folder: 'alshaer-portfolio/projects',
+    folder: "alshaer-portfolio/projects",
     publicId: `project_${projectId}_${Date.now()}`,
     transformation: transformations,
     mimeType,
@@ -182,12 +182,12 @@ export async function uploadProjectImage(fileBuffer, projectId, mimeType) {
  */
 export async function uploadDocument(fileBuffer, fileName, mimeType) {
   const timestamp = Date.now();
-  const cleanFileName = fileName.replace(/[^a-zA-Z0-9.-]/g, '_');
-  
+  const cleanFileName = fileName.replace(/[^a-zA-Z0-9.-]/g, "_");
+
   return uploadToCloudinary(fileBuffer, {
-    folder: 'alshaer-portfolio/documents',
+    folder: "alshaer-portfolio/documents",
     publicId: `doc_${timestamp}_${cleanFileName}`,
-    resourceType: 'raw',
+    resourceType: "raw",
     mimeType,
   });
 }

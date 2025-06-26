@@ -53,8 +53,6 @@ export async function verifyToken(token) {
  */
 export function setAuthCookie(token) {
   try {
-
-
     // Get the current cookies
     const cookieStore = cookies();
 

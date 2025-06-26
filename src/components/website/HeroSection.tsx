@@ -153,7 +153,7 @@ function HeroSection() {
                     {paragraph}
                   </p>
                 );
-              }
+              },
             )}
           </>
         )}
@@ -171,7 +171,7 @@ function HeroSection() {
           {socialLinks.map((social) => (
             <li
               key={social._id}
-              className="rounded-lg underline max-md:w-full max-md:bg-[var(--card-background)] max-md:px-[8px] max-md:py-[14px]"
+              className="rounded-[12px] underline max-md:w-full max-md:bg-[var(--card-background)] max-md:px-[8px] max-md:py-[14px]"
             >
               <a
                 className="flex contact-title capitalize text-[1rem] items-center hoverd gap-2 max-md:flex max-md:flex-row h-[100%] w-full"

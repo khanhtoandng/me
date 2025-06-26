@@ -12,7 +12,7 @@ export async function GET(request, { params }) {
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return NextResponse.json(
         { success: false, error: "Invalid project type ID" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -21,7 +21,7 @@ export async function GET(request, { params }) {
     if (!projectType) {
       return NextResponse.json(
         { success: false, error: "Project type not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -33,7 +33,7 @@ export async function GET(request, { params }) {
     console.error("Error fetching project type:", error);
     return NextResponse.json(
       { success: false, error: "Failed to fetch project type" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -47,7 +47,7 @@ export async function PUT(request, { params }) {
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return NextResponse.json(
         { success: false, error: "Invalid project type ID" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -58,20 +58,20 @@ export async function PUT(request, { params }) {
     if (!name || !icon || !icon.library || !icon.name) {
       return NextResponse.json(
         { success: false, error: "Name and icon are required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     // Check if another project type with same name exists
-    const existingType = await ProjectType.findOne({ 
-      name: { $regex: new RegExp(`^${name}$`, 'i') },
-      _id: { $ne: id }
+    const existingType = await ProjectType.findOne({
+      name: { $regex: new RegExp(`^${name}$`, "i") },
+      _id: { $ne: id },
     });
 
     if (existingType) {
       return NextResponse.json(
         { success: false, error: "Project type with this name already exists" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -85,13 +85,13 @@ export async function PUT(request, { params }) {
         isActive: isActive !== undefined ? isActive : true,
         updatedAt: Date.now(),
       },
-      { new: true, runValidators: true }
+      { new: true, runValidators: true },
     );
 
     if (!projectType) {
       return NextResponse.json(
         { success: false, error: "Project type not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -104,7 +104,7 @@ export async function PUT(request, { params }) {
     console.error("Error updating project type:", error);
     return NextResponse.json(
       { success: false, error: "Failed to update project type" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -118,7 +118,7 @@ export async function DELETE(request, { params }) {
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return NextResponse.json(
         { success: false, error: "Invalid project type ID" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -127,7 +127,7 @@ export async function DELETE(request, { params }) {
     if (!projectType) {
       return NextResponse.json(
         { success: false, error: "Project type not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -139,7 +139,7 @@ export async function DELETE(request, { params }) {
     console.error("Error deleting project type:", error);
     return NextResponse.json(
       { success: false, error: "Failed to delete project type" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

@@ -261,7 +261,7 @@ All loading effects from APIs now use professional shadcn/ui Skeleton components
 {[...Array(3)].map((_, i) => (
   <div
     key={i}
-    className="w-full max-w-2xl h-32 bg-gray-200 rounded-lg animate-pulse"
+    className="w-full max-w-2xl h-32 bg-gray-200 rounded-[12px] animate-pulse"
   />
 ))}
 ```
@@ -272,7 +272,7 @@ All loading effects from APIs now use professional shadcn/ui Skeleton components
 {[...Array(3)].map((_, i) => (
   <div
     key={i}
-    className="w-full max-w-2xl rounded-lg border border-[var(--card-border-color)] bg-[var(--card-background)] p-8"
+    className="w-full max-w-2xl rounded-[12px]2px] border border-[var(--card-border-color)] bg-[var(--card-background)] p-8"
   >
     <div className="flex items-start gap-4">
       {/* Avatar Skeleton */}

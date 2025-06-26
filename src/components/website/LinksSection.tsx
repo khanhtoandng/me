@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import { useSocialLinks } from "@/hooks/use-social-links";
 import { ExternalLink } from "lucide-react";
 import Link from "next/link";
-import { useSocialLinks } from "@/hooks/use-social-links";
-import * as FaIcons from "react-icons/fa";
+import React, { useState } from "react";
 import * as AiIcons from "react-icons/ai";
 import * as BiIcons from "react-icons/bi";
 import * as BsIcons from "react-icons/bs";
+import * as FaIcons from "react-icons/fa";
 import * as FiIcons from "react-icons/fi";
 import * as HiIcons from "react-icons/hi";
 import * as IoIcons from "react-icons/io5";
@@ -77,7 +77,7 @@ const LinksSection: React.FC = () => {
           {[...Array(3)].map((_, i) => (
             <div
               key={i}
-              className="h-[40px] w-[120px] bg-gray-200 rounded-lg animate-pulse"
+              className="h-[40px] w-[120px] bg-gray-200 rounded-[12px] animate-pulse"
             />
           ))}
         </div>
@@ -102,7 +102,7 @@ const LinksSection: React.FC = () => {
         {socialLinks.map((item, index) => (
           <li
             className={
-              "rounded-lg max-md:w-full max-md:bg-[var(--card-background)] max-md:px-[8px] max-md:py-[14px]"
+              "rounded-[12px]2px] max-md:w-full max-md:bg-[var(--card-background)] max-md:px-[8px] max-md:py-[14px]"
             }
             key={item._id}
           >

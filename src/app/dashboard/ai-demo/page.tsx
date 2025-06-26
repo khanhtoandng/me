@@ -1,31 +1,34 @@
 "use client";
 
-import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AITextEnhancer } from "@/components/ui/ai-text-enhancer";
-import { Sparkles, Lightbulb, Wand2, Copy, Check } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
+import { Check, Copy, Lightbulb, Sparkles, Wand2 } from "lucide-react";
+import { useState } from "react";
 
 export default function AIDemoPage() {
   const { toast } = useToast();
   const [demoTexts, setDemoTexts] = useState({
     hero: "I am a Full-Stack Developer from Palestine, specializing in crafting seamless and efficient web applications across both front-end and back-end technologies.",
-    footer: "Full-Stack Developer specializing in creating seamless and efficient web applications.",
-    project: "This is a web application built with React and Node.js. It has user authentication and a dashboard.",
-    experience: "Worked as a developer building web applications and fixing bugs. Used various technologies and frameworks."
+    footer:
+      "Full-Stack Developer specializing in creating seamless and efficient web applications.",
+    project:
+      "This is a web application built with React and Node.js. It has user authentication and a dashboard.",
+    experience:
+      "Worked as a developer building web applications and fixing bugs. Used various technologies and frameworks.",
   });
 
   const [copiedText, setCopiedText] = useState<string | null>(null);
 
   const handleTextUpdate = (type: keyof typeof demoTexts, newText: string) => {
-    setDemoTexts(prev => ({
+    setDemoTexts((prev) => ({
       ...prev,
-      [type]: newText
+      [type]: newText,
     }));
   };
 
@@ -77,10 +80,14 @@ export default function AIDemoPage() {
             AI Text Enhancement Demo
           </h1>
           <p className="text-[var(--paragraph)] mt-2">
-            Experience the power of Google Gemini AI for enhancing your portfolio content
+            Experience the power of Google Gemini AI for enhancing your
+            portfolio content
           </p>
         </div>
-        <Badge variant="secondary" className="bg-gradient-to-r from-purple-500 to-pink-500 text-white">
+        <Badge
+          variant="secondary"
+          className="bg-gradient-to-r from-purple-500 to-pink-500 text-white"
+        >
           Powered by Gemini AI
         </Badge>
       </div>
@@ -151,7 +158,12 @@ export default function AIDemoPage() {
                       </label>
                       <Textarea
                         value={text}
-                        onChange={(e) => handleTextUpdate(type as keyof typeof demoTexts, e.target.value)}
+                        onChange={(e) =>
+                          handleTextUpdate(
+                            type as keyof typeof demoTexts,
+                            e.target.value
+                          )
+                        }
                         placeholder={`Enter your ${type} content here...`}
                         className="min-h-24 bg-[var(--input-background)] border-[var(--input-border-color)] text-[var(--input-text)]"
                       />
@@ -159,8 +171,15 @@ export default function AIDemoPage() {
 
                     <AITextEnhancer
                       originalText={text}
-                      onTextUpdate={(newText) => handleTextUpdate(type as keyof typeof demoTexts, newText)}
-                      type={type as "hero" | "footer" | "project" | "experience"}
+                      onTextUpdate={(newText) =>
+                        handleTextUpdate(
+                          type as keyof typeof demoTexts,
+                          newText
+                        )
+                      }
+                      type={
+                        type as "hero" | "footer" | "project" | "experience"
+                      }
                       placeholder={`Enhance your ${type} content...`}
                     />
                   </CardContent>
@@ -172,7 +191,7 @@ export default function AIDemoPage() {
 
         {/* Features Overview */}
         <motion.div variants={itemVariants}>
-          <Card >
+          <Card>
             <CardHeader>
               <CardTitle className=" flex items-center gap-2">
                 <Sparkles className="h-5 w-5" />
@@ -181,7 +200,7 @@ export default function AIDemoPage() {
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="text-center p-4  rounded-lg ">
+                <div className="text-center p-4  rounded-[12px] ">
                   <Sparkles className="h-8 w-8  mx-auto mb-2" />
                   <h3 className="font-semibold  mb-1">Text Enhancement</h3>
                   <p className="text-sm ">
@@ -195,7 +214,7 @@ export default function AIDemoPage() {
                     Get actionable recommendations to improve your content
                   </p>
                 </div>
-                <div className="text-center p-4  rounded-lg ">
+                <div className="text-center p-4  rounded-[12px]2px] ">
                   <Wand2 className="h-8 w-8  mx-auto mb-2" />
                   <h3 className="font-semibold  mb-1">Multiple Variations</h3>
                   <p className="text-sm ">
@@ -211,34 +230,50 @@ export default function AIDemoPage() {
         <motion.div variants={itemVariants}>
           <Card className="bg-[var(--card-background)] border-[var(--card-border-color)]">
             <CardHeader>
-              <CardTitle className="text-[var(--card-headline)]">How to Use AI Enhancement</CardTitle>
+              <CardTitle className="text-[var(--card-headline)]">
+                How to Use AI Enhancement
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <Badge className=" min-w-6 h-6 flex items-center justify-center text-xs">1</Badge>
+                  <Badge className=" min-w-6 h-6 flex items-center justify-center text-xs">
+                    1
+                  </Badge>
                   <div>
-                    <h4 className="font-medium text-[var(--card-headline)]">Enter Your Content</h4>
+                    <h4 className="font-medium text-[var(--card-headline)]">
+                      Enter Your Content
+                    </h4>
                     <p className="text-sm text-[var(--card-paragraph)]">
                       Type or paste your original text in the textarea above
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Badge className=" min-w-6 h-6 flex items-center justify-center text-xs">2</Badge>
+                  <Badge className=" min-w-6 h-6 flex items-center justify-center text-xs">
+                    2
+                  </Badge>
                   <div>
-                    <h4 className="font-medium text-[var(--card-headline)]">Choose Enhancement Type</h4>
+                    <h4 className="font-medium text-[var(--card-headline)]">
+                      Choose Enhancement Type
+                    </h4>
                     <p className="text-sm text-[var(--card-paragraph)]">
-                      Click "Enhance with AI", "Get Suggestions", or "Generate Variations"
+                      Click "Enhance with AI", "Get Suggestions", or "Generate
+                      Variations"
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Badge className=" min-w-6 h-6 flex items-center justify-center text-xs">3</Badge>
+                  <Badge className=" min-w-6 h-6 flex items-center justify-center text-xs">
+                    3
+                  </Badge>
                   <div>
-                    <h4 className="font-medium text-[var(--card-headline)]">Review and Apply</h4>
+                    <h4 className="font-medium text-[var(--card-headline)]">
+                      Review and Apply
+                    </h4>
                     <p className="text-sm text-[var(--card-paragraph)]">
-                      Review the AI-generated content and apply the version you like best
+                      Review the AI-generated content and apply the version you
+                      like best
                     </p>
                   </div>
                 </div>

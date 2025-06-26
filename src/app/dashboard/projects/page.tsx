@@ -88,7 +88,7 @@ export default function ProjectsPage() {
           project.title.toLowerCase().includes(searchLower) ||
           project.description.toLowerCase().includes(searchLower) ||
           project.technologies.some((tech) =>
-            tech.toLowerCase().includes(searchLower)
+            tech.toLowerCase().includes(searchLower),
           );
         if (!matchesSearch) return false;
       }
@@ -107,7 +107,7 @@ export default function ProjectsPage() {
           case "technologies":
             if (Array.isArray(value)) {
               const hasAllTechs = value.every((tech) =>
-                project.technologies.includes(tech)
+                project.technologies.includes(tech),
               );
               if (!hasAllTechs) return false;
             }

@@ -68,7 +68,7 @@ export default function Projects({ filterType = "all" }: ProjectsProps) {
 
     if (filterType === "all") return mappedProjects;
     return mappedProjects.filter(
-      (project) => project.type.toLowerCase() === filterType.toLowerCase()
+      (project) => project.type.toLowerCase() === filterType.toLowerCase(),
     );
   }, [projects, filterType]);
 

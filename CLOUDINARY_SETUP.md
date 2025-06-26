@@ -7,6 +7,7 @@ Your portfolio application now has fully functional image upload capabilities us
 ## 📋 Configuration Details
 
 ### Cloudinary Credentials
+
 - **Cloud Name**: `dp9roufx3`
 - **API Key**: `615162185557522`
 - **API Secret**: `I7JVgk6NlJ4zfqGWg-c3tvIslp8`
@@ -15,6 +16,7 @@ Your portfolio application now has fully functional image upload capabilities us
 ### 🔧 Implementation Features
 
 #### 1. **Enhanced Upload API** (`/api/upload`)
+
 - ✅ Cloudinary integration instead of local file storage
 - ✅ Automatic image optimization
 - ✅ Organized folder structure
@@ -23,6 +25,7 @@ Your portfolio application now has fully functional image upload capabilities us
 - ✅ Secure HTTPS delivery
 
 #### 2. **Smart File Organization**
+
 ```
 alshaer-portfolio/
 ├── profiles/          # Profile photos (400x400px, face detection)
@@ -32,6 +35,7 @@ alshaer-portfolio/
 ```
 
 #### 3. **Automatic Image Optimization**
+
 - **Profile Photos**: 400x400px, face detection, auto quality
 - **Project Images**: 1200x800px, auto quality, responsive
 - **Format**: Auto-conversion to WebP when supported
@@ -40,17 +44,20 @@ alshaer-portfolio/
 #### 4. **Updated Components**
 
 ##### FileUpload Component
+
 - ✅ Added `uploadType` and `entityId` props
 - ✅ Sends upload metadata to API
 - ✅ Increased max file size to 10MB
 - ✅ Better error handling
 
 ##### ProfilePhotoManager
+
 - ✅ Uses `uploadType="profile"`
 - ✅ Entity ID based on username
 - ✅ Updated guidelines (10MB limit)
 
 ##### Project Forms
+
 - ✅ Uses `uploadType="project"`
 - ✅ Entity ID based on project title
 - ✅ Multiple image support
@@ -58,6 +65,7 @@ alshaer-portfolio/
 ## 🚀 How to Use
 
 ### 1. **Profile Photo Upload**
+
 ```typescript
 <FileUpload
   uploadType="profile"
@@ -70,6 +78,7 @@ alshaer-portfolio/
 ```
 
 ### 2. **Project Image Upload**
+
 ```typescript
 <FileUpload
   uploadType="project"
@@ -83,6 +92,7 @@ alshaer-portfolio/
 ```
 
 ### 3. **General File Upload**
+
 ```typescript
 <FileUpload
   uploadType="general"
@@ -97,6 +107,7 @@ alshaer-portfolio/
 ## 📁 File Structure
 
 ### New Files Created
+
 ```
 src/
 ├── lib/
@@ -108,6 +119,7 @@ src/
 ```
 
 ### Modified Files
+
 ```
 src/
 ├── components/
@@ -120,13 +132,16 @@ src/
 ## 🧪 Testing
 
 ### Demo Page
+
 Visit `/upload-demo` to test all upload functionality:
+
 - Profile photo uploads
-- Project image uploads  
+- Project image uploads
 - General file uploads
 - URL copying and preview
 
 ### Real Usage
+
 1. **Dashboard Profile**: Upload profile photos
 2. **Project Management**: Upload project images
 3. **All uploads**: Automatically optimized and organized
@@ -143,16 +158,19 @@ Visit `/upload-demo` to test all upload functionality:
 ## 📊 Benefits
 
 ### Performance
+
 - **Faster Loading**: Optimized images load faster
 - **Responsive**: Automatic format selection (WebP, etc.)
 - **CDN Delivery**: Global content delivery network
 
 ### Management
+
 - **Organized**: Files sorted by type and purpose
 - **Scalable**: No local storage limitations
 - **Reliable**: Professional cloud storage
 
 ### User Experience
+
 - **Drag & Drop**: Easy file uploads
 - **Progress Tracking**: Real-time upload progress
 - **Error Handling**: Clear error messages
@@ -168,6 +186,7 @@ Visit `/upload-demo` to test all upload functionality:
 ## 📞 Support
 
 If you encounter any issues:
+
 1. Check the browser console for errors
 2. Verify file size is under 10MB
 3. Ensure file types are supported

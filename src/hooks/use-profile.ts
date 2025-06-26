@@ -61,24 +61,27 @@ export function useProfile(): UseProfileReturn {
     }
   }, []);
 
-  const updateProfile = useCallback(async (data: Partial<Profile>): Promise<Profile> => {
-    const response = await fetch("/api/profile", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+  const updateProfile = useCallback(
+    async (data: Partial<Profile>): Promise<Profile> => {
+      const response = await fetch("/api/profile", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-    const result = await response.json();
+      const result = await response.json();
 
-    if (!result.success) {
-      throw new Error(result.error || "Failed to update profile");
-    }
+      if (!result.success) {
+        throw new Error(result.error || "Failed to update profile");
+      }
 
-    await fetchProfile();
-    return result.data;
-  }, [fetchProfile]);
+      await fetchProfile();
+      return result.data;
+    },
+    [fetchProfile],
+  );
 
   useEffect(() => {
     fetchProfile();

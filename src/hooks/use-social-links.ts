@@ -21,7 +21,9 @@ interface UseSocialLinksReturn {
   refetch: () => Promise<void>;
 }
 
-export function useSocialLinks(activeOnly: boolean = true): UseSocialLinksReturn {
+export function useSocialLinks(
+  activeOnly: boolean = true,
+): UseSocialLinksReturn {
   const [socialLinks, setSocialLinks] = useState<SocialLink[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -30,11 +32,11 @@ export function useSocialLinks(activeOnly: boolean = true): UseSocialLinksReturn
     try {
       setLoading(true);
       setError(null);
-      
-      const url = activeOnly 
-        ? "/api/social-links?active=true" 
+
+      const url = activeOnly
+        ? "/api/social-links?active=true"
         : "/api/social-links";
-      
+
       const response = await fetch(url);
       const data = await response.json();
 

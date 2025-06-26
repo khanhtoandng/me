@@ -6,16 +6,16 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FileUpload } from "@/components/ui/file-upload";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { 
-  Cloud, 
-  Upload, 
-  Image as ImageIcon, 
-  User, 
+import {
+  Cloud,
+  Upload,
+  Image as ImageIcon,
+  User,
   FolderOpen,
   CheckCircle,
   ExternalLink,
   Copy,
-  Trash2
+  Trash2,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -50,7 +50,7 @@ export default function UploadDemoPage() {
         {/* Header */}
         <div className="text-center space-y-4">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+            <div className="w-12 h-12 rounded-[12px] bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
               <Cloud className="h-6 w-6 text-white" />
             </div>
             <h1 className="text-4xl font-bold text-[var(--headline)]">
@@ -58,10 +58,11 @@ export default function UploadDemoPage() {
             </h1>
           </div>
           <p className="text-lg text-[var(--paragraph)] max-w-2xl mx-auto">
-            Test the enhanced file upload functionality with Cloudinary integration. 
-            Images are automatically optimized and organized by type.
+            Test the enhanced file upload functionality with Cloudinary
+            integration. Images are automatically optimized and organized by
+            type.
           </p>
-          
+
           <div className="flex items-center justify-center gap-4 text-sm">
             <Badge variant="secondary" className="flex items-center gap-1">
               <CheckCircle className="h-3 w-3" />
@@ -90,11 +91,11 @@ export default function UploadDemoPage() {
             <CardContent className="space-y-4">
               <FileUpload
                 onUpload={(urls) => {
-                  setProfileImages(prev => [...prev, ...urls]);
+                  setProfileImages((prev) => [...prev, ...urls]);
                   toast.success(`${urls.length} profile photo(s) uploaded!`);
                 }}
                 onRemove={(url) => {
-                  setProfileImages(prev => prev.filter(img => img !== url));
+                  setProfileImages((prev) => prev.filter((img) => img !== url));
                 }}
                 existingFiles={profileImages}
                 accept="image/*"
@@ -105,7 +106,7 @@ export default function UploadDemoPage() {
                 entityId="demo_user"
                 className="w-full"
               />
-              
+
               {profileImages.length > 0 && (
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
@@ -119,7 +120,10 @@ export default function UploadDemoPage() {
                     </Button>
                   </div>
                   {profileImages.map((url, index) => (
-                    <div key={index} className="flex items-center gap-2 p-2 bg-gray-50 dark:bg-gray-800 rounded text-xs">
+                    <div
+                      key={index}
+                      className="flex items-center gap-2 p-2 bg-gray-50 dark:bg-gray-800 rounded text-xs"
+                    >
                       <span className="flex-1 truncate">{url}</span>
                       <Button
                         variant="ghost"
@@ -131,7 +135,7 @@ export default function UploadDemoPage() {
                       <Button
                         variant="ghost"
                         size="sm"
-                        onClick={() => window.open(url, '_blank')}
+                        onClick={() => window.open(url, "_blank")}
                       >
                         <ExternalLink className="h-3 w-3" />
                       </Button>
@@ -156,11 +160,11 @@ export default function UploadDemoPage() {
             <CardContent className="space-y-4">
               <FileUpload
                 onUpload={(urls) => {
-                  setProjectImages(prev => [...prev, ...urls]);
+                  setProjectImages((prev) => [...prev, ...urls]);
                   toast.success(`${urls.length} project image(s) uploaded!`);
                 }}
                 onRemove={(url) => {
-                  setProjectImages(prev => prev.filter(img => img !== url));
+                  setProjectImages((prev) => prev.filter((img) => img !== url));
                 }}
                 existingFiles={projectImages}
                 accept="image/*"
@@ -171,7 +175,7 @@ export default function UploadDemoPage() {
                 entityId="demo_project"
                 className="w-full"
               />
-              
+
               {projectImages.length > 0 && (
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
@@ -185,7 +189,10 @@ export default function UploadDemoPage() {
                     </Button>
                   </div>
                   {projectImages.map((url, index) => (
-                    <div key={index} className="flex items-center gap-2 p-2 bg-gray-50 dark:bg-gray-800 rounded text-xs">
+                    <div
+                      key={index}
+                      className="flex items-center gap-2 p-2 bg-gray-50 dark:bg-gray-800 rounded text-xs"
+                    >
                       <span className="flex-1 truncate">{url}</span>
                       <Button
                         variant="ghost"
@@ -197,7 +204,7 @@ export default function UploadDemoPage() {
                       <Button
                         variant="ghost"
                         size="sm"
-                        onClick={() => window.open(url, '_blank')}
+                        onClick={() => window.open(url, "_blank")}
                       >
                         <ExternalLink className="h-3 w-3" />
                       </Button>
@@ -222,11 +229,13 @@ export default function UploadDemoPage() {
             <CardContent className="space-y-4">
               <FileUpload
                 onUpload={(urls) => {
-                  setGeneralFiles(prev => [...prev, ...urls]);
+                  setGeneralFiles((prev) => [...prev, ...urls]);
                   toast.success(`${urls.length} file(s) uploaded!`);
                 }}
                 onRemove={(url) => {
-                  setGeneralFiles(prev => prev.filter(file => file !== url));
+                  setGeneralFiles((prev) =>
+                    prev.filter((file) => file !== url),
+                  );
                 }}
                 existingFiles={generalFiles}
                 accept="*/*"
@@ -237,7 +246,7 @@ export default function UploadDemoPage() {
                 entityId="demo_general"
                 className="w-full"
               />
-              
+
               {generalFiles.length > 0 && (
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
@@ -251,7 +260,10 @@ export default function UploadDemoPage() {
                     </Button>
                   </div>
                   {generalFiles.map((url, index) => (
-                    <div key={index} className="flex items-center gap-2 p-2 bg-gray-50 dark:bg-gray-800 rounded text-xs">
+                    <div
+                      key={index}
+                      className="flex items-center gap-2 p-2 bg-gray-50 dark:bg-gray-800 rounded text-xs"
+                    >
                       <span className="flex-1 truncate">{url}</span>
                       <Button
                         variant="ghost"
@@ -263,7 +275,7 @@ export default function UploadDemoPage() {
                       <Button
                         variant="ghost"
                         size="sm"
-                        onClick={() => window.open(url, '_blank')}
+                        onClick={() => window.open(url, "_blank")}
                       >
                         <ExternalLink className="h-3 w-3" />
                       </Button>

@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { ResponsiveDashboardLayout } from "@/components/dashboard/responsive-layout";
 import { EnhancedProjectsDashboard } from "@/components/projects/enhanced-projects-dashboard";
 import { PageTransition } from "@/components/ui/page-transition";
-import { toast } from "sonner";
+import { useState } from "react";
 
 interface Project {
   _id: string;
@@ -34,7 +33,8 @@ const mockProjects: Project[] = [
   {
     _id: "1",
     title: "E-Commerce Platform",
-    description: "A full-featured e-commerce platform with real-time inventory management, payment processing, and admin dashboard. Built with modern technologies for scalability and performance.",
+    description:
+      "A full-featured e-commerce platform with real-time inventory management, payment processing, and admin dashboard. Built with modern technologies for scalability and performance.",
     projectType: "web-app",
     images: ["/api/placeholder/400/300"],
     technologies: ["React", "Node.js", "MongoDB", "Stripe", "AWS", "Docker"],
@@ -47,18 +47,28 @@ const mockProjects: Project[] = [
     client: "RetailCorp Inc.",
     teamSize: 4,
     role: "Lead Full-Stack Developer",
-    challenges: "Handling high traffic loads and ensuring secure payment processing while maintaining fast page load times.",
-    solutions: "Implemented Redis caching, optimized database queries, and used CDN for static assets. Integrated Stripe for secure payments.",
-    results: "Achieved 99.9% uptime, 2-second average page load time, and processed over $1M in transactions in the first quarter.",
+    challenges:
+      "Handling high traffic loads and ensuring secure payment processing while maintaining fast page load times.",
+    solutions:
+      "Implemented Redis caching, optimized database queries, and used CDN for static assets. Integrated Stripe for secure payments.",
+    results:
+      "Achieved 99.9% uptime, 2-second average page load time, and processed over $1M in transactions in the first quarter.",
     order: 0,
   },
   {
     _id: "2",
     title: "Task Management App",
-    description: "A collaborative task management application with real-time updates, team collaboration features, and advanced project tracking capabilities.",
+    description:
+      "A collaborative task management application with real-time updates, team collaboration features, and advanced project tracking capabilities.",
     projectType: "web-app",
     images: ["/api/placeholder/400/300"],
-    technologies: ["Next.js", "TypeScript", "PostgreSQL", "Socket.io", "Tailwind CSS"],
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "PostgreSQL",
+      "Socket.io",
+      "Tailwind CSS",
+    ],
     status: "in-progress",
     featured: false,
     githubUrl: "https://github.com/alshaer/task-manager",
@@ -67,18 +77,28 @@ const mockProjects: Project[] = [
     startDate: "2023-08-01",
     teamSize: 2,
     role: "Frontend Lead",
-    challenges: "Implementing real-time collaboration features and ensuring data consistency across multiple users.",
-    solutions: "Used Socket.io for real-time updates and implemented optimistic UI updates with conflict resolution.",
-    results: "Currently in beta testing with 50+ active users and positive feedback on user experience.",
+    challenges:
+      "Implementing real-time collaboration features and ensuring data consistency across multiple users.",
+    solutions:
+      "Used Socket.io for real-time updates and implemented optimistic UI updates with conflict resolution.",
+    results:
+      "Currently in beta testing with 50+ active users and positive feedback on user experience.",
     order: 1,
   },
   {
     _id: "3",
     title: "Mobile Weather App",
-    description: "A beautiful and intuitive weather application with location-based forecasts, interactive maps, and personalized weather alerts.",
+    description:
+      "A beautiful and intuitive weather application with location-based forecasts, interactive maps, and personalized weather alerts.",
     projectType: "mobile-app",
     images: ["/api/placeholder/400/300"],
-    technologies: ["React Native", "TypeScript", "OpenWeather API", "AsyncStorage", "React Navigation"],
+    technologies: [
+      "React Native",
+      "TypeScript",
+      "OpenWeather API",
+      "AsyncStorage",
+      "React Navigation",
+    ],
     status: "completed",
     featured: true,
     githubUrl: "https://github.com/alshaer/weather-app",
@@ -86,18 +106,29 @@ const mockProjects: Project[] = [
     endDate: "2023-05-15",
     teamSize: 1,
     role: "Solo Developer",
-    challenges: "Creating smooth animations and handling offline functionality while maintaining accurate weather data.",
-    solutions: "Implemented local caching with AsyncStorage and used React Native Reanimated for smooth transitions.",
-    results: "Published on both iOS and Android app stores with 4.8/5 rating and 10K+ downloads.",
+    challenges:
+      "Creating smooth animations and handling offline functionality while maintaining accurate weather data.",
+    solutions:
+      "Implemented local caching with AsyncStorage and used React Native Reanimated for smooth transitions.",
+    results:
+      "Published on both iOS and Android app stores with 4.8/5 rating and 10K+ downloads.",
     order: 2,
   },
   {
     _id: "4",
     title: "Portfolio Website",
-    description: "A modern, responsive portfolio website with admin dashboard, content management system, and analytics integration.",
+    description:
+      "A modern, responsive portfolio website with admin dashboard, content management system, and analytics integration.",
     projectType: "web-app",
     images: ["/api/placeholder/400/300"],
-    technologies: ["Next.js", "TypeScript", "MongoDB", "Tailwind CSS", "Framer Motion", "Vercel"],
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "MongoDB",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Vercel",
+    ],
     status: "published",
     featured: false,
     githubUrl: "https://github.com/alshaer/portfolio",
@@ -106,9 +137,12 @@ const mockProjects: Project[] = [
     endDate: "2023-11-30",
     teamSize: 1,
     role: "Full-Stack Developer",
-    challenges: "Creating a fast, SEO-optimized website with smooth animations and comprehensive admin features.",
-    solutions: "Used Next.js for SSR/SSG, implemented lazy loading, and optimized images for web performance.",
-    results: "Achieved 95+ Lighthouse score, fast loading times, and comprehensive admin dashboard for content management.",
+    challenges:
+      "Creating a fast, SEO-optimized website with smooth animations and comprehensive admin features.",
+    solutions:
+      "Used Next.js for SSR/SSG, implemented lazy loading, and optimized images for web performance.",
+    results:
+      "Achieved 95+ Lighthouse score, fast loading times, and comprehensive admin dashboard for content management.",
     order: 3,
   },
 ];
@@ -120,21 +154,20 @@ export default function EnhancedProjectsPage() {
   // Simulate API calls
   const handleUpdateProjects = async (updatedProjects: Project[]) => {
     setIsLoading(true);
-    
+
     try {
       // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       // In a real app, this would be an API call
       // const response = await fetch('/api/projects', {
       //   method: 'PUT',
       //   headers: { 'Content-Type': 'application/json' },
       //   body: JSON.stringify(updatedProjects),
       // });
-      
+
       setProjects(updatedProjects);
       console.log("Projects updated:", updatedProjects);
-      
     } catch (error) {
       console.error("Failed to update projects:", error);
       throw error;
@@ -160,7 +193,8 @@ export default function EnhancedProjectsPage() {
               Enhanced Projects Management
             </h1>
             <p className="text-gray-600 dark:text-gray-400 mt-1">
-              Manage your projects with AI-powered enhancements, drag & drop ordering, and comprehensive project details.
+              Manage your projects with AI-powered enhancements, drag & drop
+              ordering, and comprehensive project details.
             </p>
           </div>
 
@@ -172,7 +206,7 @@ export default function EnhancedProjectsPage() {
           />
 
           {/* Features Info */}
-          <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 rounded-lg p-6">
+          <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 rounded-[12px] p-6">
             <h3 className="text-lg font-medium text-green-900 dark:text-green-100 mb-3">
               ✨ Enhanced Project Features
             </h3>
@@ -217,26 +251,30 @@ export default function EnhancedProjectsPage() {
           </div>
 
           {/* Technical Implementation */}
-          <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 rounded-lg p-6">
+          <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 rounded-[12px]2px] p-6">
             <h3 className="text-lg font-medium text-purple-900 dark:text-purple-100 mb-3">
               🛠️ Technical Implementation
             </h3>
             <div className="text-sm text-purple-700 dark:text-purple-300 space-y-2">
               <p>
-                <strong>AI Integration:</strong> Google Gemini API integration for intelligent text processing,
-                technology parsing, and content enhancement with real-time validation.
+                <strong>AI Integration:</strong> Google Gemini API integration
+                for intelligent text processing, technology parsing, and content
+                enhancement with real-time validation.
               </p>
               <p>
-                <strong>Drag & Drop:</strong> Framer Motion Reorder components for smooth drag-and-drop functionality
-                with visual feedback and automatic state management.
+                <strong>Drag & Drop:</strong> Framer Motion Reorder components
+                for smooth drag-and-drop functionality with visual feedback and
+                automatic state management.
               </p>
               <p>
-                <strong>Form Management:</strong> Pre-populated forms for editing with comprehensive validation,
-                AI-enhanced fields, and real-time preview capabilities.
+                <strong>Form Management:</strong> Pre-populated forms for
+                editing with comprehensive validation, AI-enhanced fields, and
+                real-time preview capabilities.
               </p>
               <p>
-                <strong>Security:</strong> OTP-protected bulk operations, input sanitization, and secure API
-                communication with proper error handling.
+                <strong>Security:</strong> OTP-protected bulk operations, input
+                sanitization, and secure API communication with proper error
+                handling.
               </p>
             </div>
           </div>

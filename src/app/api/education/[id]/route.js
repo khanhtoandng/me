@@ -11,7 +11,7 @@ export async function GET(request, { params }) {
     if (!education) {
       return NextResponse.json(
         { success: false, error: "Education not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -19,7 +19,7 @@ export async function GET(request, { params }) {
   } catch (error) {
     return NextResponse.json(
       { success: false, error: error.message },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }
@@ -40,7 +40,7 @@ export async function PUT(request, { params }) {
     if (!education) {
       return NextResponse.json(
         { success: false, error: "Education not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -48,7 +48,7 @@ export async function PUT(request, { params }) {
   } catch (error) {
     return NextResponse.json(
       { success: false, error: error.message },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }
@@ -63,7 +63,7 @@ export async function DELETE(request, { params }) {
     if (!education) {
       return NextResponse.json(
         { success: false, error: "Education not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -71,7 +71,7 @@ export async function DELETE(request, { params }) {
   } catch (error) {
     return NextResponse.json(
       { success: false, error: error.message },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }

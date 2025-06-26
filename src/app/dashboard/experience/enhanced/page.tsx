@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { ResponsiveDashboardLayout } from "@/components/dashboard/responsive-layout";
 import { EnhancedExperienceDashboard } from "@/components/experience/enhanced-experience-dashboard";
 import { PageTransition } from "@/components/ui/page-transition";
-import { toast } from "sonner";
+import { useState } from "react";
 
 interface Experience {
   _id: string;
@@ -27,7 +26,8 @@ const mockExperiences: Experience[] = [
     _id: "1",
     company: "Tech Solutions Inc.",
     position: "Senior Full-Stack Developer",
-    description: "Led development of enterprise web applications using React, Node.js, and MongoDB. Collaborated with cross-functional teams to deliver high-quality software solutions.",
+    description:
+      "Led development of enterprise web applications using React, Node.js, and MongoDB. Collaborated with cross-functional teams to deliver high-quality software solutions.",
     startDate: "2022-01-15",
     current: true,
     location: "San Francisco, CA, USA",
@@ -36,7 +36,7 @@ const mockExperiences: Experience[] = [
     achievements: [
       "Increased application performance by 40%",
       "Led a team of 5 developers",
-      "Implemented CI/CD pipeline reducing deployment time by 60%"
+      "Implemented CI/CD pipeline reducing deployment time by 60%",
     ],
     order: 0,
   },
@@ -44,7 +44,8 @@ const mockExperiences: Experience[] = [
     _id: "2",
     company: "Digital Innovations LLC",
     position: "Frontend Developer",
-    description: "Developed responsive web applications and mobile-first designs. Worked closely with UX/UI designers to implement pixel-perfect interfaces.",
+    description:
+      "Developed responsive web applications and mobile-first designs. Worked closely with UX/UI designers to implement pixel-perfect interfaces.",
     startDate: "2020-06-01",
     endDate: "2021-12-31",
     current: false,
@@ -54,7 +55,7 @@ const mockExperiences: Experience[] = [
     achievements: [
       "Improved user engagement by 25%",
       "Reduced page load times by 50%",
-      "Mentored 3 junior developers"
+      "Mentored 3 junior developers",
     ],
     order: 1,
   },
@@ -62,7 +63,8 @@ const mockExperiences: Experience[] = [
     _id: "3",
     company: "StartupXYZ",
     position: "Full-Stack Developer",
-    description: "Built the entire web platform from scratch using modern technologies. Handled both frontend and backend development in a fast-paced startup environment.",
+    description:
+      "Built the entire web platform from scratch using modern technologies. Handled both frontend and backend development in a fast-paced startup environment.",
     startDate: "2019-03-01",
     endDate: "2020-05-31",
     current: false,
@@ -72,7 +74,7 @@ const mockExperiences: Experience[] = [
     achievements: [
       "Launched MVP in 3 months",
       "Achieved 99.9% uptime",
-      "Implemented real-time features using WebSockets"
+      "Implemented real-time features using WebSockets",
     ],
     order: 2,
   },
@@ -85,21 +87,20 @@ export default function EnhancedExperiencePage() {
   // Simulate API calls
   const handleUpdateExperiences = async (updatedExperiences: Experience[]) => {
     setIsLoading(true);
-    
+
     try {
       // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       // In a real app, this would be an API call
       // const response = await fetch('/api/experience', {
       //   method: 'PUT',
       //   headers: { 'Content-Type': 'application/json' },
       //   body: JSON.stringify(updatedExperiences),
       // });
-      
+
       setExperiences(updatedExperiences);
       console.log("Experiences updated:", updatedExperiences);
-      
     } catch (error) {
       console.error("Failed to update experiences:", error);
       throw error;
@@ -125,7 +126,8 @@ export default function EnhancedExperiencePage() {
               Enhanced Experience Management
             </h1>
             <p className="text-gray-600 dark:text-gray-400 mt-1">
-              Manage your work experience with AI-powered enhancements, drag & drop ordering, and bulk operations.
+              Manage your work experience with AI-powered enhancements, drag &
+              drop ordering, and bulk operations.
             </p>
           </div>
 
@@ -137,7 +139,7 @@ export default function EnhancedExperiencePage() {
           />
 
           {/* Features Info */}
-          <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+          <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-[12px] p-6">
             <h3 className="text-lg font-medium text-blue-900 dark:text-blue-100 mb-3">
               ✨ Enhanced Features
             </h3>
@@ -178,26 +180,29 @@ export default function EnhancedExperiencePage() {
           </div>
 
           {/* Development Notes */}
-          <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+          <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-[12px]2px] p-6">
             <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-3">
               🚀 Development Notes
             </h3>
             <div className="text-sm text-gray-700 dark:text-gray-300 space-y-2">
               <p>
-                <strong>AI Integration:</strong> Uses Google Gemini API with hardcoded key for text enhancement.
-                The AI service validates input, processes text, and provides intelligent suggestions.
+                <strong>AI Integration:</strong> Uses Google Gemini API with
+                hardcoded key for text enhancement. The AI service validates
+                input, processes text, and provides intelligent suggestions.
               </p>
               <p>
-                <strong>State Management:</strong> Uses React Context for sidebar state management and local state
-                for form data with proper TypeScript typing throughout.
+                <strong>State Management:</strong> Uses React Context for
+                sidebar state management and local state for form data with
+                proper TypeScript typing throughout.
               </p>
               <p>
-                <strong>Security:</strong> Bulk delete operations require OTP confirmation (code: 2132) to prevent
-                accidental data loss.
+                <strong>Security:</strong> Bulk delete operations require OTP
+                confirmation (code: 2132) to prevent accidental data loss.
               </p>
               <p>
-                <strong>Responsive Design:</strong> Fully responsive with mobile-first approach, collapsible sidebar,
-                and touch-friendly interactions.
+                <strong>Responsive Design:</strong> Fully responsive with
+                mobile-first approach, collapsible sidebar, and touch-friendly
+                interactions.
               </p>
             </div>
           </div>

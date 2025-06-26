@@ -161,7 +161,7 @@ export function UnifiedSearchInput({
           className={cn(
             "absolute left-3 top-1/2 transform -translate-y-1/2 text-[var(--paragraph)] transition-colors",
             size === "sm" ? "h-3 w-3" : size === "lg" ? "h-5 w-5" : "h-4 w-4",
-            isFocused && "text-[var(--link-color)]"
+            isFocused && "text-[var(--link-color)]",
           )}
         />
 
@@ -182,7 +182,7 @@ export function UnifiedSearchInput({
             variantClasses[variant],
             "transition-all duration-200",
             isFocused && "ring-2 ring-[var(--link-color)] ring-opacity-20",
-            loading && "cursor-wait"
+            loading && "cursor-wait",
           )}
         />
 
@@ -197,7 +197,7 @@ export function UnifiedSearchInput({
                   ? "h-3 w-3"
                   : size === "lg"
                     ? "h-5 w-5"
-                    : "h-4 w-4"
+                    : "h-4 w-4",
               )}
             />
           )}
@@ -220,7 +220,7 @@ export function UnifiedSearchInput({
                   className={cn(
                     "h-6 w-6 p-0 hover:bg-[var(--card-hover)] rounded-full",
                     size === "sm" && "h-5 w-5",
-                    size === "lg" && "h-7 w-7"
+                    size === "lg" && "h-7 w-7",
                   )}
                   aria-label="Clear search"
                 >
@@ -230,7 +230,7 @@ export function UnifiedSearchInput({
                         ? "h-3 w-3"
                         : size === "lg"
                           ? "h-4 w-4"
-                          : "h-3 w-3"
+                          : "h-3 w-3",
                     )}
                   />
                 </Button>
@@ -249,7 +249,7 @@ export function UnifiedSearchInput({
               className={cn(
                 "h-6 w-6 p-0 hover:bg-[var(--card-hover)] rounded-full",
                 size === "sm" && "h-5 w-5",
-                size === "lg" && "h-7 w-7"
+                size === "lg" && "h-7 w-7",
               )}
               aria-label="Search"
             >
@@ -259,7 +259,7 @@ export function UnifiedSearchInput({
                     ? "h-3 w-3"
                     : size === "lg"
                       ? "h-4 w-4"
-                      : "h-3 w-3"
+                      : "h-3 w-3",
                 )}
               />
             </Button>

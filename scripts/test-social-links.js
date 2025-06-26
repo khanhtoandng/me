@@ -142,7 +142,7 @@ async function testSocialLinks() {
     console.log(`✅ Found ${allLinks.length} social links`);
     allLinks.forEach((link) => {
       console.log(
-        `   - ${link.platform}: ${link.url} (${link.isActive ? "Active" : "Inactive"})`
+        `   - ${link.platform}: ${link.url} (${link.isActive ? "Active" : "Inactive"})`,
       );
     });
 

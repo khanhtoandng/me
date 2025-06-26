@@ -76,7 +76,7 @@ export function RecentActivity() {
             action: "starred",
             title: "Collaboration opportunity",
             timestamp: new Date(
-              Date.now() - 1000 * 60 * 60 * 24 * 2
+              Date.now() - 1000 * 60 * 60 * 24 * 2,
             ).toISOString(), // 2 days ago
           },
           {
@@ -85,7 +85,7 @@ export function RecentActivity() {
             action: "updated",
             title: "Senior Developer position",
             timestamp: new Date(
-              Date.now() - 1000 * 60 * 60 * 24 * 3
+              Date.now() - 1000 * 60 * 60 * 24 * 3,
             ).toISOString(), // 3 days ago
           },
           {
@@ -94,7 +94,7 @@ export function RecentActivity() {
             action: "created",
             title: "Advanced React Certification",
             timestamp: new Date(
-              Date.now() - 1000 * 60 * 60 * 24 * 5
+              Date.now() - 1000 * 60 * 60 * 24 * 5,
             ).toISOString(), // 5 days ago
           },
           {
@@ -103,7 +103,7 @@ export function RecentActivity() {
             action: "deleted",
             title: "Outdated Project",
             timestamp: new Date(
-              Date.now() - 1000 * 60 * 60 * 24 * 7
+              Date.now() - 1000 * 60 * 60 * 24 * 7,
             ).toISOString(), // 7 days ago
           },
         ];
@@ -162,7 +162,7 @@ export function RecentActivity() {
 
   // Get badge color based on activity type
   const getBadgeVariant = (
-    type: string
+    type: string,
   ): "default" | "secondary" | "destructive" | "outline" => {
     switch (type) {
       case "project":

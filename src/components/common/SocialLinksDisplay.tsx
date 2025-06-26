@@ -97,7 +97,7 @@ export function SocialLinksDisplay({
       case "sidebar":
         return {
           container: "flex flex-col space-y-2",
-          link: "flex items-center gap-3 p-2 rounded-lg text-[var(--paragraph)] hover:text-[var(--link-color)] hover:bg-[var(--card-hover)] transition-colors",
+          link: "flex items-center gap-3 p-2 rounded-[12px] text-[var(--paragraph)] hover:text-[var(--link-color)] hover:bg-[var(--card-hover)] transition-colors",
           label: "text-sm",
         };
       case "inline":

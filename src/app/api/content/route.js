@@ -21,7 +21,7 @@ export async function GET(request) {
     console.error("Error fetching content:", error);
     return NextResponse.json(
       { success: false, error: error.message },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }
@@ -31,44 +31,44 @@ export async function POST(request) {
     await dbConnect();
 
     const body = await request.json();
-    
+
     // Check if content for this section already exists
     const existingContent = await Content.findOne({ section: body.section });
-    
+
     if (existingContent) {
       // Update existing content
       const updatedContent = await Content.findOneAndUpdate(
         { section: body.section },
         body,
-        { new: true, runValidators: true }
+        { new: true, runValidators: true },
       );
-      
+
       return NextResponse.json(
-        { 
-          success: true, 
+        {
+          success: true,
           data: updatedContent,
-          message: "Content updated successfully"
+          message: "Content updated successfully",
         },
-        { status: 200 }
+        { status: 200 },
       );
     } else {
       // Create new content
       const content = await Content.create(body);
-      
+
       return NextResponse.json(
-        { 
-          success: true, 
+        {
+          success: true,
           data: content,
-          message: "Content created successfully"
+          message: "Content created successfully",
         },
-        { status: 201 }
+        { status: 201 },
       );
     }
   } catch (error) {
     console.error("Error saving content:", error);
     return NextResponse.json(
       { success: false, error: error.message },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }

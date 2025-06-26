@@ -16,7 +16,7 @@ export function useIsMobile() {
 
     // Use the more modern way to add event listener
     const mediaQuery = window.matchMedia(
-      `(max-width: ${MOBILE_BREAKPOINT - 1}px)`
+      `(max-width: ${MOBILE_BREAKPOINT - 1}px)`,
     );
 
     // Add event listener

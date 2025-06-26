@@ -40,7 +40,7 @@ async function fixUserPassword() {
 
     // Find user
     const user = await User.findOne({ username: "balshaer" }).select(
-      "+password"
+      "+password",
     );
 
     if (!user) {
@@ -75,7 +75,7 @@ async function fixUserPassword() {
       const isMatch = updatedUser.matchPassword("12345678");
       console.log(
         "Password verification test:",
-        isMatch ? "✅ PASS" : "❌ FAIL"
+        isMatch ? "✅ PASS" : "❌ FAIL",
       );
     } else if (user.password && user.password.includes(":")) {
       console.log("Password is already in correct format");
@@ -84,12 +84,12 @@ async function fixUserPassword() {
       const isMatch = user.matchPassword("12345678");
       console.log(
         "Password verification test:",
-        isMatch ? "✅ PASS" : "❌ FAIL"
+        isMatch ? "✅ PASS" : "❌ FAIL",
       );
 
       if (!isMatch) {
         console.log(
-          "Current password doesn't match, updating to '12345678'..."
+          "Current password doesn't match, updating to '12345678'...",
         );
         const salt = crypto.randomBytes(16).toString("hex");
         const hashedPassword =

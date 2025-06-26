@@ -63,7 +63,7 @@ export function ExperienceTimeline() {
   const formatDateRange = (
     startDate: string,
     endDate?: string,
-    current?: boolean
+    current?: boolean,
   ) => {
     const start = new Date(startDate);
     const startFormatted = start.toLocaleDateString("en-US", {
@@ -201,7 +201,7 @@ export function ExperienceTimeline() {
                 {formatDateRange(
                   experience.startDate,
                   experience.endDate,
-                  experience.current
+                  experience.current,
                 )}
               </div>
 

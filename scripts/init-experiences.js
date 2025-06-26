@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 // MongoDB connection
-const MONGODB_URI = 'mongodb://localhost:27017/alshaer';
+const MONGODB_URI = "mongodb://localhost:27017/alshaer";
 
 // Experience Schema
 const ExperienceSchema = new mongoose.Schema({
@@ -51,19 +51,20 @@ const ExperienceSchema = new mongoose.Schema({
   },
 });
 
-const Experience = mongoose.models.Experience || mongoose.model("Experience", ExperienceSchema);
+const Experience =
+  mongoose.models.Experience || mongoose.model("Experience", ExperienceSchema);
 
 async function initExperiences() {
   try {
-    console.log('🚀 Initializing experiences...');
-    
+    console.log("🚀 Initializing experiences...");
+
     // Connect to MongoDB
     await mongoose.connect(MONGODB_URI);
-    console.log('✅ Connected to MongoDB');
+    console.log("✅ Connected to MongoDB");
 
     // Clear existing experiences
     await Experience.deleteMany({});
-    console.log('🧹 Cleared existing experiences');
+    console.log("🧹 Cleared existing experiences");
 
     // Sample experiences data
     const experiences = [
@@ -74,8 +75,18 @@ async function initExperiences() {
         location: "Remote",
         startDate: new Date("2024-01-01"),
         current: true,
-        description: "Work as a Full-Stack Engineer, responsible for developing the main website for Samtax. Build tools to help the company get work done faster.",
-        skills: ["React js", "Typescript", "Tailwind CSS", "Express js", "MongoDB", "Node js", "Ai apis", "RESTful APIs"]
+        description:
+          "Work as a Full-Stack Engineer, responsible for developing the main website for Samtax. Build tools to help the company get work done faster.",
+        skills: [
+          "React js",
+          "Typescript",
+          "Tailwind CSS",
+          "Express js",
+          "MongoDB",
+          "Node js",
+          "Ai apis",
+          "RESTful APIs",
+        ],
       },
       {
         title: "Frontend Developer",
@@ -85,8 +96,16 @@ async function initExperiences() {
         startDate: new Date("2023-07-01"),
         endDate: new Date("2023-10-31"),
         current: false,
-        description: "Worked as a frontend developer using React, responsible for developing the main website for Sustainable Star LLC and significantly contributing to the SFB project.",
-        skills: ["React js", "Typescript", "Tailwind CSS", "Github", "Git", "RESTful APIs"]
+        description:
+          "Worked as a frontend developer using React, responsible for developing the main website for Sustainable Star LLC and significantly contributing to the SFB project.",
+        skills: [
+          "React js",
+          "Typescript",
+          "Tailwind CSS",
+          "Github",
+          "Git",
+          "RESTful APIs",
+        ],
       },
       {
         title: "Frontend Developer",
@@ -96,8 +115,16 @@ async function initExperiences() {
         startDate: new Date("2023-07-01"),
         endDate: new Date("2023-09-30"),
         current: false,
-        description: "Worked as a React developer, responsible for rebuilding and updating several projects, as well as developing new projects.",
-        skills: ["React js", "Typescript", "Tailwind CSS", "Github", "Git", "RESTful APIs"]
+        description:
+          "Worked as a React developer, responsible for rebuilding and updating several projects, as well as developing new projects.",
+        skills: [
+          "React js",
+          "Typescript",
+          "Tailwind CSS",
+          "Github",
+          "Git",
+          "RESTful APIs",
+        ],
       },
       {
         title: "Software Engineer Intern",
@@ -107,9 +134,10 @@ async function initExperiences() {
         startDate: new Date("2022-04-01"),
         endDate: new Date("2022-06-30"),
         current: false,
-        description: "Completed an internship at GEDCO as a software engineer through my college.",
-        skills: ["PHP", "MYSQL", "Java"]
-      }
+        description:
+          "Completed an internship at GEDCO as a software engineer through my college.",
+        skills: ["PHP", "MYSQL", "Java"],
+      },
     ];
 
     // Insert experiences
@@ -117,9 +145,9 @@ async function initExperiences() {
     console.log(`✅ Created ${createdExperiences.length} experiences`);
 
     // Display created experiences
-    console.log('\n📋 Created experiences:');
-    createdExperiences.forEach(exp => {
-      const dateRange = exp.current 
+    console.log("\n📋 Created experiences:");
+    createdExperiences.forEach((exp) => {
+      const dateRange = exp.current
         ? `${exp.startDate.toLocaleDateString()} - Present`
         : `${exp.startDate.toLocaleDateString()} - ${exp.endDate.toLocaleDateString()}`;
       console.log(`   - ${exp.title} at ${exp.company} (${dateRange})`);
@@ -127,20 +155,23 @@ async function initExperiences() {
 
     // Statistics
     const totalExperiences = await Experience.countDocuments();
-    const currentExperiences = await Experience.countDocuments({ current: true });
-    
-    console.log('\n📊 Experience Statistics:');
+    const currentExperiences = await Experience.countDocuments({
+      current: true,
+    });
+
+    console.log("\n📊 Experience Statistics:");
     console.log(`   Total Experiences: ${totalExperiences}`);
     console.log(`   Current Experiences: ${currentExperiences}`);
-    console.log(`   Past Experiences: ${totalExperiences - currentExperiences}`);
+    console.log(
+      `   Past Experiences: ${totalExperiences - currentExperiences}`,
+    );
 
-    console.log('\n🎉 Experiences initialization completed!');
-
+    console.log("\n🎉 Experiences initialization completed!");
   } catch (error) {
-    console.error('❌ Initialization failed:', error.message);
+    console.error("❌ Initialization failed:", error.message);
   } finally {
     await mongoose.disconnect();
-    console.log('🔌 Disconnected from MongoDB');
+    console.log("🔌 Disconnected from MongoDB");
   }
 }
 

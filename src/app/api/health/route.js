@@ -5,7 +5,7 @@ export async function GET() {
   try {
     // Test database connection
     await dbConnect();
-    
+
     return NextResponse.json({
       status: "ok",
       message: "Server is healthy",
@@ -13,7 +13,7 @@ export async function GET() {
     });
   } catch (error) {
     console.error("Health check failed:", error);
-    
+
     return NextResponse.json(
       {
         status: "error",
@@ -21,7 +21,7 @@ export async function GET() {
         error: error.message,
         timestamp: new Date().toISOString(),
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

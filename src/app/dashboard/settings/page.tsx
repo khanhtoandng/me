@@ -148,7 +148,7 @@ export default function SettingsPage() {
     } catch (error) {
       console.error("Password change error:", error);
       setError(
-        error instanceof Error ? error.message : "Failed to change password"
+        error instanceof Error ? error.message : "Failed to change password",
       );
       toast.error("Failed to update password");
     } finally {
@@ -222,7 +222,7 @@ export default function SettingsPage() {
     } catch (error) {
       console.error("Delete account error:", error);
       toast.error(
-        error instanceof Error ? error.message : "Failed to delete account"
+        error instanceof Error ? error.message : "Failed to delete account",
       );
     } finally {
       setLoading(false);

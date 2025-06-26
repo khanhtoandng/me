@@ -26,7 +26,7 @@ export function TestimonialsSection({
       className={cn(
         "bg-background text-foreground",
         "py-12 sm:py-24 md:py-32 px-0",
-        className
+        className,
       )}
     >
       <div className="mx-auto flex max-w-container flex-col items-center gap-4 text-center sm:gap-16">
@@ -45,7 +45,7 @@ export function TestimonialsSection({
               {[...Array(4)].map((_, setIndex) =>
                 testimonials.map((testimonial, i) => (
                   <TestimonialCard key={`${setIndex}-${i}`} {...testimonial} />
-                ))
+                )),
               )}
             </div>
           </div>

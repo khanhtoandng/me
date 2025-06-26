@@ -24,7 +24,7 @@ export function SectionDivider({
         transition={{ duration: 0.5 }}
         className="h-px bg-gradient-to-r from-transparent via-[var(--card-border-color)] to-transparent"
       />
-      
+
       {withText && (
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -36,7 +36,7 @@ export function SectionDivider({
           <span>{text}</span>
         </motion.div>
       )}
-      
+
       {withText && (
         <motion.div
           initial={{ width: 0 }}

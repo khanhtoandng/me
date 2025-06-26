@@ -26,11 +26,16 @@ interface UseProjectTypesReturn {
   error: string | null;
   refetch: () => Promise<void>;
   createProjectType: (data: Partial<ProjectType>) => Promise<ProjectType>;
-  updateProjectType: (id: string, data: Partial<ProjectType>) => Promise<ProjectType>;
+  updateProjectType: (
+    id: string,
+    data: Partial<ProjectType>,
+  ) => Promise<ProjectType>;
   deleteProjectType: (id: string) => Promise<void>;
 }
 
-export function useProjectTypes(options: UseProjectTypesOptions = {}): UseProjectTypesReturn {
+export function useProjectTypes(
+  options: UseProjectTypesOptions = {},
+): UseProjectTypesReturn {
   const [projectTypes, setProjectTypes] = useState<ProjectType[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -63,57 +68,66 @@ export function useProjectTypes(options: UseProjectTypesOptions = {}): UseProjec
     }
   }, [options.active]);
 
-  const createProjectType = useCallback(async (data: Partial<ProjectType>): Promise<ProjectType> => {
-    const response = await fetch("/api/project-types", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+  const createProjectType = useCallback(
+    async (data: Partial<ProjectType>): Promise<ProjectType> => {
+      const response = await fetch("/api/project-types", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-    const result = await response.json();
+      const result = await response.json();
 
-    if (!result.success) {
-      throw new Error(result.error || "Failed to create project type");
-    }
+      if (!result.success) {
+        throw new Error(result.error || "Failed to create project type");
+      }
 
-    await fetchProjectTypes();
-    return result.data;
-  }, [fetchProjectTypes]);
+      await fetchProjectTypes();
+      return result.data;
+    },
+    [fetchProjectTypes],
+  );
 
-  const updateProjectType = useCallback(async (id: string, data: Partial<ProjectType>): Promise<ProjectType> => {
-    const response = await fetch(`/api/project-types/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+  const updateProjectType = useCallback(
+    async (id: string, data: Partial<ProjectType>): Promise<ProjectType> => {
+      const response = await fetch(`/api/project-types/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-    const result = await response.json();
+      const result = await response.json();
 
-    if (!result.success) {
-      throw new Error(result.error || "Failed to update project type");
-    }
+      if (!result.success) {
+        throw new Error(result.error || "Failed to update project type");
+      }
 
-    await fetchProjectTypes();
-    return result.data;
-  }, [fetchProjectTypes]);
+      await fetchProjectTypes();
+      return result.data;
+    },
+    [fetchProjectTypes],
+  );
 
-  const deleteProjectType = useCallback(async (id: string): Promise<void> => {
-    const response = await fetch(`/api/project-types/${id}`, {
-      method: "DELETE",
-    });
+  const deleteProjectType = useCallback(
+    async (id: string): Promise<void> => {
+      const response = await fetch(`/api/project-types/${id}`, {
+        method: "DELETE",
+      });
 
-    const result = await response.json();
+      const result = await response.json();
 
-    if (!result.success) {
-      throw new Error(result.error || "Failed to delete project type");
-    }
+      if (!result.success) {
+        throw new Error(result.error || "Failed to delete project type");
+      }
 
-    await fetchProjectTypes();
-  }, [fetchProjectTypes]);
+      await fetchProjectTypes();
+    },
+    [fetchProjectTypes],
+  );
 
   useEffect(() => {
     fetchProjectTypes();

@@ -39,7 +39,7 @@ if (typeof window !== "undefined") {
     ArcElement,
     Title,
     Tooltip,
-    Legend
+    Legend,
   );
 }
 
@@ -307,7 +307,7 @@ export function PieChart({ data, nameField, valueField }: PieChartProps) {
               const value = context.raw || 0;
               const total = context.dataset.data.reduce(
                 (a: any, b: any) => a + b,
-                0
+                0,
               );
               const percentage = Math.round((value / total) * 100);
               return `${label}: ${value} (${percentage}%)`;
