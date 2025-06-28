@@ -1,17 +1,14 @@
 "use client";
 
-import { useEffect, useRef, memo } from "react";
-import { annotate } from "rough-notation";
-// University link constant
-const ALAZHAR_URL = "https://www.alazhar.edu.ps";
-import Link from "next/link";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useContent } from "@/hooks/use-content";
 import { useSocialLinks } from "@/hooks/use-social-links";
-import { Skeleton } from "@/components/ui/skeleton";
-import * as FaIcons from "react-icons/fa";
+import Link from "next/link";
+import { memo, useEffect, useRef } from "react";
 import * as AiIcons from "react-icons/ai";
 import * as BiIcons from "react-icons/bi";
 import * as BsIcons from "react-icons/bs";
+import * as FaIcons from "react-icons/fa";
 import * as FiIcons from "react-icons/fi";
 import * as HiIcons from "react-icons/hi";
 import * as IoIcons from "react-icons/io5";
@@ -19,6 +16,9 @@ import * as MdIcons from "react-icons/md";
 import * as RiIcons from "react-icons/ri";
 import * as SiIcons from "react-icons/si";
 import * as TiIcons from "react-icons/ti";
+import { annotate } from "rough-notation";
+// University link constant
+const ALAZHAR_URL = "https://www.alazhar.edu.ps";
 
 const iconLibraries = {
   fa: FaIcons,
@@ -129,7 +129,10 @@ function HeroSection() {
                   // First paragraph with highlighted text and university link
                   const parts = paragraph.split("Al-Azhar University");
                   return (
-                    <p key={index} className="description">
+                    <p
+                      key={index}
+                      className=" w-full  py-2 text-base text-[var(--paragraph)] max-md:max-w-none leading-relaxed max-w-full"
+                    >
                       {parts[0].includes("Full-Stack Developer") ? (
                         <>
                           {parts[0].split("Full-Stack Developer")[0]}
@@ -149,11 +152,14 @@ function HeroSection() {
                   );
                 }
                 return (
-                  <p key={index} className="description">
+                  <p
+                    key={index}
+                    className=" w-full  py-2 text-base text-[var(--paragraph)] max-md:max-w-none leading-relaxed max-w-full"
+                  >
                     {paragraph}
                   </p>
                 );
-              },
+              }
             )}
           </>
         )}

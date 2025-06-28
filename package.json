@@ -52,6 +52,7 @@
     "emailjs-com": "^3.2.0",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.4.1",
+    "gsap": "^3.13.0",
     "input-otp": "^1.4.2",
     "jose": "^6.0.11",
     "lucide-react": "^0.471.2",

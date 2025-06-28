@@ -1,13 +1,9 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -15,12 +11,15 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import emailjs from "emailjs-com";
-import { MagicCard } from "../ui/MagicCard";
 import { cn } from "@/lib/utils";
-import { toast } from "sonner";
-import { ScrollEffect } from "@/lib/animations";
+import { zodResolver } from "@hookform/resolvers/zod";
+import emailjs from "emailjs-com";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
+import ClickSpark from "../ui/ClickSpark";
+import { MagicCard } from "../ui/MagicCard";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -83,14 +82,14 @@ export default function ContactForm() {
                 subject: data.subject,
                 message: data.message,
               },
-              userId,
+              userId
             );
             console.log("Email sent successfully via EmailJS");
           }
         } catch (emailError) {
           console.error(
             "EmailJS failed, but message was saved to database:",
-            emailError,
+            emailError
           );
         }
 
@@ -115,105 +114,113 @@ export default function ContactForm() {
         gradientColor="#7e7e7e12"
         className={cn(
           "group container overflow-hidden transition-all duration-300",
-          "border-[var(--card-border-color)] bg-[var(--card-background)]",
+          "border-[var(--card-border-color)] bg-[var(--card-background)]"
         )}
         ref={undefined}
       >
         <div className="flex flex-col bg-transparent">
-          <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className="space-y-4 bg-transparent py-[20px] border-none"
-            >
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-[var(--headline)]">
-                      Name
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Enter your name"
-                        className="rounded-[8px] border-[var(--input-border-color)] bg-[var(--input-background)] text-[var(--input-text)]"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage className="text-red-500" />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-[var(--headline)]">
-                      Email Address
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Enter your email"
-                        className="rounded-[8px] border-[var(--input-border-color)] bg-[var(--input-background)] text-[var(--input-text)]"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage className="text-red-500" />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="subject"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-[var(--headline)]">
-                      Subject
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Enter message subject"
-                        className="rounded-[8px] border-[var(--input-border-color)] bg-[var(--input-background)] text-[var(--input-text)]"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage className="text-red-500" />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="message"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-[var(--headline)]">
-                      Your Message
-                    </FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="Write your message here"
-                        className="h-[200px] rounded-[8px] border-[var(--input-border-color)] bg-[var(--input-background)] text-[var(--input-text)]"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage className="text-red-500" />
-                  </FormItem>
-                )}
-              />
-
-              <Button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-[var(--button)] text-[var(--button-text)] hover:bg-[var(--button2)]"
+          <ClickSpark
+            sparkColor="#fff"
+            sparkSize={10}
+            sparkRadius={15}
+            sparkCount={8}
+            duration={400}
+          >
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-4 bg-transparent py-[20px] border-none"
               >
-                {isSubmitting ? "Sending..." : "Send Message"}
-              </Button>
-            </form>
-          </Form>
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[var(--headline)]">
+                        Name
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Enter your name"
+                          className="rounded-[8px] border-[var(--input-border-color)] bg-[var(--input-background)] text-[var(--input-text)]"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-red-500" />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[var(--headline)]">
+                        Email Address
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Enter your email"
+                          className="rounded-[8px] border-[var(--input-border-color)] bg-[var(--input-background)] text-[var(--input-text)]"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-red-500" />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="subject"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[var(--headline)]">
+                        Subject
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Enter message subject"
+                          className="rounded-[8px] border-[var(--input-border-color)] bg-[var(--input-background)] text-[var(--input-text)]"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-red-500" />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[var(--headline)]">
+                        Your Message
+                      </FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Write your message here"
+                          className="h-[200px] rounded-[8px] border-[var(--input-border-color)] bg-[var(--input-background)] text-[var(--input-text)]"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-red-500" />
+                    </FormItem>
+                  )}
+                />
+
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-[var(--button)] text-[var(--button-text)] hover:bg-[var(--button2)]"
+                >
+                  {isSubmitting ? "Sending..." : "Send Message"}
+                </Button>
+              </form>
+            </Form>
+          </ClickSpark>
         </div>
       </MagicCard>
     </div>

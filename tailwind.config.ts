@@ -17,12 +17,21 @@ export default {
       "2xl": "1536px",
     },
     extend: {
+      animation: {
+        shine: "shine 5s linear infinite",
+      },
       colors: {
         border: "var(--border)",
         input: "var(--input)",
         ring: "var(--ring)",
         background: "var(--background)",
         foreground: "var(--foreground)",
+        keyframes: {
+          shine: {
+            "0%": { "background-position": "100%" },
+            "100%": { "background-position": "-100%" },
+          },
+        },
         primary: {
           DEFAULT: "var(--primary)",
           foreground: "var(--primary-foreground)",

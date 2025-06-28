@@ -1,10 +1,10 @@
 "use client";
 
+import { ScrollEffect } from "@/lib/animations";
+import { Briefcase, Loader2 } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Badge } from "../ui/badge";
-import Link from "next/link";
-import { Briefcase, Loader2 } from "lucide-react";
-import { ScrollEffect } from "@/lib/animations";
 
 interface Experience {
   _id: string;
@@ -63,7 +63,7 @@ export function ExperienceTimeline() {
   const formatDateRange = (
     startDate: string,
     endDate?: string,
-    current?: boolean,
+    current?: boolean
   ) => {
     const start = new Date(startDate);
     const startFormatted = start.toLocaleDateString("en-US", {
@@ -201,7 +201,7 @@ export function ExperienceTimeline() {
                 {formatDateRange(
                   experience.startDate,
                   experience.endDate,
-                  experience.current,
+                  experience.current
                 )}
               </div>
 

@@ -12,6 +12,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import GooeyNav from "../ui/GooeyNav";
 import { ThemeToggle } from "../ui/theme-toggle";
 import Logo from "./Logo";
 
@@ -54,10 +55,10 @@ export default function Navbar() {
     path.startsWith("/admin");
 
   const navItems = [
-    { name: "Work", path: "/#work", icon: Briefcase },
-    { name: "Projects", path: "/projects", icon: FolderGit2 },
-    { name: "Post", path: "/posts", icon: LucideFileSpreadsheet },
-    { name: "Say Hi", path: "/contact", icon: MessageCircleCode },
+    { label: "Work", href: "/#work", icon: Briefcase },
+    { label: "Projects", href: "/projects", icon: FolderGit2 },
+    { label: "Post", href: "/posts", icon: LucideFileSpreadsheet },
+    { label: "Say Hi", href: "/contact", icon: MessageCircleCode },
   ];
 
   return (
@@ -67,12 +68,12 @@ export default function Navbar() {
           dir="ltr"
           id="navbar"
           transition={{ duration: 0.5 }}
-          className="container mb-8 max-md:bg-[var(--background)] max-md:z-40 mx-auto z-40 flex items-center justify-between gap-5 rounded-full border border-[var(--border)] max-md:border-t-0 max-md:border-x-0 bg-[var(--mobile-nav)] px-5 text-base backdrop-blur-lg max-md:fixed max-md:left-0 max-md:right-0 max-md:top-0 max-md:w-full max-md:rounded-none max-md:px-3 sm:px-6 md:mt-4 max-[900]:hidden shadow-sm"
+          className="container mb-8 max-md:bg-[var(--background)] max-md:z-40 mx-auto z-40 flex items-center justify-between gap-5 rounded-full border border-[var(--border)] max-md:border-t-0 max-md:border-x-0 bg-[var(--mobile-nav)] px-5 text-base backdrop-blur-lg max-md:fixed max-md:left-0 max-md:right-0 max-md:top-0 max-md:w-full max-md:rounded-none max-md:px-3 sm:px-6 md:mt-4 max-[900px]:hidden shadow-sm"
         >
           <div className="container mx-auto px-0">
             <div className="flex h-16 items-center justify-between max-md:flex-wrap">
               <Link
-                href={"/"}
+                href="/"
                 className="flex-shrink-0 hover:opacity-80 transition-opacity"
               >
                 <Logo />
@@ -83,23 +84,32 @@ export default function Navbar() {
                   dir="ltr"
                   className="flex h-full items-center justify-center gap-8"
                 >
-                  {navItems.map((item, index) => (
+                  {/* <GooeyNav
+                    items={navItems}
+                    particleCount={15}
+                    particleDistances={[90, 10]}
+                    particleR={100}
+                    initialActiveIndex={0}
+                    animationTime={600}
+                    timeVariance={300}
+                    colors={[1, 2, 3, 1, 2, 3, 1, 4]}
+                  /> */}
+
+                  {navItems.map((item) => (
                     <motion.div
                       className="relative flex h-full items-center justify-center max-md:hidden"
-                      key={item.name}
+                      key={item.href}
                     >
                       <Link
-                        href={item.path}
+                        href={item.href}
                         className={`${styles.link} ${
-                          path === item.path ? "text-[var(--headline)]" : ""
-                        } hover:text-[var(--headline)] transition-colors duration-300`}
+                          path === item.href ? "text-[var(--headline)]" : ""
+                        } transition-colors duration-300`}
                       >
-                        <item.icon
-                          className={`${styles.icon} transition-transform duration-300 group-hover:scale-110`}
-                        />
-                        <span>{item.name}</span>
+                        <item.icon className={styles.icon} />
+                        <span>{item.label}</span>
                       </Link>
-                      {path === item.path && (
+                      {path === item.href && (
                         <motion.div
                           className={styles.activeIndicator}
                           layoutId="activeIndicator"
@@ -117,7 +127,6 @@ export default function Navbar() {
                 <ThemeToggle />
               </div>
 
-              {/* Mobile menu toggle */}
               <div className="flex items-center max-md:flex-wrap gap-3 justify-center md:hidden">
                 <ThemeToggle />
 
@@ -136,7 +145,6 @@ export default function Navbar() {
                 </motion.button>
               </div>
 
-              {/* Mobile menu */}
               <AnimatePresence>
                 {isMobileMenuOpen && (
                   <motion.div
@@ -148,7 +156,7 @@ export default function Navbar() {
                   >
                     <div className="absolute top-0 left-0 w-full flex justify-between items-center p-4">
                       <Link
-                        href={"/"}
+                        href="/"
                         className="flex-shrink-0"
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
@@ -166,19 +174,18 @@ export default function Navbar() {
                     <div className="flex flex-col items-center space-y-6 w-full px-8">
                       {navItems.map((item, index) => (
                         <motion.div
-                          key={item.name}
+                          key={item.href}
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: index * 0.1 }}
                           className="w-full"
                         >
                           <Link
-                            href={item.path}
+                            href={item.href}
                             className="flex items-center justify-center gap-3 py-3 px-4 rounded-[12px] hover:bg-[var(--card-background)] transition-colors text-[var(--headline)] text-xl font-bold"
                             onClick={() => setIsMobileMenuOpen(false)}
                           >
-                            {/* <item.icon className="h-5 w-5 text-[var(--link-color)]" /> */}
-                            {item.name}
+                            {item.label}
                           </Link>
                         </motion.div>
                       ))}

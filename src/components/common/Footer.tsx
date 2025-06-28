@@ -165,7 +165,7 @@ export default function Footer() {
             {/* Bottom Section */}
             <motion.div
               variants={itemVariants}
-              className=" border-[var(--footer-border-color)] pt-8"
+              className=" border-[var(--footer-border-color)] "
             >
               <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                 {/* Copyright & Credits */}
@@ -176,10 +176,6 @@ export default function Footer() {
                       {displayContent.content.copyright}
                     </span>
                   </div>
-                  <Separator
-                    orientation="vertical"
-                    className="hidden md:block h-4"
-                  />
                 </div>
 
                 {/* Action Buttons */}

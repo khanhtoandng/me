@@ -27,8 +27,8 @@ export default function ProjectsPage() {
       <div className="projectCards flex min-h-[100vh] w-full flex-col gap-5 max-md:pb-0 max-md:pt-[50px]">
         <div className="header">
           <h1 className="header-title">Projects</h1>
-          <p className="description max-w-[100%]">
-            I have worked on a variety of projects, here are some of the ones
+          <p className="description ">
+            I have worked on a variety of projects, br here are some of the ones
             I'm particularly proud of.
           </p>
           <div className="py-5 flex justify-between items-center w-full">

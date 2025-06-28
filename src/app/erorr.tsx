@@ -1,20 +1,37 @@
 "use client";
 
+import { Button } from "@/components/ui";
+import FuzzyText from "@/components/ui/FuzzyText";
 import { RandomizedTextEffect } from "@/components/ui/text-randomized";
+import Link from "next/link";
+import { IoArrowBack } from "react-icons/io5";
 
 export default function ErrorPage() {
   return (
-    <div className="  relative h-[50vh] flex justify-center items-center w-full ">
-      <div className="flex flex-col m-auto absolute items-center justify-center">
-        <RandomizedTextEffect
-          className="mt-6 text-2xl font-bold tracking-tight text-[var(--headline)] sm:text-4xl"
-          text={"403 | Erorr"}
-        />
+    <div className="fixed inset-0 z-50 flex h-screen w-screen flex-col items-center justify-center bg-[var(--background)]">
+      <div className="flex flex-col items-center justify-center text-center">
+        <FuzzyText
+          fontSize={50}
+          baseIntensity={0.2}
+          hoverIntensity={2}
+          enableHover={false}
+        >
+          403 | Forbidden
+        </FuzzyText>
 
         <RandomizedTextEffect
-          className="mt-4 text-[var(--paragraph)]"
-          text={"Some error text"}
+          className="mt-4 text-xl text-[var(--paragraph)]"
+          text={"You don’t have permission to access this page."}
         />
+
+        <div className="mt-8 w-max">
+          <Link href="/">
+            <Button>
+              <IoArrowBack />
+              <span>Back To HomePage</span>
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   );
