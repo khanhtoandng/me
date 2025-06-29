@@ -1,16 +1,16 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
-import { Toaster } from "sonner";
-import Navbar from "@/components/common/Navbar";
 import Footer from "@/components/common/Footer";
-import { domain, email, webImage, websitePath } from "@/data/Links";
+import Navbar from "@/components/common/Navbar";
+import { ThemeProvider } from "@/components/theme-provider";
 import BackgroundEffect from "@/components/ui/backgroundEffect";
+import { CustomDialogProvider } from "@/components/ui/custom-dialog";
 import FloatingActionButton from "@/components/ui/FloatingActionButton";
+import { domain, email, webImage, websitePath } from "@/data/Links";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { ThemeProvider } from "@/components/theme-provider";
-import { CustomDialogProvider } from "@/components/ui/custom-dialog";
+import { Toaster } from "sonner";
 
 // Define keywords for better SEO
 const keywords = [
@@ -119,6 +119,7 @@ export default function RootLayout({
       <head>
         {/* Add preconnect for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <meta name="apple-mobile-web-app-title" content="Baraa" />
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"

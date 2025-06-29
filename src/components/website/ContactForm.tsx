@@ -214,7 +214,7 @@ export default function ContactForm() {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-[var(--button)] text-[var(--button-text)] hover:bg-[var(--button2)]"
+                  className="w-max bg-[var(--button)] text-[var(--button-text)] hover:bg-[var(--button2)]"
                 >
                   {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>

@@ -73,7 +73,7 @@ export function MagicCard({
       ref={cardRef}
       data-aos="fade-up"
       className={cn(
-        "group relative flex size-full overflow-hidden rounded-xl border border-[var(--card-border-color)] bg-[var(--card-background)] transition-all duration-300 hover-lift",
+        "group relative flex size-full overflow-hidden rounded-xl border border-[var(--card-border-color)] bg-[var(--card-background)] transition-all duration-300 ",
         className
       )}
     >

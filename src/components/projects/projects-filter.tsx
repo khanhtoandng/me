@@ -1,12 +1,11 @@
 "use client";
 
-import type React from "react";
-import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { UnifiedSearchInput } from "@/components/ui/unified-search-input";
 import { Filter } from "lucide-react";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 
 export function ProjectsFilter() {
   const router = useRouter();

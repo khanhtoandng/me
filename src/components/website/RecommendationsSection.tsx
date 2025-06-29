@@ -1,12 +1,11 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import { MagicCard } from "../ui/MagicCard";
-import { ScrollEffect } from "@/lib/animations";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { MessageSquareQuote } from "lucide-react";
-import { useFeaturedRecommendations } from "@/hooks/use-recommendations";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useFeaturedRecommendations } from "@/hooks/use-recommendations";
+import { ScrollEffect } from "@/lib/animations";
+import { cn } from "@/lib/utils";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { MagicCard } from "../ui/MagicCard";
 
 const RecommendationsSection = () => {
   const { recommendations, loading, error } = useFeaturedRecommendations();
@@ -25,7 +24,6 @@ const RecommendationsSection = () => {
         <ScrollEffect type="fadeIn">
           <div className="section-header mb-8">
             <h2 className="section-title flex items-center gap-2">
-              <MessageSquareQuote className="h-6 w-6 text-[var(--link-color)]" />
               Recommendations
             </h2>
             <p className="description">
@@ -71,7 +69,6 @@ const RecommendationsSection = () => {
         <ScrollEffect type="fadeIn">
           <div className="section-header mb-8">
             <h2 className="section-title flex items-center gap-2">
-              <MessageSquareQuote className="h-6 w-6 text-[var(--link-color)]" />
               Recommendations
             </h2>
             <p className="description">
@@ -90,7 +87,6 @@ const RecommendationsSection = () => {
       <ScrollEffect type="fadeIn">
         <div className="section-header mb-8">
           <h2 className="section-title flex items-center gap-2">
-            <MessageSquareQuote className="h-6 w-6 text-[var(--link-color)]" />
             Recommendations
           </h2>
           <p className="description">

@@ -1,7 +1,7 @@
 "use client";
 
 import { ScrollEffect } from "@/lib/animations";
-import { Briefcase, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Badge } from "../ui/badge";
@@ -105,7 +105,6 @@ export function ExperienceTimeline() {
         <ScrollEffect type="fadeIn">
           <div className="section-header mb-8">
             <h2 className="section-title flex items-center gap-2">
-              <Briefcase className="h-6 w-6 text-[var(--link-color)]" />
               Work Experience
             </h2>
             <p className="description">
@@ -130,7 +129,6 @@ export function ExperienceTimeline() {
         <ScrollEffect type="fadeIn">
           <div className="section-header mb-8">
             <h2 className="section-title flex items-center gap-2">
-              <Briefcase className="h-6 w-6 text-[var(--link-color)]" />
               Work Experience
             </h2>
             <p className="description">
@@ -155,7 +153,6 @@ export function ExperienceTimeline() {
         <ScrollEffect type="fadeIn">
           <div className="section-header mb-8">
             <h2 className="section-title flex items-center gap-2">
-              <Briefcase className="h-6 w-6 text-[var(--link-color)]" />
               Work Experience
             </h2>
             <p className="description">
@@ -180,7 +177,6 @@ export function ExperienceTimeline() {
       <ScrollEffect type="fadeIn">
         <div className="section-header mb-8">
           <h2 className="section-title flex items-center gap-2">
-            <Briefcase className="h-6 w-6 text-[var(--link-color)]" />
             Work Experience
           </h2>
           <p className="description">
@@ -192,12 +188,11 @@ export function ExperienceTimeline() {
       <div className="space-y-8">
         {experiences.map((experience, index) => (
           <ScrollEffect key={experience._id} type="fadeUp">
-            <div className="relative pl-8 border-l-2 border-[var(--card-border-color)] last:border-l-0">
+            <div className="relative  border-l-2 border-[var(--card-border-color)] last:border-l-0">
               {/* Timeline dot */}
-              <div className="absolute -left-2 top-0 w-4 h-4 bg-[var(--link-color)] rounded-full border-2 border-[var(--background)]"></div>
 
               {/* Date */}
-              <div className="text-sm text-[var(--link-color)] font-medium mb-2">
+              <div className="text-sm text-[var(--headline)] font-medium mb-2">
                 {formatDateRange(
                   experience.startDate,
                   experience.endDate,
@@ -217,7 +212,7 @@ export function ExperienceTimeline() {
                         <Link
                           href={experience.companyUrl}
                           target="_blank"
-                          className="text-[var(--link-color)] hover:underline"
+                          className="text-[var(--headline)] hover:underline"
                         >
                           {experience.company}
                         </Link>

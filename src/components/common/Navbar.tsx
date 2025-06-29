@@ -1,30 +1,15 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  Briefcase,
-  FolderGit2,
-  LucideFileSpreadsheet,
-  Menu,
-  MessageCircleCode,
-  X,
-} from "lucide-react";
+import { Menu, MessageCircle, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import GooeyNav from "../ui/GooeyNav";
-import { ThemeToggle } from "../ui/theme-toggle";
 import Logo from "./Logo";
 
 const styles = {
-  link: "text-[var(--headline)] hover:text-[var(--headline)] flex gap-[5px] hoverd rounded-md text-sm font-medium items-center py-2",
-  icon: "h-4 w-4",
-  dropdownItem:
-    "flex items-center w-full h-full p-2 text-[var(--headline)] justify-center text-center rounded-md",
-  navMenu:
-    "text-[var(--headline)] cursor-pointer h-full flex justify-center items-center",
-  activeIndicator:
-    "absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-zinc-400/0 via-zinc-400/40 to-zinc-400/0",
+  link: "text-[var(--headline)] hover:text-[var(--headline)] flex gap-[5px] rounded-md text-sm font-medium items-center py-2 relative",
+  activeIndicator: "",
 };
 
 const iconAnimationVariants = {
@@ -55,10 +40,10 @@ export default function Navbar() {
     path.startsWith("/admin");
 
   const navItems = [
-    { label: "Work", href: "/#work", icon: Briefcase },
-    { label: "Projects", href: "/projects", icon: FolderGit2 },
-    { label: "Post", href: "/posts", icon: LucideFileSpreadsheet },
-    { label: "Say Hi", href: "/contact", icon: MessageCircleCode },
+    { label: "Home", href: "/" },
+    { label: "Work", href: "/#work" },
+    { label: "Projects", href: "/projects" },
+    { label: "Post", href: "/posts" },
   ];
 
   return (
@@ -68,7 +53,7 @@ export default function Navbar() {
           dir="ltr"
           id="navbar"
           transition={{ duration: 0.5 }}
-          className="container mb-8 max-md:bg-[var(--background)] max-md:z-40 mx-auto z-40 flex items-center justify-between gap-5 rounded-full border border-[var(--border)] max-md:border-t-0 max-md:border-x-0 bg-[var(--mobile-nav)] px-5 text-base backdrop-blur-lg max-md:fixed max-md:left-0 max-md:right-0 max-md:top-0 max-md:w-full max-md:rounded-none max-md:px-3 sm:px-6 md:mt-4 max-[900px]:hidden shadow-sm"
+          className="container mb-8 max-md:bg-[var(--background)] max-md:z-40 mx-auto z-40 flex items-center justify-between gap-5 rounded-full border border-[var(--border)] max-md:border-t-0 max-md:border-x-0 bg-[var(--mobile-nav)] px-5 text-base backdrop-blur-lg max-md:fixed max-md:left-0 max-md:right-0 max-md:top-0 max-md:w-full max-md:rounded-none max-md:px-3 sm:px-6 md:mt-4 shadow-sm"
         >
           <div className="container mx-auto px-0">
             <div className="flex h-16 items-center justify-between max-md:flex-wrap">
@@ -84,29 +69,12 @@ export default function Navbar() {
                   dir="ltr"
                   className="flex h-full items-center justify-center gap-8"
                 >
-                  {/* <GooeyNav
-                    items={navItems}
-                    particleCount={15}
-                    particleDistances={[90, 10]}
-                    particleR={100}
-                    initialActiveIndex={0}
-                    animationTime={600}
-                    timeVariance={300}
-                    colors={[1, 2, 3, 1, 2, 3, 1, 4]}
-                  /> */}
-
                   {navItems.map((item) => (
                     <motion.div
                       className="relative flex h-full items-center justify-center max-md:hidden"
                       key={item.href}
                     >
-                      <Link
-                        href={item.href}
-                        className={`${styles.link} ${
-                          path === item.href ? "text-[var(--headline)]" : ""
-                        } transition-colors duration-300`}
-                      >
-                        <item.icon className={styles.icon} />
+                      <Link href={item.href} className={styles.link}>
                         <span>{item.label}</span>
                       </Link>
                       {path === item.href && (
@@ -123,12 +91,28 @@ export default function Navbar() {
                 </div>
               </div>
 
+              {/* Say Hi link with icon and hover effect */}
               <div className="flex h-full items-center justify-center gap-4 max-md:hidden max-md:gap-2">
-                <ThemeToggle />
+                <Link
+                  href="/contact"
+                  className={
+                    "text-[var(--headline)] hover:text-[var(--headline)] flex gap-[5px] rounded-md text-sm font-medium items-center py-2 relative"
+                  }
+                >
+                  <MessageCircle className="h-5 w-5" />
+                  Say Hi
+                </Link>
               </div>
 
               <div className="flex items-center max-md:flex-wrap gap-3 justify-center md:hidden">
-                <ThemeToggle />
+                {/* Say Hi link in mobile with icon */}
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-1 rounded-md bg-[var(--button)] px-3 py-1 text-[var(--button-text)] font-semibold shadow-md hover:bg-[var(--button-hover)] hover:shadow-lg transition duration-300 ease-in-out"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                  Say Hi
+                </Link>
 
                 <motion.button
                   className="text-[var(--headline)] p-2 rounded-full hover:bg-[var(--card-background)] transition-colors"

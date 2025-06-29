@@ -61,12 +61,12 @@ export default function HomePage() {
                 className="text-2xl md:text-3xl font-bold mb-4 "
               />
               <p className="text-[var(--paragraph)] mb-6 max-w-2xl mx-auto">
-                I'm always open to discussing new projects, creative ideas, or
+                I'm open to discussing new projects, creative ideas, or
                 opportunities to be part of your vision.
               </p>
               <Link
                 href={mailto}
-                className="inline-flex  items-center gap-2 px-6 py-3 rounded-full bg-[var(--link-color)] text-[var(--headline)] hover:bg-opacity-90 transition-all hover:translate-y-[-2px]"
+                className="inline-flex  items-center gap-2 px-6 py-3 rounded-full bg-[var(--button)] text-[var(--headline)] hover:bg-opacity-90 transition-all hover:translate-y-[-2px]"
               >
                 Get in Touch
                 <svg
