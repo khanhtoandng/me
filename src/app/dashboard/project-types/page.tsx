@@ -1,17 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { ProjectTypeForm } from "@/components/project-types/project-type-form";
+import { Skeleton } from "@/components/ui";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Plus, Edit, Trash2, Tag } from "lucide-react";
 import { useProjectTypes } from "@/hooks/use-project-types";
-import { ProjectTypeForm } from "@/components/project-types/project-type-form";
 import { useToast } from "@/hooks/use-toast";
-import * as FaIcons from "react-icons/fa";
+import { Edit, Plus, Tag, Trash2 } from "lucide-react";
+import { useState } from "react";
 import * as AiIcons from "react-icons/ai";
 import * as BiIcons from "react-icons/bi";
 import * as BsIcons from "react-icons/bs";
+import * as FaIcons from "react-icons/fa";
 import * as FiIcons from "react-icons/fi";
 import * as HiIcons from "react-icons/hi";
 import * as IoIcons from "react-icons/io";
@@ -19,7 +20,6 @@ import * as MdIcons from "react-icons/md";
 import * as RiIcons from "react-icons/ri";
 import * as SiIcons from "react-icons/si";
 import * as TiIcons from "react-icons/ti";
-import { Skeleton } from "@/components/ui";
 
 // Force dynamic rendering
 export const dynamic = "force-dynamic";
@@ -46,7 +46,7 @@ export default function ProjectTypesPage() {
 
   const renderIcon = (
     icon: { library: string; name: string },
-    color: string = "#3B82F6",
+    color: string = "#3B82F6"
   ) => {
     const library = iconLibraries[icon.library as keyof typeof iconLibraries];
     if (!library) return null;
@@ -69,7 +69,7 @@ export default function ProjectTypesPage() {
   const handleDelete = async (id: string, name: string) => {
     if (
       window.confirm(
-        `Are you sure you want to delete "${name}"? This action cannot be undone.`,
+        `Are you sure you want to delete "${name}"? This action cannot be undone.`
       )
     ) {
       try {
@@ -106,7 +106,7 @@ export default function ProjectTypesPage() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {[...Array(6)].map((_, i) => (
-            <Skeleton className="h-32" />
+            <Skeleton key={`loading-skeleton-${i}`} className="h-32" />
           ))}
         </div>
       </div>

@@ -35,8 +35,8 @@ const keywords = [
 export const metadata: Metadata = {
   metadataBase: new URL(`https://${domain}`),
   title: {
-    template: "balshaer - %s",
-    default: "balshaer",
+    template: "Baraa Alshaer - %s",
+    default: "Baraa Alshaer",
   },
   description:
     "Portfolio of Baraa Alshaer, a skilled Full Stack Developer with expertise in React, Node.js, TypeScript, and more. Creating impactful web applications with a focus on user experience and modern technologies.",

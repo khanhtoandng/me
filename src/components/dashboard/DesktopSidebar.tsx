@@ -1,11 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
-import { toast } from "sonner";
 import { useAuth } from "@/contexts/auth-context";
 import { motion } from "framer-motion";
 import {
+  BookOpen,
   ChevronLeft,
   ChevronRight,
   FileText,
@@ -16,13 +14,19 @@ import {
   Settings,
   Sparkles,
   Star,
-  User,
-  BookOpen,
   Tags,
+  User,
 } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
+import { toast } from "sonner";
 import { Button } from "../ui/button";
 
-export function DesktopSidebar() {
+interface DesktopSidebarProps {
+  className?: string;
+}
+
+export function DesktopSidebar({ className = "" }: DesktopSidebarProps) {
   const router = useRouter();
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
@@ -64,7 +68,7 @@ export function DesktopSidebar() {
   };
 
   return (
-    <div className="hidden md:flex">
+    <div className={`hidden md:flex ${className}`}>
       <motion.div
         className={`h-screen relative z-50 bg-[var(--card-background)] border-r border-[var(--card-border-color)] flex flex-col ${
           collapsed ? "w-[80px]" : "w-[240px] lg:w-[280px]"
