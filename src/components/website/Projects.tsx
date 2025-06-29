@@ -8,7 +8,7 @@ import { ScrollEffect } from "@/lib/animations";
 import { AnimatePresence, motion } from "framer-motion";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
@@ -38,35 +38,8 @@ const mapProjectToComponentFormat = (project: Project) => ({
 });
 
 function ProjectImageWithBg({ images }: { images: string[] }) {
-  const [bgColor, setBgColor] = useState<string>("rgba(0,0,0,0.1)");
-
-  useEffect(() => {
-    if (!images.length) return;
-
-    import("color-thief-browser").then(({ default: ColorThief }) => {
-      const img = new Image();
-      img.crossOrigin = "anonymous";
-      img.src = images[0];
-      img.onload = () => {
-        const colorThief = new ColorThief();
-        try {
-          const [r, g, b] = colorThief.getColor(img);
-          setBgColor(`rgba(${r},${g},${b},0.3)`);
-        } catch {
-          setBgColor("rgba(0,0,0,0.1)");
-        }
-      };
-    });
-  }, [images]);
-
   return (
     <div className="relative rounded-xl overflow-hidden w-full max-w-[90%] mx-auto">
-      <div
-        className="absolute inset-0 blur-3xl opacity-50"
-        style={{
-          background: `radial-gradient(circle at center, ${bgColor}, transparent)`,
-        }}
-      />
       <Carousel
         showThumbs={false}
         showStatus={false}
@@ -210,7 +183,6 @@ export default function Projects({ filterType = "all" }: ProjectsProps) {
                   >
                     {isPreviewShown ? <EyeOff size={16} /> : <Eye size={16} />}
                   </motion.span>
-                  {/* {isPreviewShown ? "Hide Preview" : "Show Preview"} */}
                 </Button>
               )}
 
@@ -238,7 +210,6 @@ export default function Projects({ filterType = "all" }: ProjectsProps) {
                   websiteLink={project.links.website}
                   githubLink={project.links.github}
                   linkStyle={styles.linkStyle}
-                  hideImage
                 />
 
                 {links.length > 0 && (
