@@ -135,7 +135,6 @@ export default function Projects({ filterType = "all" }: ProjectsProps) {
     return (
       <div className="projects-cards flex flex-col gap-8 pb-16">
         <div className="flex items-center justify-center py-12 text-center">
-          <p className="text-[var(--paragraph)] mb-2">No projects found</p>
           <p className="text-[var(--paragraph)] text-sm opacity-70">
             {filterType.toLowerCase() === "all"
               ? "No projects have been published yet."

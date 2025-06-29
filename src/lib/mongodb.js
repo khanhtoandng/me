@@ -44,14 +44,14 @@ async function dbConnect() {
       .connect(primaryURI, opts)
       .then((mongoose) => {
         console.log(
-          `Connected to ${isProduction ? "MongoDB Atlas" : "local MongoDB"}`,
+          `Connected to ${isProduction ? "MongoDB Atlas" : "local MongoDB"}`
         );
         return mongoose;
       })
       .catch((primaryErr) => {
         console.warn(
           `${isProduction ? "Atlas" : "Local"} MongoDB connection failed, trying ${isProduction ? "local" : "Atlas"}:`,
-          primaryErr.message,
+          primaryErr.message
         );
 
         // If primary connection fails, try fallback
@@ -59,7 +59,7 @@ async function dbConnect() {
           .connect(fallbackURI, opts)
           .then((mongoose) => {
             console.log(
-              `Connected to ${isProduction ? "local MongoDB" : "MongoDB Atlas"}`,
+              `Connected to ${isProduction ? "local MongoDB" : "MongoDB Atlas"}`
             );
             // Update the URI for future connections
             MONGODB_URI = fallbackURI;
@@ -69,11 +69,11 @@ async function dbConnect() {
             console.error("Both MongoDB connections failed:");
             console.error(
               `${isProduction ? "Atlas" : "Local"} error:`,
-              primaryErr.message,
+              primaryErr.message
             );
             console.error(
               `${isProduction ? "Local" : "Atlas"} error:`,
-              fallbackErr.message,
+              fallbackErr.message
             );
 
             // During build time, we might not have database access
@@ -82,7 +82,7 @@ async function dbConnect() {
               process.env.NEXT_PHASE === "phase-production-build"
             ) {
               console.warn(
-                "Database connection failed during build - this is expected for static generation",
+                "Database connection failed during build - this is expected for static generation"
               );
               throw new Error("Database not available during build");
             }
