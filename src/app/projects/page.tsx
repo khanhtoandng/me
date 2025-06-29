@@ -7,8 +7,6 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import Projects from "@/components/website/Projects";
-import ProjectTypeSelect from "@/components/website/ProjectTypeSelect";
-import { SocialLinksDisplay } from "@/components/common/SocialLinksDisplay";
 import { useState } from "react";
 
 export default function ProjectsPage() {
@@ -51,7 +49,7 @@ export default function ProjectsPage() {
               </BreadcrumbList>
             </Breadcrumb>
 
-            <ProjectTypeSelect onSelect={(value) => setFilterType(value)} />
+            {/* <ProjectTypeSelect onSelect={(value) => setFilterType(value)} /> */}
           </div>
         </div>
 
