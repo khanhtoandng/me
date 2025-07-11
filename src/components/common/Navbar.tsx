@@ -108,7 +108,7 @@ export default function Navbar() {
                 {/* Say Hi link in mobile with icon */}
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-1 rounded-md bg-[var(--button)] px-3 py-1 text-[var(--button-text)] font-semibold shadow-md hover:bg-[var(--button-hover)] hover:shadow-lg transition duration-300 ease-in-out"
+                  className="inline-flex items-center gap-1 bg-[var(--button)] rounded-[12px] px-3 py-1 text-[var(--button-text)] font-semibold shadow-md hover:bg-[var(--button-hover)] hover:shadow-lg transition duration-300 ease-in-out"
                 >
                   <MessageCircle className="h-4 w-4" />
                   Say Hi

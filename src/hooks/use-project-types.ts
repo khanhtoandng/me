@@ -1,20 +1,7 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-
-export interface ProjectType {
-  _id: string;
-  name: string;
-  description: string;
-  icon: {
-    library: string;
-    name: string;
-  };
-  color: string;
-  isActive: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
+import { projectTypesData, type ProjectType } from "@/data";
+import { useCallback, useEffect, useState } from "react";
 
 interface UseProjectTypesOptions {
   active?: boolean;
@@ -28,13 +15,13 @@ interface UseProjectTypesReturn {
   createProjectType: (data: Partial<ProjectType>) => Promise<ProjectType>;
   updateProjectType: (
     id: string,
-    data: Partial<ProjectType>,
+    data: Partial<ProjectType>
   ) => Promise<ProjectType>;
   deleteProjectType: (id: string) => Promise<void>;
 }
 
 export function useProjectTypes(
-  options: UseProjectTypesOptions = {},
+  options: UseProjectTypesOptions = {}
 ): UseProjectTypesReturn {
   const [projectTypes, setProjectTypes] = useState<ProjectType[]>([]);
   const [loading, setLoading] = useState(true);
@@ -45,22 +32,27 @@ export function useProjectTypes(
       setLoading(true);
       setError(null);
 
-      const params = new URLSearchParams();
+      // Simulate loading delay for better UX
+      await new Promise((resolve) => setTimeout(resolve, 300));
+
+      let filteredData = [...projectTypesData];
+
+      // Apply filters
       if (options.active !== undefined) {
-        params.append("active", options.active.toString());
+        filteredData = filteredData.filter(
+          (type) => type.isActive === options.active
+        );
       }
 
-      const url = `/api/project-types${params.toString() ? `?${params.toString()}` : ""}`;
-      const response = await fetch(url);
-      const data = await response.json();
+      // Sort by creation date
+      filteredData.sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      );
 
-      if (data.success) {
-        setProjectTypes(data.data);
-      } else {
-        throw new Error(data.error || "Failed to fetch project types");
-      }
+      setProjectTypes(filteredData);
     } catch (err) {
-      console.error("Error fetching project types:", err);
+      console.error("Error loading project types:", err);
       setError(err instanceof Error ? err.message : "An error occurred");
       setProjectTypes([]);
     } finally {
@@ -70,64 +62,30 @@ export function useProjectTypes(
 
   const createProjectType = useCallback(
     async (data: Partial<ProjectType>): Promise<ProjectType> => {
-      const response = await fetch("/api/project-types", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      const result = await response.json();
-
-      if (!result.success) {
-        throw new Error(result.error || "Failed to create project type");
-      }
-
-      await fetchProjectTypes();
-      return result.data;
+      // In a static app, we can't actually create project types
+      // This is just for compatibility with existing code
+      console.warn("Project type creation is not supported in static mode");
+      throw new Error("Project type creation is not supported in static mode");
     },
-    [fetchProjectTypes],
+    []
   );
 
   const updateProjectType = useCallback(
     async (id: string, data: Partial<ProjectType>): Promise<ProjectType> => {
-      const response = await fetch(`/api/project-types/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      const result = await response.json();
-
-      if (!result.success) {
-        throw new Error(result.error || "Failed to update project type");
-      }
-
-      await fetchProjectTypes();
-      return result.data;
+      // In a static app, we can't actually update project types
+      // This is just for compatibility with existing code
+      console.warn("Project type updates are not supported in static mode");
+      throw new Error("Project type updates are not supported in static mode");
     },
-    [fetchProjectTypes],
+    []
   );
 
-  const deleteProjectType = useCallback(
-    async (id: string): Promise<void> => {
-      const response = await fetch(`/api/project-types/${id}`, {
-        method: "DELETE",
-      });
-
-      const result = await response.json();
-
-      if (!result.success) {
-        throw new Error(result.error || "Failed to delete project type");
-      }
-
-      await fetchProjectTypes();
-    },
-    [fetchProjectTypes],
-  );
+  const deleteProjectType = useCallback(async (id: string): Promise<void> => {
+    // In a static app, we can't actually delete project types
+    // This is just for compatibility with existing code
+    console.warn("Project type deletion is not supported in static mode");
+    throw new Error("Project type deletion is not supported in static mode");
+  }, []);
 
   useEffect(() => {
     fetchProjectTypes();

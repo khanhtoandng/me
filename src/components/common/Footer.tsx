@@ -172,7 +172,6 @@ export default function Footer() {
                 <div className="flex flex-col md:flex-row items-center gap-4 text-sm text-[var(--paragraph)]">
                   <div className="flex items-center gap-2">
                     <span>
-                      &copy; {currentYear} {displayContent.title}.{" "}
                       {displayContent.content.copyright}
                     </span>
                   </div>

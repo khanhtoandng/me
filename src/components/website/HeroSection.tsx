@@ -17,7 +17,7 @@ import * as RiIcons from "react-icons/ri";
 import * as SiIcons from "react-icons/si";
 import * as TiIcons from "react-icons/ti";
 import { annotate } from "rough-notation";
-// University link constant
+
 const ALAZHAR_URL = "https://www.alazhar.edu.ps";
 
 const iconLibraries = {
@@ -39,20 +39,15 @@ function HeroSection() {
   const { content: heroContent, loading } = useContent("hero");
   const { socialLinks, loading: socialLoading } = useSocialLinks(true);
 
-  // Get icon component
   const getIconComponent = (iconName: string, library: string) => {
     const iconLib = iconLibraries[library as keyof typeof iconLibraries];
     if (!iconLib) return null;
-
     const IconComponent = iconLib[iconName as keyof typeof iconLib];
     if (!IconComponent) return null;
-
-    // Type assertion for React component
     const Icon = IconComponent as React.ComponentType<{ className?: string }>;
     return <Icon className="h-4 w-4" />;
   };
 
-  // Default content fallback
   const defaultContent = {
     title: "Baraa Alshaer",
     subtitle: "software engineer | Full-Stack Developer",
@@ -65,13 +60,10 @@ function HeroSection() {
     },
   };
 
-  // Use dynamic content or fallback to default
   const displayContent = heroContent || defaultContent;
 
   useEffect(() => {
-    // Only run the annotation once when the component mounts
     let annotation: any;
-
     if (highlightedWordRef.current) {
       annotation = annotate(highlightedWordRef.current, {
         type: "underline",
@@ -79,13 +71,9 @@ function HeroSection() {
         padding: 0,
         strokeWidth: 1,
       });
-
-      // Show the annotation with a slight delay for better performance
       const timer = setTimeout(() => {
         annotation.show();
       }, 100);
-
-      // Clean up
       return () => {
         clearTimeout(timer);
         if (annotation) annotation.remove();
@@ -98,11 +86,8 @@ function HeroSection() {
       <div className="header-content">
         {loading ? (
           <>
-            {/* Title Skeleton */}
             <Skeleton className="h-12 w-[300px] mb-4 max-md:w-[250px]" />
-            {/* Subtitle Skeleton */}
             <Skeleton className="h-6 w-[400px] mb-6 max-md:w-[300px]" />
-            {/* Content Paragraphs Skeleton */}
             <div className="space-y-4">
               <Skeleton className="h-4 w-full" />
               <Skeleton className="h-4 w-[90%]" />
@@ -123,15 +108,14 @@ function HeroSection() {
           <>
             <h1 className="header-title">{displayContent.title}</h1>
             <h1 className="subtitle capitalize">{displayContent.subtitle}</h1>
-            {displayContent.content.paragraphs?.map(
+            {(displayContent.content?.paragraphs || []).map(
               (paragraph: string, index: number) => {
                 if (index === 0) {
-                  // First paragraph with highlighted text and university link
                   const parts = paragraph.split("Al-Azhar University");
                   return (
                     <p
                       key={index}
-                      className=" w-full  py-2 text-base text-[var(--paragraph)] max-md:max-w-none leading-relaxed max-w-full"
+                      className="w-full py-2 text-base text-[var(--paragraph)] leading-relaxed max-md:max-w-none"
                     >
                       {parts[0].includes("Full-Stack Developer") ? (
                         <>
@@ -154,7 +138,7 @@ function HeroSection() {
                 return (
                   <p
                     key={index}
-                    className=" w-full  py-2 text-base text-[var(--paragraph)] max-md:max-w-none leading-relaxed max-w-full"
+                    className="w-full py-2 text-base text-[var(--paragraph)] leading-relaxed max-md:max-w-none"
                   >
                     {paragraph}
                   </p>
@@ -165,7 +149,6 @@ function HeroSection() {
         )}
       </div>
 
-      {/* Dynamic Social Links */}
       {socialLoading ? (
         <div className="flex items-start gap-4 py-[8px] max-md:w-full max-md:flex-col">
           {[...Array(4)].map((_, i) => (
@@ -218,5 +201,4 @@ function HeroSection() {
   );
 }
 
-// Memoize the component to prevent unnecessary re-renders
 export default memo(HeroSection);

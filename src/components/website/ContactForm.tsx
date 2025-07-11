@@ -49,57 +49,33 @@ export default function ContactForm() {
     setIsSubmitting(true);
 
     try {
-      // First, save to database
-      const response = await fetch("/api/messages", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          sender: data.name,
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+      const userId = process.env.NEXT_PUBLIC_EMAILJS_USER_ID;
+
+      if (!serviceId || !templateId || !userId) {
+        console.error("EmailJS configuration is missing");
+        toast.error("Email service is not configured. Please try again later.");
+        return;
+      }
+
+      const result = await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          name: data.name,
           email: data.email,
           subject: data.subject,
           message: data.message,
-        }),
-      });
+        },
+        userId
+      );
 
-      const result = await response.json();
-
-      if (result.success) {
-        // Also try to send email via EmailJS as backup
-        try {
-          const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-          const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-          const userId = process.env.NEXT_PUBLIC_EMAILJS_USER_ID;
-
-          if (serviceId && templateId && userId) {
-            await emailjs.send(
-              serviceId,
-              templateId,
-              {
-                name: data.name,
-                email: data.email,
-                subject: data.subject,
-                message: data.message,
-              },
-              userId
-            );
-            console.log("Email sent successfully via EmailJS");
-          }
-        } catch (emailError) {
-          console.error(
-            "EmailJS failed, but message was saved to database:",
-            emailError
-          );
-        }
-
-        form.reset();
-        toast.success("Message sent successfully! I'll get back to you soon.");
-      } else {
-        throw new Error(result.error || "Failed to send message");
-      }
+      console.log("Email sent successfully:", result.text);
+      form.reset();
+      toast.success("Message sent successfully! I'll get back to you soon.");
     } catch (error) {
-      console.error("Failed to send message:", error);
+      console.error("Failed to send email:", error);
       toast.error("Failed to send message. Please try again later.");
     } finally {
       setIsSubmitting(false);

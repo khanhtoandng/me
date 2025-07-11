@@ -1,20 +1,7 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-
-export interface Education {
-  _id: string;
-  degree: string;
-  institution: string;
-  location: string;
-  startDate: string;
-  endDate?: string;
-  current: boolean;
-  description: string;
-  achievements: string[];
-  createdAt: string;
-  updatedAt: string;
-}
+import { educationData, type Education } from "@/data";
+import { useCallback, useEffect, useState } from "react";
 
 interface UseEducationOptions {
   current?: boolean;
@@ -29,7 +16,7 @@ interface UseEducationReturn {
 }
 
 export function useEducation(
-  options: UseEducationOptions = {},
+  options: UseEducationOptions = {}
 ): UseEducationReturn {
   const [education, setEducation] = useState<Education[]>([]);
   const [loading, setLoading] = useState(true);
@@ -40,29 +27,32 @@ export function useEducation(
       setLoading(true);
       setError(null);
 
-      // Build query parameters
-      const params = new URLSearchParams();
+      // Simulate loading delay for better UX
+      await new Promise((resolve) => setTimeout(resolve, 300));
 
+      let filteredData = [...educationData];
+
+      // Apply filters
       if (options.current !== undefined) {
-        params.append("current", options.current.toString());
+        filteredData = filteredData.filter(
+          (edu) => edu.current === options.current
+        );
       }
 
+      // Apply limit
       if (options.limit) {
-        params.append("limit", options.limit.toString());
+        filteredData = filteredData.slice(0, options.limit);
       }
 
-      const url = `/api/education${params.toString() ? `?${params.toString()}` : ""}`;
+      // Sort by start date (newest first)
+      filteredData.sort(
+        (a, b) =>
+          new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
+      );
 
-      const response = await fetch(url);
-      const data = await response.json();
-
-      if (data.success) {
-        setEducation(data.data);
-      } else {
-        throw new Error(data.error || "Failed to fetch education");
-      }
+      setEducation(filteredData);
     } catch (err) {
-      console.error("Error fetching education:", err);
+      console.error("Error loading education:", err);
       setError(err instanceof Error ? err.message : "An error occurred");
       setEducation([]);
     } finally {

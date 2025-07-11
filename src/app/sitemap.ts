@@ -1,5 +1,7 @@
 import { MetadataRoute } from "next";
-import { websitePath } from "@/data/Links";
+
+// Required for static export
+export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://alshaer.vercel.app";
@@ -20,7 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
       priority: route.url === `${baseUrl}` ? 0.9 : 0.7,
-    })),
+    }))
   );
 
   return [...routes, ...localizedRoutes];

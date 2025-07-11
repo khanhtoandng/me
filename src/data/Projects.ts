@@ -10,85 +10,145 @@ const getFaviconUrl = (url: string | undefined): string => {
   }
 };
 
-export const ProjectsData = [
-  {
-    id: "samtax",
-    titleKey: "projects.samtax.title",
-    descriptionKey: "projects.samtax.description",
-    skills: ["React", "Tailwind CSS", "Shadcn UI"],
-    links: {
-      website: projects.samtax,
-    },
-    img: getFaviconUrl(projects.samtax),
-  },
+export interface Project {
+  _id: string;
+  title: string;
+  description: string;
+  projectType: string;
+  images: string[];
+  videoUrl?: string;
+  githubUrl?: string;
+  websiteUrl?: string;
+  technologies: string[];
+  featured: boolean;
+  status: "Draft" | "Published" | "Archived";
+  createdAt: string;
+  updatedAt: string;
+}
 
+export const projectsData: Project[] = [
   {
-    id: "gradients-css",
-    titleKey: "projects.gradientsCss.title",
-    descriptionKey: "projects.gradientsCss.description",
-    skills: [
-      "React JS",
-      "Typescript",
+    _id: "proj_1",
+    title: "Samtax",
+    description:
+      "A trusted tax and accounting platform providing expert tax preparation, financial planning, and business advisory services. Developed a secure, scalable web application with multi-language support, integrated payment systems, and AI-powered automation tools.",
+    projectType: "Web Application",
+    images: [],
+    websiteUrl: "https://sam-tax.com/",
+    githubUrl: "",
+    technologies: [
+      "React",
+      "TypeScript",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
       "Tailwind CSS",
-      "Github",
-      "Git",
-      "RESTful APIs",
+      "JWT",
+      "OAuth",
+      "GitHub Actions",
+      "Systems Design",
     ],
-    links: {
-      website: projects.gradientscss.website,
-      github: projects.gradientscss.github,
-    },
-    img: getFaviconUrl(projects.gradientscss.website),
+    featured: true,
+    status: "Published",
+    createdAt: "2024-06-01T00:00:00.000Z",
+    updatedAt: "2025-07-11T00:00:00.000Z",
   },
   {
-    id: "raouf-zadi",
-    titleKey: "projects.raoufzadi.title",
-    descriptionKey: "projects.raoufzadi.description",
-    skills: ["React JS", "Typescript", "Tailwind CSS", "Github", "Git"],
-    links: {
-      website: projects.raoufzadi,
-    },
-    img: getFaviconUrl(projects.raoufzadi),
-  },
-
-  {
-    id: "naj-training-center",
-    titleKey: "projects.najTrainingCenter.title",
-    descriptionKey: "projects.najTrainingCenter.description",
-    skills: ["React JS", "Javascript", "MIUI"],
-    links: {
-      website: projects.najcenter,
-    },
-    img: getFaviconUrl(projects.najcenter),
-  },
-  {
-    id: "rove",
-    titleKey: "projects.rove.title",
-    descriptionKey: "projects.rove.description",
-    skills: ["React", "Tailwind CSS", "Laravel", "MYSQL"],
-    links: {
-      github: projects.rove,
-    },
-    img: getFaviconUrl(undefined), // No website link available
+    _id: "proj_2",
+    title: "Rove E-commerce",
+    description:
+      "An e-commerce platform delivering seamless online shopping experiences. Combines modern UI, secure transactions, and scalable architecture to help businesses showcase products and grow sales effortlessly.",
+    projectType: "Web Application",
+    images: [],
+    websiteUrl: "",
+    githubUrl: projects.rove,
+    technologies: [
+      "JavaScript",
+      "React.js",
+      "Tailwind CSS",
+      "OAuth",
+      "JWT",
+      "OOP",
+      "Webpack",
+      "Laravel",
+      "PHP",
+      "REST APIs",
+      "GitHub Actions",
+    ],
+    featured: true,
+    status: "Published",
+    createdAt: "2023-05-01T00:00:00.000Z",
+    updatedAt: "2023-10-01T00:00:00.000Z",
   },
   {
-    id: "sustainable-star",
-    titleKey: "projects.sustainableStar.title",
-    descriptionKey: "projects.sustainableStar.description",
-    skills: ["React", "Tailwind CSS", "Material UI"],
-    links: {
-      website: projects.sustainablestar,
-    },
-    img: getFaviconUrl(projects.sustainablestar),
+    _id: "proj_3",
+    title: "SFP - Sustainable Star Form Builder",
+    description:
+      "A powerful, no-code form builder that lets you create, customize, and deploy smart forms in minutes. Designed for teams and creators who need flexible data collection without the technical headache.",
+    projectType: "SaaS Platform",
+    images: [],
+    websiteUrl: "https://sfb-app.com",
+    githubUrl: "",
+    technologies: [
+      "React.js",
+      "React DnD",
+      "TypeScript",
+      "Node.js",
+      "SaaS Architecture",
+      "Tailwind CSS",
+      "JWT",
+      "OAuth",
+      "REST APIs",
+      "UML",
+    ],
+    featured: true,
+    status: "Published",
+    createdAt: "2023-06-01T00:00:00.000Z",
+    updatedAt: "2023-11-30T00:00:00.000Z",
   },
   {
-    id: "bookstore-api",
-    titleKey: "projects.bookstoreApi.title",
-    descriptionKey: "projects.bookstoreApi.description",
-    skills: ["Node JS", "Express JS", "Mongoose DB"],
-    links: {
-      github: projects.bookstoreapi,
-    },
-    img: getFaviconUrl(undefined),
+    _id: "proj_4",
+    title: "Gradients CSS",
+    description:
+      "A modern tool that takes the hassle out of creating stunning gradients. Helps developers and designers explore, customize, and export beautiful CSS gradients with ease.",
+    projectType: "Tool",
+    images: [],
+    websiteUrl: "https://gradientscss.vercel.app/",
+    githubUrl: projects.gradientscss.github,
+    technologies: ["React", "TypeScript", "Tailwind CSS", "CSS3", "Vite"],
+    featured: true,
+    status: "Published",
+    createdAt: "2023-03-01T00:00:00.000Z",
+    updatedAt: "2023-06-01T00:00:00.000Z",
+  },
+  {
+    _id: "proj_5",
+    title: "Barber Academy",
+    description:
+      "Developed a comprehensive website for Barber Academy, enabling online appointment scheduling and showcasing a complete range of services. Delivered a user-friendly platform that increased client engagement and streamlined operations.",
+    projectType: "Website",
+    images: [],
+    websiteUrl: "https://raoufzadi.vercel.app/",
+    githubUrl: "",
+    technologies: ["React", "TypeScript", "Tailwind CSS", "REST APIs"],
+    featured: true,
+    status: "Published",
+    createdAt: "2022-11-01T00:00:00.000Z",
+    updatedAt: "2023-01-01T00:00:00.000Z",
+  },
+  {
+    _id: "proj_6",
+    title: "NAJ Training Center",
+    description:
+      "A training center website with course management, student enrollment, and progress tracking. Contributed to the project during my time at PTIT, enhancing functionality and maintaining legacy systems.",
+    projectType: "Web Application",
+    images: [],
+    websiteUrl: projects.najcenter,
+    githubUrl: "",
+    technologies: ["React", "JavaScript", "Material-UI", "Node.js"],
+    featured: false,
+    status: "Published",
+    createdAt: "2023-06-01T00:00:00.000Z",
+    updatedAt: "2023-09-30T00:00:00.000Z",
   },
 ];

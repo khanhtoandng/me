@@ -1,5 +1,7 @@
 import { MetadataRoute } from "next";
-import { domain } from "@/data/Links";
+
+// Required for static export
+export const dynamic = "force-static";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {

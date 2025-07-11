@@ -1,16 +1,8 @@
-import { useState, useEffect } from "react";
-
-interface ContentData {
-  _id?: string;
-  section: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  content: any;
-}
+import { contentData, type Content } from "@/data";
+import { useEffect, useState } from "react";
 
 export function useContent(section: string) {
-  const [content, setContent] = useState<ContentData | null>(null);
+  const [content, setContent] = useState<Content | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -19,18 +11,16 @@ export function useContent(section: string) {
       setLoading(true);
       setError(null);
 
-      const response = await fetch(`/api/content/${section}`);
-      const data = await response.json();
+      // Simulate loading delay for better UX
+      await new Promise((resolve) => setTimeout(resolve, 300));
 
-      if (data.success) {
-        setContent(data.data);
-      } else {
-        // If no content found, return null (will use default content)
-        setContent(null);
-      }
+      const foundContent = contentData.find(
+        (item) => item.section === section && item.isActive
+      );
+      setContent(foundContent || null);
     } catch (err) {
-      console.error(`Error fetching ${section} content:`, err);
-      setError(err instanceof Error ? err.message : "Failed to fetch content");
+      console.error(`Error loading ${section} content:`, err);
+      setError(err instanceof Error ? err.message : "Failed to load content");
       setContent(null);
     } finally {
       setLoading(false);

@@ -1,20 +1,7 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-
-export interface Profile {
-  _id?: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone?: string;
-  location?: string;
-  bio?: string;
-  avatar?: string;
-  skills: string[];
-  createdAt?: string;
-  updatedAt?: string;
-}
+import { profileData, type Profile } from "@/data";
+import { useCallback, useEffect, useState } from "react";
 
 interface UseProfileReturn {
   profile: Profile | null;
@@ -34,26 +21,12 @@ export function useProfile(): UseProfileReturn {
       setLoading(true);
       setError(null);
 
-      const response = await fetch("/api/profile");
-      const data = await response.json();
+      // Simulate loading delay for better UX
+      await new Promise((resolve) => setTimeout(resolve, 300));
 
-      if (data.success) {
-        setProfile(data.data);
-      } else {
-        // If no profile exists, set default empty profile
-        setProfile({
-          firstName: "",
-          lastName: "",
-          email: "",
-          phone: "",
-          location: "",
-          bio: "",
-          avatar: "",
-          skills: [],
-        });
-      }
+      setProfile(profileData);
     } catch (err) {
-      console.error("Error fetching profile:", err);
+      console.error("Error loading profile:", err);
       setError(err instanceof Error ? err.message : "An error occurred");
       setProfile(null);
     } finally {
@@ -63,24 +36,12 @@ export function useProfile(): UseProfileReturn {
 
   const updateProfile = useCallback(
     async (data: Partial<Profile>): Promise<Profile> => {
-      const response = await fetch("/api/profile", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      const result = await response.json();
-
-      if (!result.success) {
-        throw new Error(result.error || "Failed to update profile");
-      }
-
-      await fetchProfile();
-      return result.data;
+      // In a static app, we can't actually update the profile
+      // This is just for compatibility with existing code
+      console.warn("Profile updates are not supported in static mode");
+      return profileData;
     },
-    [fetchProfile],
+    []
   );
 
   useEffect(() => {

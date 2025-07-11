@@ -1,11 +1,19 @@
 import type { NextConfig } from "next";
 
 /**
- * Next.js configuration with optimizations for performance and SEO
+ * Next.js configuration optimized for static export
  */
 const nextConfig: NextConfig = {
-  // Enhanced image optimization
+  // Enable static export
+  output: "export",
+
+  // Disable server-side features for static export
+  trailingSlash: true,
+  skipTrailingSlashRedirect: true,
+
+  // Enhanced image optimization for static export
   images: {
+    unoptimized: true, // Required for static export
     domains: ["edurank.org", "res.cloudinary.com"],
     remotePatterns: [
       { protocol: "https", hostname: "media.licdn.com" },
@@ -20,27 +28,19 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
   // Performance optimizations
   poweredByHeader: false,
-  compress: true,
-
-  // SEO optimizations
-  trailingSlash: true,
 
   // Build optimizations
   reactStrictMode: true,
 
-  // Cache optimizations
-  onDemandEntries: {
-    // Period (in ms) where the server will keep pages in the buffer
-    // maxInactiveAge: 25 * 1000,
-    // Number of pages that should be kept simultaneously without being disposed
-    pagesBufferLength: 4,
+  // Disable features not compatible with static export
+  experimental: {
+    // Disable features that require server-side rendering
   },
 };
 

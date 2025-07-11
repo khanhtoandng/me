@@ -1,20 +1,7 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-
-export interface Recommendation {
-  _id: string;
-  name: string;
-  position: string;
-  company: string;
-  text: string;
-  relationship: string;
-  avatar?: string;
-  featured: boolean;
-  date: string;
-  createdAt: string;
-  updatedAt: string;
-}
+import { recommendationsData, type Recommendation } from "@/data";
+import { useCallback, useEffect, useState } from "react";
 
 interface UseRecommendationsOptions {
   featured?: boolean;
@@ -29,7 +16,7 @@ interface UseRecommendationsReturn {
 }
 
 export function useRecommendations(
-  options: UseRecommendationsOptions = {},
+  options: UseRecommendationsOptions = {}
 ): UseRecommendationsReturn {
   const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
   const [loading, setLoading] = useState(true);
@@ -40,29 +27,31 @@ export function useRecommendations(
       setLoading(true);
       setError(null);
 
-      // Build query parameters
-      const params = new URLSearchParams();
+      // Simulate loading delay for better UX
+      await new Promise((resolve) => setTimeout(resolve, 300));
 
+      let filteredData = [...recommendationsData];
+
+      // Apply filters
       if (options.featured !== undefined) {
-        params.append("featured", options.featured.toString());
+        filteredData = filteredData.filter(
+          (rec) => rec.featured === options.featured
+        );
       }
 
+      // Apply limit
       if (options.limit) {
-        params.append("limit", options.limit.toString());
+        filteredData = filteredData.slice(0, options.limit);
       }
 
-      const url = `/api/recommendations${params.toString() ? `?${params.toString()}` : ""}`;
+      // Sort by date (newest first)
+      filteredData.sort(
+        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+      );
 
-      const response = await fetch(url);
-      const data = await response.json();
-
-      if (data.success) {
-        setRecommendations(data.data);
-      } else {
-        throw new Error(data.error || "Failed to fetch recommendations");
-      }
+      setRecommendations(filteredData);
     } catch (err) {
-      console.error("Error fetching recommendations:", err);
+      console.error("Error loading recommendations:", err);
       setError(err instanceof Error ? err.message : "An error occurred");
       setRecommendations([]);
     } finally {
@@ -89,7 +78,7 @@ export function useFeaturedRecommendations(): UseRecommendationsReturn {
 
 // Helper hook for recommendations with limit
 export function useRecommendationsWithLimit(
-  limit: number,
+  limit: number
 ): UseRecommendationsReturn {
   return useRecommendations({ limit });
 }

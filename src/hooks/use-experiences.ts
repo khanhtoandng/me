@@ -1,21 +1,7 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-
-export interface Experience {
-  _id: string;
-  title: string;
-  company: string;
-  companyUrl?: string;
-  location: string;
-  startDate: string;
-  endDate?: string;
-  current: boolean;
-  description: string;
-  skills: string[];
-  createdAt: string;
-  updatedAt: string;
-}
+import { experiencesData, type Experience } from "@/data";
+import { useCallback, useEffect, useState } from "react";
 
 interface UseExperiencesOptions {
   current?: boolean;
@@ -30,7 +16,7 @@ interface UseExperiencesReturn {
 }
 
 export function useExperiences(
-  options: UseExperiencesOptions = {},
+  options: UseExperiencesOptions = {}
 ): UseExperiencesReturn {
   const [experiences, setExperiences] = useState<Experience[]>([]);
   const [loading, setLoading] = useState(true);
@@ -41,29 +27,32 @@ export function useExperiences(
       setLoading(true);
       setError(null);
 
-      // Build query parameters
-      const params = new URLSearchParams();
+      // Simulate loading delay for better UX
+      await new Promise((resolve) => setTimeout(resolve, 300));
 
+      let filteredData = [...experiencesData];
+
+      // Apply filters
       if (options.current !== undefined) {
-        params.append("current", options.current.toString());
+        filteredData = filteredData.filter(
+          (exp) => exp.current === options.current
+        );
       }
 
+      // Apply limit
       if (options.limit) {
-        params.append("limit", options.limit.toString());
+        filteredData = filteredData.slice(0, options.limit);
       }
 
-      const url = `/api/experiences${params.toString() ? `?${params.toString()}` : ""}`;
+      // Sort by start date (newest first)
+      filteredData.sort(
+        (a, b) =>
+          new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
+      );
 
-      const response = await fetch(url);
-      const data = await response.json();
-
-      if (data.success) {
-        setExperiences(data.data);
-      } else {
-        throw new Error(data.error || "Failed to fetch experiences");
-      }
+      setExperiences(filteredData);
     } catch (err) {
-      console.error("Error fetching experiences:", err);
+      console.error("Error loading experiences:", err);
       setError(err instanceof Error ? err.message : "An error occurred");
       setExperiences([]);
     } finally {

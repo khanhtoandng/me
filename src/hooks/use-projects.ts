@@ -1,22 +1,10 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { projectsData, type Project } from "@/data";
+import { useCallback, useEffect, useState } from "react";
 
-export interface Project {
-  _id: string;
-  title: string;
-  description: string;
-  projectType: string;
-  images: string[];
-  videoUrl: string;
-  githubUrl: string;
-  websiteUrl: string;
-  technologies: string[];
-  featured: boolean;
-  status: "Draft" | "Published" | "Archived";
-  createdAt: string;
-  updatedAt: string;
-}
+// Re-export Project type for convenience
+export type { Project };
 
 interface UseProjectsReturn {
   projects: Project[];
@@ -33,7 +21,7 @@ interface UseProjectsOptions {
 }
 
 export function useProjects(
-  options: UseProjectsOptions = {},
+  options: UseProjectsOptions = {}
 ): UseProjectsReturn {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
@@ -44,36 +32,43 @@ export function useProjects(
       setLoading(true);
       setError(null);
 
-      // Build query parameters
-      const params = new URLSearchParams();
+      // Simulate loading delay for better UX
+      await new Promise((resolve) => setTimeout(resolve, 300));
 
-      // Default to published projects only unless specified otherwise
+      let filteredData = [...projectsData];
+
+      // Apply filters
       if (options.publishedOnly !== false) {
-        params.append("status", "Published");
+        filteredData = filteredData.filter(
+          (project) => project.status === "Published"
+        );
       } else if (options.status) {
-        params.append("status", options.status);
+        filteredData = filteredData.filter(
+          (project) => project.status === options.status
+        );
       }
 
       if (options.featured !== undefined) {
-        params.append("featured", options.featured.toString());
+        filteredData = filteredData.filter(
+          (project) => project.featured === options.featured
+        );
       }
 
       if (options.projectType) {
-        params.append("projectType", options.projectType);
+        filteredData = filteredData.filter(
+          (project) => project.projectType === options.projectType
+        );
       }
 
-      const url = `/api/projects${params.toString() ? `?${params.toString()}` : ""}`;
+      // Sort by creation date (newest first)
+      filteredData.sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      );
 
-      const response = await fetch(url);
-      const data = await response.json();
-
-      if (data.success) {
-        setProjects(data.data);
-      } else {
-        throw new Error(data.error || "Failed to fetch projects");
-      }
+      setProjects(filteredData);
     } catch (err) {
-      console.error("Error fetching projects:", err);
+      console.error("Error loading projects:", err);
       setError(err instanceof Error ? err.message : "An error occurred");
       setProjects([]);
     } finally {
