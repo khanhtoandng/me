@@ -3,8 +3,7 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { useContent } from "@/hooks/use-content";
 import { useSocialLinks } from "@/hooks/use-social-links";
-import Link from "next/link";
-import { memo, useEffect, useRef } from "react";
+import { memo } from "react";
 import * as AiIcons from "react-icons/ai";
 import * as BiIcons from "react-icons/bi";
 import * as BsIcons from "react-icons/bs";
@@ -16,7 +15,6 @@ import * as MdIcons from "react-icons/md";
 import * as RiIcons from "react-icons/ri";
 import * as SiIcons from "react-icons/si";
 import * as TiIcons from "react-icons/ti";
-import { annotate } from "rough-notation";
 
 const ALAZHAR_URL = "https://www.alazhar.edu.ps";
 
@@ -35,7 +33,6 @@ const iconLibraries = {
 };
 
 function HeroSection() {
-  const highlightedWordRef = useRef<HTMLSpanElement>(null);
   const { content: heroContent, loading } = useContent("hero");
   const { socialLinks, loading: socialLoading } = useSocialLinks(true);
 
@@ -61,25 +58,6 @@ function HeroSection() {
   };
 
   const displayContent = heroContent || defaultContent;
-
-  useEffect(() => {
-    let annotation: any;
-    if (highlightedWordRef.current) {
-      annotation = annotate(highlightedWordRef.current, {
-        type: "underline",
-        color: "#7f5af0",
-        padding: 0,
-        strokeWidth: 1,
-      });
-      const timer = setTimeout(() => {
-        annotation.show();
-      }, 100);
-      return () => {
-        clearTimeout(timer);
-        if (annotation) annotation.remove();
-      };
-    }
-  }, []);
 
   return (
     <div className="header max-md:pt-[50px]">
@@ -108,43 +86,9 @@ function HeroSection() {
           <>
             <h1 className="header-title">{displayContent.title}</h1>
             <h1 className="subtitle capitalize">{displayContent.subtitle}</h1>
-            {(displayContent.content?.paragraphs || []).map(
-              (paragraph: string, index: number) => {
-                if (index === 0) {
-                  const parts = paragraph.split("Al-Azhar University");
-                  return (
-                    <p
-                      key={index}
-                      className="w-full py-2 text-base text-[var(--paragraph)] leading-relaxed max-md:max-w-none"
-                    >
-                      {parts[0].includes("Full-Stack Developer") ? (
-                        <>
-                          {parts[0].split("Full-Stack Developer")[0]}
-                          <span ref={highlightedWordRef}>
-                            Full-Stack Developer
-                          </span>
-                          {parts[0].split("Full-Stack Developer")[1]}
-                        </>
-                      ) : (
-                        parts[0]
-                      )}
-                      <Link target="_blank" href={ALAZHAR_URL} className="link">
-                        Al-Azhar University
-                      </Link>
-                      {parts[1]}
-                    </p>
-                  );
-                }
-                return (
-                  <p
-                    key={index}
-                    className="w-full py-2 text-base text-[var(--paragraph)] leading-relaxed max-md:max-w-none"
-                  >
-                    {paragraph}
-                  </p>
-                );
-              }
-            )}
+            <h1 className="text-[var(--paragraph)]">
+              {displayContent.description}
+            </h1>
           </>
         )}
       </div>

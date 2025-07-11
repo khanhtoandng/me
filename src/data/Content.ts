@@ -17,7 +17,7 @@ export const contentData: Content[] = [
     title: "Baraa Alshaer",
     subtitle: "Full-Stack Developer",
     description:
-      "I am Baraa Alshaer, a Full-Stack Developer from Palestine with a degree in Software Engineering. I specialize in creating efficient web applications across the full stack, focusing on delivering high-quality, user-centric solutions that drive innovation.",
+      "I’m a Full Stack Software Developer passionate about creating secure, user-focused web applications. With expertise in modern web technologies, AI integration, and cybersecurity best practices, I build scalable solutions that solve real problems and deliver real value. I thrive on innovation, always seeking to enhance user experiences and drive business growth through clean, efficient code. Committed to continuous learning, I aim to stay at the forefront of AI and security to keep products and clients a step ahead.",
     content: {
       greeting: "Hello, I'm",
       name: "Baraa Alshaer",
