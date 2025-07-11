@@ -3,14 +3,142 @@
 import ReusableCard from "@/components/common/ReusableCard";
 import { Button } from "@/components/ui/button";
 import { github } from "@/data/Links";
-import { useProjects, type Project } from "@/hooks/use-projects";
+import { type Project } from "@/hooks/use-projects";
 import { ScrollEffect } from "@/lib/animations";
 import { AnimatePresence, motion } from "framer-motion";
-import { Eye, EyeOff, Loader2 } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+
+// Define your projects data directly here
+export const projectsData: Project[] = [
+  {
+    _id: "proj_1",
+    title: "Samtax",
+    description:
+      "A trusted tax and accounting platform providing expert tax preparation, financial planning, and business advisory services. Developed a secure, scalable web application with multi-language support, integrated payment systems, and AI-powered automation tools.",
+    projectType: "Web Application",
+    images: [],
+    websiteUrl: "https://sam-tax.com/",
+    githubUrl: "",
+    technologies: [
+      "React",
+      "TypeScript",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Tailwind CSS",
+      "JWT",
+      "OAuth",
+      "GitHub Actions",
+      "Systems Design",
+    ],
+    featured: true,
+    status: "Published",
+    createdAt: "2024-06-01T00:00:00.000Z",
+    updatedAt: "2025-07-11T00:00:00.000Z",
+  },
+  {
+    _id: "proj_2",
+    title: "Rove E-commerce",
+    description:
+      "An e-commerce platform delivering seamless online shopping experiences. Combines modern UI, secure transactions, and scalable architecture to help businesses showcase products and grow sales effortlessly.",
+    projectType: "Web Application",
+    images: [],
+    websiteUrl: "",
+    githubUrl: "", // Removed projects.rove reference (undefined)
+    technologies: [
+      "JavaScript",
+      "React.js",
+      "Tailwind CSS",
+      "OAuth",
+      "JWT",
+      "OOP",
+      "Webpack",
+      "Laravel",
+      "PHP",
+      "REST APIs",
+      "GitHub Actions",
+    ],
+    featured: true,
+    status: "Published",
+    createdAt: "2023-05-01T00:00:00.000Z",
+    updatedAt: "2023-10-01T00:00:00.000Z",
+  },
+  {
+    _id: "proj_3",
+    title: "SFP - Sustainable Star Form Builder",
+    description:
+      "A powerful, no-code form builder that lets you create, customize, and deploy smart forms in minutes. Designed for teams and creators who need flexible data collection without the technical headache.",
+    projectType: "SaaS Platform",
+    images: [],
+    websiteUrl: "https://sfb-app.com",
+    githubUrl: "",
+    technologies: [
+      "React.js",
+      "React DnD",
+      "TypeScript",
+      "Node.js",
+      "SaaS Architecture",
+      "Tailwind CSS",
+      "JWT",
+      "OAuth",
+      "REST APIs",
+      "UML",
+    ],
+    featured: true,
+    status: "Published",
+    createdAt: "2023-06-01T00:00:00.000Z",
+    updatedAt: "2023-11-30T00:00:00.000Z",
+  },
+  {
+    _id: "proj_4",
+    title: "Gradients CSS",
+    description:
+      "A modern tool that takes the hassle out of creating stunning gradients. Helps developers and designers explore, customize, and export beautiful CSS gradients with ease.",
+    projectType: "Tool",
+    images: [],
+    websiteUrl: "https://gradientscss.vercel.app/",
+    githubUrl: "", // Removed projects.gradientscss.github (undefined)
+    technologies: ["React", "TypeScript", "Tailwind CSS", "CSS3", "Vite"],
+    featured: true,
+    status: "Published",
+    createdAt: "2023-03-01T00:00:00.000Z",
+    updatedAt: "2023-06-01T00:00:00.000Z",
+  },
+  {
+    _id: "proj_5",
+    title: "Barber Academy",
+    description:
+      "Developed a comprehensive website for Barber Academy, enabling online appointment scheduling and showcasing a complete range of services. Delivered a user-friendly platform that increased client engagement and streamlined operations.",
+    projectType: "Website",
+    images: [],
+    websiteUrl: "https://raoufzadi.vercel.app/",
+    githubUrl: "",
+    technologies: ["React", "TypeScript", "Tailwind CSS", "REST APIs"],
+    featured: true,
+    status: "Published",
+    createdAt: "2022-11-01T00:00:00.000Z",
+    updatedAt: "2023-01-01T00:00:00.000Z",
+  },
+  {
+    _id: "proj_6",
+    title: "NAJ Training Center",
+    description:
+      "A training center website with course management, student enrollment, and progress tracking. Contributed to the project during my time at PTIT, enhancing functionality and maintaining legacy systems.",
+    projectType: "Web Application",
+    images: [],
+    websiteUrl: "", // Removed projects.najcenter reference (undefined)
+    githubUrl: "",
+    technologies: ["React", "JavaScript", "Material-UI", "Node.js"],
+    featured: false,
+    status: "Published",
+    createdAt: "2023-06-01T00:00:00.000Z",
+    updatedAt: "2023-09-30T00:00:00.000Z",
+  },
+];
 
 const styles = {
   linkStyle:
@@ -88,7 +216,8 @@ function ProjectImageWithBg({ images }: { images: string[] }) {
 }
 
 export default function Projects({ filterType = "all" }: ProjectsProps) {
-  const { projects, loading, error } = useProjects({ publishedOnly: true });
+  // Use the static data directly instead of fetching
+  const projects = projectsData;
 
   const filteredProjects = useMemo(() => {
     const mapped = projects.map(mapProjectToComponentFormat);
@@ -108,28 +237,6 @@ export default function Projects({ filterType = "all" }: ProjectsProps) {
       [id]: !prev[id],
     }));
   };
-
-  if (loading)
-    return (
-      <div className="projects-cards flex flex-col gap-8 pb-16">
-        <div className="flex items-center justify-center py-12">
-          <div className="flex items-center gap-3 text-[var(--paragraph)]">
-            <Loader2 className="h-6 w-6 animate-spin" />
-            <span>Loading projects...</span>
-          </div>
-        </div>
-      </div>
-    );
-
-  if (error)
-    return (
-      <div className="projects-cards flex flex-col gap-8 pb-16">
-        <div className="flex items-center justify-center py-12 text-center">
-          <p className="text-red-500 mb-2">Failed to load projects</p>
-          <p className="text-[var(--paragraph)] text-sm">{error}</p>
-        </div>
-      </div>
-    );
 
   if (filteredProjects.length === 0)
     return (

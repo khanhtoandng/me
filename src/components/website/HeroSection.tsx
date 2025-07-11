@@ -57,7 +57,7 @@ function HeroSection() {
     },
   };
 
-  const displayContent = heroContent || defaultContent;
+  const displayContent = heroContent || (defaultContent as any);
 
   return (
     <div className="header max-md:pt-[50px]">

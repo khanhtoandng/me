@@ -9,5 +9,3 @@ export * from './SocialLinks';
 export * from './ProjectTypes';
 export * from './Links';
 
-// Re-export legacy data for backward compatibility
-export { ProjectsData } from './Projects';
