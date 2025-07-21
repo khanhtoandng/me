@@ -1,5 +1,3 @@
-import PostsPreview from "@/components/website/PostsPreview";
-import { Metadata } from "next";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -7,10 +5,10 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import PostsPreview from "@/components/website/PostsPreview";
+import { Metadata } from "next";
 
-import React from "react";
 import { webImage, websitePath } from "@/data/Links";
-import PageSeo from "@/components/seo/PageSeo";
 
 // Enhanced metadata for better SEO
 export const metadata: Metadata = {
@@ -54,13 +52,7 @@ export default function PostsPage() {
 
   return (
     <>
-      {/* Add structured data for the blog posts page */}
-      <PageSeo
-        title="Blog Posts - Baraa Alshaer"
-        description="Explore the latest blog posts by Baraa Alshaer, a Full Stack Developer sharing insights on web development and technology."
-        image={webImage}
-        type="WebPage"
-      />
+
 
       <div className="posts container mx-auto flex min-h-[100vh] w-full flex-col gap-5 max-md:pb-0 max-md:pt-[50px]">
         <div className="header">

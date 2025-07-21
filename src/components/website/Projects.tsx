@@ -40,33 +40,7 @@ export const projectsData: Project[] = [
     createdAt: "2024-06-01T00:00:00.000Z",
     updatedAt: "2025-07-11T00:00:00.000Z",
   },
-  {
-    _id: "proj_2",
-    title: "Rove E-commerce",
-    description:
-      "An e-commerce platform delivering seamless online shopping experiences. Combines modern UI, secure transactions, and scalable architecture to help businesses showcase products and grow sales effortlessly.",
-    projectType: "Web Application",
-    images: [],
-    websiteUrl: "",
-    githubUrl: "", // Removed projects.rove reference (undefined)
-    technologies: [
-      "JavaScript",
-      "React.js",
-      "Tailwind CSS",
-      "OAuth",
-      "JWT",
-      "OOP",
-      "Webpack",
-      "Laravel",
-      "PHP",
-      "REST APIs",
-      "GitHub Actions",
-    ],
-    featured: true,
-    status: "Published",
-    createdAt: "2023-05-01T00:00:00.000Z",
-    updatedAt: "2023-10-01T00:00:00.000Z",
-  },
+
   {
     _id: "proj_3",
     title: "SFP - Sustainable Star Form Builder",
@@ -101,7 +75,7 @@ export const projectsData: Project[] = [
     projectType: "Tool",
     images: [],
     websiteUrl: "https://gradientscss.vercel.app/",
-    githubUrl: "", // Removed projects.gradientscss.github (undefined)
+    githubUrl: "https://github.com/balshaer/gradients-css", // Removed projects.gradientscss.github (undefined)
     technologies: ["React", "TypeScript", "Tailwind CSS", "CSS3", "Vite"],
     featured: true,
     status: "Published",
@@ -123,21 +97,52 @@ export const projectsData: Project[] = [
     createdAt: "2022-11-01T00:00:00.000Z",
     updatedAt: "2023-01-01T00:00:00.000Z",
   },
+
+
   {
-    _id: "proj_6",
-    title: "NAJ Training Center",
+    _id: "proj_51",
+    title: "Saascan",
     description:
-      "A training center website with course management, student enrollment, and progress tracking. Contributed to the project during my time at PTIT, enhancing functionality and maintaining legacy systems.",
+      "SaaScan is an open source tool that analyzes SaaS ideas and generates detailed validation reports. It helps entrepreneurs and product teams assess market fit, competition, pricing strategies, and opportunities before investing time and resources",
+    projectType: "Website",
+    images: [],
+    websiteUrl: "https://saascan.vercel.app/",
+    githubUrl: "https://github.com/balshaer/saascan", // Removed projects.rove reference (undefined)
+
+    technologies: ["React", "TypeScript", "Tailwind CSS", "REST APIs", "AI Integration", "AI"],
+    featured: true,
+    status: "Published",
+    createdAt: "2022-11-01T00:00:00.000Z",
+    updatedAt: "2023-01-01T00:00:00.000Z",
+  },
+  {
+    _id: "proj_2",
+    title: "Rove E-commerce",
+    description:
+      "An e-commerce platform delivering seamless online shopping experiences. Combines modern UI, secure transactions, and scalable architecture to help businesses showcase products and grow sales effortlessly.",
     projectType: "Web Application",
     images: [],
-    websiteUrl: "", // Removed projects.najcenter reference (undefined)
-    githubUrl: "",
-    technologies: ["React", "JavaScript", "Material-UI", "Node.js"],
-    featured: false,
+    websiteUrl: "",
+    githubUrl: "https://github.com/balshaer/rove", // Removed projects.rove reference (undefined)
+    technologies: [
+      "JavaScript",
+      "React.js",
+      "Tailwind CSS",
+      "OAuth",
+      "JWT",
+      "OOP",
+      "Webpack",
+      "Laravel",
+      "PHP",
+      "REST APIs",
+      "GitHub Actions",
+    ],
+    featured: true,
     status: "Published",
-    createdAt: "2023-06-01T00:00:00.000Z",
-    updatedAt: "2023-09-30T00:00:00.000Z",
+    createdAt: "2023-05-01T00:00:00.000Z",
+    updatedAt: "2023-10-01T00:00:00.000Z",
   },
+
 ];
 
 const styles = {

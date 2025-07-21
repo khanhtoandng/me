@@ -17,12 +17,6 @@ export default function HomePage() {
   return (
     <div className="container mx-auto">
       {/* Add structured data for the home page */}
-      <PageSeo
-        title="Baraa Alshaer - Full Stack Developer"
-        description="Portfolio of Baraa Alshaer, a skilled Full Stack Developer with expertise in React, Node.js, TypeScript, and modern web technologies."
-        image={webImage}
-        type="Person"
-      />
 
       {/* Hero Section */}
       <HeroSection />

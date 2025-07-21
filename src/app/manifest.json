@@ -1,5 +1,5 @@
 {
-  "name": "Baraa Alshaer Website",
+  "name": "Baraa",
   "short_name": "Baraa",
   "icons": [
     {
@@ -15,7 +15,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "16161a",
-  "background_color": "16161a",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
   "display": "standalone"
 }

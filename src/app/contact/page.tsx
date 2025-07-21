@@ -53,13 +53,7 @@ export default function ContactPage() {
 
   return (
     <div className="container mx-auto">
-      {/* Add structured data for the contact page */}
-      <PageSeo
-        title="Contact - Baraa Alshaer"
-        description="Get in touch with Baraa Alshaer, a Full Stack Developer, for inquiries, collaborations, or to discuss your next project."
-        image={webImage}
-        type="WebPage"
-      />
+
 
       <div>
         <div className="header max-md:pt-[50px]">
