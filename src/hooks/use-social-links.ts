@@ -57,7 +57,7 @@ const mockSocialLinks: SocialLink[] = [
   },
   {
     _id: "4",
-    platform: "Email",
+    platform: "Email Me",
     url: "mailto:alshaer.contact@gmail.com",
     icon: "envelope",
     iconLibrary: "fontawesome",

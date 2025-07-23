@@ -40,7 +40,7 @@ function HeroSocialLinks() {
       <div className="w-full mx-auto   ">
         <div className="text-left mb-4">
           <p
-            className="text-[var(--paragraph)] text-sm border-t"
+            className="text-[var(--paragraph)] text-sm border-t pt-2"
             style={{ borderColor: "var(--card-border-color)" }}
           >
             Where to find me{" "}

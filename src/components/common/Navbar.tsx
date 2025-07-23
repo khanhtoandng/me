@@ -20,13 +20,13 @@ const iconAnimationVariants = {
 const mobileMenuVariants = {
   closed: {
     opacity: "0%",
-    x: "100%",
+    x: 0,
     transition: { duration: 0.2 },
   },
   open: {
     opacity: "100%",
     x: 0,
-    transition: { duration: 0.2 },
+    transition: { duration: 0.4 },
   },
 };
 

@@ -1,13 +1,13 @@
 "use client";
 
-import PageSeo from "@/components/seo/PageSeo";
 import ClickSpark from "@/components/ui/ClickSpark";
 import ShinyText from "@/components/ui/ShinyText";
 import Education from "@/components/website/Education";
 import { ExperienceTimeline } from "@/components/website/ExperienceTimeline";
 import HeroSection from "@/components/website/HeroSection";
 import RecommendationsSection from "@/components/website/RecommendationsSection";
-import { mailto, webImage } from "@/data/Links";
+import SkillsSection from "@/components/website/SkillsSection";
+import { mailto } from "@/data/Links";
 import { ScrollEffect } from "@/lib/animations";
 import Link from "next/link";
 
@@ -24,6 +24,11 @@ export default function HomePage() {
       {/* Education Section with SectionDivider */}
       <div className="py-4">
         <Education />
+      </div>
+
+
+        <div className="py-4">
+        <SkillsSection />
       </div>
 
       {/* Work Experience Section */}
