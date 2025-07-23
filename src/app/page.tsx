@@ -1,14 +1,14 @@
 "use client";
 
+import PostSection from "@/components/sections/blog/PostSection";
+import Education from "@/components/sections/education/Education";
+import WorkExperienceSection from "@/components/sections/experience/WorkExperienceSection";
+import HeroSection from "@/components/sections/hero/HeroSection";
+import Projects from "@/components/sections/projects/Projects";
+import RecommendationsSection from "@/components/sections/recommendations/RecommendationsSection";
+import SkillsSection from "@/components/sections/skills/SkillsSection";
 import ClickSpark from "@/components/ui/ClickSpark";
 import ShinyText from "@/components/ui/ShinyText";
-import Education from "@/components/website/Education";
-import HeroSection from "@/components/website/HeroSection";
-import PostSection from "@/components/website/PostSection";
-import Projects from "@/components/website/Projects";
-import RecommendationsSection from "@/components/website/RecommendationsSection";
-import SkillsSection from "@/components/website/SkillsSection";
-import WorkExperienceSection from "@/components/website/WorkExperienceSection";
 import { mailto } from "@/data/Links";
 import { ScrollEffect } from "@/lib/animations";
 import Link from "next/link";

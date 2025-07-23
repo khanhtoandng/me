@@ -1,12 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
-import Footer from "@/components/common/Footer";
-import Navbar from "@/components/common/Navbar";
-import { ThemeProvider } from "@/components/theme-provider";
+import Footer from "@/components/layout/Footer";
+import Navbar from "@/components/layout/Navbar";
 import BackgroundEffect from "@/components/ui/backgroundEffect";
 import { CustomDialogProvider } from "@/components/ui/custom-dialog";
 import FloatingActionButton from "@/components/ui/FloatingActionButton";
+import { ThemeProvider } from "@/contexts/theme-provider";
 import { domain, email, webImage, websitePath } from "@/data/Links";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";

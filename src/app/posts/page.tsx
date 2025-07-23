@@ -1,3 +1,4 @@
+import PostsPreview from "@/components/sections/blog/PostsPreview";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -5,7 +6,6 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import PostsPreview from "@/components/website/PostsPreview";
 import { Metadata } from "next";
 
 import { webImage, websitePath } from "@/data/Links";
