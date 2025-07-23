@@ -71,7 +71,9 @@ function ExperienceItem({ experience }: { experience: ExperienceItemType }) {
               unoptimized
             />
           ) : (
-            <span className="flex h-2 w-2 rounded-full bg-[var(--card-paragraph)] dark:bg-[var(--card-paragraph)]" />
+            <div className="flex h-6 w-6 shrink-0 items-center justify-center">
+              <span className="flex h-2 w-2 rounded-full bg-zinc-300 dark:bg-zinc-600" />
+            </div>
           )}
         </div>
 

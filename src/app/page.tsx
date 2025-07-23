@@ -20,29 +20,29 @@ export default function HomePage() {
 
       <HeroSection />
 
-      <div className="py-4">
+      <div className="py-4 border-t mt-6">
         <Education />
       </div>
 
 
-      <div className="py-4">
+      <div className="py-4 border-t mt-6">
         <SkillsSection />
       </div>
 
-      <div className="py-4">
+      <div id="work" className="py-4 border-t mt-6">
         <WorkExperienceSection />
       </div>
 
-      <div className="py-4">
+      <div id="projects" className="py-4 border-t mt-6">
         <Projects />
       </div>
 
 
-      <div className="py-4">
+      <div className="py-4 border-t mt-6">
         <RecommendationsSection />
       </div>
 
-      <div className="py-4">
+      <div className="py-4 border-t mt-6">
         <PostSection />
       </div>
 
