@@ -36,17 +36,15 @@ function HeroSocialLinks() {
   }
 
   return (
-    <section >
-      <div className="w-full mx-auto   ">
+    <section>
+      <div className="w-full mx-auto">
         <div className="text-left mb-4">
           <p
-            className="text-[var(--paragraph)] text-sm  pt-2"
+            className="text-[var(--paragraph)] text-sm pt-2"
             style={{ borderColor: "var(--card-border-color)" }}
           >
             Where to find me{" "}
-            <span className="text-[var(--headline)] font-medium">
-              (digitally)
-            </span>{" "}
+            <span className="text-[var(--headline)] font-medium">(digitally)</span>{" "}
             if you wish to
           </p>
         </div>
@@ -66,14 +64,14 @@ function HeroSocialLinks() {
                   className="flex items-center rounded-lg px-3 py-2 font-medium text-xs gap-2 shadow transition focus:outline-none"
                   style={{
                     backgroundColor: "var(--card-background)",
-                    border: `1px solid var(--card-border-color)`,
                     color: "var(--headline)",
+                    border: "none",
                   }}
                   onMouseEnter={(e) =>
                     (e.currentTarget.style.borderColor = "var(--link-color)")
                   }
                   onMouseLeave={(e) =>
-                    (e.currentTarget.style.borderColor = "var(--card-border-color)")
+                    (e.currentTarget.style.borderColor = "transparent")
                   }
                 >
                   {IconComponent && (
@@ -121,7 +119,7 @@ function HeroSection() {
       <div className="header-content">
         <h1 className="header-title text-[var(--headline)]">{displayContent.title}</h1>
         <h1 className="subtitle capitalize text-[var(--headline)]">{displayContent.subtitle}</h1>
-        <h1 className="text-[var(--paragraph)]">{displayContent.description}</h1>
+        <p className="text-[var(--paragraph)]">{displayContent.description}</p>
       </div>
 
       {/* Social Links */}

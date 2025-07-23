@@ -54,7 +54,7 @@ export default function Navbar() {
           dir="ltr"
           id="navbar"
           transition={{ duration: 0.5 }}
-          className="container mb-8 max-md:bg-[var(--background)] max-md:z-40 mx-auto z-40 flex items-center justify-between gap-5 rounded-full border border-[var(--border)] max-md:border-t-0 max-md:border-x-0 bg-[var(--mobile-nav)] px-5 text-base backdrop-blur-lg max-md:fixed max-md:left-0 max-md:right-0 max-md:top-0 max-md:w-full max-md:rounded-none max-md:px-3 sm:px-6 md:mt-4 shadow-sm"
+          className="container  mb-8 max-md:bg-[var(--background)] max-md:z-40 mx-auto z-40 flex items-center justify-between gap-5 rounded-full border border-[var(--border)] max-md:border-t-0 max-md:border-x-0 bg-[var(--mobile-nav)] px-5 text-base backdrop-blur-lg max-md:fixed max-md:left-0 max-md:right-0 max-md:top-0 max-md:w-full max-md:rounded-none max-md:px-3 sm:px-6 md:mt-4 shadow-sm"
         >
           <div className="container mx-auto px-0">
             <div className="flex h-16 items-center justify-between max-md:flex-wrap">
@@ -68,7 +68,7 @@ export default function Navbar() {
               <div className="hidden h-full items-center justify-center md:flex">
                 <div
                   dir="ltr"
-                  className="flex h-full items-center justify-center gap-8"
+                  className="flex h-full  items-center justify-center gap-8"
                 >
                   {navItems.map((item) => (
                     <motion.div
@@ -92,9 +92,10 @@ export default function Navbar() {
                 </div>
               </div>
 
-              <div className="flex items-center max-md:flex-wrap gap-3 justify-center md:hidden">
+              <div className="flex items-center max-md:flex-wrap gap-3 max-md:gap-2 justify-center md:hidden">
            <ToggleMode/>
                 <motion.button
+                variants={"icon"}
                   className="text-[var(--headline)] p-2 rounded-full hover:bg-[var(--card-background)] transition-colors"
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                   whileTap={{ scale: 0.95 }}

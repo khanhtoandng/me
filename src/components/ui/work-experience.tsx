@@ -57,7 +57,7 @@ function ExperienceItem({ experience }: { experience: ExperienceItemType }) {
     <div className="space-y-4 py-4">
       <div className="not-prose flex items-center gap-3">
         <div
-          className="flex h-6 w-6 shrink-0 items-center justify-center"
+          className="flex h-8 w-8 shrink-0 items-center border rounded-full justify-center bg-[var(--card-background)] p-1"
           aria-hidden
         >
           {experience.companyLogo ? (

@@ -183,7 +183,7 @@ export default function Footer() {
                     variant="ghost"
                     size="sm"
                     onClick={scrollToTop}
-                    className="text-xs group"
+                    className="text-xs group max-md:hidden"
                     aria-label="Back to top"
                   >
                     <span>Back to top</span>
@@ -198,7 +198,9 @@ export default function Footer() {
                   <div className="flex items-center gap-4">
                     <span className="flex items-center justify-center gap-1 text-[var(--paragraph)] hover:text-[var(--headline)] hoverd">
                       <span>Built with Next.js </span>
+
                       <RiNextjsFill className="h-4 w-4" />
+
                     </span>
                     <Separator
                       orientation="vertical"
@@ -209,7 +211,7 @@ export default function Footer() {
                       <SiRender className="h-4 w-4" />
                     </span>
                   </div>
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center max-md:hidden gap-4">
                     <Link
                       href="/sitemap.xml"
                       className="hover:text-[var(--link-color)] transition-colors flex justify-center items-center gap-1"

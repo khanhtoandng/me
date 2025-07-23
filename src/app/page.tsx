@@ -1,7 +1,6 @@
 "use client";
 
 import PostSection from "@/components/sections/blog/PostSection";
-import Education from "@/components/sections/education/Education";
 import WorkExperienceSection from "@/components/sections/experience/WorkExperienceSection";
 import HeroSection from "@/components/sections/hero/HeroSection";
 import Projects from "@/components/sections/projects/Projects";
@@ -19,10 +18,6 @@ export default function HomePage() {
     <div className="container mx-auto">
 
       <HeroSection />
-
-      <div className="py-4 border-t mt-6">
-        <Education />
-      </div>
 
 
       <div className="py-4 border-t mt-6">

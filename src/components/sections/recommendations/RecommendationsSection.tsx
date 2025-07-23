@@ -77,19 +77,26 @@ const RecommendationsSection = () => {
     <section className="w-full py-10">
       <ScrollEffect type="fadeIn">
         <header className="mb-8">
-        <h1
-              className="section-title"
-              style={{ color: "var(--headline)", borderColor: "var(--border)" }}
-              data-ninja-font="doto_bold_normal_rg90b"
-            >
-              Recommendations{" "}
-              <span
-                className="font-jetbrains-mono text-sm  flex items-center justify-center gap-1"
-                style={{ color: "var(--secondary)" }}
-              >
-                From <Link className="hoverd hover:text-[var(--headline)] flex items-center justify-center gap-1" href="link">LinkedIn <GoLinkExternal className="mb-0.5"/></Link>
-              </span>
-            </h1>
+     <h1
+  className="section-title flex items-end gap-1"
+  style={{ color: "var(--headline)", borderColor: "var(--border)" }}
+  data-ninja-font="doto_bold_normal_rg90b"
+>
+  <span>Recommendations</span>
+  <span
+    className="font-jetbrains-mono pb-[3px] text-sm flex items-center gap-1"
+    style={{ color: "var(--secondary)" }}
+  >
+    
+    <Link
+      href="link"
+      className="hoverd hover:text-[var(--headline)] flex items-center gap-1"
+    >
+    From LinkedIn <GoLinkExternal className="mb-0.5" />
+    </Link>
+  </span>
+</h1>
+
         </header>
       </ScrollEffect>
       <div className="flex flex-col items-center gap-6">

@@ -172,7 +172,7 @@ const WORK_EXPERIENCE: ExperienceItemType[] = [
 
 export default function WorkSection() {
   return (
-    <section className="w-full">
+    <section className="w-full ibmsans">
       <h2 className="section-title">Work Experience & Education</h2>
       <WorkExperience className="rounded-lg" experiences={WORK_EXPERIENCE} />
     </section>

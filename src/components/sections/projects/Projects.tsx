@@ -150,12 +150,7 @@ const Projects = () => {
           style={{ color: "var(--headline)" }}
         >
           Projects
-          <sup
-            className="ml-1 font-mono text-sm select-none"
-            style={{ color: "var(--paragraph)" }}
-          >
-            ({projectsData.length})
-          </sup>
+     
         </h2>
       </div>
 
@@ -167,13 +162,20 @@ const Projects = () => {
           data-state={openProjectId === project.id ? "open" : "closed"}
         >
           <div className="flex items-center ">
-            <img
+
+<div
+
+              className="mx-4 flex size-6 bg-[var(--card-background)] h-8 w-8 border  p-1 rounded-full  shrink-0"
+>
+
+
+     <img
               alt={`${project.title} logo`}
               loading="lazy"
               width={32}
               height={32}
+              className="rounded-full"
               decoding="async"
-              className="mx-4 flex size-6 rounded-full  shrink-0"
               src={`/logos/${project.logoFileName}`}
               onError={(e) => {
                 (e.currentTarget as HTMLImageElement).src =
@@ -181,6 +183,9 @@ const Projects = () => {
               }}
               style={{ objectFit: "contain" }}
             />
+</div>
+
+       
             <div
               className="flex-1 border-l border-dashed"
               style={{ borderColor: "var(--card-border-color)" }}

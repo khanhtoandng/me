@@ -86,36 +86,32 @@ const categories: SkillCategory[] = [
 
 const styles = {
   section: "w-full",
-  headerTitle:
-    "section-title",
+  headerTitle: "section-title",
   headerTitleStyle: {
     color: "var(--headline)",
     borderColor: "var(--border)",
   },
-  headerSubTitle:
-    "font-jetbrains-mono text-sm font-normal tracking-wider",
+  headerSubTitle: "font-jetbrains-mono text-sm font-normal tracking-wider",
   headerSubTitleStyle: { color: "var(--secondary)" },
-  headerDesc:
-    "font-figtree text-sm mt-2 mb-4",
+  headerDesc: "font-figtree text-sm mt-2 mb-4",
   headerDescStyle: { color: "var(--paragraph)" },
-  categoryTitle:
-    "text-xs font-figtree font-medium mb-4 uppercase tracking-wider",
+  categoryTitle: "text-[11px] font-figtree font-medium mb-1 uppercase tracking-wider",
   categoryTitleStyle: { color: "var(--paragraph)" },
   skillButton:
     "flex items-center cursor-default rounded-lg px-3 py-2 font-medium text-xs gap-2 shadow transition focus:outline-none",
   skillButtonStyle: {
     backgroundColor: "var(--card-background)",
-    border: "1px solid var(--card-border-color)",
+    border: "none",
     color: "var(--headline)",
   },
 };
 
 export default function SkillsSection() {
   const onMouseEnter = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.currentTarget.style.borderColor = "var(--link-color)";
+    e.currentTarget.style.borderColor = "transparent";
   };
   const onMouseLeave = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.currentTarget.style.borderColor = "var(--card-border-color)";
+    e.currentTarget.style.borderColor = "transparent";
   };
 
   return (
@@ -154,7 +150,7 @@ export default function SkillsSection() {
             &lt; {title} /&gt;
           </h3>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex ibmsans flex-wrap gap-3">
             {skills.map(({ name, icon }) => (
               <button
                 key={name}
