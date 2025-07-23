@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { GraduationCap } from "lucide-react";
-import { useEducation } from "@/hooks/use-education";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useEducation } from "@/hooks/use-education";
+import { GraduationCap } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function Education() {
   const [isMounted, setIsMounted] = useState(false);
@@ -105,11 +105,20 @@ export default function Education() {
           }}
         >
           <div className="block cursor-default">
-            <div className="rounded-[12px] bg-[var(--card-background)] text-[var(--paragraph)] flex border border-[var(--card-border-color)] p-3 hover:bg-[var(--card-hover)] transition-colors">
-              <div className="flex-none">
-                <span className="relative flex shrink-0 overflow-hidden rounded-full border border-[var(--card-border-color)] size-12 m-auto bg-[var(--background)]">
+            <div className="rounded-[12px] bg-[var(--card-background)] text-[var(--paragraph)] flex border border-[var(--card-border-color)] p-3 hover:bg-[var(--card-hover)] transition-colors max-md:flex-col">
+              <div className="flex-none max-md:pb-4 max-md:ps-2 max-md:flex max-md:items-center max-md:justify-between max-md:w-full">
+                <span className="relative flex shrink-0 overflow-hidden rounded-full border border-[var(--card-border-color)] size-12 m-auto max-md:mx-0 bg-[var(--background)]">
                   <GraduationCap className="h-6 w-6 m-auto text-[var(--link-color)]" />
                 </span>
+
+ <div className="text-xs sm:text-sm tabular-nums max-md:flex hidden text-[var(--paragraph)] text-right">
+                      {formatDateRange(
+                        item.startDate,
+                        item.endDate,
+                        item.current,
+                      )}
+                    </div>
+
               </div>
               <div className="flex-grow ml-4 items-center flex-col group py-1">
                 <div className="flex flex-col">
@@ -117,7 +126,7 @@ export default function Education() {
                     <h3 className="inline-flex items-center justify-center font-semibold leading-none text-xs sm:text-sm text-[var(--headline)]">
                       {item.institution}
                     </h3>
-                    <div className="text-xs sm:text-sm tabular-nums text-[var(--paragraph)] text-right">
+                    <div className="text-xs sm:text-sm tabular-nums md:flex hidden text-[var(--paragraph)] text-right">
                       {formatDateRange(
                         item.startDate,
                         item.endDate,

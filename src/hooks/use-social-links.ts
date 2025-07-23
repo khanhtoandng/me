@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export interface SocialLink {
   _id: string;
@@ -21,9 +21,65 @@ interface UseSocialLinksReturn {
   refetch: () => Promise<void>;
 }
 
-export function useSocialLinks(
-  activeOnly: boolean = true,
-): UseSocialLinksReturn {
+const mockSocialLinks: SocialLink[] = [
+  {
+    _id: "1",
+    platform: "GitHub",
+    url: "https://github.com/balshaer",
+    icon: "github",
+    iconLibrary: "fontawesome",
+    isActive: true,
+    order: 1,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    _id: "2",
+    platform: "LinkedIn",
+    url: "https://linkedin.com/in/balshaer",
+    icon: "linkedin",
+    iconLibrary: "fontawesome",
+    isActive: true,
+    order: 2,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    _id: "3",
+    platform: "YouTube",
+    url: "https://youtube.com/@codewithbaraa",
+    icon: "youtube",
+    iconLibrary: "fontawesome",
+    isActive: true,
+    order: 3,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    _id: "4",
+    platform: "Email",
+    url: "mailto:alshaer.contact@gmail.com",
+    icon: "envelope",
+    iconLibrary: "fontawesome",
+    isActive: true,
+    order: 4,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    _id: "5",
+    platform: "WhatsApp",
+    url: "https://wa.me/970599349034",
+    icon: "whatsapp",
+    iconLibrary: "fontawesome",
+    isActive: true,
+    order: 5,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+];
+
+export function useSocialLinks(activeOnly: boolean = true): UseSocialLinksReturn {
   const [socialLinks, setSocialLinks] = useState<SocialLink[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -33,21 +89,15 @@ export function useSocialLinks(
       setLoading(true);
       setError(null);
 
-      const url = activeOnly
-        ? "/api/social-links?active=true"
-        : "/api/social-links";
+      const links = activeOnly
+        ? mockSocialLinks.filter((link) => link.isActive)
+        : mockSocialLinks;
 
-      const response = await fetch(url);
-      const data = await response.json();
+      await new Promise((resolve) => setTimeout(resolve, 300));
 
-      if (data.success) {
-        setSocialLinks(data.data);
-      } else {
-        throw new Error(data.error || "Failed to fetch social links");
-      }
-    } catch (err) {
-      console.error("Error fetching social links:", err);
-      setError(err instanceof Error ? err.message : "An error occurred");
+      setSocialLinks(links);
+    } catch {
+      setError("Failed to load social links");
       setSocialLinks([]);
     } finally {
       setLoading(false);

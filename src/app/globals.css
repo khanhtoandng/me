@@ -49,6 +49,7 @@
     --mobile-nav: #16161aa6;
     --gradient1: #7f5af0;
     --gradient1: #baa3fd;
+    --radius : 12px;
   }
 
   .light {
@@ -94,6 +95,8 @@
     --mobile-nav: #ffffffa6;
     --gradient1: #7f5af0;
     --gradient1: #baa3fd;
+    --radius : 12px;
+
   }
 
   .dark {

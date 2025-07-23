@@ -1,12 +1,12 @@
 "use client";
 
-import React from "react";
-import Link from "next/link";
 import { useSocialLinks } from "@/hooks/use-social-links";
-import * as FaIcons from "react-icons/fa";
+import Link from "next/link";
+import React from "react";
 import * as AiIcons from "react-icons/ai";
 import * as BiIcons from "react-icons/bi";
 import * as BsIcons from "react-icons/bs";
+import * as FaIcons from "react-icons/fa";
 import * as FiIcons from "react-icons/fi";
 import * as HiIcons from "react-icons/hi";
 import * as IoIcons from "react-icons/io5";
