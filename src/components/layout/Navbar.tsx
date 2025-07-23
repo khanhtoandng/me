@@ -1,12 +1,12 @@
 "use client";
 
+import Logo from "@/components/layout/Logo";
+import ToggleMode from "@/components/layout/ToggleMode";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import Logo from "./Logo";
-import ToggleMode from "./ToggleMode";
 
 const styles = {
   link: "text-[var(--headline)] hover:text-[var(--headline)] flex gap-[5px] rounded-md text-sm font-medium items-center py-2 relative",
