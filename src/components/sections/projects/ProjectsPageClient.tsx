@@ -1,14 +1,14 @@
 "use client";
 
 import Projects from "@/components/sections/projects/Projects";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import ProjectTypeSelect from "@/components/sections/projects/ProjectTypeSelect";
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 import { useState } from "react";
 
 export default function ProjectsPageClient() {
@@ -54,7 +54,7 @@ export default function ProjectsPageClient() {
         </div>
       </div>
 
-      <Projects filterType={filterType} />
+      <Projects />
     </div>
   );
 }

@@ -95,7 +95,6 @@ export default function Navbar() {
               <div className="flex items-center max-md:flex-wrap gap-3 max-md:gap-2 justify-center md:hidden">
            <ToggleMode/>
                 <motion.button
-                variants={"icon"}
                   className="text-[var(--headline)] p-2 rounded-full hover:bg-[var(--card-background)] transition-colors"
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                   whileTap={{ scale: 0.95 }}
