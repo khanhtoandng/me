@@ -1,11 +1,12 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, MessageCircle, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import Logo from "./Logo";
+import ToggleMode from "./ToggleMode";
 
 const styles = {
   link: "text-[var(--headline)] hover:text-[var(--headline)] flex gap-[5px] rounded-md text-sm font-medium items-center py-2 relative",
@@ -40,10 +41,10 @@ export default function Navbar() {
     path.startsWith("/admin");
 
   const navItems = [
-    { label: "Home", href: "/" },
     { label: "Work", href: "/#work" },
     { label: "Projects", href: "/#projects" },
     { label: "Post", href: "/posts" },
+    { label: "Say Hi", href: "/contact" },
   ];
 
   return (
@@ -91,29 +92,8 @@ export default function Navbar() {
                 </div>
               </div>
 
-              {/* Say Hi link with icon and hover effect */}
-              <div className="flex h-full items-center justify-center gap-4 max-md:hidden max-md:gap-2">
-                <Link
-                  href="/contact"
-                  className={
-                    "text-[var(--headline)] hover:text-[var(--headline)] flex gap-[5px] rounded-md text-sm font-medium items-center py-2 relative"
-                  }
-                >
-                  <MessageCircle className="h-5 w-5" />
-                  Say Hi
-                </Link>
-              </div>
-
               <div className="flex items-center max-md:flex-wrap gap-3 justify-center md:hidden">
-                {/* Say Hi link in mobile with icon */}
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-1 bg-[var(--button)] rounded-[12px] px-3 py-1 text-[var(--button-text)] font-semibold shadow-md hover:bg-[var(--button-hover)] hover:shadow-lg transition duration-300 ease-in-out"
-                >
-                  <MessageCircle className="h-4 w-4" />
-                  Say Hi
-                </Link>
-
+           <ToggleMode/>
                 <motion.button
                   className="text-[var(--headline)] p-2 rounded-full hover:bg-[var(--card-background)] transition-colors"
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -127,6 +107,10 @@ export default function Navbar() {
                     <Menu className="h-5 w-5" />
                   </motion.div>
                 </motion.button>
+              </div>
+
+              <div className="hidden md:flex items-center gap-3">
+                <ToggleMode />
               </div>
 
               <AnimatePresence>
@@ -175,16 +159,7 @@ export default function Navbar() {
                       ))}
                     </div>
 
-                    <motion.div
-                      className="absolute bottom-10 left-0 w-full flex justify-center"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.5 }}
-                    >
-                      <div className="text-[var(--paragraph)] text-sm">
-                        &copy; {new Date().getFullYear()} Baraa Alshaer
-                      </div>
-                    </motion.div>
+               
                   </motion.div>
                 )}
               </AnimatePresence>

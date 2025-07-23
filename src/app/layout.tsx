@@ -6,11 +6,11 @@ import Navbar from "@/components/layout/Navbar";
 import BackgroundEffect from "@/components/ui/backgroundEffect";
 import { CustomDialogProvider } from "@/components/ui/custom-dialog";
 import FloatingActionButton from "@/components/ui/FloatingActionButton";
-import { ThemeProvider } from "@/contexts/theme-provider";
 import { domain, email, webImage, websitePath } from "@/data/Links";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "sonner";
+import { ThemeProvider } from "@/theme/theme-provider";
 
 // Define keywords for better SEO
 const keywords = [
@@ -186,7 +186,12 @@ export default function RootLayout({
       <body className="flex relative dark flex-col min-h-screen">
         <SpeedInsights />
         <Analytics />
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+                  <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+          >
+
           <CustomDialogProvider />
           <Toaster />
           <Navbar />
