@@ -36,11 +36,11 @@ function HeroSocialLinks() {
   }
 
   return (
-    <section className="py-2">
+    <section >
       <div className="w-full mx-auto   ">
         <div className="text-left mb-4">
           <p
-            className="text-[var(--paragraph)] text-sm border-t pt-2"
+            className="text-[var(--paragraph)] text-sm  pt-2"
             style={{ borderColor: "var(--card-border-color)" }}
           >
             Where to find me{" "}

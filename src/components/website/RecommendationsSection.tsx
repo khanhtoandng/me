@@ -11,7 +11,7 @@ import { MagicCard } from "../ui/MagicCard";
 const styles = {
   section: "w-full",
   headerTitle:
-    "font-doto font-bold tracking-wider text-[26px] leading-8 border-t pt-2",
+    "font-doto font-bold tracking-wider text-[26px] leading-8  pt-2",
   headerTitleStyle: {
     color: "var(--headline)",
     borderColor: "var(--border)",

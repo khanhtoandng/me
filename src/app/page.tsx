@@ -4,6 +4,8 @@ import ClickSpark from "@/components/ui/ClickSpark";
 import ShinyText from "@/components/ui/ShinyText";
 import Education from "@/components/website/Education";
 import HeroSection from "@/components/website/HeroSection";
+import PostSection from "@/components/website/PostSection";
+import Projects from "@/components/website/Projects";
 import RecommendationsSection from "@/components/website/RecommendationsSection";
 import SkillsSection from "@/components/website/SkillsSection";
 import WorkExperienceSection from "@/components/website/WorkExperienceSection";
@@ -11,37 +13,38 @@ import { mailto } from "@/data/Links";
 import { ScrollEffect } from "@/lib/animations";
 import Link from "next/link";
 
-// Note: Metadata is handled by PageSeo component since this is now a client component
 
 export default function HomePage() {
   return (
     <div className="container mx-auto">
-      {/* Add structured data for the home page */}
 
-      {/* Hero Section */}
       <HeroSection />
 
-      {/* Education Section with SectionDivider */}
       <div className="py-4">
         <Education />
       </div>
 
 
-        <div className="py-4">
+      <div className="py-4">
         <SkillsSection />
       </div>
 
-      {/* Work Experience Section */}
       <div className="py-4">
         <WorkExperienceSection />
       </div>
 
-      {/* Recommendations Section */}
+      <div className="py-4">
+        <Projects />
+      </div>
+
+
       <div className="py-4">
         <RecommendationsSection />
       </div>
 
-      {/* Contact CTA Section */}
+      <div className="py-4">
+        <PostSection />
+      </div>
 
       <ClickSpark
         sparkColor="var(--headline)"
