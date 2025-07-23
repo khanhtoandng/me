@@ -3,10 +3,10 @@
 import ClickSpark from "@/components/ui/ClickSpark";
 import ShinyText from "@/components/ui/ShinyText";
 import Education from "@/components/website/Education";
-import { ExperienceTimeline } from "@/components/website/ExperienceTimeline";
 import HeroSection from "@/components/website/HeroSection";
 import RecommendationsSection from "@/components/website/RecommendationsSection";
 import SkillsSection from "@/components/website/SkillsSection";
+import WorkExperienceSection from "@/components/website/WorkExperienceSection";
 import { mailto } from "@/data/Links";
 import { ScrollEffect } from "@/lib/animations";
 import Link from "next/link";
@@ -33,7 +33,7 @@ export default function HomePage() {
 
       {/* Work Experience Section */}
       <div className="py-4">
-        <ExperienceTimeline />
+        <WorkExperienceSection />
       </div>
 
       {/* Recommendations Section */}
