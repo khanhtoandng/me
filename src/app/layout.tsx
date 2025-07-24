@@ -7,12 +7,11 @@ import BackgroundEffect from "@/components/ui/backgroundEffect";
 import { CustomDialogProvider } from "@/components/ui/custom-dialog";
 import FloatingActionButton from "@/components/ui/FloatingActionButton";
 import { domain, email, webImage, websitePath } from "@/data/Links";
+import { ThemeProvider } from "@/theme/theme-provider";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "sonner";
-import { ThemeProvider } from "@/theme/theme-provider";
 
-// Define keywords for better SEO
 const keywords = [
   "Baraa Alshaer",
   "Full Stack Developer",
@@ -31,7 +30,6 @@ const keywords = [
   "Web Applications",
 ];
 
-// Define metadata for better SEO
 export const metadata: Metadata = {
   metadataBase: new URL(`https://${domain}`),
   title: {
@@ -39,16 +37,11 @@ export const metadata: Metadata = {
     default: "Baraa Alshaer",
   },
   description:
-    "Portfolio of Baraa Alshaer, a skilled Full Stack Developer with expertise in React, Node.js, TypeScript, and more. Creating impactful web applications with a focus on user experience and modern technologies.",
+    "Portfolio of Baraa Alshaer, a skilled Full Stack Developer with expertise in React, Node.js, TypeScript, and more.",
   keywords: keywords.join(", "),
   authors: [{ name: "Baraa Alshaer", url: websitePath.main }],
   creator: "Baraa Alshaer",
   publisher: "Baraa Alshaer",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
   alternates: {
     canonical: websitePath.main,
     languages: {
@@ -62,7 +55,7 @@ export const metadata: Metadata = {
     alternateLocale: "ar_SA",
     title: "balshaer",
     description:
-      "Explore the portfolio of Baraa Alshaer, a passionate Full Stack Developer. Projects, blogs, and more showcasing expertise in modern web development with React, Node.js, and TypeScript.",
+      "Explore the portfolio of Baraa Alshaer, a passionate Full Stack Developer.",
     url: websitePath.main,
     siteName: "Baraa Alshaer Portfolio",
     images: [
@@ -80,7 +73,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "balshaer",
     description:
-      "Explore the portfolio of Baraa Alshaer, a passionate Full Stack Developer. Projects, blogs, and more showcasing expertise in modern web development.",
+      "Explore the portfolio of Baraa Alshaer, a passionate Full Stack Developer.",
     images: webImage,
     creator: "@balshaer",
   },
@@ -94,14 +87,8 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    // Add your verification tokens if you have them
-    // google: "your-google-verification-code",
-    // yandex: "your-yandex-verification-code",
-  },
 };
 
-// Define viewport settings for better mobile experience
 export const viewport: Viewport = {
   themeColor: "#16161a",
   width: "device-width",
@@ -117,47 +104,9 @@ export default function RootLayout({
   return (
     <html lang="en" dir="ltr">
       <head>
-        {/* Add preconnect for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <meta name="apple-mobile-web-app-title" content="Baraa" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-
-        {/* Script to fix hydration errors caused by browser extensions like Grammarly */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                // Remove attributes added by browser extensions (like Grammarly)
-                // that can cause hydration errors
-                const observer = new MutationObserver((mutations) => {
-                  mutations.forEach(({ target }) => {
-                    if (target.nodeType === 1) {
-                      const elem = target;
-                      if (elem.hasAttribute('data-gr-ext-installed') ||
-                          elem.hasAttribute('data-new-gr-c-s-check-loaded')) {
-                        elem.removeAttribute('data-gr-ext-installed');
-                        elem.removeAttribute('data-new-gr-c-s-check-loaded');
-                      }
-                    }
-                  });
-                });
-
-                // Start observing the document
-                observer.observe(document.documentElement, {
-                  attributes: true,
-                  subtree: true,
-                  attributeFilter: ['data-gr-ext-installed', 'data-new-gr-c-s-check-loaded']
-                });
-              })();
-            `,
-          }}
-        />
-
-        {/* Add structured data for Person */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -183,20 +132,15 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="flex relative dark flex-col min-h-screen">
+      <body className="flex relative flex-col min-h-screen">
         <SpeedInsights />
         <Analytics />
-                  <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-          >
-
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <CustomDialogProvider />
           <Toaster />
           <Navbar />
           <BackgroundEffect />
-          <main className=" z-40 max-md:z-30  mx-auto w-full flex-grow">
+          <main className="z-40 max-md:z-30 mx-auto w-full flex-grow">
             {children}
           </main>
           <Footer />

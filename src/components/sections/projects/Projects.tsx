@@ -22,7 +22,7 @@ interface Project {
 const projectsData: Project[] = [
   {
     id: "proj_1",
-    title: "Samtax",
+    title: "sam-tax.com",
     description:
       "A trusted tax and accounting platform providing expert tax preparation, financial planning, and business advisory services. Developed a secure, scalable web application with multi-language support, integrated payment systems, and AI-powered automation tools.",
     type: "Web Application",
@@ -47,7 +47,7 @@ const projectsData: Project[] = [
   },
   {
     id: "proj_3",
-    title: "SFP - Sustainable Star Form Builder",
+    title: "SF",
     description:
       "A powerful, no-code form builder that lets you create, customize, and deploy smart forms in minutes. Designed for teams and creators who need flexible data collection without the technical headache.",
     type: "SaaS Platform",

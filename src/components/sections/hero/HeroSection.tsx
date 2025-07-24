@@ -5,10 +5,10 @@ import { useSocialLinks } from "@/hooks/use-social-links";
 import { memo } from "react";
 
 import {
-  AiFillTwitterCircle,
-  AiFillYoutube,
-  AiOutlineMail,
-  AiOutlineWhatsApp,
+    AiFillTwitterCircle,
+    AiFillYoutube,
+    AiOutlineMail,
+    AiOutlineWhatsApp,
 } from "react-icons/ai";
 import { BsLinkedin } from "react-icons/bs";
 import { FaFacebook } from "react-icons/fa";

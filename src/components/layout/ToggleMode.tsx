@@ -4,7 +4,7 @@ export default function ToggleMode() {
   return (
     <div>
  
-    <ThemeToggleButton showLabel variant="circle-blur" start="top-right" />
+    <ThemeToggleButton  variant="circle-blur" start="top-right" />
 
 
     </div>
