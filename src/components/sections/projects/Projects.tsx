@@ -3,7 +3,7 @@
 import { SkillsList } from "@/components/ui/skills";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { AiOutlineBranches, AiOutlineCalendar, AiOutlineCheckCircle, AiOutlineCode, AiOutlineTag } from "react-icons/ai";
+import { AiOutlineBranches, AiOutlineCode } from "react-icons/ai";
 import { BsCloud, BsFillPeopleFill } from "react-icons/bs";
 import { FaCss3Alt, FaNodeJs, FaReact } from "react-icons/fa";
 import { MdDesignServices } from "react-icons/md";
@@ -175,6 +175,46 @@ const techIconMap: Record<string, React.ReactNode> = {
   "Open Source": <SiGithubactions className="text-black dark:text-white" title="Open Source" />,
   "Data Visualization": <MdDesignServices className="text-purple-500" title="Data Visualization" />,
 };
+
+function ProjectDescription({ description }: { description: string }) {
+  return (
+    <ul className="mb-4 list-disc ml-6 space-y-2">
+      {description.split("\n\n").map((item, idx) => (
+        <li key={idx} className="flex items-start gap-2">
+          <span className="text-base leading-5">-</span>
+          <span>{item.replace(/^•\s*/, "")}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function ProjectLinks({ github }: { github?: string }) {
+  if (!github) return null;
+  return (
+    <li className="flex items-center gap-2">
+      <AiOutlineBranches className="text-[var(--headline)]" />
+      <strong style={{ color: "var(--headline)" }}>GitHub:</strong>
+      <a
+        href={github}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="underline"
+        style={{ color: "var(--link-color)" }}
+      >
+        {github}
+      </a>
+    </li>
+  );
+}
+
+function ProjectTechnologies({ technologies }: { technologies: string[] }) {
+  return (
+    <li className="flex items-center gap-2 mb-4 list-disc ml-6 space-y-2">
+      <SkillsList skills={technologies} iconMap={techIconMap} />
+    </li>
+  );
+}
 
 const Projects = () => {
   const [openProjectId, setOpenProjectId] = useState<string | null>(null);
@@ -364,18 +404,7 @@ const Projects = () => {
                 initial="closed"
                 animate="open"
                 exit="closed"
-                variants={{
-                  open: {
-                    opacity: 1,
-                    height: "auto",
-                    transition: { duration: 0.4, ease: "easeInOut" },
-                  },
-                  closed: {
-                    opacity: 0,
-                    height: 0,
-                    transition: { duration: 0.4, ease: "easeInOut" },
-                  },
-                }}
+                variants={contentVariants}
                 style={{
                   overflow: "hidden",
                   borderTopStyle: "dashed",
@@ -388,14 +417,7 @@ const Projects = () => {
                   className="prose prose-sm max-w-none font-mono prose-headings:font-semibold prose-headings:text-2xl prose-lead:text-base prose-a:font-medium prose-a:underline prose-code:rounded-md prose-code:border prose-code:px-[0.3rem] prose-code:py-[0.2rem] prose-code:text-sm prose-code:font-normal prose-code:before:content-none prose-code:after:content-none prose-hr:border-edge p-4"
                   style={{ color: "var(--card-paragraph)" }}
                 >
-                  <ul className="mb-4 list-disc ml-6 space-y-2">
-                    {project.description.split("\n\n").map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-2">
-                        <span className="text-base leading-5">-</span>
-                        <span>{item.replace(/^•\s*/, "")}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <ProjectDescription description={project.description} />
                   {project.videoUrl && (
                     <p className="mb-2">
                       <a
@@ -409,47 +431,9 @@ const Projects = () => {
                       </a>
                     </p>
                   )}
-                  <ul className="mb-2 space-y-2">
-                    <li className="flex items-center gap-2">
-                      <AiOutlineTag className="text-[var(--headline)]" />
-                      <strong style={{ color: "var(--headline)" }}>Type:</strong>
-                      <span>{project.type}</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <AiOutlineCheckCircle className="text-[var(--headline)]" />
-                      <strong style={{ color: "var(--headline)" }}>Status:</strong>
-                      <span>{project.status}</span>
-                    </li>
-                    {project.github && (
-                      <li className="flex items-center gap-2">
-                        <AiOutlineBranches className="text-[var(--headline)]" />
-                        <strong style={{ color: "var(--headline)" }}>GitHub:</strong>
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="underline"
-                          style={{ color: "var(--link-color)" }}
-                        >
-                          {project.github}
-                        </a>
-                      </li>
-                    )}
-                    <li className="flex items-center gap-2">
-                      <AiOutlineCode className="text-[var(--headline)]" />
-                      <strong style={{ color: "var(--headline)" }}>Technologies:</strong>
-                      <SkillsList skills={project.technologies} iconMap={techIconMap} />
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <AiOutlineCalendar className="text-[var(--headline)]" />
-                      <strong style={{ color: "var(--headline)" }}>Created:</strong>
-                      <span>{project.created ? new Date(project.created).toLocaleDateString("en-US") : "Unknown"}</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <AiOutlineCalendar className="text-[var(--headline)]" />
-                      <strong style={{ color: "var(--headline)" }}>Updated:</strong>
-                      <span>{project.status === "Published" && !project.updated ? "Present" : project.updated ? new Date(project.updated).toLocaleDateString("en-US") : "Unknown"}</span>
-                    </li>
+                  <ul className="mb-2 space-y-2 ">
+                    <ProjectLinks github={project.github} />
+                    <ProjectTechnologies technologies={project.technologies} />
                   </ul>
                 </div>
               </motion.div>

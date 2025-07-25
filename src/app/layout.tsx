@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(`https://${domain}`),
   title: {
     template: "Baraa Alshaer - %s",
-    default: "Baraa Alshaer",
+    default: "Baraa Alshaer - Software Developer ",
   },
   description:
     "Portfolio of Baraa Alshaer, a skilled Full Stack Developer with expertise in React, Node.js, TypeScript, and more.",

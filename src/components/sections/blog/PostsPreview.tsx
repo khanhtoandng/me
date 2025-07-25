@@ -66,7 +66,7 @@ export default function PostsPreview() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
       dir={direction}
-      className="posts  flex min-h-[100vh] w-full flex-col gap-5 max-md:pb-0 max-md:pt-[50px]"
+      className="posts  flex min-h-[100vh] w-full flex-col gap-5 max-md:pb-0 max-md:pt-[0px]"
     >
       <div className="flex relative w-full min-h-[50vh] flex-col items-center justify-center gap-8 ">
         {loading

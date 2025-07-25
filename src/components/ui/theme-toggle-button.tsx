@@ -101,11 +101,9 @@ export function ThemeToggleButton({
   }, [theme, setTheme])
 
   return (
-    <Button
+    <button
       onClick={toggleTheme}
-      variant="ghost"
-      size="icon"
-      className="w-12 p-0 h-12 relative group" // updated width and height classes to fit larger icons
+      className="w-12 max-md:w-max  p-0 h-12  relative group" // updated width and height classes to fit larger icons
       name="Theme Toggle Button"
     >
       <AnimatePresence initial={false} mode="wait">
@@ -133,6 +131,6 @@ export function ThemeToggleButton({
           </motion.span>
         )}
       </AnimatePresence>
-    </Button>
+    </button>
   )
 }

@@ -12,13 +12,6 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import {
-  AiOutlineBranches,
-  AiOutlineCalendar,
-  AiOutlineCheckCircle,
-  AiOutlineCode,
-  AiOutlineTag,
-} from "react-icons/ai";
 
 import {
   Collapsible,
@@ -107,12 +100,10 @@ function ExperienceItem({ experience }: { experience: ExperienceItemType }) {
 }
 
 function ExperiencePositionItem({ position }: { position: ExperiencePositionItemType }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(position.isExpanded ?? false);
 
   useEffect(() => {
-    if (position.isExpanded !== undefined) {
-      setIsOpen(position.isExpanded);
-    }
+    if (position.isExpanded !== undefined) setIsOpen(position.isExpanded);
   }, [position.isExpanded]);
 
   const ExperienceIcon = iconMap[position.icon || "business"];
@@ -127,19 +118,13 @@ function ExperiencePositionItem({ position }: { position: ExperiencePositionItem
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
           >
             <div className="relative z-10 mb-1 flex items-center gap-3 bg-[var(--background)]">
-              <div
-                className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-[var(--card-background)] border text-[var(--card-paragraph)]"
-                aria-hidden
-              >
+              <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-[var(--card-background)] border text-[var(--card-paragraph)]" aria-hidden>
                 <ExperienceIcon className="h-4 w-4" />
               </div>
               <h4 className="flex-1 text-base font-medium text-[var(--main)]">
                 {position.title}
               </h4>
-              <div
-                className="shrink-0 text-[var(--secondary)] [&_svg]:h-4 [&_svg]:w-4"
-                aria-hidden
-              >
+              <div className="shrink-0 text-[var(--secondary)] [&_svg]:h-4 [&_svg]:w-4" aria-hidden>
                 {isOpen ? <ChevronsDownUpIcon /> : <ChevronsUpDownIcon />}
               </div>
             </div>
@@ -150,11 +135,7 @@ function ExperiencePositionItem({ position }: { position: ExperiencePositionItem
                     <dt className="sr-only">Employment Type</dt>
                     <dd>{position.employmentType}</dd>
                   </dl>
-                  <Separator
-                    className="data-[orientation=vertical]:h-4"
-                    orientation="vertical"
-                    style={{ borderColor: "var(--border)" }}
-                  />
+                  <Separator className="data-[orientation=vertical]:h-4" orientation="vertical" style={{ borderColor: "var(--border)" }} />
                 </>
               )}
               <dl>
@@ -165,66 +146,53 @@ function ExperiencePositionItem({ position }: { position: ExperiencePositionItem
           </motion.div>
         </CollapsibleTrigger>
         <AnimatePresence initial={false}>
-          {isOpen && (
-            <motion.div
-              key="content"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.25 }}
-            >
+          <motion.div
+            key={isOpen ? "open" : "closed"}
+            initial={{ opacity: 0, height: 0 }}
+            animate={isOpen ? { opacity: 1, height: "auto" } : { opacity: 0, height: 0 }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25 }}
+            style={{ overflow: "hidden" }}
+          >
+            {isOpen && (
               <CollapsibleContent className="overflow-hidden">
-                {/* Description as bullet list */}
                 {position.description && (
-                  <div className="pt-2 pl-9">
-                    <ul className="mb-4 list-disc ml-6 space-y-2">
-                      {position.description.split("\n\n").map((desc: string, idx: number) => (
-                        <li key={idx} className="flex items-start gap-2">
-                          <span className="text-base leading-5">-</span>
-                          <span>{desc.replace(/^•\s*/, "")}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  <DescriptionList description={position.description} />
                 )}
-                {/* Details with icons */}
-                <div className="pl-9">
-                  <ul className="mb-2 space-y-2">
-                    <li className="flex items-center gap-2">
-                      <AiOutlineTag className="text-[var(--headline)]" />
-                      <strong style={{ color: "var(--headline)" }}>Title:</strong>
-                      <span>{position.title}</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <AiOutlineCheckCircle className="text-[var(--headline)]" />
-                      <strong style={{ color: "var(--headline)" }}>Type:</strong>
-                      <span>{position.employmentType}</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <AiOutlineCalendar className="text-[var(--headline)]" />
-                      <strong style={{ color: "var(--headline)" }}>Period:</strong>
-                      <span>{position.employmentPeriod}</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <AiOutlineCode className="text-[var(--headline)]" />
-                      <strong style={{ color: "var(--headline)" }}>Skills:</strong>
-                      <SkillsList skills={Array.isArray(position.skills) ? position.skills : []} iconMap={skillIconMap} />
-                    </li>
-                    {position.location && (
-                      <li className="flex items-center gap-2">
-                        <AiOutlineBranches className="text-[var(--headline)]" />
-                        <strong style={{ color: "var(--headline)" }}>Location:</strong>
-                        <span>{position.location}</span>
-                      </li>
-                    )}
-                  </ul>
-                </div>
+                <SkillsSection skills={position.skills} />
               </CollapsibleContent>
-            </motion.div>
-          )}
+            )}
+          </motion.div>
         </AnimatePresence>
       </div>
     </Collapsible>
+  );
+}
+
+function DescriptionList({ description }: { description: string }) {
+  return (
+    <div className="pt-2 pl-9 max-md:pl-2">
+      <ul className="mb-4 list-disc ml-6 space-y-2">
+        {description.split("\n\n").map((desc, idx) => (
+          <li key={idx} className="flex items-start gap-2">
+            <span className="text-base leading-5">-</span>
+            <span>{desc.replace(/^•\s*/, "")}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function SkillsSection({ skills }: { skills?: string[] }) {
+  return (
+    <div className="pl-9 max-md:pl-2">
+      <ul className="mb-4 list-disc ml-6 space-y-2">
+        <li className="flex items-center gap-2 ">
+          <SkillsList skills={Array.isArray(skills) ? skills : []} iconMap={skillIconMap} />
+        </li>
+      </ul>
+    </div>
   );
 }
 

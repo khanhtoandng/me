@@ -15,8 +15,15 @@
     --paragraph: #94a1b2;
     --button: #4f565f;
     --button2: #7f5af08a;
-    --button-border: #7f5af054;
-    --button-text: #fffffe;
+    --button-border: #ffffff0d;
+    --button-border-main: #ffffff1a;
+    --button-border-hover: #ffffff1a;
+    --button-bg-from: #3f3f46;
+    --button-bg-to: #27272a;
+    --button-text: #fff;
+    --button-shadow: 0 1px 2px 0 #0000001a;
+    --button-hover-to: #3f3f46;
+    --button-text-shadow: 0 1px 2px #0006;
     --illustration-stroke: #01010179;
     --main: #fffffe;
     --highlight: #7f5af0;
@@ -53,17 +60,23 @@
     --gradient1: #7f5af0;
     --gradient1: #baa3fd;
     --radius : 12px;
-    
   }
 
   .light {
-        --background: #fffffe;
+    --background: #fffffe;
     --headline: #16161a;
     --paragraph: #36374a;
     --button: #efeff2;
     --button2: #baa3fd8a;
-    --button-border: #baa3fd54;
-    --button-text: #16161a;
+    --button-border: #ffffff1a;
+    --button-border-main: #ffffff1a;
+    --button-border-hover: #ffffff1a;
+    --button-bg-from: #f4f4f5;
+    --button-bg-to: #e4e4e7;
+    --button-text: #18181b;
+    --button-shadow: 0 1px 2px 0 #0000000a;
+    --button-hover-to: #e4e4e7;
+    --button-text-shadow: 0 1px 2px #fff6;
     --illustration-stroke: #b4b4b479;
     --main: #16161a;
     --highlight: #7f5af0;
@@ -98,9 +111,7 @@
     --active-text: #fffffe;
     --mobile-nav: #fffffea6;
     --gradient1: #baa3fd;
-    --gradient2: #7f5af0;
-    --radius: 12px;
-
+    --radius : 12px;
   }
 
   .dark {
@@ -233,7 +244,7 @@
   }
 
   .container {
-    @apply max-w-[1024px] px-[20px];
+    @apply max-w-[930px] px-[20px];
   }
 }
 
