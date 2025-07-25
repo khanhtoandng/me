@@ -68,7 +68,7 @@ export default function Navbar() {
               <div className="hidden h-full items-center justify-center md:flex">
                 <div
                   dir="ltr"
-                  className="flex h-full  items-center justify-center gap-8"
+                  className="flex h-full  items-center justify-center gap-6"
                 >
                   {navItems.map((item) => (
                     <motion.div

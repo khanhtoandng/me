@@ -1,7 +1,13 @@
 "use client";
 
+import { SkillsList } from "@/components/ui/skills";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
+import { AiOutlineBranches, AiOutlineCalendar, AiOutlineCheckCircle, AiOutlineCode, AiOutlineTag } from "react-icons/ai";
+import { BsCloud, BsFillPeopleFill } from "react-icons/bs";
+import { FaCss3Alt, FaNodeJs, FaReact } from "react-icons/fa";
+import { MdDesignServices } from "react-icons/md";
+import { SiExpress, SiGithubactions, SiMongodb, SiNextdotjs, SiOpenai, SiTailwindcss, SiTypescript, SiVite } from "react-icons/si";
 
 interface Project {
   id: string;
@@ -28,16 +34,17 @@ const projectsData: Project[] = [
     type: "Web Application",
     website: "https://sam-tax.com/",
     technologies: [
-      "React",
+      "React (Next.js)",
       "TypeScript",
       "Node.js",
       "Express.js",
       "MongoDB",
       "Tailwind CSS",
-      "JWT",
-      "OAuth",
-      "GitHub Actions",
-      "Systems Design",
+      "JWT & OAuth",
+      "CI/CD (GitHub Actions)",
+      "AI Automation",
+      "Payment Integration",
+      "Cloud Deployment",
     ],
     status: "Published",
     featured: true,
@@ -47,22 +54,22 @@ const projectsData: Project[] = [
   },
   {
     id: "proj_3",
-    title: "SF",
+    title: "SFB - Sustainable Form Builder ",
     description:
       `• Powerful no-code form builder for creating, customizing, and deploying smart forms in minutes.\n\n• Designed for teams and creators needing flexible data collection without technical headaches.\n\n• Features drag-and-drop, advanced logic, and seamless integrations.`,
     type: "SaaS Platform",
     website: "https://sfb-app.com",
     technologies: [
-      "React.js",
-      "React DnD",
+      "React (Next.js)",
       "TypeScript",
+      "React DnD",
       "Node.js",
-      "SaaS Architecture",
+      "RESTful APIs",
       "Tailwind CSS",
-      "JWT",
-      "OAuth",
-      "REST APIs",
-      "UML",
+      "JWT & OAuth",
+      "SaaS Multi-Tenant Architecture",
+      "Cloud Hosting",
+      "Automated Testing",
     ],
     status: "Published",
     featured: true,
@@ -79,7 +86,15 @@ const projectsData: Project[] = [
     type: "Tool",
     website: "https://gradientscss.vercel.app/",
     github: "https://github.com/projects/gradientscss",
-    technologies: ["React", "TypeScript", "Tailwind CSS", "CSS3", "Vite"],
+    technologies: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Vite",
+      "CSS3",
+      "UI/UX Design",
+      "Export Utilities",
+    ],
     status: "Published",
     featured: true,
     created: "2023-03-01",
@@ -93,7 +108,14 @@ const projectsData: Project[] = [
       `• Comprehensive website for Barber Academy with online appointment scheduling.\n\n• Showcases a complete range of services and streamlines operations.\n\n• Delivered a user-friendly platform that increased client engagement.`,
     type: "Website",
     website: "https://raoufzadi.vercel.app/",
-    technologies: ["React", "TypeScript", "Tailwind CSS", "REST APIs"],
+    technologies: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "RESTful APIs",
+      "Booking System",
+      "Responsive Design",
+    ],
     status: "Published",
     featured: true,
     created: "2022-11-01",
@@ -108,7 +130,16 @@ const projectsData: Project[] = [
     type: "Tool",
     website: "https://saascan.vercel.app/",
     github: "https://github.com/balshaer/saascan",
-    technologies: ["React", "TypeScript", "Tailwind CSS", "Node.js"],
+    technologies: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Node.js",
+      "Gemini AI API",
+      "Prompt Engineering",
+      "Open Source",
+      "Data Visualization",
+    ],
     status: "Published",
     featured: false,
     created: "2023-01-01",
@@ -116,6 +147,34 @@ const projectsData: Project[] = [
     logoFileName: "saascan.png",
   },
 ];
+
+const techIconMap: Record<string, React.ReactNode> = {
+  "React": <FaReact className="text-sky-500" title="React" />,
+  "React.js": <FaReact className="text-sky-500" title="React.js" />,
+  "React (Next.js)": <SiNextdotjs className="text-black dark:text-white" title="Next.js" />,
+  "Next.js": <SiNextdotjs className="text-black dark:text-white" title="Next.js" />,
+  "TypeScript": <SiTypescript className="text-blue-600" title="TypeScript" />,
+  "Node.js": <FaNodeJs className="text-green-700" title="Node.js" />,
+  "Express.js": <SiExpress className="text-gray-700" title="Express.js" />,
+  "MongoDB": <SiMongodb className="text-green-600" title="MongoDB" />,
+  "Tailwind CSS": <SiTailwindcss className="text-cyan-400" title="Tailwind CSS" />,
+  "CSS3": <FaCss3Alt className="text-blue-500" title="CSS3" />,
+  "Vite": <SiVite className="text-purple-500" title="Vite" />,
+  "JWT & OAuth": <BsFillPeopleFill className="text-yellow-600" title="JWT & OAuth" />,
+  "RESTful APIs": <BsCloud className="text-blue-400" title="RESTful APIs" />,
+  "CI/CD (GitHub Actions)": <SiGithubactions className="text-gray-700" title="GitHub Actions" />,
+  "AI Automation": <SiOpenai className="text-gray-700" title="AI Automation" />,
+  "Gemini AI API": <SiOpenai className="text-gray-700" title="Gemini AI API" />,
+  "Prompt Engineering": <SiOpenai className="text-gray-700" title="Prompt Engineering" />,
+  "Cloud Deployment": <BsCloud className="text-blue-400" title="Cloud Deployment" />,
+  "Cloud Hosting": <BsCloud className="text-blue-400" title="Cloud Hosting" />,
+  "UI/UX Design": <MdDesignServices className="text-pink-500" title="UI/UX Design" />,
+  "Export Utilities": <MdDesignServices className="text-pink-500" title="Export Utilities" />,
+  "Booking System": <BsFillPeopleFill className="text-green-700" title="Booking System" />,
+  "SaaS Multi-Tenant Architecture": <BsFillPeopleFill className="text-blue-700" title="SaaS Multi-Tenant Architecture" />,
+  "Open Source": <SiGithubactions className="text-black dark:text-white" title="Open Source" />,
+  "Data Visualization": <MdDesignServices className="text-purple-500" title="Data Visualization" />,
+};
 
 const Projects = () => {
   const [openProjectId, setOpenProjectId] = useState<string | null>(null);
@@ -350,18 +409,21 @@ const Projects = () => {
                       </a>
                     </p>
                   )}
-                  <ul className="mb-2 space-y-1">
-                    <li>
-                      <strong style={{ color: "var(--headline)" }}>Type:</strong>{" "}
-                      {project.type}
+                  <ul className="mb-2 space-y-2">
+                    <li className="flex items-center gap-2">
+                      <AiOutlineTag className="text-[var(--headline)]" />
+                      <strong style={{ color: "var(--headline)" }}>Type:</strong>
+                      <span>{project.type}</span>
                     </li>
-                    <li>
-                      <strong style={{ color: "var(--headline)" }}>Status:</strong>{" "}
-                      {project.status}
+                    <li className="flex items-center gap-2">
+                      <AiOutlineCheckCircle className="text-[var(--headline)]" />
+                      <strong style={{ color: "var(--headline)" }}>Status:</strong>
+                      <span>{project.status}</span>
                     </li>
                     {project.github && (
-                      <li>
-                        <strong style={{ color: "var(--headline)" }}>GitHub:</strong>{" "}
+                      <li className="flex items-center gap-2">
+                        <AiOutlineBranches className="text-[var(--headline)]" />
+                        <strong style={{ color: "var(--headline)" }}>GitHub:</strong>
                         <a
                           href={project.github}
                           target="_blank"
@@ -373,27 +435,20 @@ const Projects = () => {
                         </a>
                       </li>
                     )}
-                    <li>
-                      <strong style={{ color: "var(--headline)" }}>Technologies:</strong>{" "}
-                      {project.technologies.length > 0
-                        ? project.technologies.join(", ")
-                        : "N/A"}
+                    <li className="flex items-center gap-2">
+                      <AiOutlineCode className="text-[var(--headline)]" />
+                      <strong style={{ color: "var(--headline)" }}>Technologies:</strong>
+                      <SkillsList skills={project.technologies} iconMap={techIconMap} />
                     </li>
-                    <li>
-                      <strong style={{ color: "var(--headline)" }}>Created:</strong>{" "}
-                      {project.created
-                        ? new Date(project.created).toLocaleDateString("en-US")
-                        : "Unknown"}
+                    <li className="flex items-center gap-2">
+                      <AiOutlineCalendar className="text-[var(--headline)]" />
+                      <strong style={{ color: "var(--headline)" }}>Created:</strong>
+                      <span>{project.created ? new Date(project.created).toLocaleDateString("en-US") : "Unknown"}</span>
                     </li>
-                    <li>
-                      <strong style={{ color: "var(--headline)" }}>Updated:</strong>{" "}
-                      {project.status === "Published" && !project.updated ? (
-                        <span className="inline-flex items-center gap-1">Present</span>
-                      ) : project.updated ? (
-                        new Date(project.updated).toLocaleDateString("en-US")
-                      ) : (
-                        "Unknown"
-                      )}
+                    <li className="flex items-center gap-2">
+                      <AiOutlineCalendar className="text-[var(--headline)]" />
+                      <strong style={{ color: "var(--headline)" }}>Updated:</strong>
+                      <span>{project.status === "Published" && !project.updated ? "Present" : project.updated ? new Date(project.updated).toLocaleDateString("en-US") : "Unknown"}</span>
                     </li>
                   </ul>
                 </div>

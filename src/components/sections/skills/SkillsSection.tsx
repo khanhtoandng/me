@@ -1,38 +1,8 @@
 "use client";
 
+import { ALL_SKILLS, skillIconMap } from "@/components/ui/all-skills";
+import { SkillsList } from "@/components/ui/skills";
 import React, { JSX } from "react";
-import { FaBrain, FaCode, FaJava, FaProjectDiagram } from "react-icons/fa";
-import { GiArtificialIntelligence } from "react-icons/gi";
-import {
-  SiBootstrap,
-  SiCss3,
-  SiDocker,
-  SiExpress,
-  SiFastapi,
-  SiFirebase,
-  SiGit,
-  SiGithubactions,
-  SiGooglecloud,
-  SiHtml5,
-  SiJavascript,
-  SiJsonwebtokens,
-  SiMongodb,
-  SiMysql,
-  SiNextdotjs,
-  SiNodedotjs,
-  SiOpenai,
-  SiOpencv,
-  SiPostgresql,
-  SiPostman,
-  SiPrisma,
-  SiPython,
-  SiReact,
-  SiSass,
-  SiTailwindcss,
-  SiTypescript,
-  SiWebauthn,
-  SiWebpack,
-} from "react-icons/si";
 
 type Skill = {
   name: string;
@@ -44,67 +14,14 @@ type SkillCategory = {
   skills: Skill[];
 };
 
-const categories: SkillCategory[] = [
-  {
-    title: "Programming Languages",
-    skills: [
-      { name: "JavaScript", icon: <SiJavascript /> },
-      { name: "TypeScript", icon: <SiTypescript /> },
-      { name: "Python", icon: <SiPython /> },
-      { name: "Java", icon: <FaJava /> },
-      { name: "PostgreSQL", icon: <SiPostgresql /> },
-      { name: "MySQL", icon: <SiMysql /> },
-      { name: "MongoDB", icon: <SiMongodb /> },
-    ],
-  },
-  {
-    title: "Libraries & Frameworks",
-    skills: [
-      { name: "React.js", icon: <SiReact /> },
-      { name: "Next.js", icon: <SiNextdotjs /> },
-      { name: "Express.js", icon: <SiExpress /> },
-      { name: "Prisma", icon: <SiPrisma /> },
-      { name: "Tailwind CSS", icon: <SiTailwindcss /> },
-      { name: "Bootstrap", icon: <SiBootstrap /> },
-      { name: "SASS", icon: <SiSass /> },
-      { name: "FastAPI", icon: <SiFastapi /> },
-    ],
-  },
-  {
-    title: "Infrastructure & Tools",
-    skills: [
-      { name: "Node.js", icon: <SiNodedotjs /> },
-      { name: "Git", icon: <SiGit /> },
-      { name: "Docker", icon: <SiDocker /> },
-      { name: "REST APIs", icon: <SiPostman /> },
-      { name: "Webpack", icon: <SiWebpack /> },
-      { name: "Google Cloud Platform", icon: <SiGooglecloud /> },
-      { name: "GitHub Actions", icon: <SiGithubactions /> },
-      { name: "Firebase", icon: <SiFirebase /> },
-      { name: "JWT", icon: <SiJsonwebtokens /> },
-      { name: "OAuth", icon: <SiWebauthn /> },
-      { name: "UML", icon: <FaProjectDiagram /> },
-      { name: "Systems Design", icon: <FaProjectDiagram /> },
-      { name: "OOP", icon: <FaCode /> },
-    ],
-  },
-  {
-    title: "AI & Machine Learning",
-    skills: [
-      { name: "Machine Learning", icon: <FaBrain /> },
-      { name: "Deep Learning", icon: <GiArtificialIntelligence /> },
-      { name: "OpenCV", icon: <SiOpencv /> },
-      { name: "OpenAI API", icon: <SiOpenai /> },
-    ],
-  },
-  {
-    title: "Other",
-    skills: [
-      { name: "HTML", icon: <SiHtml5 /> },
-      { name: "CSS", icon: <SiCss3 /> },
-    ],
-  },
-];
+// Replace categories definition with dynamic grouping from ALL_SKILLS
+const categories = Array.from(
+  ALL_SKILLS.reduce((acc, skill) => {
+    if (!acc.has(skill.category)) acc.set(skill.category, []);
+    acc.get(skill.category)!.push(skill);
+    return acc;
+  }, new Map<string, typeof ALL_SKILLS>())
+).map(([title, skills]) => ({ title, skills }));
 
 const styles = {
   section: "w-full",
@@ -171,24 +88,7 @@ export default function SkillsSection() {
           >
             &lt; {title} /&gt;
           </h3>
-
-          <div className="flex ibmsans flex-wrap gap-3">
-            {skills.map(({ name, icon }) => (
-              <button
-                key={name}
-                type="button"
-                aria-label={name}
-                tabIndex={0}
-                className={styles.skillButton}
-                style={styles.skillButtonStyle}
-                onMouseEnter={onMouseEnter}
-                onMouseLeave={onMouseLeave}
-              >
-                <span className="text-lg">{icon}</span>
-                <span>{name}</span>
-              </button>
-            ))}
-          </div>
+          <SkillsList skills={skills.map((s) => s.name)} iconMap={skillIconMap} />
         </div>
       ))}
     </section>

@@ -1,5 +1,6 @@
 "use client";
 
+import { AiOutlineBranches, AiOutlineCalendar, AiOutlineCheckCircle, AiOutlineCode, AiOutlineTag } from "react-icons/ai";
 import { ExperienceItemType, WorkExperience } from "../../ui/work-experience";
 
 const WORK_EXPERIENCE: ExperienceItemType[] = [
@@ -174,7 +175,63 @@ export default function WorkSection() {
 	return (
 		<section className="w-full ibmsans">
 			<h2 className="section-title">Work Experience & Education</h2>
-			<WorkExperience className="rounded-lg" experiences={WORK_EXPERIENCE} />
+			<WorkExperience
+				className="rounded-lg"
+				experiences={WORK_EXPERIENCE}
+				renderDetails={(item) => (
+					<>
+						<ul className="mb-4 list-disc ml-6 space-y-2">
+							{item.description.split("\n\n").map((desc: string, idx: number) => (
+								<li key={idx} className="flex items-start gap-2">
+									<span className="text-base leading-5">-</span>
+									<span>{desc.replace(/^•\s*/, "")}</span>
+								</li>
+							))}
+						</ul>
+						<ul className="mb-2 space-y-2">
+							<li className="flex items-center gap-2">
+								<AiOutlineTag className="text-[var(--headline)]" />
+								<strong style={{ color: "var(--headline)" }}>Title:</strong>
+								<span>{item.title}</span>
+							</li>
+							<li className="flex items-center gap-2">
+								<AiOutlineCheckCircle className="text-[var(--headline)]" />
+								<strong style={{ color: "var(--headline)" }}>Type:</strong>
+								<span>{item.employmentType}</span>
+							</li>
+							<li className="flex items-center gap-2">
+								<AiOutlineCalendar className="text-[var(--headline)]" />
+								<strong style={{ color: "var(--headline)" }}>Period:</strong>
+								<span>{item.employmentPeriod}</span>
+							</li>
+							<li className="flex items-center gap-2">
+								<AiOutlineCode className="text-[var(--headline)]" />
+								<strong style={{ color: "var(--headline)" }}>Skills:</strong>
+								<div className="flex flex-wrap gap-2 mt-1">
+									{item.skills && item.skills.length > 0 ? (
+										(item.skills as string[]).map((skill: string) => (
+											<span
+												key={skill}
+												className="inline-flex items-center gap-1 rounded bg-[var(--card-background)] px-2 py-1 text-xs font-medium border border-[var(--card-border-color)]"
+												style={{ color: "var(--headline)" }}
+											>
+												{skill}
+											</span>
+										))
+									) : (
+										<span>N/A</span>
+									)}
+								</div>
+							</li>
+							<li className="flex items-center gap-2">
+								<AiOutlineBranches className="text-[var(--headline)]" />
+								<strong style={{ color: "var(--headline)" }}>Location:</strong>
+								<span>{item.location}</span>
+							</li>
+						</ul>
+					</>
+				)}
+			/>
 		</section>
 	);
 }

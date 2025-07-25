@@ -12,7 +12,13 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import ReactMarkdown from "react-markdown";
+import {
+  AiOutlineBranches,
+  AiOutlineCalendar,
+  AiOutlineCheckCircle,
+  AiOutlineCode,
+  AiOutlineTag,
+} from "react-icons/ai";
 
 import {
   Collapsible,
@@ -20,6 +26,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { Separator } from "@/components/ui/separator";
+import { SkillsList, skillIconMap } from "@/components/ui/skills";
 import { cn } from "@/lib/utils";
 
 const iconMap = {
@@ -126,11 +133,9 @@ function ExperiencePositionItem({ position }: { position: ExperiencePositionItem
               >
                 <ExperienceIcon className="h-4 w-4" />
               </div>
-
               <h4 className="flex-1 text-base font-medium text-[var(--main)]">
                 {position.title}
               </h4>
-
               <div
                 className="shrink-0 text-[var(--secondary)] [&_svg]:h-4 [&_svg]:w-4"
                 aria-hidden
@@ -138,7 +143,6 @@ function ExperiencePositionItem({ position }: { position: ExperiencePositionItem
                 {isOpen ? <ChevronsDownUpIcon /> : <ChevronsUpDownIcon />}
               </div>
             </div>
-
             <div className="flex items-center gap-2 pl-9 text-sm text-[var(--secondary)]">
               {position.employmentType && (
                 <>
@@ -160,7 +164,6 @@ function ExperiencePositionItem({ position }: { position: ExperiencePositionItem
             </div>
           </motion.div>
         </CollapsibleTrigger>
-
         <AnimatePresence initial={false}>
           {isOpen && (
             <motion.div
@@ -171,20 +174,51 @@ function ExperiencePositionItem({ position }: { position: ExperiencePositionItem
               transition={{ duration: 0.25 }}
             >
               <CollapsibleContent className="overflow-hidden">
+                {/* Description as bullet list */}
                 {position.description && (
-                  <Prose className="pt-2 pl-9">
-                    <ReactMarkdown>{position.description}</ReactMarkdown>
-                  </Prose>
+                  <div className="pt-2 pl-9">
+                    <ul className="mb-4 list-disc ml-6 space-y-2">
+                      {position.description.split("\n\n").map((desc: string, idx: number) => (
+                        <li key={idx} className="flex items-start gap-2">
+                          <span className="text-base leading-5">-</span>
+                          <span>{desc.replace(/^•\s*/, "")}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 )}
-                {Array.isArray(position.skills) && position.skills.length > 0 && (
-                  <ul className="not-prose flex flex-wrap gap-1.5 pt-2 pl-9">
-                    {position.skills.map((skill, index) => (
-                      <li key={index} className="flex">
-                        <Skill>{skill}</Skill>
+                {/* Details with icons */}
+                <div className="pl-9">
+                  <ul className="mb-2 space-y-2">
+                    <li className="flex items-center gap-2">
+                      <AiOutlineTag className="text-[var(--headline)]" />
+                      <strong style={{ color: "var(--headline)" }}>Title:</strong>
+                      <span>{position.title}</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <AiOutlineCheckCircle className="text-[var(--headline)]" />
+                      <strong style={{ color: "var(--headline)" }}>Type:</strong>
+                      <span>{position.employmentType}</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <AiOutlineCalendar className="text-[var(--headline)]" />
+                      <strong style={{ color: "var(--headline)" }}>Period:</strong>
+                      <span>{position.employmentPeriod}</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <AiOutlineCode className="text-[var(--headline)]" />
+                      <strong style={{ color: "var(--headline)" }}>Skills:</strong>
+                      <SkillsList skills={Array.isArray(position.skills) ? position.skills : []} iconMap={skillIconMap} />
+                    </li>
+                    {position.location && (
+                      <li className="flex items-center gap-2">
+                        <AiOutlineBranches className="text-[var(--headline)]" />
+                        <strong style={{ color: "var(--headline)" }}>Location:</strong>
+                        <span>{position.location}</span>
                       </li>
-                    ))}
+                    )}
                   </ul>
-                )}
+                </div>
               </CollapsibleContent>
             </motion.div>
           )}
@@ -201,18 +235,6 @@ function Prose({ className, ...props }: React.ComponentProps<"div">) {
         "prose prose-sm max-w-none font-mono text-[var(--card-paragraph)] prose-zinc dark:prose-invert",
         "prose-a:font-medium prose-a:break-words prose-a:text-[var(--card-paragraph)] prose-a:underline prose-a:underline-offset-4",
         "prose-code:rounded-md prose-code:border prose-code:bg-[var(--card-background-effect)] prose-code:px-[0.3rem] prose-code:py-[0.2rem] prose-code:text-sm prose-code:font-normal prose-code:before:content-none prose-code:after:content-none",
-        className
-      )}
-      {...props}
-    />
-  );
-}
-
-function Skill({ className, ...props }: React.ComponentProps<"span">) {
-  return (
-    <span
-      className={cn(
-        "inline-flex items-center rounded-lg border border-[var(--card-border-color)] bg-[var(--card-background-effect)] px-1.5 py-0.5 font-mono text-xs text-[var(--card-paragraph)]",
         className
       )}
       {...props}
