@@ -1,14 +1,13 @@
 "use client";
 
-import { useContent } from "@/hooks/use-content";
 import { useSocialLinks } from "@/hooks/use-social-links";
 import { memo } from "react";
 
 import {
-    AiFillTwitterCircle,
-    AiFillYoutube,
-    AiOutlineMail,
-    AiOutlineWhatsApp,
+  AiFillTwitterCircle,
+  AiFillYoutube,
+  AiOutlineMail,
+  AiOutlineWhatsApp,
 } from "react-icons/ai";
 import { BsLinkedin } from "react-icons/bs";
 import { FaFacebook } from "react-icons/fa";
@@ -25,15 +24,7 @@ const iconsMap = {
 };
 
 function HeroSocialLinks() {
-  const { socialLinks, loading } = useSocialLinks(true);
-
-  if (loading) {
-    return (
-      <p className="text-center text-[var(--paragraph)]">
-        Loading social links...
-      </p>
-    );
-  }
+  const { socialLinks } = useSocialLinks(true);
 
   return (
     <section>
@@ -93,33 +84,32 @@ function HeroSocialLinks() {
 }
 
 function HeroSection() {
-  const { content: heroContent } = useContent("hero");
-
-  const defaultContent = {
-    title: "Baraa Alshaer",
-    subtitle: "software engineer | Full-Stack Developer",
-    description: "",
-    content: {
-      paragraphs: [
-        "I am a Full-Stack Developer from Palestine, specializing in crafting seamless and efficient web applications across both front-end and back-end technologies. I hold a degree in software engineering from Al-Azhar University, where I developed a strong foundation in modern software development principles, problem-solving, and system architecture.",
-        "I approach each project with a focus on delivering high-quality solutions, combining my skills in frontend development, backend systems, and overall project design. My aim is to create user-centric applications that not only meet client needs but also drive innovation.",
-        "I am dedicated to staying current with industry trends and continuously improving my craft. My work reflects a commitment to excellence and a drive to contribute meaningfully to the tech community.",
-      ],
-    },
-  };
-
-  const displayContent = {
-    ...defaultContent,
-    ...(heroContent || {}),
-    description: heroContent?.description || defaultContent.description,
-  };
-
   return (
     <div className="header max-md:pt-[50px]">
       <div className="header-content">
-        <h1 className="header-title text-[var(--headline)]">{displayContent.title}</h1>
-        <h1 className="subtitle capitalize text-[var(--headline)]">{displayContent.subtitle}</h1>
-        <p className="text-[var(--paragraph)]">{displayContent.description}</p>
+        <h1 className="header-title text-[var(--headline)]">Baraa Alshaer</h1>
+        <h1 className="subtitle capitalize text-[var(--headline)]">
+          Full-Stack Developer & AI Engineer
+        </h1>
+        <p className="text-[var(--paragraph)]">
+          I’m a full-stack developer with 5+ years of experience in both front-end
+          and back-end development, specializing in building robust, scalable, and
+          intelligent web applications. My passion lies in integrating AI
+          technologies to deliver smarter, more efficient solutions that solve
+          real-world problems.
+          <br />
+          <br />
+          I take pride in writing clean, maintainable code and designing
+          user-centric interfaces that enhance usability and engagement. My
+          approach combines technical expertise with a strong focus on innovation,
+          ensuring every project is both functional and future-ready.
+          <br />
+          <br />
+          Committed to continuous learning, I stay up to date with the latest
+          advancements in AI and modern software development. My goal is to
+          deliver high-quality, impactful software that drives progress and
+          exceeds expectations.
+        </p>
       </div>
 
       {/* Social Links */}

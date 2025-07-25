@@ -24,7 +24,7 @@ const projectsData: Project[] = [
     id: "proj_1",
     title: "sam-tax.com",
     description:
-      "A trusted tax and accounting platform providing expert tax preparation, financial planning, and business advisory services. Developed a secure, scalable web application with multi-language support, integrated payment systems, and AI-powered automation tools.",
+      `• Trusted tax and accounting platform for expert tax preparation, financial planning, and business advisory services.\n\n• Developed a secure, scalable web application with multi-language support.\n\n• Integrated payment systems and AI-powered automation tools for enhanced efficiency.`,
     type: "Web Application",
     website: "https://sam-tax.com/",
     technologies: [
@@ -42,14 +42,14 @@ const projectsData: Project[] = [
     status: "Published",
     featured: true,
     created: "2024-06-01",
-    updated: "2025-07-11",
+    updated: "",
     logoFileName: "samtax.svg",
   },
   {
     id: "proj_3",
     title: "SF",
     description:
-      "A powerful, no-code form builder that lets you create, customize, and deploy smart forms in minutes. Designed for teams and creators who need flexible data collection without the technical headache.",
+      `• Powerful no-code form builder for creating, customizing, and deploying smart forms in minutes.\n\n• Designed for teams and creators needing flexible data collection without technical headaches.\n\n• Features drag-and-drop, advanced logic, and seamless integrations.`,
     type: "SaaS Platform",
     website: "https://sfb-app.com",
     technologies: [
@@ -75,7 +75,7 @@ const projectsData: Project[] = [
     id: "proj_4",
     title: "Gradients CSS",
     description:
-      "A modern tool that takes the hassle out of creating stunning gradients. Helps developers and designers explore, customize, and export beautiful CSS gradients with ease.",
+      `• Modern tool for creating, exploring, and exporting beautiful CSS gradients.\n\n• Helps developers and designers customize gradients with ease.\n\n• Features real-time preview and export options for quick workflow.`,
     type: "Tool",
     website: "https://gradientscss.vercel.app/",
     github: "https://github.com/projects/gradientscss",
@@ -90,7 +90,7 @@ const projectsData: Project[] = [
     id: "proj_5",
     title: "Barber Academy",
     description:
-      "Developed a comprehensive website for Barber Academy, enabling online appointment scheduling and showcasing a complete range of services. Delivered a user-friendly platform that increased client engagement and streamlined operations.",
+      `• Comprehensive website for Barber Academy with online appointment scheduling.\n\n• Showcases a complete range of services and streamlines operations.\n\n• Delivered a user-friendly platform that increased client engagement.`,
     type: "Website",
     website: "https://raoufzadi.vercel.app/",
     technologies: ["React", "TypeScript", "Tailwind CSS", "REST APIs"],
@@ -104,14 +104,14 @@ const projectsData: Project[] = [
     id: "proj_6",
     title: "SaaScan",
     description:
-      "SaaScan is an open source tool that analyzes SaaS ideas and generates detailed validation reports. It helps entrepreneurs and product teams assess market fit, competition, pricing strategies, and opportunities before investing time and resources.",
+      `• Open source tool for analyzing SaaS ideas and generating validation reports.\n\n• Assesses market fit, competition, pricing strategies, and opportunities.\n\n• Helps entrepreneurs and product teams make informed decisions before investing.`,
     type: "Tool",
     website: "https://saascan.vercel.app/",
     github: "https://github.com/balshaer/saascan",
-    technologies: [],
+    technologies: ["React", "TypeScript", "Tailwind CSS", "Node.js"],
     status: "Published",
     featured: false,
-    created: "",
+    created: "2023-01-01",
     updated: "",
     logoFileName: "saascan.png",
   },
@@ -329,9 +329,16 @@ const Projects = () => {
                   className="prose prose-sm max-w-none font-mono prose-headings:font-semibold prose-headings:text-2xl prose-lead:text-base prose-a:font-medium prose-a:underline prose-code:rounded-md prose-code:border prose-code:px-[0.3rem] prose-code:py-[0.2rem] prose-code:text-sm prose-code:font-normal prose-code:before:content-none prose-code:after:content-none prose-hr:border-edge p-4"
                   style={{ color: "var(--card-paragraph)" }}
                 >
-                  <p>{project.description}</p>
+                  <ul className="mb-4 list-disc ml-6 space-y-2">
+                    {project.description.split("\n\n").map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-2">
+                        <span className="text-base leading-5">-</span>
+                        <span>{item.replace(/^•\s*/, "")}</span>
+                      </li>
+                    ))}
+                  </ul>
                   {project.videoUrl && (
-                    <p>
+                    <p className="mb-2">
                       <a
                         href={project.videoUrl}
                         target="_blank"
@@ -343,22 +350,18 @@ const Projects = () => {
                       </a>
                     </p>
                   )}
-                  <ul>
+                  <ul className="mb-2 space-y-1">
                     <li>
                       <strong style={{ color: "var(--headline)" }}>Type:</strong>{" "}
                       {project.type}
                     </li>
                     <li>
-                      <strong style={{ color: "var(--headline)" }}>
-                        Status:
-                      </strong>{" "}
+                      <strong style={{ color: "var(--headline)" }}>Status:</strong>{" "}
                       {project.status}
                     </li>
                     {project.github && (
                       <li>
-                        <strong style={{ color: "var(--headline)" }}>
-                          GitHub:
-                        </strong>{" "}
+                        <strong style={{ color: "var(--headline)" }}>GitHub:</strong>{" "}
                         <a
                           href={project.github}
                           target="_blank"
@@ -371,28 +374,26 @@ const Projects = () => {
                       </li>
                     )}
                     <li>
-                      <strong style={{ color: "var(--headline)" }}>
-                        Technologies:
-                      </strong>{" "}
+                      <strong style={{ color: "var(--headline)" }}>Technologies:</strong>{" "}
                       {project.technologies.length > 0
                         ? project.technologies.join(", ")
                         : "N/A"}
                     </li>
                     <li>
-                      <strong style={{ color: "var(--headline)" }}>
-                        Created:
-                      </strong>{" "}
+                      <strong style={{ color: "var(--headline)" }}>Created:</strong>{" "}
                       {project.created
                         ? new Date(project.created).toLocaleDateString("en-US")
                         : "Unknown"}
                     </li>
                     <li>
-                      <strong style={{ color: "var(--headline)" }}>
-                        Updated:
-                      </strong>{" "}
-                      {project.updated
-                        ? new Date(project.updated).toLocaleDateString("en-US")
-                        : "Unknown"}
+                      <strong style={{ color: "var(--headline)" }}>Updated:</strong>{" "}
+                      {project.status === "Published" && !project.updated ? (
+                        <span className="inline-flex items-center gap-1">Present</span>
+                      ) : project.updated ? (
+                        new Date(project.updated).toLocaleDateString("en-US")
+                      ) : (
+                        "Unknown"
+                      )}
                     </li>
                   </ul>
                 </div>

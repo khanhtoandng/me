@@ -92,7 +92,7 @@ export default function Navbar() {
                 </div>
               </div>
 
-              <div className="flex items-center max-md:flex-wrap gap-3 max-md:gap-2 justify-center md:hidden">
+              <div className="flex items-center max-md:flex-wrap gap-3 max-md:gap-0 justify-center md:hidden">
            <ToggleMode/>
                 <motion.button
                   className="text-[var(--headline)] p-2 rounded-full hover:bg-[var(--card-background)] transition-colors"

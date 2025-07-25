@@ -73,8 +73,6 @@ export default function ContactForm() {
   return (
     <div>
       <MagicCard
-        data-aos="fade-up"
-        data-aos-easing="ease-in-out"
         gradientColor="#7e7e7e12"
         className={cn(
           "group container overflow-hidden transition-all duration-300",

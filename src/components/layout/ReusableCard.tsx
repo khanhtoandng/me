@@ -58,8 +58,6 @@ const ReusableCard = React.forwardRef<HTMLDivElement, ReusableCardProps>(
   ) => {
     return (
       <MagicCard
-        data-aos="fade-up"
-        data-aos-easing="ease-in-out"
         gradientColor="#7e7e7e12"
         ref={ref}
         className={cn(

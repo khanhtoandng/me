@@ -1,33 +1,38 @@
 "use client";
 
-import {
-    SiBootstrap,
-    SiDocker,
-    SiExpress,
-    SiFirebase,
-    SiGit,
-    SiGithubactions,
-    SiGooglecloud,
-    SiJavascript,
-    SiJsonwebtokens,
-    SiMongodb,
-    SiMysql,
-    SiNextdotjs,
-    SiNodedotjs,
-    SiPostgresql,
-    SiPostman,
-    SiPrisma,
-    SiPython,
-    SiReact,
-    SiSass,
-    SiTailwindcss,
-    SiTypescript,
-    SiWebauthn,
-    SiWebpack,
-} from "react-icons/si";
-
 import React, { JSX } from "react";
-import { FaCode, FaJava, FaProjectDiagram } from "react-icons/fa";
+import { FaBrain, FaCode, FaJava, FaProjectDiagram } from "react-icons/fa";
+import { GiArtificialIntelligence } from "react-icons/gi";
+import {
+  SiBootstrap,
+  SiCss3,
+  SiDocker,
+  SiExpress,
+  SiFastapi,
+  SiFirebase,
+  SiGit,
+  SiGithubactions,
+  SiGooglecloud,
+  SiHtml5,
+  SiJavascript,
+  SiJsonwebtokens,
+  SiMongodb,
+  SiMysql,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiOpenai,
+  SiOpencv,
+  SiPostgresql,
+  SiPostman,
+  SiPrisma,
+  SiPython,
+  SiReact,
+  SiSass,
+  SiTailwindcss,
+  SiTypescript,
+  SiWebauthn,
+  SiWebpack,
+} from "react-icons/si";
 
 type Skill = {
   name: string;
@@ -47,13 +52,13 @@ const categories: SkillCategory[] = [
       { name: "TypeScript", icon: <SiTypescript /> },
       { name: "Python", icon: <SiPython /> },
       { name: "Java", icon: <FaJava /> },
-      { name: "MongoDB", icon: <SiMongodb /> },
-      { name: "MySQL", icon: <SiMysql /> },
       { name: "PostgreSQL", icon: <SiPostgresql /> },
+      { name: "MySQL", icon: <SiMysql /> },
+      { name: "MongoDB", icon: <SiMongodb /> },
     ],
   },
   {
-    title: "Libraries / Frameworks",
+    title: "Libraries & Frameworks",
     skills: [
       { name: "React.js", icon: <SiReact /> },
       { name: "Next.js", icon: <SiNextdotjs /> },
@@ -62,24 +67,41 @@ const categories: SkillCategory[] = [
       { name: "Tailwind CSS", icon: <SiTailwindcss /> },
       { name: "Bootstrap", icon: <SiBootstrap /> },
       { name: "SASS", icon: <SiSass /> },
+      { name: "FastAPI", icon: <SiFastapi /> },
     ],
   },
   {
-    title: "Infrastructure",
+    title: "Infrastructure & Tools",
     skills: [
       { name: "Node.js", icon: <SiNodedotjs /> },
       { name: "Git", icon: <SiGit /> },
       { name: "Docker", icon: <SiDocker /> },
       { name: "REST APIs", icon: <SiPostman /> },
       { name: "Webpack", icon: <SiWebpack /> },
-      { name: "UML", icon: <FaProjectDiagram /> },
       { name: "Google Cloud Platform", icon: <SiGooglecloud /> },
       { name: "GitHub Actions", icon: <SiGithubactions /> },
       { name: "Firebase", icon: <SiFirebase /> },
-      { name: "Systems Design", icon: <FaProjectDiagram /> },
-      { name: "OOP", icon: <FaCode /> },
       { name: "JWT", icon: <SiJsonwebtokens /> },
       { name: "OAuth", icon: <SiWebauthn /> },
+      { name: "UML", icon: <FaProjectDiagram /> },
+      { name: "Systems Design", icon: <FaProjectDiagram /> },
+      { name: "OOP", icon: <FaCode /> },
+    ],
+  },
+  {
+    title: "AI & Machine Learning",
+    skills: [
+      { name: "Machine Learning", icon: <FaBrain /> },
+      { name: "Deep Learning", icon: <GiArtificialIntelligence /> },
+      { name: "OpenCV", icon: <SiOpencv /> },
+      { name: "OpenAI API", icon: <SiOpenai /> },
+    ],
+  },
+  {
+    title: "Other",
+    skills: [
+      { name: "HTML", icon: <SiHtml5 /> },
+      { name: "CSS", icon: <SiCss3 /> },
     ],
   },
 ];
