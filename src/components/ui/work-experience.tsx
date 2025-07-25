@@ -64,7 +64,7 @@ function ExperienceItem({ experience }: { experience: ExperienceItemType }) {
     <div className="space-y-4 py-4">
       <div className="not-prose flex items-center gap-3">
         <div
-          className="flex h-8 w-8 shrink-0 items-center border rounded-full justify-center bg-[var(--card-background)] p-1"
+          className="flex h-8 w-8 shrink-0 items-center border rounded-full justify-center bg-[var(--card-background)] border p-1"
           aria-hidden
         >
           {experience.companyLogo ? (
@@ -128,7 +128,7 @@ function ExperiencePositionItem({ position }: { position: ExperiencePositionItem
           >
             <div className="relative z-10 mb-1 flex items-center gap-3 bg-[var(--background)]">
               <div
-                className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-[var(--card-background)] text-[var(--card-paragraph)]"
+                className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-[var(--card-background)] border text-[var(--card-paragraph)]"
                 aria-hidden
               >
                 <ExperienceIcon className="h-4 w-4" />
