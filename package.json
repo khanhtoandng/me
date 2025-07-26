@@ -3,7 +3,7 @@
   "version": "22.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack -H 0.0.0.0 -p 4000",
+    "dev": "next dev --turbopack -H 0.0.0.0 -p 7000",
     "build": "next build",
     "export": "next build && next export",
     "start": "next start",

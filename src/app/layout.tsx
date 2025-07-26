@@ -12,33 +12,37 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "sonner";
 
-const keywords = [
-  "Baraa Alshaer",
-  "Full Stack Developer",
-  "Web Developer",
-  "React Developer",
-  "Node.js Developer",
-  "TypeScript",
-  "JavaScript",
-  "Frontend Developer",
-  "Backend Developer",
-  "Software Engineer",
-  "Portfolio",
-  "Web Development",
-  "UI/UX",
-  "Responsive Design",
-  "Web Applications",
-];
-
 export const metadata: Metadata = {
   metadataBase: new URL(`https://${domain}`),
   title: {
-    template: "Baraa Alshaer - %s",
-    default: "Baraa Alshaer - Software Developer ",
+    template: "%s | Baraa Alshaer - Full Stack Developer",
+    default: "Baraa Alshaer - Full Stack Developer & Portfolio",
   },
   description:
-    "Portfolio of Baraa Alshaer, a skilled Full Stack Developer with expertise in React, Node.js, TypeScript, and more.",
-  keywords: keywords.join(", "),
+    "Explore the portfolio of Baraa Alshaer, Full Stack Developer specializing in React, Node.js, TypeScript, and modern web technologies. View projects, experience, and contact details.",
+  keywords: [
+    "Baraa Alshaer",
+    "Full Stack Developer",
+    "React Developer",
+    "Node.js Developer",
+    "TypeScript",
+    "JavaScript",
+    "Frontend Developer",
+    "Backend Developer",
+    "Software Engineer",
+    "Portfolio",
+    "Web Development",
+    "UI/UX",
+    "Projects",
+    "Contact",
+    "Resume",
+    "Modern Web",
+    "Tailwind CSS",
+    "MongoDB",
+    "Express.js",
+    "AI Integration",
+    "Remote Work",
+  ].join(", "),
   authors: [{ name: "Baraa Alshaer", url: websitePath.main }],
   creator: "Baraa Alshaer",
   publisher: "Baraa Alshaer",
@@ -53,9 +57,9 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     alternateLocale: "ar_SA",
-    title: "balshaer",
+    title: "Baraa Alshaer - Full Stack Developer Portfolio",
     description:
-      "Explore the portfolio of Baraa Alshaer, a passionate Full Stack Developer.",
+      "Discover the work and experience of Baraa Alshaer, a passionate Full Stack Developer. Projects, skills, and contact info included.",
     url: websitePath.main,
     siteName: "Baraa Alshaer Portfolio",
     images: [
@@ -63,7 +67,7 @@ export const metadata: Metadata = {
         url: webImage,
         width: 400,
         height: 400,
-        alt: "balshaer",
+        alt: "Baraa Alshaer Portfolio Preview",
       },
     ],
     countryName: "Palestine",
@@ -71,9 +75,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "balshaer",
+    title: "Baraa Alshaer - Full Stack Developer Portfolio",
     description:
-      "Explore the portfolio of Baraa Alshaer, a passionate Full Stack Developer.",
+      "Explore the portfolio of Baraa Alshaer, Full Stack Developer. Projects, experience, and contact details.",
     images: webImage,
     creator: "@balshaer",
   },
@@ -85,6 +89,7 @@ export const metadata: Metadata = {
       follow: true,
       "max-image-preview": "large",
       "max-snippet": -1,
+      "max-video-preview": -1,
     },
   },
 };
@@ -105,7 +110,11 @@ export default function RootLayout({
     <html lang="en" dir="ltr">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
         <meta name="apple-mobile-web-app-title" content="Baraa" />
         <script
           type="application/ld+json"
@@ -133,6 +142,7 @@ export default function RootLayout({
         />
       </head>
       <body className="flex relative flex-col min-h-screen">
+        <div className="absolute inset-0 -z-10 h-full w-full bg-[var(--background)] bg-[linear-gradient(to_right,var(--border-background)_1px,transparent_1px),linear-gradient(to_bottom,var(--border-background)_1px,transparent_1px)] bg-[size:6rem_4rem]"></div>
         <SpeedInsights />
         <Analytics />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>

@@ -419,7 +419,7 @@ const Projects = () => {
                 >
                   <ProjectDescription description={project.description} />
                   {project.videoUrl && (
-                    <p className="mb-2">
+                    <p className="mb-4 list-disc ml-6 space-y-2">
                       <a
                         href={project.videoUrl}
                         target="_blank"

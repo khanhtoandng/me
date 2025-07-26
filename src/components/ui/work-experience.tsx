@@ -55,7 +55,7 @@ export type ExperienceItemType = {
 function ExperienceItem({ experience }: { experience: ExperienceItemType }) {
   return (
     <div className="space-y-4 py-4">
-      <div className="not-prose flex items-center gap-3">
+      <div className="not-prose flex items-center gap-3 ms-[-4px]">
         <div
           className="flex h-8 w-8 shrink-0 items-center  rounded-full justify-center bg-[var(--card-background)] border p-1"
           aria-hidden
@@ -218,7 +218,7 @@ export function WorkExperience({
   experiences: ExperienceItemType[];
 }) {
   return (
-    <div className={cn("bg-[var(--background)] px-4", className)}>
+    <div className={cn(" px-4", className)}>
       {experiences.map((experience) => (
         <ExperienceItem key={experience.id} experience={experience} />
       ))}

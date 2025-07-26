@@ -90,7 +90,7 @@ const RecommendationsSection = () => {
     
     <Link
       href="link"
-      className="hoverd hover:text-[var(--headline)] flex items-center gap-1"
+      className="hoverd hover:text-[var(--headline)] flex items-center gap-1 max-md:hidden"
     >
     From LinkedIn <GoLinkExternal className="mb-0.5" />
     </Link>

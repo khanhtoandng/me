@@ -1,6 +1,5 @@
 "use client";
 
-import { AiOutlineBranches, AiOutlineCalendar, AiOutlineCheckCircle, AiOutlineCode, AiOutlineTag } from "react-icons/ai";
 import { ExperienceItemType, WorkExperience } from "../../ui/work-experience";
 
 const WORK_EXPERIENCE: ExperienceItemType[] = [
@@ -28,6 +27,27 @@ const WORK_EXPERIENCE: ExperienceItemType[] = [
 					"AI Integration",
 					"Payment Systems",
 					"Systems Design",
+				],
+				location: "Philadelphia, United States",
+				isExpanded: true,
+			},
+			{
+				id: "1-2",
+				title: "AI Engineer",
+				employmentPeriod: "March 2025 – Present",
+				employmentType: "Full-time",
+				description:
+					`• Built and deployed AI-powered tools to automate and optimize company operations.\n\n• Designed and implemented machine learning models for business solutions.\n\n• Collaborated with engineering teams to integrate AI features into existing products.`,
+				icon: "code",
+				skills: [
+					"AI Integration",
+					"Machine Learning",
+					"Python",
+					"TensorFlow",
+					"Data Engineering",
+					"Automation",
+					"React",
+					"TypeScript"
 				],
 				location: "Philadelphia, United States",
 				isExpanded: true,
@@ -151,7 +171,7 @@ const WORK_EXPERIENCE: ExperienceItemType[] = [
 		positions: [
 			{
 				id: "6-1",
-				title: "Diploma in Software Engineering and Database Systems",
+				title: "Software Engineering and Database Systems",
 				employmentPeriod: "2020 – 2022",
 				employmentType: "Education",
 				description:
@@ -174,7 +194,7 @@ const WORK_EXPERIENCE: ExperienceItemType[] = [
 export default function WorkSection() {
 	return (
 		<section className="w-full ibmsans">
-			<h2 className="section-title">Work Experience & Education</h2>
+			<h2 className="section-title">Experience</h2>
 			<WorkExperience
 				className="rounded-lg"
 				experiences={WORK_EXPERIENCE}
