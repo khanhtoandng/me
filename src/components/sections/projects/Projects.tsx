@@ -3,7 +3,7 @@
 import { SkillsList } from "@/components/ui/skills";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { AiOutlineBranches, AiOutlineCode } from "react-icons/ai";
+import { AiOutlineBranches } from "react-icons/ai";
 import { BsCloud, BsFillPeopleFill } from "react-icons/bs";
 import { FaCss3Alt, FaNodeJs, FaReact } from "react-icons/fa";
 import { MdDesignServices } from "react-icons/md";
@@ -122,30 +122,7 @@ const projectsData: Project[] = [
     updated: "2023-01-01",
     logoFileName: "barber.svg",
   },
-  // {
-  //   id: "proj_6",
-  //   title: "SaaScan",
-  //   description:
-  //     `• Open source tool for analyzing SaaS ideas and generating validation reports.\n\n• Assesses market fit, competition, pricing strategies, and opportunities.\n\n• Helps entrepreneurs and product teams make informed decisions before investing.`,
-  //   type: "Tool",
-  //   website: "https://saascan.vercel.app/",
-  //   github: "https://github.com/balshaer/saascan",
-  //   technologies: [
-  //     "React",
-  //     "TypeScript",
-  //     "Tailwind CSS",
-  //     "Node.js",
-  //     "Gemini AI API",
-  //     "Prompt Engineering",
-  //     "Open Source",
-  //     "Data Visualization",
-  //   ],
-  //   status: "Published",
-  //   featured: false,
-  //   created: "2023-01-01",
-  //   updated: "",
-  //   logoFileName: "saascan.png",
-  // },
+  // ...you can bring back your other commented-out projects here
 ];
 
 const techIconMap: Record<string, React.ReactNode> = {
@@ -237,11 +214,7 @@ const Projects = () => {
   };
 
   return (
-    <section
-      data-slot="panel"
-    
-      id="projects"
-    >
+    <section data-slot="panel" id="projects">
       <div data-slot="panel-header" className="screen-line-after px-4">
         <h2
           data-slot="panel-title"
@@ -249,8 +222,12 @@ const Projects = () => {
           style={{ color: "var(--headline)" }}
         >
           Projects
-     
         </h2>
+        {/* ==== BEGIN: Proud Projects Intro ==== */}
+        <p className="mt-2 mb-6 text-base font-mono" style={{ color: "var(--card-paragraph)" }}>
+          These are some of my projects I’m proud of.
+        </p>
+        {/* ==== END: Proud Projects Intro ==== */}
       </div>
 
       {projectsData.map((project) => (
@@ -261,30 +238,24 @@ const Projects = () => {
           data-state={openProjectId === project.id ? "open" : "closed"}
         >
           <div className="flex items-center ">
-
-<div
-
+            <div
               className="mx-4 flex size-6 bg-[var(--card-background)] h-8 w-8 border  p-1 rounded-full  shrink-0"
->
-
-
-     <img
-              alt={`${project.title} logo`}
-              loading="lazy"
-              width={32}
-              height={32}
-              className="rounded-full"
-              decoding="async"
-              src={`/logos/${project.logoFileName}`}
-              onError={(e) => {
-                (e.currentTarget as HTMLImageElement).src =
-                  "https://via.placeholder.com/32?text=P";
-              }}
-              style={{ objectFit: "contain" }}
-            />
-</div>
-
-       
+            >
+              <img
+                alt={`${project.title} logo`}
+                loading="lazy"
+                width={32}
+                height={32}
+                className="rounded-full"
+                decoding="async"
+                src={`/logos/${project.logoFileName}`}
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).src =
+                    "https://via.placeholder.com/32?text=P";
+                }}
+                style={{ objectFit: "contain" }}
+              />
+            </div>
             <div
               className="flex-1 border-l border-dashed"
               style={{ borderColor: "var(--card-border-color)" }}
@@ -395,7 +366,6 @@ const Projects = () => {
               </button>
             </div>
           </div>
-
           <AnimatePresence initial={false}>
             {openProjectId === project.id && (
               <motion.div
@@ -441,6 +411,20 @@ const Projects = () => {
           </AnimatePresence>
         </div>
       ))}
+
+      {/* ==== BEGIN: Explore More on GitHub ==== */}
+      <div className="px-4 py-6 flex justify-center">
+        <a
+          href="https://github.com/balshaer"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-bold text-lg underline"
+          style={{ color: "var(--link-color)" }}
+        >
+          Explore more on GitHub 
+        </a>
+      </div>
+      {/* ==== END: Explore More on GitHub ==== */}
     </section>
   );
 };
