@@ -97,8 +97,8 @@ const projectsData: Project[] = [
     ],
     status: "Published",
     featured: true,
-    created: "2023-03-01",
-    updated: "2023-06-01",
+    created: "2024-11-01",
+    updated: "",
     logoFileName: "gradientscss.png",
   },
   {
@@ -118,8 +118,8 @@ const projectsData: Project[] = [
     ],
     status: "Published",
     featured: true,
-    created: "2022-11-01",
-    updated: "2023-01-01",
+    created: "2023-07-01",
+    updated: "2023-08-01",
     logoFileName: "barber.svg",
   },
   // ...you can bring back your other commented-out projects here
