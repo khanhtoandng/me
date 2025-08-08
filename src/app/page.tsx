@@ -17,6 +17,7 @@ import { MdEmail } from 'react-icons/md'
 export default function HomePage() {
   return (
     <div className="container mx-auto">
+      {/* SEO-optimized page structure for Huynh Tran Khanh Toan */}
       <HeroSection />
 
       <div className="py-4 border-t mt-6">

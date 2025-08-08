@@ -12,31 +12,31 @@ import { webImage, websitePath } from '@/data/Links'
 
 // Enhanced metadata for better SEO
 export const metadata: Metadata = {
-  title: 'Blog Posts | Web Development & Technology Insights',
+  title: 'Blog Posts by Huynh Tran Khanh Toan | Backend Engineering Insights',
   description:
-    'Explore the latest blog posts by Toan Huynh, a Backend Engineer. Stay updated with insights, tutorials, and projects related to web development, React, Node.js, TypeScript, and modern technology trends.',
+    'Read blog posts and articles by Huynh Tran Khanh Toan (Toan Huynh), Backend Engineer based in Da Nang, Vietnam, working at Enosta. Insights on GraphQL, TypeScript, NestJS, PostgreSQL, AWS, cloud-native applications, and modern backend development practices.',
   keywords:
-    'web development blog, React tutorials, Node.js articles, TypeScript tips, full stack development, coding tutorials, tech insights, software engineering blog',
+    'Huynh Tran Khanh Toan blog, Toan Huynh articles, backend engineering blog Da Nang, GraphQL tutorials Vietnam, TypeScript tips, NestJS articles, PostgreSQL insights, AWS cloud tutorials, backend development blog, Enosta developer blog, khanhtoandng posts, Da Nang tech blog',
   openGraph: {
-    title: 'Blog Posts - Toan Huynh | Web Development & Technology Insights',
+    title: 'Blog Posts by Huynh Tran Khanh Toan | Backend Engineering Insights',
     description:
-      'Discover the latest posts and articles by Toan Huynh, a Backend Engineer sharing his insights on web development, React, Node.js, TypeScript, and other cutting-edge technologies.',
+      'Discover blog posts and articles by Huynh Tran Khanh Toan, Backend Engineer based in Da Nang, Vietnam, working at Enosta. Sharing insights on GraphQL, TypeScript, NestJS, PostgreSQL, AWS, and modern backend development practices.',
     url: websitePath.posts,
     images: [
       {
         url: webImage,
         width: 400,
         height: 400,
-        alt: 'Toan Huynh Blog Posts',
+        alt: 'Huynh Tran Khanh Toan Blog Posts',
       },
     ],
     type: 'article',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Blog Posts - Toan Huynh | Web Development & Technology Insights',
+    title: 'Blog Posts by Huynh Tran Khanh Toan | Backend Engineering Insights',
     description:
-      'Explore the latest blog posts by Toan Huynh, a Backend Engineer. Stay updated with insights, tutorials, and projects related to web development, technology, and more.',
+      'Explore blog posts by Huynh Tran Khanh Toan, Backend Engineer based in Da Nang, Vietnam, working at Enosta. Stay updated with insights on GraphQL, TypeScript, NestJS, PostgreSQL, AWS, and backend development practices.',
     images: webImage,
   },
 }

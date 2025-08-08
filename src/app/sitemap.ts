@@ -7,13 +7,27 @@ export const revalidate = false
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://portfolio.anphaops.cloud'
 
-  // Main pages - only include routes that actually exist
-  const routes = ['', '/posts', '/contact'].map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: route === '' ? 1 : 0.8,
-  }))
+  // Main pages with specific priorities and update frequencies
+  const routes = [
+    {
+      url: `${baseUrl}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 1,
+    },
+    {
+      url: `${baseUrl}/posts`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/contact`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+    },
+  ]
 
   return routes
 }

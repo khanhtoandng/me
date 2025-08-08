@@ -1,0 +1,22 @@
+# humans.txt for Huynh Tran Khanh Toan Portfolio
+# https://portfolio.anphaops.cloud
+
+/* TEAM */
+Developer: Huynh Tran Khanh Toan
+Contact: khanhtoan.dng@gmail.com
+GitHub: https://github.com/khanhtoandng
+LinkedIn: https://www.linkedin.com/in/toanhuynh19/
+Twitter: @khanhtoandng
+Location: Da Nang, Vietnam
+Company: Enosta
+
+/* THANKS */
+Technologies: Next.js, TypeScript, Tailwind CSS, React
+Backend Skills: GraphQL, NestJS, PostgreSQL, AWS
+Years of Experience: 4+
+
+/* SITE */
+Last update: 2024
+Language: English
+Doctype: HTML5
+IDE: Cursor, VS Code

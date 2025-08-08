@@ -1,0 +1,16 @@
+# Robots.txt for Toan Huynh Portfolio
+# https://portfolio.anphaops.cloud
+
+User-agent: *
+Allow: /
+
+# Allow all content for search engines
+Allow: /posts
+Allow: /contact
+Allow: /projects
+
+# Sitemap location
+Sitemap: https://portfolio.anphaops.cloud/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1

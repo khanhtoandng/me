@@ -1,4 +1,4 @@
-export const email = 'khanhtoan.dng@gmailcom'
+export const email = 'khanhtoan.dng@gmail.com'
 export const phoneNumber = '970599349034'
 export const mailto = `mailto:${email}`
 export const website = 'https://portfolio.anphaops.cloud/'

@@ -13,30 +13,30 @@ import { webImage, websitePath } from '@/data/Links'
 
 // Enhanced metadata for better SEO
 export const metadata: Metadata = {
-  title: 'Contact | Hire Full Stack Developer',
+  title: 'Contact Huynh Tran Khanh Toan | Backend Engineer',
   description:
-    'Get in touch with Toan Huynh, a Full Stack Developer, for inquiries, collaborations, or to discuss your next project. Reach out through the contact form or email for professional web development services and consultations.',
+    'Contact Huynh Tran Khanh Toan (Toan Huynh), Backend Engineer based in Da Nang, Vietnam, currently working at Enosta. Specializing in GraphQL, TypeScript, NestJS, PostgreSQL, and AWS. Get in touch for backend development projects, consultations, or collaboration opportunities.',
   keywords:
-    'contact developer, hire full stack developer, web development services, React developer, Node.js developer, TypeScript expert, freelance developer, web project consultation',
+    'contact Huynh Tran Khanh Toan, contact Toan Huynh, hire backend engineer Da Nang, GraphQL developer Da Nang, TypeScript developer Vietnam, NestJS expert, PostgreSQL developer, AWS cloud engineer, Enosta developer contact, backend development services Da Nang, khanhtoandng contact',
   openGraph: {
-    title: 'Contact - Toan Huynh | Hire Full Stack Developer',
+    title: 'Contact Huynh Tran Khanh Toan | Backend Engineer',
     description:
-      "Contact Toan Huynh, a skilled Full Stack Developer, for project inquiries, consultations, or collaborations. Let's bring your web development ideas to life with modern technologies and best practices.",
+      'Contact Huynh Tran Khanh Toan, Backend Engineer based in Da Nang, Vietnam, working at Enosta. 4+ years experience in GraphQL, TypeScript, NestJS, PostgreSQL, and AWS. Available for backend development projects and consultations.',
     url: websitePath.contact,
     images: [
       {
         url: webImage,
         width: 400,
         height: 400,
-        alt: 'Contact Toan Huynh - Full Stack Developer',
+        alt: 'Contact Huynh Tran Khanh Toan - Backend Engineer',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Contact - Toan Huynh | Hire Full Stack Developer',
+    title: 'Contact Huynh Tran Khanh Toan | Backend Engineer',
     description:
-      "Reach out to Toan Huynh, a Full Stack Developer, for professional inquiries, collaborations, and web development services. Let's discuss your next project!",
+      "Reach out to Huynh Tran Khanh Toan, Backend Engineer based in Da Nang, Vietnam, working at Enosta. Expertise in GraphQL, TypeScript, NestJS, PostgreSQL, and AWS. Let's discuss your backend development project!",
     images: webImage,
   },
 }
