@@ -20,6 +20,13 @@ export const CERTIFICATIONS: Certification[] = [
     issuer: 'Educational Testing Service (ETS)',
     image: '/certificates/toeic.png',
   },
+  {
+    id: 'machine-learning-in-production',
+    name: 'Machine Learning in Production',
+    issuer: 'DeepLearning.AI',
+    image: '/certificates/deeplearning-ai.png',
+    verificationUrl: 'https://www.coursera.org/account/accomplishments/verify/PTCZPS1U1BYF',
+  },
 ]
 
 export default CERTIFICATIONS

@@ -13,6 +13,7 @@ import {
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { Separator } from '@/components/ui/separator'
 import { SkillsList, skillIconMap } from '@/components/ui/skills'
@@ -30,44 +31,151 @@ export type ExperiencePositionIconType = keyof typeof iconMap
 
 function ImageGallery({ images }: { images: string[] }) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const [api, setApi] = useState<any>(null)
+  const [canScrollPrev, setCanScrollPrev] = useState(false)
+  const [canScrollNext, setCanScrollNext] = useState(false)
+  const [showButtons, setShowButtons] = useState(false)
+
+  useEffect(() => {
+    if (!api) {
+      return
+    }
+
+    const onSelect = () => {
+      setCanScrollPrev(api.canScrollPrev())
+      setCanScrollNext(api.canScrollNext())
+      // Show buttons only if there's scrollable content
+      const hasScrollableContent = api.canScrollPrev() || api.canScrollNext()
+      setShowButtons(hasScrollableContent)
+    }
+
+    onSelect()
+    api.on('reInit', onSelect)
+    api.on('select', onSelect)
+
+    return () => {
+      api?.off('select', onSelect)
+    }
+  }, [api])
 
   return (
     <>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 mb-4">
-        {images.map((image, index) => (
-          <div
-            key={index}
-            className="relative aspect-square cursor-pointer group overflow-hidden rounded-lg border border-[var(--border)] hover:border-[var(--main)] transition-colors"
-            onClick={() => setSelectedImage(image)}
-          >
-            <Image
-              src={image}
-              alt={`Gallery image ${index + 1}`}
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-200"
-              sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
-            />
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
-          </div>
-        ))}
+      <div className="relative">
+        <Carousel
+          opts={{
+            align: 'start',
+            loop: true,
+          }}
+          setApi={setApi}
+          className="w-full"
+        >
+          <CarouselContent className="-ml-2 md:-ml-4">
+            {images.map((image, index) => (
+              <CarouselItem key={index} className="pl-2 md:pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+                <div
+                  className="relative aspect-square cursor-pointer group overflow-hidden rounded-lg border border-[var(--border)] hover:border-[var(--main)] transition-all duration-300 hover:shadow-lg"
+                  onClick={() => setSelectedImage(image)}
+                >
+                  <Image
+                    src={image}
+                    alt={`Gallery image ${index + 1}`}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+
+                  {/* Expand icon overlay */}
+                  <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="bg-black/50 backdrop-blur-sm rounded-full p-1.5">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width={16}
+                        height={16}
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="white"
+                        strokeWidth={2}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="lucide lucide-expand"
+                      >
+                        <path d="m21 21-6-6m6 6v-4.8m0 4.8h-4.8" />
+                        <path d="M3 16.2V21m0 0h4.8M3 21l6-6" />
+                        <path d="M21 7.8V3m0 0h-4.8M21 3l-6 6" />
+                        <path d="M3 7.8V3m0 0h4.8M3 3l6 6" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+
+          {/* Custom navigation buttons - only show when scrolling is possible */}
+          {showButtons && (
+            <>
+              <button
+                className="absolute left-2 top-1/2 -translate-y-1/2 h-8 w-8 bg-[var(--background)] border-2 border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-200 shadow-lg flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed text-black dark:text-white"
+                onClick={() => api?.scrollPrev()}
+                disabled={!canScrollPrev}
+                aria-label="Previous image"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width={16}
+                  height={16}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="m15 18-6-6 6-6" />
+                </svg>
+              </button>
+              <button
+                className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8 bg-[var(--background)] border-2 border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-200 shadow-lg flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed text-black dark:text-white"
+                onClick={() => api?.scrollNext()}
+                disabled={!canScrollNext}
+                aria-label="Next image"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width={16}
+                  height={16}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="m9 18 6-6-6-6" />
+                </svg>
+              </button>
+            </>
+          )}
+        </Carousel>
       </div>
 
-      {/* Image Popup Modal */}
+      {/* Enhanced Image Popup Modal */}
       {selectedImage && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
           onClick={() => setSelectedImage(null)}
         >
-          <div className="relative max-w-[90vw] max-h-[90vh]">
+          <div className="relative w-full h-full flex items-center justify-center animate-in fade-in-0 zoom-in-95 duration-300">
             <button
-              className="absolute -top-10 right-0 text-white hover:text-gray-300 transition-colors"
+              className="absolute top-4 right-4 z-10 text-white hover:text-gray-300 transition-colors bg-black/50 backdrop-blur-sm rounded-full p-2"
               onClick={() => setSelectedImage(null)}
               aria-label="Close image"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width={24}
-                height={24}
+                width={20}
+                height={20}
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -80,14 +188,17 @@ function ImageGallery({ images }: { images: string[] }) {
                 <path d="M6 6l12 12" />
               </svg>
             </button>
-            <Image
-              src={selectedImage}
-              alt="Full size image"
-              width={800}
-              height={600}
-              className="max-w-full max-h-full object-contain rounded-lg"
-              onClick={(e) => e.stopPropagation()}
-            />
+            <div className="relative max-w-[90vw] max-h-[90vh] w-full h-full flex items-center justify-center">
+              <Image
+                src={selectedImage}
+                alt="Full size image"
+                fill
+                className="object-contain rounded-lg shadow-2xl"
+                onClick={(e) => e.stopPropagation()}
+                sizes="90vw"
+                priority
+              />
+            </div>
           </div>
         </div>
       )}

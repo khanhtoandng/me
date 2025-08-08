@@ -64,7 +64,7 @@ const projectsData: Project[] = [
   {
     id: 'proj_2',
     title: 'Smartos - Digital Transformation Solutions for Property Management',
-    description: `• Powerful no-code form builder for creating, customizing, and deploying smart forms in minutes.\n\n• Designed for teams and creators needing flexible data collection without technical headaches.\n\n• Features drag-and-drop, advanced logic, and seamless integrations.`,
+    description: `• Providing an integrated digital transformation solution to manage & operate leasing space effectively, helping space providers focus on developing business efficiency.\n\n• Offer Digital Transformation Solutions for Property Management, including Smartos PMS (Property Management System), Bespoke Solution (Web & App), and Smartos Marketplace`,
     type: 'SaaS Platform',
     website: 'https://smartos.space/',
     technologies: [

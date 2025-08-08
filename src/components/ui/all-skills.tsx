@@ -10,6 +10,8 @@ import {
   SiBitwarden,
   SiBrave,
   SiDatagrip,
+  SiDiagramsdotnet,
+  SiExcalidraw,
   SiExpress,
   SiGithubactions,
   SiGmail,
@@ -38,6 +40,12 @@ export type SkillData = {
 export const ALL_SKILLS: SkillData[] = [
   // Programming Languages
   {
+    name: 'Git',
+    icon: <FaGitAlt title="Git" className="text-orange-600" />,
+    category: 'Programming Languages',
+    link: 'https://git-scm.com/',
+  },
+  {
     name: 'JavaScript',
     icon: <SiJavascript title="JavaScript" className="text-yellow-400" />,
     category: 'Programming Languages',
@@ -49,18 +57,6 @@ export const ALL_SKILLS: SkillData[] = [
     category: 'Programming Languages',
     link: 'https://www.typescriptlang.org/',
   },
-  // {
-  //   name: 'Python',
-  //   icon: <SiPython title="Python" className="text-blue-400" />,
-  //   category: 'Programming Languages',
-  //   link: 'https://www.python.org/',
-  // },
-  // {
-  //   name: 'Java',
-  //   icon: <FaJava title="Java" className="text-orange-700" />,
-  //   category: 'Programming Languages',
-  //   link: 'https://www.oracle.com/java/',
-  // },
   {
     name: 'PostgreSQL',
     icon: <SiPostgresql title="PostgreSQL" className="text-blue-700" />,
@@ -107,81 +103,39 @@ export const ALL_SKILLS: SkillData[] = [
   {
     name: 'AWS',
     icon: <FaAws title="AWS" className="text-yellow-500" />,
-    category: 'Infrastructure & Tools',
+    category: 'Infrastructure',
     link: 'https://aws.amazon.com/',
   },
   {
     name: 'Serverless Framework',
     icon: <SiServerless title="Serverless" className="text-red-500" />,
-    category: 'Infrastructure & Tools',
+    category: 'Infrastructure',
     link: 'https://www.serverless.com/',
   },
   {
     name: 'AWS CDK',
     icon: <SiAwsorganizations title="AWS CDK" className="text-yellow-700" />,
-    category: 'Infrastructure & Tools',
+    category: 'Infrastructure',
     link: 'https://aws.amazon.com/cdk/',
   },
   {
     name: 'Docker',
     icon: <FaDocker title="Docker" className="text-blue-400" />,
-    category: 'Infrastructure & Tools',
+    category: 'Infrastructure',
     link: 'https://www.docker.com/',
   },
   {
     name: 'GitHub Actions',
     icon: <SiGithubactions title="GitHub Actions" className="text-gray-700" />,
-    category: 'Infrastructure & Tools',
+    category: 'Infrastructure',
     link: 'https://github.com/features/actions',
   },
   {
     name: 'GitLab',
     icon: <FaGitlab title="GitLab" className="text-orange-500" />,
-    category: 'Infrastructure & Tools',
+    category: 'Infrastructure',
     link: 'https://gitlab.com/',
   },
-  // {
-  //   name: 'RESTful APIs',
-  //   icon: <SiPostman title="RESTful APIs" className="text-orange-500" />,
-  //   category: 'Infrastructure & Tools',
-  //   link: 'https://www.postman.com/',
-  // },
-  // {
-  //   name: 'Google Cloud Platform',
-  //   icon: <SiGooglecloud title="Google Cloud Platform" className="text-yellow-500" />,
-  //   category: 'Infrastructure & Tools',
-  //   link: 'https://cloud.google.com/',
-  // },
-
-  // {
-  //   name: 'Firebase',
-  //   icon: <SiFirebase title="Firebase" className="text-yellow-500" />,
-  //   category: 'Infrastructure & Tools',
-  //   link: 'https://firebase.google.com/',
-  // },
-  // {
-  //   name: 'JWT & OAuth',
-  //   icon: <SiJsonwebtokens title="JWT" className="text-yellow-600" />,
-  //   category: 'Infrastructure & Tools',
-  //   link: 'https://jwt.io/',
-  // },
-  // {
-  //   name: 'OAuth',
-  //   icon: <SiWebauthn title="OAuth" className="text-blue-600" />,
-  //   category: 'Infrastructure & Tools',
-  //   link: 'https://oauth.net/',
-  // },
-  // {
-  //   name: 'UML',
-  //   icon: <FaProjectDiagram title="UML" className="text-purple-600" />,
-  //   category: 'Infrastructure & Tools',
-  // },
-  // {
-  //   name: 'Systems Design',
-  //   icon: <FaProjectDiagram title="Systems Design" className="text-purple-600" />,
-  //   category: 'Infrastructure & Tools',
-  // },
-  // { name: 'OOP', icon: <FaCode title="OOP" className="text-gray-700" />, category: 'Infrastructure & Tools' },
   // Productivity Tools
   {
     name: 'Cursor',
@@ -189,12 +143,7 @@ export const ALL_SKILLS: SkillData[] = [
     category: 'Productivity Tools',
     link: 'https://www.cursor.com/',
   },
-  {
-    name: 'Git',
-    icon: <FaGitAlt title="Git" className="text-orange-600" />,
-    category: 'Productivity Tools',
-    link: 'https://git-scm.com/',
-  },
+
   {
     name: 'OrbStack',
     icon: <SiGooglecontaineroptimizedos title="Google Cloud Platform" className="text-purple-500" />,
@@ -257,46 +206,22 @@ export const ALL_SKILLS: SkillData[] = [
   },
   {
     name: 'AlDente',
-    icon: <BsFillLightningChargeFill title="Lightning" className="text-yellow-500" />,
+    icon: <BsFillLightningChargeFill title="Lightning" className="text-yellow-400" />,
     category: 'Productivity Tools',
     link: 'https://apphousekitchen.com/aldente-overview/',
   },
-  // AI & Machine Learning
-  // {
-  //   name: 'Machine Learning',
-  //   icon: <FaBrain title="Machine Learning" className="text-purple-600" />,
-  //   category: 'AI & Machine Learning',
-  // },
-  // {
-  //   name: 'Deep Learning',
-  //   icon: <GiArtificialIntelligence title="Deep Learning" className="text-indigo-600" />,
-  //   category: 'AI & Machine Learning',
-  // },
-  // {
-  //   name: 'OpenCV',
-  //   icon: <SiOpencv title="OpenCV" className="text-green-700" />,
-  //   category: 'AI & Machine Learning',
-  //   link: 'https://opencv.org/',
-  // },
-  // {
-  //   name: 'OpenAI API',
-  //   icon: <SiOpenai title="OpenAI API" className="text-gray-700" />,
-  //   category: 'AI & Machine Learning',
-  //   link: 'https://openai.com/api/',
-  // },
-  // Other
-  // {
-  //   name: 'HTML',
-  //   icon: <FaHtml5 title="HTML" className="text-orange-500" />,
-  //   category: 'Other',
-  //   link: 'https://developer.mozilla.org/en-US/docs/Web/HTML',
-  // },
-  // {
-  //   name: 'CSS',
-  //   icon: <FaCss3Alt title="CSS" className="text-blue-500" />,
-  //   category: 'Other',
-  //   link: 'https://developer.mozilla.org/en-US/docs/Web/CSS',
-  // },
+  {
+    name: 'Excalidraw',
+    icon: <SiExcalidraw title="Excalidraw" className="text-purple-500" />,
+    category: 'Productivity Tools',
+    link: 'https://excalidraw.com/',
+  },
+  {
+    name: 'Diagrams.net',
+    icon: <SiDiagramsdotnet title="Diagrams.net" className="text-orange-500" />,
+    category: 'Productivity Tools',
+    link: 'https://www.diagrams.net/',
+  },
 ]
 
 export const skillIconMap: Record<string, ReactNode> = Object.fromEntries(ALL_SKILLS.map((s) => [s.name, s.icon]))
