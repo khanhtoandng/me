@@ -1,204 +1,282 @@
-"use client";
+'use client'
 
-import { ExperienceItemType, WorkExperience } from "../../ui/work-experience";
+import { ExperienceItemType, WorkExperience } from '../../ui/work-experience'
 
 const WORK_EXPERIENCE: ExperienceItemType[] = [
-	{
-		id: "1",
-		companyName: "Samtax",
-		companyLogo: "/logos/samtax.svg",
-		isCurrentEmployer: true,
-		positions: [
-			{
-				id: "1-1",
-				title: "Full Stack Engineer",
-				employmentPeriod: "June 2024 – Present",
-				employmentType: "Full-time",
-				description:
-					`• Developed and launched multiple full-stack web applications in a fast-paced startup environment.\n\n• Built custom internal tools, AI-driven automation solutions, and secure payment systems.\n\n• Focused on scalable, robust, and secure application architecture.\n\n• Collaborated with cross-functional teams to deliver high-impact features on tight deadlines.`,
-				icon: "code",
-				skills: [
-					"React",
-					"TypeScript",
-					"Tailwind CSS",
-					"Express.js",
-					"MongoDB",
-					"Node.js",
-					"AI Integration",
-					"Payment Systems",
-					"Systems Design",
-				],
-				location: "Philadelphia, United States",
-				isExpanded: true,
-			},
-			{
-				id: "1-2",
-				title: "AI Engineer",
-				employmentPeriod: "March 2025 – Present",
-				employmentType: "Full-time",
-				description:
-					`• Built and deployed AI-powered tools to automate and optimize company operations.\n\n• Designed and implemented machine learning models for business solutions.\n\n• Collaborated with engineering teams to integrate AI features into existing products.`,
-				icon: "code",
-				skills: [
-					"AI Integration",
-					"Machine Learning",
-					"Python",
-					"TensorFlow",
-					"Data Engineering",
-					"Automation",
-					"React",
-					"TypeScript"
-				],
-				location: "Philadelphia, United States",
-				isExpanded: true,
-			},
-		],
-	},
-	{
-		id: "2",
-		companyName: "Sustainable Star LLC",
-		companyLogo: "/logos/sustainablestar.png",
-		isCurrentEmployer: false,
-		positions: [
-			{
-				id: "2-1",
-				title: "Frontend Developer",
-				employmentPeriod: "July 2023 – November 2023",
-				employmentType: "Full-time",
-				description:
-					`• Developed the Sustainable Star Form Builder platform with customizable forms and drag-and-drop functionality.\n\n• Ensured responsive design and optimized frontend performance for a seamless user experience.\n\n• Collaborated with designers and backend engineers to deliver new features and improvements.`,
-				icon: "code",
-				skills: [
-					"React.js",
-					"JavaScript ES6+",
-					"CSS3",
-					"TypeScript",
-					"Tailwind CSS",
-					"Redux Toolkit",
-					"REST APIs",
-					"Webpack",
-					"Git",
-					"Axios",
-				],
-				location: "Riyadh, Saudi Arabia",
-			},
-		],
-	},
-	{
-		id: "3",
-		companyName: "Perfect Touch (PTIT)",
-		companyLogo: "/logos/ptit.png",
-		isCurrentEmployer: false,
-		positions: [
-			{
-				id: "3-1",
-				title: "Frontend Developer",
-				employmentPeriod: "June 2023 – September 2023",
-				employmentType: "Full-time",
-				description:
-					`• Contributed to team projects including the NAJ Training Center, improving usability and creativity.\n\n• Maintained legacy projects by updating packages and optimizing code for better performance.\n\n• Worked closely with team members to deliver high-quality solutions on schedule.`,
-				icon: "code",
-				skills: [
-					"React",
-					"JavaScript",
-					"HTML5",
-					"CSS3",
-					"Legacy Code Optimization",
-					"Package Management",
-				],
-				location: "Riyadh, Saudi Arabia",
-			},
-		],
-	},
-	{
-		id: "4",
-		companyName: "Gaza Electricity Distribution Company (GEDCO)",
-		companyLogo: "/logos/gedco.png",
-		isCurrentEmployer: false,
-		positions: [
-			{
-				id: "4-1",
-				title: "IT Security & Database Intern",
-				employmentPeriod: "April 2022 – June 2022",
-				employmentType: "Internship",
-				description:
-					`• Supported database maintenance and security operations for critical infrastructure.\n\n• Implemented protocols to protect sensitive data and ensure compliance with security standards.\n\n• Participated in network security monitoring, backup systems, and disaster recovery planning.`,
-				icon: "security",
-				skills: [
-					"SQL Server Administration",
-					"MySQL",
-					"Database Security",
-					"Network Security Monitoring",
-					"Security Compliance",
-					"Vulnerability Management",
-					"Data Backup Solutions",
-				],
-				location: "Gaza, Palestine",
-			},
-		],
-	},
-	{
-		id: "5",
-		companyName: "Freelance",
-		isCurrentEmployer: false,
-		positions: [
-			{
-				id: "5-1",
-				title: "Full Stack Engineer",
-				employmentPeriod: "2022 – 2023",
-				employmentType: "Contract",
-				description:
-					`• Worked independently on various full-stack projects for clients in diverse industries.\n\n• Delivered custom web applications, API integrations, and client-specific solutions.\n\n• Managed end-to-end development including design, deployment, and maintenance.`,
-				icon: "code",
-				skills: [
-					"React",
-					"Node.js",
-					"Express.js",
-					"MongoDB",
-					"TypeScript",
-					"REST APIs",
-					"Tailwind CSS",
-				],
-				location: "Remote",
-			},
-		],
-	},
-	{
-		id: "6",
-		companyName: "Al-Azhar University",
-		companyLogo: "/logos/alazhar-logo.png",
-		isCurrentEmployer: false,
-		positions: [
-			{
-				id: "6-1",
-				title: "Software Engineering and Database Systems",
-				employmentPeriod: "2020 – 2022",
-				employmentType: "Education",
-				description:
-					`• Studied Software Engineering and Database Systems with a strong emphasis on building secure applications and robust data management.\n\n• Developed a solid foundation in modern programming practices, system architecture, and problem-solving.\n\n• Engaged in hands-on projects and collaborative learning environments.`,
-				icon: "education",
-				skills: [
-					"Software Engineering",
-					"Database Systems",
-					"Secure Applications",
-					"System Architecture",
-					"Programming Practices",
-					"Problem Solving",
-				],
-				location: "Gaza, Palestine",
-			},
-		],
-	},
-];
+  {
+    id: '1',
+    companyName: 'Enosta - Digital Product Consultancy',
+    companyLogo: '/logos/enosta.png',
+    webUrl: 'https://enosta.com',
+    isCurrentEmployer: true,
+    positions: [
+      {
+        id: '1-1',
+        title: 'Backend Engineer',
+        employmentPeriod: 'Dec 2023 – Present',
+        employmentType: 'Full-time',
+        description: [
+          {
+            title: 'Backend Team',
+            items: [
+              //   `Implemented codebase improvements such as reorganizing code structure, removing unused code/libraries, upgrading NestJS/TypeORM to latest version.`,
+              `Initiated and implemented new projects for company's clients, including designing codebase and database schema, implementing backend APIs, and deploying the project.`,
+              `Supported other members to debug, solve problems, reviewing code.`,
+              `Col`,
+              `Collaborated with senior engineers to deliver internal knowledge-sharing sessions on AWS Foundations, enhancing cloud proficiency and best practices adoption across the engineering team.`,
+            ],
+          },
+          {
+            title: 'DevOps Team',
+            items: [
+              `Refactored Gitlab CI pipeline template by separating CI steps/resources into independent YAML files, improving configuration consistency across projects, centralizing in a remote repository.`,
+              `Configured CI/CD pipelines using GitLab CI and GitHub Actions, integrating stages such as linting, type checking, unit testing, building, and deployment to streamline development workflows and enforce code quality.`,
+              `Managed AWS infrastructure using Infrastructure as Code (IaC) tools like AWS CDK and Serverless Framework, along with Docker, to automate provisioning, deployment, and scaling of cloud-native applications.`,
+            ],
+          },
+          {
+            title: 'Project: Kaiso',
+            items: [],
+            isExpanded: false,
+            subsections: [
+              {
+                title: 'Team Size',
+                items: ['5 Members: 3 Frontend, 2 Backend'],
+              },
+              {
+                title: 'Description',
+                items: [
+                  'A SAAS platform that automates the ISO compliance from start to finish for small business in Australia.',
+                ],
+              },
+              {
+                title: 'Technology',
+                items: [
+                  'Typescript, GraphQL, NestJS, PostgresQL, ORM (TypeORM)',
+                  'Amazon Web Services: CDK, ALB, ECS, EC2, RDS, S3, ElastiCache, SES, CloudWatch, Lambda',
+                ],
+              },
+              {
+                title: 'Responsibility',
+                items: [
+                  'Played a primary role in architecting, designing, developing database schema, backend APIs and deployment from scratch using NestJS, PostgresQL, Cloud services (AWS).',
+                  'Integrated backend service with AI service for generative AI features.',
+                  'Implemented message queue using Bull queue for offloading heavy works, asynchronous job, high performance.',
+                  `Provisioned the cloud infrastructure using AWS CDK and set up CI/CD pipelines for whole BE/FE repos using GitHub Actions (includes linter, check-types, unit test, build script, deploy) that decreases time to deploy new functionality, decreases 20% for provision infra for new environment.`,
+                  `Collaborated with team members including Business Analysts, Project Managers, and Clients to design technological solutions for business problems.`,
+                ],
+              },
+              {
+                title: 'Gallery',
+                items: ['Application screenshots and architecture diagrams'],
+                images: ['/kaiso/manual-1.png', '/kaiso/manual-2.png', '/kaiso/manual-4.png'],
+              },
+            ],
+          },
+        ],
+        icon: 'code',
+        skills: [
+          'TypeScript',
+          'GraphQL',
+          'RESTful APIs',
+          'Server-Sent Events',
+          'NestJS',
+          'PostgreSQL',
+          'Redis',
+          'AWS',
+          'GitHub Actions',
+        ],
+        location: 'Da Nang, Vietnam',
+        isExpanded: true,
+      },
+    ],
+  },
+  {
+    id: '2',
+    companyName: 'Smartos - Digital Transformation Solutions for Property Management',
+    companyLogo: '/logos/smartos.png',
+    webUrl: 'https://smartos.space/',
+    isCurrentEmployer: false,
+    positions: [
+      {
+        id: '2-1',
+        title: 'Backend Engineer',
+        employmentPeriod: 'Jan 2022 – Dec 2023',
+        employmentType: 'Full-time',
+        description: [
+          {
+            title: 'Description',
+            isExpanded: true,
+            items: [
+              `Smartos is a SaaS Proptech platform for Property Management, including Smartos PMS, White Label Solutions, and
+Smartos Marketplace.`,
+            ],
+          },
+          {
+            title: 'Team size',
+            items: ['10 members: 2 Backend, 5 Frontend, 3 Backend'],
+            isExpanded: true,
+          },
+          {
+            title: 'Responsibilities',
+            isExpanded: true,
+            items: [
+              `A key member of development team, responsible for designing and architect solutions, developing service modules that helps product approaches to 3500+ rooms in Vietnam, Canada.`,
+              `Migrated Backend APIs from Hapi to NestJS, from RestAPI to GraphQL.`,
+              `Developed multiple modules including dashboard, booking, invoice, notification, analytics and reporting, configuration,...`,
+              `Implemented a worker service and task scheduling service utilizing Serverless (Lambda, SQS, EventBridge) to handle asynchronous jobs, reminders, and cron jobs.`,
+              `Designed and developed a module for importing/exporting data in xlsx Format and generating docx files with prefilled data from template.`,
+              `Troubleshooted application using CloudWatch and Sentry, optimized several BE APIs, resolved technical issues.`,
+              `Designed and developed third-party APIs integrations, including Firebase for Browser/Mobile App notifications, Zalo ZNS for invoice notifications, TTLock for smart door lock management, and Stripe for Canada payment gateway integration.`,
+              `Developed White Label Solution App for clients: TPBank, BizCity, NTVM,...`,
+              `Participated in analysis and work out solutions for new requirements, conducted code reviews, provided valuable feedback, and mentored new team members.`,
+              `Invoked in an Scrumban team`,
+            ],
+          },
+          {
+            title: 'Product Gallery',
+            items: ['Smartos platform interface and mobile app screenshots'],
+            images: ['/placeholder.jpg', '/placeholder-logo.svg', '/placeholder-user.jpg'],
+          },
+        ],
+        icon: 'code',
+        skills: [
+          'TypeScript',
+          'GraphQL',
+          'NestJS',
+          'PostgreSQL',
+          'Redis',
+          'AWS',
+          'AWS Lambda',
+          'AWS ECS',
+          'AWS SQS',
+          'AWS S3',
+          'AWS CloudWatch',
+          'AWS CDK',
+          'Serverless Framework',
+          'Stripe',
+          'Zalo Notification Service',
+          'TTLock',
+          'Firebase Cloud Messaging',
+        ],
+        location: 'Riyadh, Saudi Arabia',
+      },
+    ],
+  },
+  {
+    id: '3',
+    companyName: 'Enouvo IT Solutions',
+    companyLogo: '/logos/enouvo.png',
+    webUrl: 'https://enouvo.com',
+    isCurrentEmployer: false,
+    positions: [
+      {
+        id: '3-1',
+        title: 'Backend Developer',
+        employmentPeriod: 'Jan 2022 – May 2023',
+        employmentType: 'Full-time',
+        description: [
+          {
+            title: 'Overview',
+            items: [
+              "Joined to develop several company's projects as a backend developer.",
+              `Contributed as a member of the Blockchain team to researching and developing smart contracts and Web3 solutions on Ethereum and Polygon.`,
+            ],
+            isExpanded: true,
+          },
+          {
+            title: 'Project: EdLuma',
+            items: [],
+            isExpanded: false,
+            subsections: [
+              {
+                title: 'Team Size',
+                items: ['7 Members: 4 Front-end, 3 Back-end'],
+              },
+              {
+                title: 'Description',
+                items: [
+                  'Education platform connecting students, parents, and tutors for personalized academic support in online and in-person learning.',
+                ],
+              },
+              {
+                title: 'Technology',
+                items: [
+                  'TypeScript, GraphQL, NestJS for backend development',
+                  'PostgreSQL with TypeORM, Redis for database management',
+                  'Amazon Web Services for deployment',
+                ],
+              },
+              {
+                title: 'Responsibility',
+                items: [
+                  'Collaborated with Team Lead, BA teams for designing database schemas, implementing common features, finding solutions.',
+                  'Developed several feature: onboarding, booking, checkout cart, course configuration, transferring and refunding payment.',
+                  'Implemented Backend APIs using NestJS, PostgresQL.',
+                  'Developed the messaging queue, dead letter queue based on AWS Cloud services (SQS, Lambda).',
+                  'Integrated with Stripe for collecting online payment: one-time payment, subscription payment.',
+                  'Invoked in an Agile team.',
+                ],
+              },
+            ],
+          },
+          {
+            title: 'Project: RRQ Guild',
+            items: [],
+            isExpanded: false,
+            subsections: [
+              {
+                title: 'Team Size',
+                items: ['3 members: 1 front-end, 1 smart contract, 1 technical lead'],
+              },
+              {
+                title: 'Description',
+                items: ['Web3 Proof of concept project about tokenization and staking.'],
+              },
+              {
+                title: 'Technology',
+                items: ['Solidity, Polygon, Hardhat, Ethers.js, Smart contract.'],
+              },
+              {
+                title: 'Responsibility',
+                items: [
+                  'Designed and developed smart contracts for tokenization, staking, and liquid staking using Solidity .',
+                  'Supported frontend to integrate smart contracts with React.',
+                ],
+              },
+            ],
+          },
+        ],
+        skills: ['TypeScript', 'GraphQL', 'NestJS', 'PostgreSQL', 'AWS', 'Solidity', 'Ethereum', 'Polygon'],
+        icon: 'code',
+        location: 'Da Nang, Vietnam',
+      },
+      {
+        id: '3-2',
+        title: 'Backend Internship',
+        employmentPeriod: 'Sep 2021 – Dec 2021',
+        employmentType: 'Internship',
+        description: [
+          {
+            items: [
+              'Learned about Git, Javascript, Typescript, PostgresQL, NodeJS/NestJS fundamentals, GraphQL in 4 weeks.',
+              'Developed GraphQL APIs, wrote unit tests and learned more teamwork, communication, process flows,... in Tedgro project (product inhouse).',
+            ],
+          },
+        ],
+        icon: 'code',
+        skills: ['Git', 'JavaScript', 'TypeScript', 'NestJS', 'PostgreSQL', 'GraphQL'],
+        location: 'Da Nang, Vietnam',
+      },
+    ],
+  },
+]
 
 export default function WorkSection() {
-	return (
-		<section className="w-full ibmsans">
-			<h2 className="section-title">Experience</h2>
-			<WorkExperience
-				className="rounded-lg"
-				experiences={WORK_EXPERIENCE}
-			/>
-		</section>
-	);
+  return (
+    <section className="w-full ibmsans">
+      <h2 className="section-title">Experience</h2>
+      <WorkExperience className="rounded-lg" experiences={WORK_EXPERIENCE} />
+    </section>
+  )
 }

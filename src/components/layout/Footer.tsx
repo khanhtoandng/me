@@ -1,55 +1,43 @@
-"use client";
+'use client'
 
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { useContent } from "@/hooks/use-content";
-import { scrollToTop } from "@/lib/helper";
-import { motion } from "framer-motion";
-import {
-  ArrowUp,
-  Calendar,
-  Code,
-  Coffee,
-  Mail,
-  MapPin,
-  Phone,
-  Star,
-} from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { FaSitemap } from "react-icons/fa";
-import { RiNextjsFill } from "react-icons/ri";
-import { SiRender } from "react-icons/si";
+import { Button } from '@/components/ui/button'
+import { Separator } from '@/components/ui/separator'
+import { scrollToTop } from '@/lib/helper'
+import { motion } from 'framer-motion'
+import { ArrowUp, Calendar, Code, Coffee, Mail, MapPin, Phone, Star } from 'lucide-react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { FaSitemap } from 'react-icons/fa'
+import { RiNextjsFill } from 'react-icons/ri'
+import { SiVercel } from 'react-icons/si'
 
 interface FooterLink {
-  title: string;
-  link: string;
-  icon?: React.ReactNode;
-  external?: boolean;
+  title: string
+  link: string
+  icon?: React.ReactNode
+  external?: boolean
 }
 
 interface FooterSection {
-  title: string;
-  links: FooterLink[];
+  title: string
+  links: FooterLink[]
 }
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-  const path = usePathname();
-  const { content: footerContent } = useContent("footer");
+  const currentYear = 2025 // Static year to prevent hydration issues
+  const path = usePathname()
 
   // Default content fallback
   const defaultFooterContent = {
-    title: "Baraa Alshaer",
-    description:
-      "Full-Stack Developer specializing in creating seamless and efficient web applications.",
+    title: 'Toan Huynh',
+    description: 'Backend Engineer specializing in creating seamless and efficient web applications.',
     content: {
-      copyright: "All rights reserved.",
+      copyright: 'All rights reserved.',
     },
-  };
+  }
 
   // Use dynamic content or fallback to default
-  const displayContent = footerContent || defaultFooterContent;
+  const displayContent = defaultFooterContent
 
   // Animation variants
   const containerVariants = {
@@ -61,7 +49,7 @@ export default function Footer() {
         delayChildren: 0.3,
       },
     },
-  };
+  }
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
@@ -70,90 +58,87 @@ export default function Footer() {
       opacity: 1,
       transition: { duration: 0.5 },
     },
-  };
+  }
 
   // Enhanced footer sections
   const footerSections: FooterSection[] = [
     {
-      title: "Navigation",
+      title: 'Navigation',
       links: [
-        { title: "Home", link: "/" },
-        { title: "About", link: "/#about" },
-        { title: "Work", link: "/#work" },
-        { title: "Projects", link: "/projects" },
-        { title: "Contact", link: "/contact" },
+        { title: 'Home', link: '/' },
+        { title: 'About', link: '/#about' },
+        { title: 'Work', link: '/#work' },
+        { title: 'Projects', link: '/projects' },
+        { title: 'Contact', link: '/contact' },
       ],
     },
 
     {
-      title: "Resources",
+      title: 'Resources',
       links: [
-        { title: "Blog", link: "/posts" },
+        { title: 'Blog', link: '/posts' },
 
         {
-          title: "GitHub",
-          link: "https://github.com/balshaer",
+          title: 'GitHub',
+          link: 'https://github.com/khanhtoandng',
           external: true,
         },
         {
-          title: "LinkedIn",
-          link: "https://linkedin.com/in/balshaer",
+          title: 'LinkedIn',
+          link: 'https://linkedin.com/in/toanhuynh19',
           external: true,
         },
       ],
     },
-  ];
+  ]
 
   // Contact information
   const contactInfo = [
     {
       icon: <Mail className="h-4 w-4" />,
-      label: "Email",
-      value: "alshaercontact@gmail.com",
-      link: "mailto:alshaercontact@gmail.com",
+      label: 'Email',
+      value: 'khanhtoan.dng@gmail.com',
+      link: 'mailto:khanhtoan.dng@gmail.com',
     },
     {
       icon: <Phone className="h-4 w-4" />,
-      label: "Phone",
-      value: "+970 59 123 4567",
-      link: "tel:+970591234567",
+      label: 'Phone',
+      value: '',
+      link: '',
     },
     {
       icon: <MapPin className="h-4 w-4" />,
-      label: "Location",
-      value: "Palestine",
-      link: "https://maps.google.com/?q=Palestine",
+      label: 'Location',
+      value: '',
+      link: '',
     },
-  ];
+  ]
 
   // Quick stats
   const quickStats = [
     {
-      label: "Projects Completed",
-      value: "50+",
+      label: 'Projects Completed',
+      value: '50+',
       icon: <Code className="h-4 w-4" />,
     },
     {
-      label: "Years Experience",
-      value: "5+",
+      label: 'Years Experience',
+      value: '5+',
       icon: <Calendar className="h-4 w-4" />,
     },
     {
-      label: "Happy Clients",
-      value: "30+",
+      label: 'Happy Clients',
+      value: '30+',
       icon: <Star className="h-4 w-4" />,
     },
     {
-      label: "Coffee Consumed",
-      value: "∞",
+      label: 'Coffee Consumed',
+      value: '∞',
       icon: <Coffee className="h-4 w-4" />,
     },
-  ];
+  ]
 
-  const ispath =
-    path.startsWith("/auth") ||
-    path.startsWith("/dashboard") ||
-    path.startsWith("/admin");
+  const ispath = path.startsWith('/auth') || path.startsWith('/dashboard') || path.startsWith('/admin')
 
   return (
     <div>
@@ -163,17 +148,12 @@ export default function Footer() {
             {/* Main Footer Content */}
 
             {/* Bottom Section */}
-            <motion.div
-              variants={itemVariants}
-              className=" border-[var(--footer-border-color)] "
-            >
+            <motion.div variants={itemVariants} className=" border-[var(--footer-border-color)] ">
               <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                 {/* Copyright & Credits */}
                 <div className="flex flex-col md:flex-row items-center gap-4 text-sm text-[var(--paragraph)]">
                   <div className="flex items-center gap-2">
-                    <span>
-                      {displayContent.content.copyright}
-                    </span>
+                    <span>{displayContent.content.copyright}</span>
                   </div>
                 </div>
 
@@ -200,15 +180,11 @@ export default function Footer() {
                       <span>Built with Next.js </span>
 
                       <RiNextjsFill className="h-4 w-4" />
-
                     </span>
-                    <Separator
-                      orientation="vertical"
-                      className="hidden md:block h-3"
-                    />
+                    <Separator orientation="vertical" className="hidden md:block h-3" />
                     <span className="flex items-center justify-center gap-1 text-[var(--paragraph)] hover:text-[var(--headline)] hoverd">
-                      <span>Deployed on Render </span>
-                      <SiRender className="h-4 w-4" />
+                      <span>Deployed on Vercel </span>
+                      <SiVercel className="h-4 w-4" />
                     </span>
                   </div>
                   <div className="flex items-center max-md:hidden gap-4">
@@ -234,5 +210,5 @@ export default function Footer() {
         </footer>
       )}
     </div>
-  );
+  )
 }

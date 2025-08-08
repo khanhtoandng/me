@@ -1,64 +1,62 @@
-"use client";
+'use client'
 
-import { Badge } from "@/components/ui/badge";
-import { Skeleton } from "@/components/ui/skeleton";
-import { motion } from "framer-motion";
-import { FileWarning, Github, Globe, RepeatIcon } from "lucide-react";
-import Link from "next/link";
-import React, { useState } from "react";
-import ReusableCard from "../../layout/ReusableCard";
-import { Button } from "../../ui/button";
-import { Card, CardContent, CardFooter } from "../../ui/card";
-import { RandomizedTextEffect } from "../../ui/text-randomized";
+import { Badge } from '@/components/ui/badge'
+import { Skeleton } from '@/components/ui/skeleton'
+import { motion } from 'framer-motion'
+import { FileWarning, Github, Globe, RepeatIcon } from 'lucide-react'
+import Link from 'next/link'
+import React, { useState } from 'react'
+import ReusableCard from '../../layout/ReusableCard'
+import { Button } from '../../ui/button'
+import { Card, CardContent, CardFooter } from '../../ui/card'
+import { RandomizedTextEffect } from '../../ui/text-randomized'
 
 export default function PostsPreview() {
-  const direction = "en";
+  const direction = 'en'
 
   const styles = {
-    breadcrumbLink: "hover:text-[var(--paragraph)] hoverd",
+    breadcrumbLink: 'hover:text-[var(--paragraph)] hoverd',
     arrowIcon:
-      "text-[var(--paragraph)] text-3xl hoverd hover:text-[var(--link-color)] cursor-pointer ml-[-16px] max-md:ml-[-8px]",
+      'text-[var(--paragraph)] text-3xl hoverd hover:text-[var(--link-color)] cursor-pointer ml-[-16px] max-md:ml-[-8px]',
     linkStyle:
-      "flex items-center justify-center gap-1 text-sm text-[var(--headline)] opacity-70 hoverd hover:opacity-100",
-  };
+      'flex items-center justify-center gap-1 text-sm text-[var(--headline)] opacity-70 hoverd hover:opacity-100',
+  }
 
   const isValidLink = (link: string | undefined) => {
-    return link && link.trim() !== "" && link !== "#";
-  };
+    return link && link.trim() !== '' && link !== '#'
+  }
 
-  const [posts, setPosts] = React.useState<any[]>([]);
-  const [loading, setLoading] = React.useState(true);
-  const [flag, setflag] = useState(false);
+  const [posts, setPosts] = React.useState<any[]>([])
+  const [loading, setLoading] = React.useState(true)
+  const [flag, setflag] = useState(false)
 
   React.useEffect(() => {
     const fetchPosts = async () => {
-      const startTime = Date.now();
-      const minLoadingTime = 1500; // Minimum 1.5 seconds for skeleton
+      const startTime = performance.now()
+      const minLoadingTime = 1500 // Minimum 1.5 seconds for skeleton
 
       try {
-        const response = await fetch(
-          "https://dev.to/api/articles?username=baraa",
-        );
-        const data = await response.json();
-        setPosts(data);
+        const response = await fetch('https://dev.to/api/articles?username=khanhtoandng')
+        const data = await response.json()
+        setPosts(data)
       } catch (error) {
-        console.error("Error fetching posts:", error);
-        setflag(true);
+        console.error('Error fetching posts:', error)
+        setflag(true)
       } finally {
         // Ensure minimum loading time
-        const elapsedTime = Date.now() - startTime;
-        const remainingTime = Math.max(0, minLoadingTime - elapsedTime);
+        const elapsedTime = performance.now() - startTime
+        const remainingTime = Math.max(0, minLoadingTime - elapsedTime)
 
         setTimeout(() => {
-          setLoading(false);
-        }, remainingTime);
+          setLoading(false)
+        }, remainingTime)
       }
-    };
+    }
 
-    fetchPosts();
-  }, []);
+    fetchPosts()
+  }, [])
 
-  const reload = () => {};
+  const reload = () => {}
 
   return (
     <motion.div
@@ -127,14 +125,12 @@ export default function PostsPreview() {
                 dir={direction}
                 coverImg={
                   post.cover_image ||
-                  "https://images.prismic.io/loco-blogs/79328284-f97b-489f-924c-eb3b17e34b56_image2.png?auto=compress%2Cformat&rect=0%2C0%2C1999%2C1124&w=1920&fit=max"
+                  'https://images.prismic.io/loco-blogs/79328284-f97b-489f-924c-eb3b17e34b56_image2.png?auto=compress%2Cformat&rect=0%2C0%2C1999%2C1124&w=1920&fit=max'
                 } // Passing image URL as 'img' prop
               >
                 <div className="flex max-w-[60%] flex-wrap gap-2 max-md:mb-0 max-md:mt-4 max-md:max-w-full">
                   {Array.isArray(post.tags) && post.tags.length > 0 ? (
-                    post.tags.map((tag: string, tagIndex: number) => (
-                      <Badge key={tagIndex}>{tag}</Badge>
-                    ))
+                    post.tags.map((tag: string, tagIndex: number) => <Badge key={tagIndex}>{tag}</Badge>)
                   ) : (
                     <span>No tags available</span>
                   )}
@@ -142,12 +138,7 @@ export default function PostsPreview() {
 
                 <div className="flex flex-wrap gap-4 max-md:mt-5">
                   {isValidLink(post.url) && (
-                    <Link
-                      href={post.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.linkStyle}
-                    >
+                    <Link href={post.url} target="_blank" rel="noopener noreferrer" className={styles.linkStyle}>
                       <span>
                         <Globe className="h-4 w-4" />
                       </span>
@@ -156,12 +147,7 @@ export default function PostsPreview() {
                   )}
 
                   {isValidLink(post.github_url) && (
-                    <Link
-                      href={post.github_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.linkStyle}
-                    >
+                    <Link href={post.github_url} target="_blank" rel="noopener noreferrer" className={styles.linkStyle}>
                       <span>
                         <Github className="h-4 w-4" />
                       </span>
@@ -177,10 +163,7 @@ export default function PostsPreview() {
             <CardContent>
               <div className="error flex items-center justify-center gap-1">
                 <FileWarning />
-                <RandomizedTextEffect
-                  className=" text-[var(--paragraph)]"
-                  text={"Faield to get posts"}
-                />
+                <RandomizedTextEffect className=" text-[var(--paragraph)]" text={'Faield to get posts'} />
               </div>
             </CardContent>
 
@@ -193,5 +176,5 @@ export default function PostsPreview() {
         )}
       </div>
     </motion.div>
-  );
+  )
 }

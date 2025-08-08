@@ -1,51 +1,48 @@
-"use client";
+'use client'
 
-import Logo from "@/components/layout/Logo";
-import ToggleMode from "@/components/layout/ToggleMode";
-import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+import Logo from '@/components/layout/Logo'
+import ToggleMode from '@/components/layout/ToggleMode'
+import { AnimatePresence, motion } from 'framer-motion'
+import { Menu, X } from 'lucide-react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useState } from 'react'
 
 const styles = {
-  link: "text-[var(--headline)] hover:text-[var(--headline)] flex gap-[5px] rounded-md text-sm font-medium items-center py-2 relative",
-  activeIndicator: "",
-};
+  link: 'text-[var(--headline)] hover:text-[var(--headline)] flex gap-[5px] rounded-md text-sm font-medium items-center py-2 relative',
+  activeIndicator: '',
+}
 
 const iconAnimationVariants = {
   initial: { scale: 1 },
   animate: { scale: [1, 0.9, 1], transition: { duration: 0.2 } },
-};
+}
 
 const mobileMenuVariants = {
   closed: {
-    opacity: "0%",
+    opacity: '0%',
     x: 0,
     transition: { duration: 0.2 },
   },
   open: {
-    opacity: "100%",
+    opacity: '100%',
     x: 0,
     transition: { duration: 0.4 },
   },
-};
+}
 
 export default function Navbar() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const path = usePathname();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const path = usePathname()
 
-  const ispath =
-    path.startsWith("/auth") ||
-    path.startsWith("/dashboard") ||
-    path.startsWith("/admin");
+  const ispath = path.startsWith('/auth') || path.startsWith('/dashboard') || path.startsWith('/admin')
 
   const navItems = [
-    { label: "Work", href: "/#work" },
-    { label: "Projects", href: "/#projects" },
-    { label: "Post", href: "/posts" },
-    { label: "Say Hi", href: "/contact" },
-  ];
+    { label: 'Work', href: '/#work' },
+    { label: 'Certifications', href: '/#certifications' },
+    { label: 'Projects', href: '/#projects' },
+    { label: 'Post', href: '/posts' },
+  ]
 
   return (
     <>
@@ -58,18 +55,12 @@ export default function Navbar() {
         >
           <div className="container mx-auto px-0">
             <div className="flex h-16 items-center justify-between max-md:flex-wrap">
-              <Link
-                href="/"
-                className="flex-shrink-0 hover:opacity-80 transition-opacity"
-              >
+              <Link href="/" className="flex-shrink-0 hover:opacity-80 transition-opacity">
                 <Logo />
               </Link>
 
               <div className="hidden h-full items-center justify-center md:flex">
-                <div
-                  dir="ltr"
-                  className="flex h-full  items-center justify-center gap-6"
-                >
+                <div dir="ltr" className="flex h-full  items-center justify-center gap-6">
                   {navItems.map((item) => (
                     <motion.div
                       className="relative flex h-full items-center justify-center max-md:hidden"
@@ -93,7 +84,7 @@ export default function Navbar() {
               </div>
 
               <div className="flex items-center max-md:flex-wrap gap-3 max-md:gap-2 justify-center md:hidden">
-           <ToggleMode/>
+                <ToggleMode />
                 <motion.button
                   className="text-[var(--headline)] p-2 rounded-full hover:bg-[var(--card-background)] transition-colors"
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -123,11 +114,7 @@ export default function Navbar() {
                     variants={mobileMenuVariants}
                   >
                     <div className="absolute top-0 left-0 w-full flex justify-between items-center p-4">
-                      <Link
-                        href="/"
-                        className="flex-shrink-0"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
+                      <Link href="/" className="flex-shrink-0" onClick={() => setIsMobileMenuOpen(false)}>
                         <Logo />
                       </Link>
                       <motion.button
@@ -158,8 +145,6 @@ export default function Navbar() {
                         </motion.div>
                       ))}
                     </div>
-
-               
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -168,5 +153,5 @@ export default function Navbar() {
         </motion.nav>
       )}
     </>
-  );
+  )
 }

@@ -32,7 +32,7 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
   const textRef = useRef<HTMLSpanElement>(null);
   const [activeIndex, setActiveIndex] = useState<number>(initialActiveIndex);
 
-  const noise = (n = 1) => n / 2 - Math.random() * n;
+  const noise = (n = 1) => typeof window !== 'undefined' ? n / 2 - Math.random() * n : 0;
 
   const getXY = (
     distance: number,
@@ -56,7 +56,7 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
       end: getXY(d[1] + noise(7), particleCount - i, particleCount),
       time: t,
       scale: 1 + noise(0.2),
-      color: colors[Math.floor(Math.random() * colors.length)],
+      color: typeof window !== 'undefined' ? colors[Math.floor(Math.random() * colors.length)] : colors[0],
       rotate: rotate > 0 ? (rotate + r / 20) * 10 : (rotate - r / 20) * 10,
     };
   };

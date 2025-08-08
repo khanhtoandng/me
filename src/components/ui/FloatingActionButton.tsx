@@ -1,54 +1,52 @@
-"use client";
+'use client'
 
-import { AnimatePresence, motion } from "framer-motion";
-import { Briefcase, FileText, Home, Mail, Menu, X } from "lucide-react";
-import Link from "next/link";
-import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from 'framer-motion'
+import { Briefcase, FileText, Home, Mail, Menu, X } from 'lucide-react'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
 interface FloatingActionButtonProps {
-  threshold?: number;
+  threshold?: number
 }
 
-export default function FloatingActionButton({
-  threshold = 300,
-}: FloatingActionButtonProps) {
-  const [isVisible, setIsVisible] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+export default function FloatingActionButton({ threshold = 300 }: FloatingActionButtonProps) {
+  const [isVisible, setIsVisible] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > threshold) {
-        setIsVisible(true);
+        setIsVisible(true)
       } else {
-        setIsVisible(false);
-        if (isMenuOpen) setIsMenuOpen(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [threshold, isMenuOpen]);
-
-  const menuItems = [
-    { icon: <Home className="h-5 w-5" />, label: "Home", href: "/" },
-    { icon: <Briefcase className="h-5 w-5" />, label: "Work", href: "/#work" },
-    {
-      icon: <FileText className="h-5 w-5" />,
-      label: "Projects",
-      href: "/projects",
-    },
-    { icon: <Mail className="h-5 w-5" />, label: "Contact", href: "/contact" },
-  ];
-
-  const handleMenuItemClick = (href: string) => {
-    setIsMenuOpen(false);
-    if (href === "/#work") {
-      const workSection = document.getElementById("work");
-      if (workSection) {
-        workSection.scrollIntoView({ behavior: "smooth" });
+        setIsVisible(false)
+        if (isMenuOpen) setIsMenuOpen(false)
       }
     }
-  };
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [threshold, isMenuOpen])
+
+  const menuItems = [
+    { icon: <Home className="h-5 w-5" />, label: 'Home', href: '/' },
+    { icon: <Briefcase className="h-5 w-5" />, label: 'Work', href: '/#work' },
+    {
+      icon: <FileText className="h-5 w-5" />,
+      label: 'Projects',
+      href: '/projects',
+    },
+    { icon: <Mail className="h-5 w-5" />, label: 'Contact', href: '/contact' },
+  ]
+
+  const handleMenuItemClick = (href: string) => {
+    setIsMenuOpen(false)
+    if (href === '/#work') {
+      const workSection = document.getElementById('work')
+      if (workSection) {
+        workSection.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+  }
 
   return (
     <AnimatePresence>
@@ -94,22 +92,16 @@ export default function FloatingActionButton({
           {/* Main button */}
           <motion.button
             className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--link-color)] text-white shadow-lg hover:bg-[var(--button)] transition-colors"
-            onClick={() =>
-              isMenuOpen ? setIsMenuOpen(false) : setIsMenuOpen(true)
-            }
+            onClick={() => (isMenuOpen ? setIsMenuOpen(false) : setIsMenuOpen(true))}
             whileTap={{ scale: 0.9 }}
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           >
-            {isMenuOpen ? (
-              <X className="h-5 w-5" />
-            ) : (
-              <Menu className="h-5 w-5" />
-            )}
+            {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </motion.button>
 
           {/* Back to top button */}
         </motion.div>
       )}
     </AnimatePresence>
-  );
+  )
 }

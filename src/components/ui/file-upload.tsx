@@ -1,110 +1,100 @@
-"use client";
+'use client'
 
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import { useToast } from "@/hooks/use-toast";
-import { AnimatePresence, motion } from "framer-motion";
-import {
-  AlertCircle,
-  CheckCircle,
-  File,
-  Loader2,
-  Upload,
-  X,
-} from "lucide-react";
-import { useCallback, useRef, useState } from "react";
+import { Button } from '@/components/ui/button'
+import { Progress } from '@/components/ui/progress'
+import { useToast } from '@/hooks/use-toast'
+import { AnimatePresence, motion } from 'framer-motion'
+import { AlertCircle, CheckCircle, File, Loader2, Upload, X } from 'lucide-react'
+import { useCallback, useRef, useState } from 'react'
 
 interface FileUploadProps {
-  onUpload: (urls: string[]) => void;
-  onRemove?: (url: string) => void;
-  existingFiles?: string[];
-  accept?: string;
-  multiple?: boolean;
-  maxFiles?: number;
-  maxSize?: number; // in MB
-  className?: string;
-  disabled?: boolean;
-  uploadType?: "profile" | "project" | "document" | "general";
-  entityId?: string;
+  onUpload: (urls: string[]) => void
+  onRemove?: (url: string) => void
+  existingFiles?: string[]
+  accept?: string
+  multiple?: boolean
+  maxFiles?: number
+  maxSize?: number // in MB
+  className?: string
+  disabled?: boolean
+  uploadType?: 'profile' | 'project' | 'document' | 'general'
+  entityId?: string
 }
 
 interface UploadFile {
-  file: File;
-  url: string;
-  progress: number;
-  status: "uploading" | "success" | "error";
-  id: string;
+  file: File
+  url: string
+  progress: number
+  status: 'uploading' | 'success' | 'error'
+  id: string
 }
 
 export function FileUpload({
   onUpload,
   onRemove,
   existingFiles = [],
-  accept = "image/*",
+  accept = 'image/*',
   multiple = true,
   maxFiles = 5,
   maxSize = 10, // 10MB default for Cloudinary
-  className = "",
+  className = '',
   disabled = false,
-  uploadType = "general",
-  entityId = "default",
+  uploadType = 'general',
+  entityId = 'default',
 }: FileUploadProps) {
-  const { toast } = useToast();
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const [uploadingFiles, setUploadingFiles] = useState<UploadFile[]>([]);
-  const [isDragOver, setIsDragOver] = useState(false);
+  const { toast } = useToast()
+  const fileInputRef = useRef<HTMLInputElement>(null)
+  const [uploadingFiles, setUploadingFiles] = useState<UploadFile[]>([])
+  const [isDragOver, setIsDragOver] = useState(false)
 
   const uploadFile = async (file: File): Promise<string> => {
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("type", uploadType);
-    formData.append("entityId", entityId);
+    const formData = new FormData()
+    formData.append('file', file)
+    formData.append('type', uploadType)
+    formData.append('entityId', entityId)
 
-    const response = await fetch("/api/upload", {
-      method: "POST",
+    const response = await fetch('/api/upload', {
+      method: 'POST',
       body: formData,
-    });
+    })
 
     if (!response.ok) {
-      throw new Error("Upload failed");
+      throw new Error('Upload failed')
     }
 
-    const data = await response.json();
+    const data = await response.json()
     if (!data.success) {
-      throw new Error(data.error || "Upload failed");
+      throw new Error(data.error || 'Upload failed')
     }
 
-    return data.url;
-  };
+    return data.url
+  }
 
   const handleFileSelect = useCallback(
     async (files: FileList | null) => {
-      if (!files || disabled) return;
+      if (!files || disabled) return
 
-      const fileArray = Array.from(files);
-      const totalFiles =
-        existingFiles.length + uploadingFiles.length + fileArray.length;
+      const fileArray = Array.from(files)
+      const totalFiles = existingFiles.length + uploadingFiles.length + fileArray.length
 
       if (totalFiles > maxFiles) {
         toast({
-          title: "Too many files",
+          title: 'Too many files',
           description: `Maximum ${maxFiles} files allowed`,
-          variant: "destructive",
-        });
-        return;
+          variant: 'destructive',
+        })
+        return
       }
 
       // Validate file sizes
-      const oversizedFiles = fileArray.filter(
-        (file) => file.size > maxSize * 1024 * 1024
-      );
+      const oversizedFiles = fileArray.filter((file) => file.size > maxSize * 1024 * 1024)
       if (oversizedFiles.length > 0) {
         toast({
-          title: "File too large",
+          title: 'File too large',
           description: `Maximum file size is ${maxSize}MB`,
-          variant: "destructive",
-        });
-        return;
+          variant: 'destructive',
+        })
+        return
       }
 
       // Create upload file objects
@@ -112,11 +102,11 @@ export function FileUpload({
         file,
         url: URL.createObjectURL(file),
         progress: 0,
-        status: "uploading" as const,
-        id: Math.random().toString(36).substr(2, 9),
-      }));
+        status: 'uploading' as const,
+        id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      }))
 
-      setUploadingFiles((prev) => [...prev, ...newUploadFiles]);
+      setUploadingFiles((prev) => [...prev, ...newUploadFiles])
 
       // Upload files
       const uploadPromises = newUploadFiles.map(async (uploadFileItem) => {
@@ -124,17 +114,13 @@ export function FileUpload({
           // Simulate progress
           const progressInterval = setInterval(() => {
             setUploadingFiles((prev) =>
-              prev.map((f) =>
-                f.id === uploadFileItem.id
-                  ? { ...f, progress: Math.min(f.progress + 10, 90) }
-                  : f
-              )
-            );
-          }, 200);
+              prev.map((f) => (f.id === uploadFileItem.id ? { ...f, progress: Math.min(f.progress + 10, 90) } : f))
+            )
+          }, 200)
 
-          const uploadedUrl = await uploadFile(uploadFileItem.file);
+          const uploadedUrl = await uploadFile(uploadFileItem.file)
 
-          clearInterval(progressInterval);
+          clearInterval(progressInterval)
 
           setUploadingFiles((prev) =>
             prev.map((f) =>
@@ -142,91 +128,77 @@ export function FileUpload({
                 ? {
                     ...f,
                     progress: 100,
-                    status: "success" as const,
+                    status: 'success' as const,
                     url: uploadedUrl,
                   }
                 : f
             )
-          );
+          )
 
           // Clean up object URL
-          URL.revokeObjectURL(uploadFileItem.url);
+          URL.revokeObjectURL(uploadFileItem.url)
 
-          return uploadedUrl;
+          return uploadedUrl
         } catch (error) {
           setUploadingFiles((prev) =>
-            prev.map((f) =>
-              f.id === uploadFileItem.id
-                ? { ...f, status: "error" as const }
-                : f
-            )
-          );
+            prev.map((f) => (f.id === uploadFileItem.id ? { ...f, status: 'error' as const } : f))
+          )
 
           toast({
-            title: "Upload failed",
+            title: 'Upload failed',
             description: `Failed to upload ${uploadFileItem.file.name}`,
-            variant: "destructive",
-          });
+            variant: 'destructive',
+          })
 
-          return null;
+          return null
         }
-      });
+      })
 
-      const results = await Promise.all(uploadPromises);
-      const successfulUploads = results.filter(Boolean) as string[];
+      const results = await Promise.all(uploadPromises)
+      const successfulUploads = results.filter(Boolean) as string[]
 
       if (successfulUploads.length > 0) {
-        onUpload(successfulUploads);
+        onUpload(successfulUploads)
         toast({
-          title: "Upload successful",
+          title: 'Upload successful',
           description: `${successfulUploads.length} file(s) uploaded successfully`,
-        });
+        })
       }
 
       // Clean up completed uploads after a delay
       setTimeout(() => {
-        setUploadingFiles((prev) =>
-          prev.filter((f) => f.status === "uploading")
-        );
-      }, 2000);
+        setUploadingFiles((prev) => prev.filter((f) => f.status === 'uploading'))
+      }, 2000)
     },
-    [
-      disabled,
-      existingFiles.length,
-      uploadingFiles.length,
-      maxFiles,
-      maxSize,
-      onUpload,
-      toast,
-    ]
-  );
+    [disabled, existingFiles.length, uploadingFiles.length, maxFiles, maxSize, onUpload, toast]
+  )
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragOver(true);
-  }, []);
+    e.preventDefault()
+    setIsDragOver(true)
+  }, [])
 
   const handleDragLeave = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragOver(false);
-  }, []);
+    e.preventDefault()
+    setIsDragOver(false)
+  }, [])
 
   const handleDrop = useCallback(
     (e: React.DragEvent) => {
-      e.preventDefault();
-      setIsDragOver(false);
-      handleFileSelect(e.dataTransfer.files);
+      e.preventDefault()
+      setIsDragOver(false)
+      handleFileSelect(e.dataTransfer.files)
     },
     [handleFileSelect]
-  );
+  )
 
   const isImage = (url: string) => {
-    return /\.(jpg|jpeg|png|gif|webp)$/i.test(url);
-  };
+    return /\.(jpg|jpeg|png|gif|webp)$/i.test(url)
+  }
 
   const getFileName = (url: string) => {
-    return url.split("/").pop() || "Unknown file";
-  };
+    return url.split('/').pop() || 'Unknown file'
+  }
 
   return (
     <div className={`space-y-4 ${className}`}>
@@ -236,10 +208,10 @@ export function FileUpload({
           border-2 border-dashed rounded-[12px] p-6 text-center transition-colors
           ${
             isDragOver
-              ? "border-[var(--link-color)] bg-[var(--link-color)]/5"
-              : "border-[var(--input-border-color)] hover:border-[var(--link-color)]"
+              ? 'border-[var(--link-color)] bg-[var(--link-color)]/5'
+              : 'border-[var(--input-border-color)] hover:border-[var(--link-color)]'
           }
-          ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
+          ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
         `}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
@@ -248,11 +220,10 @@ export function FileUpload({
       >
         <Upload className="h-8 w-8 mx-auto mb-2 text-[var(--paragraph)]" />
         <p className="text-sm text-[var(--paragraph)] mb-1">
-          {isDragOver ? "Drop files here" : "Click to upload or drag and drop"}
+          {isDragOver ? 'Drop files here' : 'Click to upload or drag and drop'}
         </p>
         <p className="text-xs text-[var(--paragraph)]">
-          {accept === "image/*" ? "Images" : "Files"} up to {maxSize}MB each
-          (max {maxFiles} files)
+          {accept === 'image/*' ? 'Images' : 'Files'} up to {maxSize}MB each (max {maxFiles} files)
         </p>
       </div>
 
@@ -277,30 +248,18 @@ export function FileUpload({
             className="flex items-center gap-3 p-3 bg-[var(--card-background)] border border-[var(--card-border-color)] rounded-[12px]2px]"
           >
             <div className="flex-shrink-0">
-              {uploadFile.status === "uploading" && (
+              {uploadFile.status === 'uploading' && (
                 <Loader2 className="h-5 w-5 animate-spin text-[var(--link-color)]" />
               )}
-              {uploadFile.status === "success" && (
-                <CheckCircle className="h-5 w-5 text-green-500" />
-              )}
-              {uploadFile.status === "error" && (
-                <AlertCircle className="h-5 w-5 text-red-500" />
-              )}
+              {uploadFile.status === 'success' && <CheckCircle className="h-5 w-5 text-green-500" />}
+              {uploadFile.status === 'error' && <AlertCircle className="h-5 w-5 text-red-500" />}
             </div>
 
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium truncate">
-                {uploadFile.file.name}
-              </p>
-              {uploadFile.status === "uploading" && (
-                <Progress value={uploadFile.progress} className="mt-1" />
-              )}
-              {uploadFile.status === "success" && (
-                <p className="text-xs text-green-600">Upload complete</p>
-              )}
-              {uploadFile.status === "error" && (
-                <p className="text-xs text-red-600">Upload failed</p>
-              )}
+              <p className="text-sm font-medium truncate">{uploadFile.file.name}</p>
+              {uploadFile.status === 'uploading' && <Progress value={uploadFile.progress} className="mt-1" />}
+              {uploadFile.status === 'success' && <p className="text-xs text-green-600">Upload complete</p>}
+              {uploadFile.status === 'error' && <p className="text-xs text-red-600">Upload failed</p>}
             </div>
           </motion.div>
         ))}
@@ -325,7 +284,7 @@ export function FileUpload({
                       alt={`Upload ${index + 1}`}
                       className="w-full h-full object-cover"
                       onError={(e) => {
-                        e.currentTarget.src = "/placeholder.svg";
+                        e.currentTarget.src = '/placeholder.svg'
                       }}
                     />
                   </div>
@@ -336,9 +295,7 @@ export function FileUpload({
                 )}
 
                 <div className="p-2">
-                  <p className="text-xs text-[var(--paragraph)] truncate">
-                    {getFileName(url)}
-                  </p>
+                  <p className="text-xs text-[var(--paragraph)] truncate">{getFileName(url)}</p>
                 </div>
 
                 {onRemove && (
@@ -348,8 +305,8 @@ export function FileUpload({
                       variant="destructive"
                       size="sm"
                       onClick={(e) => {
-                        e.stopPropagation();
-                        onRemove(url);
+                        e.stopPropagation()
+                        onRemove(url)
                       }}
                     >
                       <X className="h-4 w-4" />
@@ -362,5 +319,5 @@ export function FileUpload({
         </div>
       )}
     </div>
-  );
+  )
 }

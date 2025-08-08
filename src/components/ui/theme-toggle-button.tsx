@@ -1,16 +1,10 @@
-"use client"
+'use client'
 
-import { AnimatePresence, motion } from "framer-motion"
-import { useTheme } from "next-themes"
-import React from "react"
+import { AnimatePresence, motion } from 'framer-motion'
+import { useTheme } from 'next-themes'
+import React, { useEffect, useState } from 'react'
 
-import { Button } from "@/components/ui/button"
-
-import {
-  AnimationStart,
-  AnimationVariant,
-  createAnimation,
-} from "@/theme/theme-animations"
+import { AnimationStart, AnimationVariant, createAnimation } from '@/theme/theme-animations'
 
 interface ThemeToggleAnimationProps {
   variant?: AnimationVariant
@@ -59,21 +53,27 @@ function MoonIconLarge() {
 }
 
 export function ThemeToggleButton({
-  variant = "circle-blur",
-  start = "top-left",
-  url = "",
+  variant = 'circle-blur',
+  start = 'top-left',
+  url = '',
 }: ThemeToggleAnimationProps) {
   const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
 
-  const styleId = "theme-transition-styles"
+  // Ensure we only render after hydration to prevent mismatch
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  const styleId = 'theme-transition-styles'
 
   const updateStyles = React.useCallback((css: string, name: string) => {
-    if (typeof window === "undefined") return
+    if (typeof window === 'undefined') return
 
     let styleElement = document.getElementById(styleId) as HTMLStyleElement
 
     if (!styleElement) {
-      styleElement = document.createElement("style")
+      styleElement = document.createElement('style')
       styleElement.id = styleId
       document.head.appendChild(styleElement)
     }
@@ -86,10 +86,10 @@ export function ThemeToggleButton({
 
     updateStyles(animation.css, animation.name)
 
-    if (typeof window === "undefined") return
+    if (typeof window === 'undefined') return
 
     const switchTheme = () => {
-      setTheme(theme === "light" ? "dark" : "light")
+      setTheme(theme === 'light' ? 'dark' : 'light')
     }
 
     if (!document.startViewTransition) {
@@ -100,6 +100,17 @@ export function ThemeToggleButton({
     document.startViewTransition(switchTheme)
   }, [theme, setTheme])
 
+  // Show nothing on server render to prevent hydration mismatch
+  if (!mounted) {
+    return (
+      <button className="w-12 max-md:w-max p-0 h-12 relative group" name="Theme Toggle Button" disabled>
+        <div className="flex">
+          <SunIconLarge />
+        </div>
+      </button>
+    )
+  }
+
   return (
     <button
       onClick={toggleTheme}
@@ -107,7 +118,7 @@ export function ThemeToggleButton({
       name="Theme Toggle Button"
     >
       <AnimatePresence initial={false} mode="wait">
-        {theme === "light" ? (
+        {theme === 'light' ? (
           <motion.span
             key="sun"
             initial={{ opacity: 0 }}
