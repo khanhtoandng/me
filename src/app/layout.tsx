@@ -47,10 +47,6 @@ export const metadata: Metadata = {
   publisher: 'Huynh Tran Khanh Toan',
   alternates: {
     canonical: websitePath.main,
-    languages: {
-      en: `${websitePath.main}/en`,
-      ar: `${websitePath.main}/ar`,
-    },
   },
   openGraph: {
     type: 'website',

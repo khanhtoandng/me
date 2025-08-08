@@ -1,9 +1,9 @@
 export const email = 'khanhtoan.dng@gmailcom'
 export const phoneNumber = '970599349034'
 export const mailto = `mailto:${email}`
-export const website = 'https://toanhuynh.vercel.app/'
-export const domain = 'toanhuynh.vercel.app'
-export const webImage = 'https://toanhuynh.vercel.app/images/web-image.png'
+export const website = 'https://portfolio.anphaops.cloud/'
+export const domain = 'portfolio.anphaops.cloud'
+export const webImage = 'https://portfolio.anphaops.cloud/kt-logo-512x512.png'
 
 export const websitePath = {
   main: `${website}`,

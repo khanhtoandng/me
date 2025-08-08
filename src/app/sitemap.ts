@@ -5,26 +5,15 @@ export const dynamic = 'force-static'
 export const revalidate = false
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://toanhuynh.vercel.app'
+  const baseUrl = 'https://portfolio.anphaops.cloud'
 
-  // Main pages
-  const routes = ['', '/projects', '/posts', '/contact'].map((route) => ({
+  // Main pages - only include routes that actually exist
+  const routes = ['', '/posts', '/contact'].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: route === '' ? 1 : 0.8,
   }))
 
-  // Add language variants
-  const locales = ['en', 'ar']
-  const localizedRoutes = locales.flatMap((locale) =>
-    routes.map((route) => ({
-      url: `${baseUrl}/${locale}${route.url === `${baseUrl}` ? '' : route.url.replace(baseUrl, '')}`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: route.url === `${baseUrl}` ? 0.9 : 0.7,
-    }))
-  )
-
-  return [...routes, ...localizedRoutes]
+  return routes
 }
